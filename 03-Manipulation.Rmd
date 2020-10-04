@@ -217,7 +217,7 @@ dat %>%  summarise(across(where(is.numeric),
 
 ### The data
 
-We will work on the summary data of all past activities, which come in JSON files. So basically, the data is contained in (nested) lists. This is real worl data, it's super messy and dirty !
+We will work on the summary data of all past activities, which come in JSON files. So basically, the data is contained in (nested) lists. This is real word data, it's super messy and dirty !
 You will have to :
 
 - Import the data 
@@ -250,14 +250,40 @@ random_list[[1]] # is a vector
 ```
 
 
-## The split-apply-combine operation
+<!-- ## The split-apply-combine operation -->
 
-![](img/split-apply-combine.png)
-
+<!-- ![](img/split-apply-combine.png) -->
 
 
 ## Tidy your data
 
-gather/spread
+The data will almost never come in a ready-to-use format. Wrangling the data, beyond *cleaning* it also sometimes imply to *reshape* it so that it conforms to the tidy principles. For that you have 2 functions :
 
+- `pivot_longer()` which will convert columns into rows
+- `pivot_wider()`, the reciprocate operation, which will convert rows into columns
+
+For example, we can chose that an observation is the combination of an activity and a metric. This representation can be useful in some cases (see \@ref(adv_viz)).
+
+```{r}
+dat_long <- dat %>% 
+  select(activityId,where(is.numeric)) %>% 
+  pivot_longer(-activityId,names_to="metric",values_to="value")
+dat_long
+```
+With this format you can get summary statistics for all metrics also easily :
+
+```{r}
+group_by(dat_long,metric) %>% 
+  summarise(mean_val=mean(value,na.rm=T))
+```
+
+And you you can go back to the original format if you want :
+
+```{r}
+group_by(dat_long,metric) %>% 
+  summarise(mean_val=mean(value,na.rm=T)) %>% 
+  pivot_wider(names_from = metric,values_from=mean_val)
+```
+
+The result looks very much like the one we had with `across` but the intermediate manipulationsncan be very useful in some cases. For instance, you could join the `dat_long` dataframe or its summary with an external data that has values by metrics (eg the average metric values for pro athletes).
 

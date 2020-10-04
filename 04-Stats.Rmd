@@ -453,7 +453,7 @@ dat_clean <- filter(dat,!(activityId %in% c(407226313,2321338)) & year(date)>=20
 ```
 
 
-## Statistical inference
+## Statistical inference {#stat_inf}
 
 ### The statistical model
 
@@ -468,11 +468,13 @@ $\Rightarrow$ There is a difference between the **sample mean** and the **popula
 As a matter of fact the sample mean is an estimator of the population mean. The value of an estimator (often noted $\hat{\theta}$) is a random variable (it depends on the sample), meaning this is not a single deterministic value, but has a probability distribution. Therefore it has a **expectation** and a **variance**
 An estimator is said to be *biased* if $\mathbb{E}(\hat{\theta}) \neq \mu$ ; it is said to be *efficient* if its variance is minimal.
 
+One fundamental hypothesis of the model is that all observations are independent and identically distributed (*iid*). This is typically not the case for *time series*.
+
 ### Two fundamental theorems
 
 Eventough we cannot observe the true parameter and that the sample mean is an estimator (hence a random variable), 2 theorems save the game :
 
-### The law of large numbers
+#### The law of large numbers
 
 $$\bar{U} = \dfrac{1}{n} \sum_{i=1}^n U_i \xrightarrow[n \to +\infty]{a.s.} \mu$$
 
@@ -529,13 +531,13 @@ data.frame(unbiased=rnorm(100000,10,4),low_variance=rnorm(100000,10.5,1)) %>%
 ```
 
 In the first case, the estimator is unbiased, but with a higher variance than the second : if we go for it, we take the chance to have an estimate (depending on our sample) of eg 15 or 5, which is almost unlikely to happen with the second estimator, although this second is not centered on the true value.
-It's up to you to decide, but you generally can't have both an unbiased and very precise estimator... 
+It is up to you to decide, but you generally can't have both an unbiased and very precise estimator... 
 
 ### Statistical tests
 
 #### Introductory example
 
-Knowing the theoretical probability distribution of our estimator, we can assess the likelihood of an hypothesis. For the example, let's take the hypothesis ($\mathcal{H_0}$) that the true mean is 10 and stardard deviation is $2\sqrt{n}$. If this hypothesis is true, thanks to the CTL, the distribution of $\bar{U}$ would be the following :
+Knowing the theoretical probability distribution of our estimator, we can assess the likelihood of an hypothesis. For the example, let's take the hypothesis ($\mathcal{H_0}$) that the true mean is 10 and standard deviation is $2\sqrt{n}$. If this hypothesis is true, thanks to the CTL, the distribution of $\bar{U}$ would be the following :
 
 ```{r,echo=FALSE}
 sim <- data.frame(gauss=rnorm(100000,10,2)) 
@@ -567,7 +569,7 @@ A test is defined by its *null hypothesis* $\mathcal{H_0}$, the contrapositive b
 
 In general, statistician chose a null hypothesis such that they can build a statistic for which they know the distribution $\rightarrow$ they can compute probability for a specific value to occur.
 
-For the example, we'll focus on the **Student test**. The test is meant to check whether the true value of the mean is equal to a specific value. Example, I know that the average age of the austrian population is 43.2 years. I want to test whether our customers have the same average age. Our test is the following :
+For the example, we'll focus on the **Student test**. The test is meant to check whether the true value of the mean is equal to a specific value. Example, I want to test whether the average speed for all activities is 20km/h. Our test is the following :
 
 - $\mathcal{H_0}$ : The average distance of activities is 20
 - $\mathcal{H_1}$ : The average distance of activities is not 20
@@ -576,11 +578,11 @@ The next important parameter of a test if $\alpha$, the
 
 Thanks to the CLT, we can build the following test statistic :
 
-$$T = \sqrt{n} \dfrac{\bar{A}-43.2}{\sigma} \hookrightarrow \mathcal{N}(0,1)$$
+$$T = \sqrt{n} \dfrac{\bar{A}-20}{\sigma} \hookrightarrow \mathcal{N}(0,1)$$
 
 Problem : we don't know the value of the true standard deviation. The final test statistic is distributed with a Student distribution :
 
-$$T = \sqrt{n} \dfrac{\bar{A}-43.2}{\hat{s}} \hookrightarrow \mathcal{St}_{n-1}$$
+$$T = \sqrt{n} \dfrac{\bar{A}-20}{\hat{s}} \hookrightarrow \mathcal{St}_{n-1}$$
 
 where $\hat{s}^2 = \dfrac{1}{n-1}\sum_{i=1}^n (X-\bar{X})^2$ is the unbiased estimator of the variance.
 
@@ -593,7 +595,7 @@ t.test(dat$distance/1E5,mu=20)
 ##### Interpretation :
 
 If you have one thing to remember : **the p-value is the probability to be wrong while rejecting $\mathcal{H_0}$**. 
-In our case, this probability is very small, meaning that rejecting the fact that our customers' avergae age is equal to 43.2 is the good option $\Rightarrow$ our customers' average age differs **significantly** from the austrian average.
+In our case, this probability is very small, meaning that we should not consider that the average speed of all activities is 20km/h
 
 In short : all you have to know what the null hypothesis is and make your decision depending on the p-value. In general, we reject the null is p-value < 5%, but you can decide to be more demanding and chose a lower threshold if you don't want to make a mistake.
 
@@ -614,7 +616,7 @@ In this case, the null is "the difference in means is 0" and the p-value is very
 
 #### Back to our $\chi^2$
 
-Remember the $\chi^2$ test is used to assess if 2 categorical variables are independant or not. The null hypothesis in this test is "both variable are independant". To check that, a test statistic, $D^2$ (X-squared in R output) is built, and under $\mathcal{H_0}$, it is distributed with a $\chi^2$ probability distribution. We can can then test the validity of the null depending on the test value.
+Remember the $\chi^2$ test is used to assess if 2 categorical variables are independent or not. The null hypothesis in this test is "both variable are independant". To check that, a test statistic, $D^2$ (X-squared in R output) is built, and under $\mathcal{H_0}$, it is distributed with a $\chi^2$ probability distribution. We can can then test the validity of the null depending on the test value.
 
 Let's check if there is a relationship between activity and distance in bins :
 
@@ -625,7 +627,7 @@ tab
 tab %>% chisq.test()
 ```
 
-In this case, the p-value is much higher than 5% $\Rightarrow$ the probability to be wrong by rejecting the null is 31%... It is not reasonable to reject the null and we can consider that the two variables are independent, meaning churn and gender have no connection.
+In this case, the p-value is much higher than 5% $\Rightarrow$ the probability to be wrong by rejecting the null is again very small... It is hence reasonable to reject the null and we can consider that the two variables are independent, meaning there is a connection between the activity type and the distance.
 
 ### Other estimators : maximum of likelihood
 
@@ -633,7 +635,7 @@ We saw how that the sample mean is a good estimator or the population mean. If y
 
 Let's say we want to estimate the $s$ parameter of the [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law).
 
-In this case, you can use the **maximum likelihood estimator** (MLE). The [likelihood](https://en.wikipedia.org/wiki/Likelihood_function) is the joint probability of observing the sample I got (which is the product of individual probabilities). Since we state that the underlying probability distribution is Zipf's law, we can express the likelihood as a function of the $s$ parameter. The idea of the MLE is since this sample occurred, it was the *most likely* to happen, hence the value of $s$ is such that it maximizes the likelihood for my sample. Finding the maximum value is something for which we have a few algorithms !
+In this case, you can use the **maximum likelihood estimator** (MLE). The [likelihood](https://en.wikipedia.org/wiki/Likelihood_function) is the joint probability of observing the sample I got (which is the product of individual probabilities in the iid hypothesis). Since we state that the underlying probability distribution is Zipf's law, we can express the likelihood as a function of the $s$ parameter. The idea of the MLE is since this sample occurred, it was the *most likely* to happen, hence the value of $s$ is such that it maximizes the likelihood for my sample. Finding the maximum value is something for which we have a few algorithms !
 
 For this estimator, we also know some asymptotic properties that allows to build tests, which you can interpret in the same manner. Namely, you have three tests :
 
@@ -654,9 +656,9 @@ MLE is also used for machine learning/econometrics, especially when relationship
 
 ### Exercises : interprete a test you don't know
 
-In time series analysis, it is crucial to check if a time serie is stationary or not. Stationarity means that both mean and variance are constant over time (no drift). If it's the case, it's easier to model it.
+In time series analysis, it is crucial to check if a time series is stationary or not. Stationarity means that both mean and variance are constant over time (no drift). If it's the case, it's easier to model it.
 To check that, there are several tests called "unit-root" tests (if there is a unit root, the serie is not stationary).
-In this example, I simulate a time series and run the Phillips-Perron test. The alternative hypothesis is specified in the output ; please interprete the result.
+In this example, I simulate a time series and run the Phillips-Perron test. The alternative hypothesis is specified in the output ; please interpret the result.
 
 ```{r}
 library(tseries)

@@ -2,9 +2,9 @@
 
 ## Multivariate analysis {#multivar}
 
-### Advanced visualization
+### Advanced visualization {#adv_viz}
 
-#### The grammar of graphics
+#### The grammar of graphics 
 
 The grammar of graphics was introduced in 2005 by Wilkinson and Leland as a general framework for graphical representation of data. It was adapted by Hadley Wickham in the R package `ggplot2`.
 *It presents a unique foundation for producing almost every quantitative graphic found in scientific journals, newspapers, statistical packages, and data visualization systems*.
@@ -161,7 +161,7 @@ ggpubr makes your life much easier to make publication-ready graphics. It allows
 ```{r,fig.width=8}
 # install.packages("ggpubr")
 require(ggpubr)
-gg1 <- ggplot(dat_clean,aes(distance)) + geom_histogram() + labs(title = "Age distribution")+
+gg1 <- ggplot(dat_clean,aes(distance)) + geom_histogram() + labs(title = "Distance distribution")+
   theme_minimal()
 gg2 <- ggplot(dat_clean,aes(x=avgSpeed,y=elevationGain,size=calories,color=duration,size=distance)) + 
   geom_jitter() + 
@@ -397,7 +397,7 @@ t-SNE ahs a completely different approach to dimension reduction : it does not a
 
 
 
-## Bonus : dashboards and reports
+## Visualization bonus : dashboards and reports
 
 ### Shiny and rmarkdown
 

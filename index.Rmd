@@ -1,0 +1,29 @@
+--- 
+title: "Data exploration and statistics with R and the tidyverse"
+author: "Vivien Roussez (A1 Telekom Austria Group)"
+date: "Fall 2020"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Welcome to the wonderful world of data science and R !"
+always_allow_html: yes
+---
+
+# Foreword
+
+![](img/asigmo.png)
+
+Welcome to this learning week in Asigmo's program ! 
+
+
+This week will be dedicated to data exploration, manipulation and visualization using R and the tidyverse. To that end, we will also cover the basics of statistics, that are essential for your understanding of modeling and later on machine learning !
+
+
+We will deal with complex and pretty dirty data, but this is real-world data, and you will also see that, more than artificial intelligence, you need common sense to deal with data !
+
+
+This material was powered by [bookdown](https://bookdown.org/home/)
+
+To contact me : vivien.roussez@gmail.com

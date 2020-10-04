@@ -1,0 +1,428 @@
+# Multivariate analysis and dimension reduction
+
+## Multivariate analysis {#multivar}
+
+### Advanced visualization
+
+#### The grammar of graphics
+
+The grammar of graphics was introduced in 2005 by Wilkinson and Leland as a general framework for graphical representation of data. It was adapted by Hadley Wickham in the R package `ggplot2`.
+*It presents a unique foundation for producing almost every quantitative graphic found in scientific journals, newspapers, statistical packages, and data visualization systems*.
+
+You can check [the paper](https://vita.had.co.nz/papers/layered-grammar.html) from Wickham 
+
+When ploting data, one has to define :
+
+- What are the aesthetics $\rightarrow$ **the dimensions you want to represent**
+- What is the geometry you want to use $\rightarrow$ **the kind of plot you want**
+- Ploting options (that come with default values) :
+    + scales of the axis
+    + fonts and colors for text
+    + labels (title, axis titles...)
+    
+In short, what you have to find is the right combination of aesthetics and geometry that best represent the data. To find the recommended combination, don't forget to use [From data to viz](https://www.data-to-viz.com/)
+    
+#### Playing with aesthetics
+
+You must define at least 1 dimension for the plot, either continuous or categorical for the x axis. Then you can increase the number of dimensions (ie columns of the data frame) you want to represent :
+
+- x and y for the axis
+- size : optional (integer) dimension that will represent an additional number
+- color/fill : optional (categorical) dimension reprensented by a color. Color is for line/point geoms, fill for bars/heatmap geoms
+- linetype : optional (categorical) : different type of lines (solid, dotted, dashed...). Only for geometries using lines
+- shape : optional (categorical) : variable that will make the shape of the dot vary. Only for point geometries
+- alpha : optional (continuous) : the transparency of the dots (the lower the value, the more transparent the dot)
+- ...
+
+More about the aesthetics [here](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html)
+
+You can also use the `facet_wrap()` or `facet_grid()` functions to add up to 2 more dimensions with categorical variables (see demo)
+
+#### Geometries
+
+Once you chose the variables (dimensions) you want to plot, you have to chose the geometry, that highly depends on the type of variable (numerical or character/factor). Don't forget to reffer to the website *from data to viz* if you need some inspiration.
+
+A short list of most common geometries :
+
+- geom_bar for barplots
+- geom_histogram for histograms
+- geom_jitter for scatter plots
+- geom_boxplot & geom_violin for compared density plots
+- geom_tile for heatmaps
+- geom_line for time series
+- geom_text or geom_label for text (annotations)
+- geom_hline and geom_vline for horizontal and vertiacal lines
+- ......
+
+
+```{r}
+# From 
+ggplot(dat_clean,aes(x=distance)) +
+  theme_minimal()
+
+ggplot(dat_clean,aes(x=distance)) + geom_histogram()+
+  theme_minimal()
+ggplot(dat_clean,aes(distance,avgSpeed)) + geom_jitter()+
+  theme_minimal()
+ggplot(dat_clean,aes(distance,avgSpeed,color=activity_recoded))  + geom_jitter()+
+  theme_minimal()
+
+# To 
+ggplot(dat_clean,aes(x=avgSpeed,y=calories,size=duration,color=qual_distance,shape=qual_avgHr)) + 
+  geom_jitter() + 
+  facet_wrap(.~ activity_recoded,scales = "free")+
+  theme_minimal()
+# Or maybe
+ggplot(dat_clean,aes(x=avgSpeed,y=elevationGain,size=calories,color=duration)) + 
+  geom_jitter() + 
+  facet_grid(activity_recoded~qual_distance,scales = "free" )+
+  theme_minimal()
+```
+
+#### Important options
+
+With ggplot, one can make publishable graphics that don't need to be modified in another software. For that, the most useful functions are :
+
+- scale_xx_yy : functions that allow you to tweak the axis' scale, the colors used by either `color` or `fill` aesthetics (eg : `scale_color_manual()`) and other options.
+- labs : allows you to proper label title, axis' titles, legend titles...
+- theme : allows you to tweak general parameters for the plot (font family, font size, margins, background colors...). You have several `theme_xx()` functions already defined with different default values for those parameters (eg `theme_minimal()` or `theme_void()`)
+- guides : allows you to modify the legend entries
+
+Whats you can also do is recode the levels of the factor variables to make them more understanble or reorder them if you want them to be displayed in a specific order. See `forcats::fct_recode()` and `forcats::fct_reorder()`
+
+**Hint :** when working with strings, you can force a string to be split in 2 rows with `\n`
+
+Here is an example :
+
+```{r}
+dat_clean %>% 
+  ggplot(aes(x=avgSpeed,y=elevationGain,size=calories,color=duration,size=distance)) + 
+  geom_jitter() + 
+  facet_grid(activity_recoded~qual_distance,scales = "free" ) +
+  theme_minimal() +
+  labs(title="Great insights",y="Total evelation",x="Average speed",
+       color="Duration",size="Total distance") +
+  # scale_color_manual(values = c("magenta","orange")) + 
+  scale_size_continuous(labels=scales::comma) +
+  scale_y_continuous(labels=scales::comma) +
+  scale_x_continuous(labels=scales::comma)+
+  theme_minimal()
+```
+
+#### Some tricks with ggplot
+
+This approach (grammar of graphics) is very coherent but makes it sometimes difficult. For example, how can I represent the distribution of several variables (and not the distribution of one variable according to different sub-groups -meaning that there is a second dimension -) ? 
+
+##### The cheater way
+
+You can brute-force the graph by superposing different geometries. But first, you'll have to standardize the variables (they don't have the same scale). Remember the usage to `across` to apply a function to a selection of variables.
+
+```{r}
+mutate(dat_clean,across(where(is.numeric),
+                        function(xx) (xx-mean(xx,na.rm=T))/sd(xx,na.rm=T))) %>% 
+  ggplot() + geom_density(aes(distance),color="blue") + 
+  geom_density(aes(duration),color="red")+
+  theme_minimal()
+```
+
+This solution can be also used if you want to superpose different geometries (bars and lines, bars and hlines,...), and is in this case legal :D
+
+##### Do it with the tidy philosophy
+
+You can reformulate this task as : I want to represent the distribution of one unique variable for 3 subgroups : age, churn and usage. I have to reshape the data first to create such a variable. For that I will use `tidyr::pivot_longer()` which helps me to transform columns into rows
+
+```{r}
+reshaped <- select(dat_clean,duration,distance) %>% 
+  pivot_longer(cols = everything(),names_to="latent_variable",values_to="values")
+reshaped
+```
+
+Now I can use the latent_variable variable as a dimension in a classic ggplot statement, with a prior standardization
+
+```{r}
+group_by(reshaped,latent_variable) %>% 
+  mutate(values=(values-mean(values,na.rm = T))/sd(values,na.rm = T)) %>% 
+  ggplot(aes(values,color=latent_variable)) + geom_histogram()+
+  theme_minimal()
+```
+
+Or you can even skip the standardization step thanks to facets :
+
+```{r}
+ggplot(reshaped,aes(values)) + geom_histogram() + 
+  facet_wrap(.~latent_variable,scales = "free")+
+  theme_minimal()
+```
+
+##### Combine different plots with ggpubr
+
+ggpubr makes your life much easier to make publication-ready graphics. It allows you for example to combine several ggplot graphics in a grid, regardless of any latent dimension that facet_grid would require. For that you have to store the graphics and "replay" them in a defined grid generated by `ggarrange()`
+
+```{r,fig.width=8}
+# install.packages("ggpubr")
+require(ggpubr)
+gg1 <- ggplot(dat_clean,aes(distance)) + geom_histogram() + labs(title = "Age distribution")+
+  theme_minimal()
+gg2 <- ggplot(dat_clean,aes(x=avgSpeed,y=elevationGain,size=calories,color=duration,size=distance)) + 
+  geom_jitter() + 
+  facet_grid(activity_recoded~qual_distance,scales = "free" ) +
+  theme_minimal() + labs(title = "Beautiful but useless plot")+
+  theme_minimal()
+
+ggarrange(gg1,gg2,ncol = 2,widths = c(1,2))
+```
+
+There are a lot of options in this function (common legend, height and width of each plot,...). You can check the full [documentation of this package](http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/).
+
+Note that you can mix tables and graphics with this function. Tables can be rendered as ggplot object with `ggpubr::ggtexttable()`
+
+### Easily explore an entire dataset
+
+Now, you know how to to one graph including several dimensions. To explore a new dataset and identify the correlations between them, you can visualize at a glance all variables in a datasets and their correlations with `GGally`
+
+#### Scatter plot matrix
+
+The scatter plot matrix shows the correlations between all variables and helps you to spot dependencies between them. We can use either the basic `plot()` function on the dataframe or the GGally package which provides extensions to ggplot.
+Side note : the ggpairs function does a lot of computation and can take a lot of time ! $\rightarrow$ if your dataset is large, you should run it only on a sample of the observations with `dplyr::sample_n()` or `dplyr::sample_frac()`.
+
+```{r}
+select(dat_clean,distance,duration,avgHr,avgSpeed,avgPower,
+       calories,elevationGain,avgBikeCadence,activity_recoded) %>% 
+  plot()
+# install.packages("GGally")
+require(GGally)
+select(dat_clean,distance,duration,avgSpeed,
+       calories,activity_recoded) %>% 
+  GGally::ggpairs()
+```
+
+#### Correlation plots
+
+```{r}
+select(dat_clean,distance,duration,avgHr,avgSpeed,avgPower,
+       calories,elevationGain,avgDoubleCadence,activity_recoded)  %>% 
+  GGally::ggcorr(geom = "circle")
+```
+
+## Multivariate analysis and dimension reduction
+
+In this section, we will focus on the bike activities, which have the highest number of metrics. However, before we can go further, we have to deal with missing data and scale them to avoid that the column with a large order of magnitude are over-weighted.
+
+### Imputation
+
+So far, we have ignored the missing values because we were computing summary statistics on one or 2 variables. The problem when taking into account more columns is that the probability of having one missing value on one of these features is higher, and therefore the risk that the whole observation is ignored increases. Every observation should still contain some original information that an analysis (or a model) should reflect. To avoid to ignore to many observations because of missing data we perform **imputation**, meaning that we replace the missing value with a true value. Many methods can be used to that end :
+
+For numeric variables
+
+- Imputation with a random value from the sample
+- Imputation with the mean/median
+- Imputation with the nearest neighbours (k-nn)
+- Hotdeck
+- Imputation with a model (regression)
+
+For categorical variables :
+
+- Imputation with random category selection
+- Imputation with the most frequent category (total or of the neighbours)
+- Hotdeck
+- Model-based imputation 
+
+The challenge here is to chose between "reflecting the instance's originality" or "not creating noise"
+
+The following code counts the number of missing values per column and does a simple mean or median imputation. We will practice hte imputation via regression in the final chapter's exercises.
+
+```{r}
+dat_bike <- filter(dat_clean,is_bike) # Bike activities
+sapply(dat_bike,function(xx) sum(is.na(xx)))
+```
+
+For this use case, we will use a median imputation, because for some of the variables, the mean would not make sense (eg longitude and latitude).
+
+```{r}
+dat_bike_imp <- mutate(dat_bike,across(where(is.numeric),
+                                   function(xx) ifelse(is.na(xx),mean(xx,na.rm=T),xx)))
+sapply(dat_bike_imp,function(xx) sum(is.na(xx)))
+```
+
+Let's do the same for categorical (maximum frequency), even though it is not mandatory for PCA.
+
+```{r}
+most_freq_cat <- function(xx)
+{
+  tab <- table(xx)
+  return(names(tab[which.max(tab)]))
+}
+
+dat_bike_imp <- mutate(dat_bike_imp,across(where(is.character),
+                                           function(xx) coalesce(xx,most_freq_cat(xx))))
+
+sapply(dat_bike_imp,function(xx) sum(is.na(xx)))
+
+  
+# replacements <-   select(dat_bike_imp,activityId,where(is.character)) %>%
+#   pivot_longer(-activityId,names_to="name",values_to="val") %>% 
+#   filter(!is.na(val)) %>% 
+#   group_by(name,val) %>% 
+#   summarise(cat_nb=n()) %>% 
+#   arrange(name,-cat_nb) %>% 
+#   group_by(name) %>% 
+#   summarise(most_freq=first(val)) %>% 
+#   pivot_wider(names_from = name,values_from=most_freq) %>% 
+#   rename_with(function(xx) paste0(xx,"_imp"))
+
+```
+
+
+### Normalization
+
+Normalization is the operation consisting in scaling the columns so that their unit do not matter in the end. For example, the distance in meter is much larger than the cadence or the power, which have totally different units. To normalize the columns and make them unit-less, there are several methods among which the most common are the following  :
+
+- Standardization : $X_i^{std} = \dfrac{X_i-\bar{X}}{\sigma_X} \rightarrow$ mean 0 and standard deviation 1
+- Min-Max scaling : $X_i^{std} = \dfrac{X_i-min(X)}{max(X)-min(X)}  \rightarrow$ between 0 and 1
+- Robust standardization $X_i^{std} = \dfrac{X_i-Q2(X)}{Q3(X)-Q1(X)}  \rightarrow$ similar to the first option but robust to outliers
+
+You can check [scikit-learn documentation](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing) to see what other options you have (and then search for their R implementation).
+
+Normalization is a mandatory step before fitting a model, in order to avoid that only one feature bears the majority of the variance and makes the model biased.
+
+### PCA
+
+Principal Components Analysis (PCA) is often seen by machine learning engineers as a dimension reduction technique, but it is also a very powerful tool to explore your data (and it was designed for that purpose $\rightarrow$ IQ test). PCA applies on numerical variables only and aims to **create new synthetic and uncorrelated variables, princpipal components** (as a linear combination of the original variables) such that the *inertia* (ie variance) is highly concentrated on a small number of variables.
+
+The mathematical problem is to find eigenvalues and eigenvectors of the correlation matrix. The eigenvectors represent the linear combination of the original variables needed to design thos new variables, and the eigenvalues the variance that each of these new value bears. Once those new variable have been found, graphical representations with few dimensions are possible.
+
+To apply PCA, we will use the `FactoMineR` package, very easy to use for multivariate analysis. 
+
+**Notes** : 
+
+- You can have supplementary continuous or categorical variables. They won't be used in the construction of the eigenvectors, but you will be able to place them in the newly defined vector space.
+- By default, almost all implementations of PCA standardizes the data, so you do not have to do it by yourself, but check in the documentation of the function you use
+
+
+```{r}
+# install.packages("FactoMineR")
+require(FactoMineR)
+acp_dat <- select(dat_bike_imp,deviceId,duration,distance,elevationGain,elevationLoss,avgSpeed,avgHr,calories,
+              minTemperature,maxTemperature,lapCount,avgBikeCadence,avgPower,vO2MaxValue,
+              max20MinPower) 
+acp <-   PCA(acp_dat,graph = F,quali.sup = c(1))
+```
+
+What's in this new object ? 
+
+```{r}
+str(acp)
+```
+
+This is a list with several elements :
+
+- `eig` contains the eigenvalues, and their share in the total inertia (PCA is performed by default on scaled variables $\rightarrow$ the trace of the diagonal matrix equals to the number of columns)
+- `ind` and `var` refer to rows and columns. They both have the same elements : "coord" for the coordinate on each principal component, "contr" the contribution to the inertia of this row (resp column) to the inertia of the component, "cos2" the squared cosine (ie quality of projection) for the row/column
+- `quali.sup` have the same elements than the previous ones (coordinates are the barycenter of each category of the qualitative variable)
+
+The first thing is to have a look at the eignevalues to see how well the PCA could summarize the information
+
+
+```{r}
+barplot(acp$eig[,2])
+barplot(acp$eig[,3])
+```
+
+In our case, the first component bears 35% of the total inertia and the second 15%. Hence, the first factorial plane (the first 2 components) : let's look at how the variable correlate with them :
+
+```{r}
+plot.PCA(acp,choix="var",col.var = "blue")
+```
+
+What you can read at once on this plot is how important each variable is to construct the new variables. As a matter of fact, contribution, cos2 and coordinates are almost the same in PCA, meaning that the closer to the unit disc the coordinate is, the high are also contribution and quality of representation. 
+
+What we deduct from this graph : 
+
+- Distance, calories and duration have the largest values on the first component $\rightarrow$ they contribute largely to the first component, which bears the 35% of total variance $\rightarrow$ those variables are the most discriminant
+- Those three variables are very close to each other, which means they are highly correlated
+- The average cadence is on the other side of the first component $\righarrow$ it is negatively correlated with those variables
+- There is a right angle between elevationGain and avgPower $\rightarrow$ the correlation is very small
+
+Let's check the correlation matrix to be sure about what we are reading here
+
+```{r}
+select(acp_dat,-deviceId) %>% 
+  cor() %>% 
+  corrplot::corrplot()
+```
+
+How about the individuals ?
+
+```{r}
+plot.PCA(acp,choix="ind")
+```
+
+This graph is harder to read, but we still can identify outliers and understand wht they are. Anyway in the top-right corner, those are long rides with a lot of ups and downs ! The most extreme is `r dat_bike_imp$activityId[2252]` which is another measurement error (indoor cycling with 34000 elevation meters !)
+
+
+### Exercises
+
+- Remove the measurement errors and re-run the PCA ; what are the changes ?
+- Let's focus the running activities : select relevant features, impute the missing values using k-nn, run a PCA and analyze the results
+
+
+## Dimension reduction
+
+Dimension reduction aims to reduce the size of the data ; most of the time the goal is to decrease the number of columns but it can also apply to rows (depending on your use case). Why reduce the dimension :
+
+- Avoid the [curse of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality)
+- Remove undesired noise
+- Avoid [multicollinearity](https://en.wikipedia.org/wiki/Multicollinearity) in the features
+
+### Use the results of the PCA
+
+After performing a PCA, you can select a limited number of principal components that you will use further in the modeling task. You can chose the number of components to keep with several criteria :
+
+- average inertia (eigenvalue > 1)
+- minimal total inertia (eg 80%)
+- elbow criteria : keep components before there is a "drop" in the eigenvalues barplot
+
+### Other inertia-based methods
+
+PCA is designed only for continuous variables, but you can use other methods for other types of data :
+
+- MCA (Multiple Correspondence Analysis ) for categorical variables (if you have a mixture of continuous and categorical, you can discretize numerical variables and perform MCA)
+- FDA (Functional Data Analysis for functions/curves)
+
+### t-SNE
+
+t-SNE ahs a completely different approach to dimension reduction : it does not aim to preserve the total variance but rather the distances between the observations.
+
+### A word about clustering
+
+
+
+## Bonus : dashboards and reports
+
+### Shiny and rmarkdown
+
+R offers 2 main packages that allow you to create dashboards and reports in HTML format and the latest feature of web technologies without knowing anything about HTML, CSS or other web-specific languages :
+
+- [Rmarkdown](https://rmarkdown.rstudio.com/) is markdown adapted to R, allows you to create *standalone* documents in either PDF or HTML format, and mixes regular word-processor features and R code. The [flexdashboard package](https://rmarkdown.rstudio.com/flexdashboard/) is an extension to Rmarkdown that helps to generate dashboards in HTML format. Those tools are essentially used to design reproducible documents (scientific reports, regularly updated reports/dashboards...). You can also create presentation with it.
+- [Shiny](https://shiny.rstudio.com/gallery/) is a package to develop interactive web-apps. A shiny app requires an R engine to be rendered on the client side.
+
+In the course material, you'll find one example for each package. You'll easily find online material to develop your skills further with these tools
+
+- For [rmarkdown](https://bookdown.org/yihui/rmarkdown/)
+- For [shiny](https://mastering-shiny.org/)
+
+### Web-based graphics with `plotly`
+
+[plotly](https://plotly.com/r/) is a graphical library that generate "interactive" web-based graphics. It is available for R, but also python and other programming languages. You can learn the syntax of this package too, but there is a very useful function, `plotly::ggplotly()` that translates your ggplot object into a `plotly` graphic. It works for most of the cases.
+
+```{r}
+# install.packages("plotly")
+require(plotly)
+ggplotly(gg1)
+```
+
+This is very useful to embed in a rmarkdown document or a shiny app !
+
+### Other packages & widgets
+
+You can use a lot of other [html widgets](https://www.htmlwidgets.org/index.html) to incorporate in your report/shiny app

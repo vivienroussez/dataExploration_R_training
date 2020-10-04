@@ -1,0 +1,63 @@
+# Introduction {#intro}
+
+```{r,include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,error = FALSE,message = FALSE)
+```
+
+
+## Topics of the week
+
+During this week, we will cover a lot of *basic* and nonetheless indispensable tools for a data scientist. We will cover mainly the "boring side" of data science (aka data analysis :P ). As a matter of fact, if machine learning is more and more automatized, everything that is related to data **exploration**, **wrangling**, **cleaning**, **understanding** and **analysis** is hardly doable by "AI".
+
+What's on our agenda :
+
+- Introduction to R
+- Data manipulation
+- Introduction to statistics
+- Data exploration 
+- Explainable machine learning (eg regression)
+- Data visualization
+- Data cleaning
+- Dimension reduction
+
+**Important notes** : 
+
++ of course, it's  not a linear path and the data science workflow is not a simple execution of those steps in a pre-determined order. It's all connected and you'll have to move back and forth between all of them to achieve your goal.  And this goal, what is it already ?
++ in data science is the word "science". And what is science ? Huge topic... But a few keywords that you should always have in mind when starting a project
+    + reproducibility
+    + hypothesis testing
+    + incremental
+    + iterative
+    + monitored
+
+## The data science workflow
+
+A popular schematic overview of a the workflow
+
+![](img/data-science-explore.png)
+
+## Resources
+
+You will find a lot of resources online. Here is a selection, mostly related to R. However, our goal for this session is to have you understand how all the methods we will cover are related to each other and when you should consider using them
+
+- [R for data science](https://r4ds.had.co.nz/)
+- [Statistics and econometrics](https://www.econometrics-with-r.org/)
+- [Statistics and exploration with R](https://moderndive.com/)
+- [From data to viz](https://www.data-to-viz.com/) (featuring python :D )
+- [Data visualization]( https://socviz.co/)
+- [More resource online books using R (text mining, machine learning...)](https://bookdown.org/home/)
+
+## Data of the week
+
+In this course, we will handle with my *own* personal data (I give my consent ! ;) )
+Those are my sports activity data, which I got from garmin (thanks to the GDPR). If you want to get your own data from [this page](https://www.garmin.com/en-US/account/datamanagement/exportdata/).
+Being a triathlete, there are several sports involved and a lot of activities. The goal will be to import, clean, analyse the data with statistics and eventually build some first models (**explainable AI**).
+
+The export results in a lot of JSON files and we will focus on the summary data. It's real worl data and you'll see it's complicated, dirty and requires a lot of preparation/manipulation !
+
+```{r}
+require(tidyverse)
+dat <- read.csv("Data/Sports/Activities.csv",header = T)
+head(dat)
+```
+

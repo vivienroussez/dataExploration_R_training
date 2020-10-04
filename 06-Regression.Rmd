@@ -1,0 +1,12 @@
+# Linear and logistic regression {#reg}
+
+Regression is the first machine learning algorithm. It allows you to model a *target variable* $y$ depending on a set of *explanatory variables* or *features* $X$ such that $y=f(X) + \epsilon$ where $f$ is a linear function (for linear regression).
+
+## Linear regression
+
+
+
+
+
+
+## Logitic regression

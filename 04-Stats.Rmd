@@ -1,5 +1,10 @@
 # Statistics {#stats}
 
+Let's load and clean the data (which you have done during the exercises)
+
+```{r,results='hide'}
+source("ZZ2 - data_preparation.R")
+```
 
 This session aims to give a practical guide to explore a dataset you've never seen before and to understand some of the key statistical concepts. You will learn to describe each *variable* of a dataset and assess the strength of the relationship between two variables whatever their types may be. For that, we'll see how to visually explore a dataset and to quantify what the graphics show. We will also give an overview of what statistical inference is and what it can be used for.
 
@@ -25,7 +30,7 @@ A data set can be viewed in two different manners :
 
 - A set of columns, or **variables** that describe the individuals
 
-It is crucial to have a good understanding of **what the statistical indvidual is**, and that can be challenging !
+It is crucial to have a good understanding of **what the statistical individual is**, and that can be challenging !
 
 Some examples :
 
@@ -251,11 +256,11 @@ We can see here that there is a positive relationship between distance and data 
 To quantify this relationship, you can use the coefficients of correlation. There are 3 main coefficients : Pearson (the most famous and used), Kendall and Spearman. The latter can handle non-linear functional dependencies (ranks correlation) ; this is (roughly) equivalent to computing the coefficients on the log-transformed variables.
 
 ```{r}
-print("Pearson coeff")
+# Pearson coeff
 cor(dat$distance,dat$avgPower,method="pearson")
-print("Pearson coeff, NAs removed")
+# Pearson coeff, NAs removed
 cor(dat$distance,dat$avgPower,method="pearson",use = "complete.obs")
-print("Spearman coeff")
+# Spearman coeff 
 cor(dat$distance,dat$avgPower,method="spearman",use = "complete.obs")
 
 # Why is R a beautiful language ? Do it at once, without loops (loops are evil) 
@@ -269,7 +274,7 @@ Should there be a complex relationship (eg sine), the graphical exploration is m
 
 ### 2 categorical variables
 
-For this part, I will create a discrete variable out of the distance variable (see previous exercises) to use it as second qualitative variable (the other are not really meaningful)
+For this part, I will create a discrete variable out of the distance variable (see previous exercises) to use it as second qualitative variable (the other ones are not really meaningful)
 
 ```{r}
 dat <- mutate(dat,qual_distance=as.character(cut(distance,
@@ -289,9 +294,12 @@ Try different layouts with you barcharts !
 #### Barcharts
 
 ```{r}
-ggplot(dat,aes(activity_recoded,fill=qual_distance)) + geom_bar(position = "stack") + theme_minimal()
-ggplot(dat,aes(activity_recoded,fill=qual_distance)) + geom_bar(position = "dodge") + theme_minimal()
-ggplot(dat,aes(activity_recoded,fill=qual_distance)) + geom_bar(position = "fill") + 
+ggplot(dat,aes(activity_recoded,fill=qual_distance)) + 
+  geom_bar(position = "stack") + theme_minimal()
+ggplot(dat,aes(activity_recoded,fill=qual_distance)) + 
+  geom_bar(position = "dodge") + theme_minimal()
+ggplot(dat,aes(activity_recoded,fill=qual_distance)) + 
+  geom_bar(position = "fill") + 
   scale_y_continuous(labels = scales::percent) + theme_minimal()
 ```
 
@@ -301,9 +309,12 @@ You get really different insights depending on the representation you chose !
 
 ```{r}
 table(dat$activity_recoded,dat$qual_distance) 
-table(dat$activity_recoded,dat$qual_distance) %>%   prop.table()*100
-table(dat$activity_recoded,dat$qual_distance) %>%   prop.table(margin = 1)*100
-table(dat$activity_recoded,dat$qual_distance) %>%   prop.table(margin = 2)*100
+table(dat$activity_recoded,dat$qual_distance) %>%   
+  prop.table()*100
+table(dat$activity_recoded,dat$qual_distance) %>%   
+  prop.table(margin = 1)*100
+table(dat$activity_recoded,dat$qual_distance) %>%   
+  prop.table(margin = 2)*100
 ```
 
 <!-- ### Weighted contingency tables -->
@@ -430,11 +441,11 @@ This is also the $R^2$ of the 1-factor ANOVA regression of distance explained by
 
 ```{r}
 anova <- aov(distance~activity_recoded,data=dat) 
-print("Variance decomposition")
+# Variance decomposition
 summary(anova)
 print("eta squared")
 lsr::etaSquared(anova)
-print("Alternatively")
+# Alternatively
 lm(distance~activity_recoded,data=dat) %>% summary()
 ```
 
@@ -457,26 +468,26 @@ dat_clean <- filter(dat,!(activityId %in% c(407226313,2321338)) & year(date)>=20
 
 ### The statistical model
 
-We want to measure a characteristic in the *general population*, let's say the usage of fixed data and let's denote it by U.
+We want to measure a characteristic in the *general population*, let's say the average distance of all potential activites, and let's denote it by D.
 
-The fundamental assumption of the statistical model is that there is an underlying *data-genereting process*, which means that U is distributed according to a certain probability distribution. The goal of the statistician is to find which distribution it is, and estimate its parameters. 
+The fundamental assumption of the statistical model is that there is an underlying *data-genereting process*, which means that D is distributed with a certain probability distribution. The goal of the statistician is to find which distribution it is, and estimate its parameters. 
 <!-- To simplify, we'll assume that $U \hookrightarrow \mathcal{N}(\mu,\sigma)$ where $\mu, \sigma$ are the *population parameters*. -->
 
-The big problem is that it is impossible to observe U on the whole population (even with a census), and a dataset is only a **sample of the general population** (which does not really exists). The question is then : how can we estimate the parameters of the *true* distribution ?
+The big problem is that it is impossible to observe D on the whole population, and any dataset is only a **sample of the general population** (which does not really exists). The question is then : how can we estimate the parameters of the *true* distribution ?
 
 $\Rightarrow$ There is a difference between the **sample mean** and the **population mean** (noted $\mu$).
-As a matter of fact the sample mean is an estimator of the population mean. The value of an estimator (often noted $\hat{\theta}$) is a random variable (it depends on the sample), meaning this is not a single deterministic value, but has a probability distribution. Therefore it has a **expectation** and a **variance**
+As a matter of fact the sample mean is an estimator of the population mean. The value of an estimator (often noted $\hat{\theta}$) is a random variable (it depends on the sample), meaning this is not a single deterministic value, but has a probability distribution. Therefore it has an **expectation** and a **variance**
 An estimator is said to be *biased* if $\mathbb{E}(\hat{\theta}) \neq \mu$ ; it is said to be *efficient* if its variance is minimal.
 
-One fundamental hypothesis of the model is that all observations are independent and identically distributed (*iid*). This is typically not the case for *time series*.
+One fundamental hypothesis of the model is that all observations are independent and identically distributed (*iid*). This is typically not the case for *time series*, but this hypothesis is, in general, reasonable.
 
 ### Two fundamental theorems
 
-Eventough we cannot observe the true parameter and that the sample mean is an estimator (hence a random variable), 2 theorems save the game :
+Eventough we cannot observe the true parameter(s), and that the sample mean is an estimator (hence a random variable), 2 theorems save the game :
 
 #### The law of large numbers
 
-$$\bar{U} = \dfrac{1}{n} \sum_{i=1}^n U_i \xrightarrow[n \to +\infty]{a.s.} \mu$$
+$$\bar{D} = \dfrac{1}{n} \sum_{i=1}^n D_i \xrightarrow[n \to +\infty]{a.s.} \mu$$
 
 In other words, when the sample size n is big enough, the sample mean converges to the population mean $\rightarrow$ We can estimate this parameter with a simple mean without **bias**.
 
@@ -484,11 +495,11 @@ In other words, when the sample size n is big enough, the sample mean converges 
 
 Probably the most important theorem in statistics, valid whatever the true distribution is 
 
-$$\sqrt{n} \cdot \bar{U} \xrightarrow[n \to +\infty]{p}  \mathcal{N} (\mu,\sigma^2)$$
+$$\sqrt{n} \cdot \bar{D} \xrightarrow[n \to +\infty]{p}  \mathcal{N} (\mu,\sigma^2)$$
 
-Meaning that the sample mean converges in probability to a normal distribution with population parameters at "speed" $\sqrt{n}$. This equivalent to :
+Meaning that the sample mean converges in probability to a normal distribution with population parameters at "speed" $\sqrt{n}$. This is equivalent to :
 
-$$ \bar{U} - \mu \xrightarrow[n \to +\infty]{p}  \mathcal{N} (0,\frac{\sigma^2}{n})$$
+$$ \bar{D} - \mu \xrightarrow[n \to +\infty]{p}  \mathcal{N} (0,\frac{\sigma^2}{n})$$
 
 Meaning that : 
 
@@ -513,7 +524,7 @@ Take away :
 - The **sample mean** is an **estimator** of the true value of an underlying "true" mean. The estimator's value depends on the sample I have
 - This estimator (any estimator) has a **variance** that I could measure if I had several samples to compute several sample means
 - Probality theory gives us tools to estimate the **bias** and **the variance** of an estimator
-- **Bias-variance trade-off** :$\mathbb{E}((U-\bar{U})^2)=\mathbb{E}^2(U-\bar{U}) + \mathbb{V}(\bar{U})$, in other words : $MSE_{\bar{U}} = bias^2 + \mathbb{V}(\bar{U})$  $\rightarrow$ see you during ML course ;-)
+- **Bias-variance trade-off** :$\mathbb{E}((D-\bar{D})^2)=\mathbb{E}^2(D-\bar{D}) + \mathbb{V}(\bar{D})$, in other words : $MSE_{\bar{D}} = bias^2 + \mathbb{V}(\bar{D})$  $\rightarrow$ see you during ML course ;-)
 
 Illustration of the biais-variance trade-off.
 
@@ -537,7 +548,7 @@ It is up to you to decide, but you generally can't have both an unbiased and ver
 
 #### Introductory example
 
-Knowing the theoretical probability distribution of our estimator, we can assess the likelihood of an hypothesis. For the example, let's take the hypothesis ($\mathcal{H_0}$) that the true mean is 10 and standard deviation is $2\sqrt{n}$. If this hypothesis is true, thanks to the CTL, the distribution of $\bar{U}$ would be the following :
+Knowing the theoretical probability distribution of our estimator, we can assess the likelihood of an hypothesis. For the example, let's make the hypothesis ($\mathcal{H_0}$) that the true mean is 10 and standard deviation is $2\sqrt{n}$. If this hypothesis is true, thanks to the CTL, the distribution of $\bar{D}$ would be the following :
 
 ```{r,echo=FALSE}
 sim <- data.frame(gauss=rnorm(100000,10,2)) 
@@ -565,46 +576,46 @@ Obviously my actual value doesn't fit with my hypothesis : the probability of ge
 
 #### Student test
 
-A test is defined by its *null hypothesis* $\mathcal{H_0}$, the contrapositive being $\mathcal{H_1}$. The general procedure is to set $\mathcal{H_0}$ in a way that we can build a *test statistic* whose distribution we can derive.
+A test is defined by its *null hypothesis* $\mathcal{H_0}$, the contrapositive (alternative) being $\mathcal{H_1}$. The general procedure is to set $\mathcal{H_0}$ such that we can build a *test statistic* of which we can derive the distribution.
 
-In general, statistician chose a null hypothesis such that they can build a statistic for which they know the distribution $\rightarrow$ they can compute probability for a specific value to occur.
+In general, statisticians chose a null hypothesis such that they can build a statistic for which they know the distribution $\rightarrow$ they can compute the probability of a specific value to occur.
 
-For the example, we'll focus on the **Student test**. The test is meant to check whether the true value of the mean is equal to a specific value. Example, I want to test whether the average speed for all activities is 20km/h. Our test is the following :
+For the example, we'll focus on the **Student test**. The test is meant to check whether the true value of the mean is equal to a specific value. Example, I want to test whether the average distance for all activities is 20km/h. Our test is the following :
 
 - $\mathcal{H_0}$ : The average distance of activities is 20
 - $\mathcal{H_1}$ : The average distance of activities is not 20
 
-The next important parameter of a test if $\alpha$, the
+The next important parameter of a test if $\alpha$, the risk level, meaning the probability we are willing to take to be wrong while accepting $\mathcal{H_0}$. 5% is a value that is often chosen.
 
 Thanks to the CLT, we can build the following test statistic :
 
-$$T = \sqrt{n} \dfrac{\bar{A}-20}{\sigma} \hookrightarrow \mathcal{N}(0,1)$$
+$$T = \sqrt{n} \dfrac{\bar{D}-20}{\sigma} \hookrightarrow \mathcal{N}(0,1)$$
 
 Problem : we don't know the value of the true standard deviation. The final test statistic is distributed with a Student distribution :
 
-$$T = \sqrt{n} \dfrac{\bar{A}-20}{\hat{s}} \hookrightarrow \mathcal{St}_{n-1}$$
+$$T = \sqrt{n} \dfrac{\bar{D}-20}{\hat{s}} \hookrightarrow \mathcal{St}_{n-1}$$
 
-where $\hat{s}^2 = \dfrac{1}{n-1}\sum_{i=1}^n (X-\bar{X})^2$ is the unbiased estimator of the variance.
+where $\hat{s}^2 = \dfrac{1}{n-1}\sum_{i=1}^n (D-\bar{D})^2$ is the unbiased estimator of the variance.
 
 ##### Implementation in R :
 
 ```{r}
-t.test(dat$distance/1E5,mu=20)
+t.test(dat$distance,mu=20)
 ```
 
 ##### Interpretation :
 
 If you have one thing to remember : **the p-value is the probability to be wrong while rejecting $\mathcal{H_0}$**. 
-In our case, this probability is very small, meaning that we should not consider that the average speed of all activities is 20km/h
+In our case, this probability is very small, meaning that we should not consider that the average distance of all activities is 20km/h.
 
-In short : all you have to know what the null hypothesis is and make your decision depending on the p-value. In general, we reject the null is p-value < 5%, but you can decide to be more demanding and chose a lower threshold if you don't want to make a mistake.
+In short : all you have to know is what the null hypothesis is, and make your decision depending on the p-value. In general, we reject the null is p-value < 5% (the risk level), but you can decide to be more demanding and chose a lower threshold if you don't want to make a mistake.
 
 *Note : * If you want to dig deeper, you can test whether the mean is strictly greater than a specific value using the parameter `alternative` of the `t-test` function.
 
 #### Student test to compare group means
 
-You can also use the Student test to check whether the means of two sub-populations are equal or not. In this case, the tests checks whether the difference in means differs significantly from 0. We'll check in this example if average age differs between churners and non churners.
-For that we have to extract the churners and non churners' age in two separate vectors and run the test on those.
+You can also use the Student test to check whether the means of two sub-populations are equal or not. In this case, the tests checks whether the difference in means differs significantly from 0. We'll check in this example if average distance differs between rides and other activities.
+For that we have to extract on the one hand the bike activities' distance and the other activites' distance on the other hand. We can run the test on those 2 vectors :
 
 ```{r}
 bike <- filter(dat,is_bike) %>% pull(distance)
@@ -612,7 +623,7 @@ non_bike <- filter(dat,!is_bike) %>% pull(distance)
 t.test(bike,non_bike)
 ```
 
-In this case, the null is "the difference in means is 0" and the p-value is very very small (almost 0) $\rightarrow$ we can reject the null without second thoughts, which means there is a **significant** difference between the 2 sub-groups regarding average age.
+In this case, the null hypothesis is "the difference in means is 0" and the p-value is very very small (almost 0) $\rightarrow$ we can reject the null without second thoughts, which means there is a **significant** difference between the 2 sub-groups regarding average distance.
 
 #### Back to our $\chi^2$
 
@@ -627,15 +638,19 @@ tab
 tab %>% chisq.test()
 ```
 
-In this case, the p-value is much higher than 5% $\Rightarrow$ the probability to be wrong by rejecting the null is again very small... It is hence reasonable to reject the null and we can consider that the two variables are independent, meaning there is a connection between the activity type and the distance.
+In this case, the p-value is again much smaller than 5% $\Rightarrow$ the probability to be wrong by rejecting the null is again very small... It is hence reasonable to reject the null and we can consider that the two variables are independent, meaning there is a connection between the activity type and the distance.
 
 ### Other estimators : maximum of likelihood
 
-We saw how that the sample mean is a good estimator or the population mean. If you assume that the underlying probability distribution of the variable of interest is something else than a normal distribution, you can be interested in estimating another parameter than the mean.
+We saw that the sample mean is a good estimator for the population mean. If you assume that the underlying probability distribution of the variable of interest is something else than a normal distribution, you can be interested in estimating another parameter than the mean.
 
 Let's say we want to estimate the $s$ parameter of the [Zipf's law](https://en.wikipedia.org/wiki/Zipf%27s_law).
 
-In this case, you can use the **maximum likelihood estimator** (MLE). The [likelihood](https://en.wikipedia.org/wiki/Likelihood_function) is the joint probability of observing the sample I got (which is the product of individual probabilities in the iid hypothesis). Since we state that the underlying probability distribution is Zipf's law, we can express the likelihood as a function of the $s$ parameter. The idea of the MLE is since this sample occurred, it was the *most likely* to happen, hence the value of $s$ is such that it maximizes the likelihood for my sample. Finding the maximum value is something for which we have a few algorithms !
+In this case, you can use the **maximum likelihood estimator** (MLE). The [likelihood](https://en.wikipedia.org/wiki/Likelihood_function) is the joint probability of observing the sample I got (which is the product of individual probabilities under the iid hypothesis). 
+
+$$L_X(s) = \prod_{i=1}^n f(k;s,N)$$
+
+Since we state that the underlying probability distribution is Zipf's law, we can express the likelihood as a function of the $s$ parameter. The idea of the MLE is since this sample happened, it was the *most likely* to happen, hence the value of $s$ is such that it maximizes the likelihood for my sample. And finding the maximum value is something for which we have a few algorithms !
 
 For this estimator, we also know some asymptotic properties that allows to build tests, which you can interpret in the same manner. Namely, you have three tests :
 
@@ -645,7 +660,7 @@ For this estimator, we also know some asymptotic properties that allows to build
 
 ![](img/wald-lm-lr.jpg)
 
-All those test statistics are distributed according to a $\chi^2$ distribution
+All those test statistics are distributed as a $\chi^2$ distribution
 
 MLE is also used for machine learning/econometrics, especially when relationships are non linear $\Rightarrow$ logistic regression.
 
@@ -656,7 +671,8 @@ MLE is also used for machine learning/econometrics, especially when relationship
 
 ### Exercises : interprete a test you don't know
 
-In time series analysis, it is crucial to check if a time series is stationary or not. Stationarity means that both mean and variance are constant over time (no drift). If it's the case, it's easier to model it.
+- Run a Kolmogorov–Smirnov test on the distance variable, and the logarithm of this variable. What can you conclude ?
+- In time series analysis, it is crucial to check if a time series is stationary or not. Stationarity means that both mean and variance are constant over time (no drift). If it's the case, it's easier to model it.
 To check that, there are several tests called "unit-root" tests (if there is a unit root, the serie is not stationary).
 In this example, I simulate a time series and run the Phillips-Perron test. The alternative hypothesis is specified in the output ; please interpret the result.
 

@@ -241,6 +241,7 @@ square(5)
 
 #### Exercices
 
+
 - Create a vector mixing both numbers and strings : what happens ?
 - Create a vector containing the values "fellow 1" to fellow 15". Hint : be lazy and use the `paste()` function
 - Replace the value "fellow 5" with "best fellow"

@@ -231,7 +231,10 @@ You will have to :
     - Check the distance/elevation variables ; what do you think ?
     - Check the speed related variables : what do you think ?
     - Check the calories variable and adjust it
+    - Check the duration related variable and adjust them to have minutes
     - To help you figuring out, you can check an activity on garmin's site using [this url](https://connect.garmin.com/modern/activity/5570974040) and change the activity number for the one you are inspecting
+    
+A lot of reverse engineering ahead
     
 ### One tool you will need : `lapply()`
 

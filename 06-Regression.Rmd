@@ -134,5 +134,7 @@ summary(selection)
 
 - From the last functional form used, design a graphic that shows the final impact of an increase in power to the average speed, taking the distance into account.
 - Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates...)
+- Fit a model for running activities to impute avgHr where it's missing
 
 ## Logitic regression
+

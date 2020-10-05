@@ -312,31 +312,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>geom_hline and geom_vline for horizontal and vertiacal lines</li>
 <li>……</li>
 </ul>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb214-1"></a><span class="co"># From </span></span>
-<span id="cb214-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb214-2"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>distance)) <span class="op">+</span></span>
-<span id="cb214-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb214-3"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb215-1"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()<span class="op">+</span></span>
-<span id="cb215-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb215-2"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-71-2.png" width="672" /></p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb216-1"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(distance,avgSpeed)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()<span class="op">+</span></span>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb215-1"></a><span class="co"># From </span></span>
+<span id="cb215-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb215-2"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>distance)) <span class="op">+</span></span>
+<span id="cb215-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb215-3"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb216-1"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()<span class="op">+</span></span>
 <span id="cb216-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb216-2"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-71-3.png" width="672" /></p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb217-1"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(distance,avgSpeed,<span class="dt">color=</span>activity_recoded))  <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()<span class="op">+</span></span>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-72-2.png" width="672" /></p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb217-1"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(distance,avgSpeed)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()<span class="op">+</span></span>
 <span id="cb217-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb217-2"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-71-4.png" width="672" /></p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb218-1"></a><span class="co"># To </span></span>
-<span id="cb218-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb218-2"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>avgSpeed,<span class="dt">y=</span>calories,<span class="dt">size=</span>duration,<span class="dt">color=</span>qual_distance,<span class="dt">shape=</span>qual_avgHr)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb218-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb218-3"></a><span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb218-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb218-4"></a><span class="st">  </span><span class="kw">facet_wrap</span>(.<span class="op">~</span><span class="st"> </span>activity_recoded,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span></span>
-<span id="cb218-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb218-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-71-5.png" width="672" /></p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb219-1"></a><span class="co"># Or maybe</span></span>
-<span id="cb219-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb219-2"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>avgSpeed,<span class="dt">y=</span>elevationGain,<span class="dt">size=</span>calories,<span class="dt">color=</span>duration)) <span class="op">+</span><span class="st"> </span></span>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-72-3.png" width="672" /></p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb218-1"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(distance,avgSpeed,<span class="dt">color=</span>activity_recoded))  <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()<span class="op">+</span></span>
+<span id="cb218-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb218-2"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-72-4.png" width="672" /></p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb219-1"></a><span class="co"># To </span></span>
+<span id="cb219-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb219-2"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>avgSpeed,<span class="dt">y=</span>calories,<span class="dt">size=</span>duration,<span class="dt">color=</span>qual_distance,<span class="dt">shape=</span>qual_avgHr)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb219-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb219-3"></a><span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb219-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb219-4"></a><span class="st">  </span><span class="kw">facet_grid</span>(activity_recoded<span class="op">~</span>qual_distance,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span> )<span class="op">+</span></span>
+<span id="cb219-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb219-4"></a><span class="st">  </span><span class="kw">facet_wrap</span>(.<span class="op">~</span><span class="st"> </span>activity_recoded,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span></span>
 <span id="cb219-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb219-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-71-6.png" width="672" /></p>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-72-5.png" width="672" /></p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-1"></a><span class="co"># Or maybe</span></span>
+<span id="cb220-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-2"></a><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>avgSpeed,<span class="dt">y=</span>elevationGain,<span class="dt">size=</span>calories,<span class="dt">color=</span>duration)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb220-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-3"></a><span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb220-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-4"></a><span class="st">  </span><span class="kw">facet_grid</span>(activity_recoded<span class="op">~</span>qual_distance,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span> )<span class="op">+</span></span>
+<span id="cb220-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-72-6.png" width="672" /></p>
 </div>
 <div id="important-options" class="section level4">
 <h4><span class="header-section-number">6.1.1.4</span> Important options</h4>
@@ -350,19 +350,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Whats you can also do is recode the levels of the factor variables to make them more understanble or reorder them if you want them to be displayed in a specific order. See <code>forcats::fct_recode()</code> and <code>forcats::fct_reorder()</code></p>
 <p><strong>Hint :</strong> when working with strings, you can force a string to be split in 2 rows with <code>\n</code></p>
 <p>Here is an example :</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-1"></a>dat_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb220-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>avgSpeed,<span class="dt">y=</span>elevationGain,<span class="dt">size=</span>calories,<span class="dt">color=</span>duration,<span class="dt">size=</span>distance)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb220-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-3"></a><span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb220-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-4"></a><span class="st">  </span><span class="kw">facet_grid</span>(activity_recoded<span class="op">~</span>qual_distance,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span> ) <span class="op">+</span></span>
-<span id="cb220-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
-<span id="cb220-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Great insights&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Total evelation&quot;</span>,<span class="dt">x=</span><span class="st">&quot;Average speed&quot;</span>,</span>
-<span id="cb220-7"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-7"></a>       <span class="dt">color=</span><span class="st">&quot;Duration&quot;</span>,<span class="dt">size=</span><span class="st">&quot;Total distance&quot;</span>) <span class="op">+</span></span>
-<span id="cb220-8"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-8"></a><span class="st">  </span><span class="co"># scale_color_manual(values = c(&quot;magenta&quot;,&quot;orange&quot;)) + </span></span>
-<span id="cb220-9"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-9"></a><span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>comma) <span class="op">+</span></span>
-<span id="cb220-10"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-10"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>comma) <span class="op">+</span></span>
-<span id="cb220-11"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-11"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>comma)<span class="op">+</span></span>
-<span id="cb220-12"><a href="multivariate-analysis-and-dimension-reduction.html#cb220-12"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-1"></a>dat_clean <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb221-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>avgSpeed,<span class="dt">y=</span>elevationGain,<span class="dt">size=</span>calories,<span class="dt">color=</span>duration,<span class="dt">size=</span>distance)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb221-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-3"></a><span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb221-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-4"></a><span class="st">  </span><span class="kw">facet_grid</span>(activity_recoded<span class="op">~</span>qual_distance,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span> ) <span class="op">+</span></span>
+<span id="cb221-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb221-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Great insights&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Total evelation&quot;</span>,<span class="dt">x=</span><span class="st">&quot;Average speed&quot;</span>,</span>
+<span id="cb221-7"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-7"></a>       <span class="dt">color=</span><span class="st">&quot;Duration&quot;</span>,<span class="dt">size=</span><span class="st">&quot;Total distance&quot;</span>) <span class="op">+</span></span>
+<span id="cb221-8"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-8"></a><span class="st">  </span><span class="co"># scale_color_manual(values = c(&quot;magenta&quot;,&quot;orange&quot;)) + </span></span>
+<span id="cb221-9"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-9"></a><span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>comma) <span class="op">+</span></span>
+<span id="cb221-10"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-10"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>comma) <span class="op">+</span></span>
+<span id="cb221-11"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-11"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>comma)<span class="op">+</span></span>
+<span id="cb221-12"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-12"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 </div>
 <div id="some-tricks-with-ggplot" class="section level4">
 <h4><span class="header-section-number">6.1.1.5</span> Some tricks with ggplot</h4>
@@ -370,61 +370,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-cheater-way" class="section level5">
 <h5><span class="header-section-number">6.1.1.5.1</span> The cheater way</h5>
 <p>You can brute-force the graph by superposing different geometries. But first, you’ll have to standardize the variables (they don’t have the same scale). Remember the usage to <code>across</code> to apply a function to a selection of variables.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-1"></a><span class="kw">mutate</span>(dat_clean,<span class="kw">across</span>(<span class="kw">where</span>(is.numeric),</span>
-<span id="cb221-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-2"></a>                        <span class="cf">function</span>(xx) (xx<span class="op">-</span><span class="kw">mean</span>(xx,<span class="dt">na.rm=</span>T))<span class="op">/</span><span class="kw">sd</span>(xx,<span class="dt">na.rm=</span>T))) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-3"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(distance),<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb221-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-4"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(duration),<span class="dt">color=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb221-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb221-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb222-1"></a><span class="kw">mutate</span>(dat_clean,<span class="kw">across</span>(<span class="kw">where</span>(is.numeric),</span>
+<span id="cb222-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb222-2"></a>                        <span class="cf">function</span>(xx) (xx<span class="op">-</span><span class="kw">mean</span>(xx,<span class="dt">na.rm=</span>T))<span class="op">/</span><span class="kw">sd</span>(xx,<span class="dt">na.rm=</span>T))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb222-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb222-3"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(distance),<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb222-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb222-4"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(duration),<span class="dt">color=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb222-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb222-5"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 <p>This solution can be also used if you want to superpose different geometries (bars and lines, bars and hlines,…), and is in this case legal :D</p>
 </div>
 <div id="do-it-with-the-tidy-philosophy" class="section level5">
 <h5><span class="header-section-number">6.1.1.5.2</span> Do it with the tidy philosophy</h5>
 <p>You can reformulate this task as : I want to represent the distribution of one unique variable for 3 subgroups : age, churn and usage. I have to reshape the data first to create such a variable. For that I will use <code>tidyr::pivot_longer()</code> which helps me to transform columns into rows</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb222-1"></a>reshaped &lt;-<span class="st"> </span><span class="kw">select</span>(dat_clean,duration,distance) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb222-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb222-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">everything</span>(),<span class="dt">names_to=</span><span class="st">&quot;latent_variable&quot;</span>,<span class="dt">values_to=</span><span class="st">&quot;values&quot;</span>)</span>
-<span id="cb222-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb222-3"></a>reshaped</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb223-1"></a>reshaped &lt;-<span class="st"> </span><span class="kw">select</span>(dat_clean,duration,distance) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb223-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb223-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">everything</span>(),<span class="dt">names_to=</span><span class="st">&quot;latent_variable&quot;</span>,<span class="dt">values_to=</span><span class="st">&quot;values&quot;</span>)</span>
+<span id="cb223-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb223-3"></a>reshaped</span></code></pre></div>
 <pre><code>## # A tibble: 10,250 x 2
-##    latent_variable    values
-##    &lt;chr&gt;               &lt;dbl&gt;
-##  1 duration         3640221.
-##  2 distance          300000 
-##  3 duration        15064570.
-##  4 distance        12293220.
-##  5 duration        10382433.
-##  6 distance         8360927.
-##  7 duration         5393830.
-##  8 distance         1792890.
-##  9 duration         3626825.
-## 10 distance         3492347.
+##    latent_variable values
+##    &lt;chr&gt;            &lt;dbl&gt;
+##  1 duration          60.7
+##  2 distance           3  
+##  3 duration         251. 
+##  4 distance         123. 
+##  5 duration         173. 
+##  6 distance          83.6
+##  7 duration          89.9
+##  8 distance          17.9
+##  9 duration          60.4
+## 10 distance          34.9
 ## # … with 10,240 more rows</code></pre>
 <p>Now I can use the latent_variable variable as a dimension in a classic ggplot statement, with a prior standardization</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb224-1"></a><span class="kw">group_by</span>(reshaped,latent_variable) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb224-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb224-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">values=</span>(values<span class="op">-</span><span class="kw">mean</span>(values,<span class="dt">na.rm =</span> T))<span class="op">/</span><span class="kw">sd</span>(values,<span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb224-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb224-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(values,<span class="dt">color=</span>latent_variable)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()<span class="op">+</span></span>
-<span id="cb224-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb224-4"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
-<p>Or you can even skip the standardization step thanks to facets :</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb225-1"></a><span class="kw">ggplot</span>(reshaped,<span class="kw">aes</span>(values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb225-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb225-2"></a><span class="st">  </span><span class="kw">facet_wrap</span>(.<span class="op">~</span>latent_variable,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span></span>
-<span id="cb225-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb225-3"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb225-1"></a><span class="kw">group_by</span>(reshaped,latent_variable) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb225-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb225-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">values=</span>(values<span class="op">-</span><span class="kw">mean</span>(values,<span class="dt">na.rm =</span> T))<span class="op">/</span><span class="kw">sd</span>(values,<span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb225-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb225-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(values,<span class="dt">color=</span>latent_variable)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()<span class="op">+</span></span>
+<span id="cb225-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb225-4"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p>Or you can even skip the standardization step thanks to facets :</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-1"></a><span class="kw">ggplot</span>(reshaped,<span class="kw">aes</span>(values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb226-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-2"></a><span class="st">  </span><span class="kw">facet_wrap</span>(.<span class="op">~</span>latent_variable,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span></span>
+<span id="cb226-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-3"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
 </div>
 <div id="combine-different-plots-with-ggpubr" class="section level5">
 <h5><span class="header-section-number">6.1.1.5.3</span> Combine different plots with ggpubr</h5>
 <p>ggpubr makes your life much easier to make publication-ready graphics. It allows you for example to combine several ggplot graphics in a grid, regardless of any latent dimension that facet_grid would require. For that you have to store the graphics and “replay” them in a defined grid generated by <code>ggarrange()</code></p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-1"></a><span class="co"># install.packages(&quot;ggpubr&quot;)</span></span>
-<span id="cb226-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-2"></a><span class="kw">require</span>(ggpubr)</span>
-<span id="cb226-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-3"></a>gg1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Age distribution&quot;</span>)<span class="op">+</span></span>
-<span id="cb226-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-4"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span>
-<span id="cb226-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-5"></a>gg2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>avgSpeed,<span class="dt">y=</span>elevationGain,<span class="dt">size=</span>calories,<span class="dt">color=</span>duration,<span class="dt">size=</span>distance)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb226-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-6"></a><span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb226-7"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-7"></a><span class="st">  </span><span class="kw">facet_grid</span>(activity_recoded<span class="op">~</span>qual_distance,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span> ) <span class="op">+</span></span>
-<span id="cb226-8"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-8"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Beautiful but useless plot&quot;</span>)<span class="op">+</span></span>
-<span id="cb226-9"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-9"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span>
-<span id="cb226-10"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-10"></a></span>
-<span id="cb226-11"><a href="multivariate-analysis-and-dimension-reduction.html#cb226-11"></a><span class="kw">ggarrange</span>(gg1,gg2,<span class="dt">ncol =</span> <span class="dv">2</span>,<span class="dt">widths =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-77-1.png" width="768" /></p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-1"></a><span class="co"># install.packages(&quot;ggpubr&quot;)</span></span>
+<span id="cb227-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-2"></a><span class="kw">require</span>(ggpubr)</span>
+<span id="cb227-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-3"></a>gg1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Distance distribution&quot;</span>)<span class="op">+</span></span>
+<span id="cb227-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-4"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span>
+<span id="cb227-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-5"></a>gg2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat_clean,<span class="kw">aes</span>(<span class="dt">x=</span>avgSpeed,<span class="dt">y=</span>elevationGain,<span class="dt">size=</span>calories,<span class="dt">color=</span>duration,<span class="dt">size=</span>distance)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb227-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-6"></a><span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb227-7"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-7"></a><span class="st">  </span><span class="kw">facet_grid</span>(activity_recoded<span class="op">~</span>qual_distance,<span class="dt">scales =</span> <span class="st">&quot;free&quot;</span> ) <span class="op">+</span></span>
+<span id="cb227-8"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-8"></a><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Beautiful but useless plot&quot;</span>)<span class="op">+</span></span>
+<span id="cb227-9"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-9"></a><span class="st">  </span><span class="kw">theme_minimal</span>()</span>
+<span id="cb227-10"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-10"></a></span>
+<span id="cb227-11"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-11"></a><span class="kw">ggarrange</span>(gg1,gg2,<span class="dt">ncol =</span> <span class="dv">2</span>,<span class="dt">widths =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-78-1.png" width="768" /></p>
 <p>There are a lot of options in this function (common legend, height and width of each plot,…). You can check the full <a href="http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/">documentation of this package</a>.</p>
 <p>Note that you can mix tables and graphics with this function. Tables can be rendered as ggplot object with <code>ggpubr::ggtexttable()</code></p>
 </div>
@@ -437,23 +437,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">6.1.2.1</span> Scatter plot matrix</h4>
 <p>The scatter plot matrix shows the correlations between all variables and helps you to spot dependencies between them. We can use either the basic <code>plot()</code> function on the dataframe or the GGally package which provides extensions to ggplot.
 Side note : the ggpairs function does a lot of computation and can take a lot of time ! <span class="math inline">\(\rightarrow\)</span> if your dataset is large, you should run it only on a sample of the observations with <code>dplyr::sample_n()</code> or <code>dplyr::sample_frac()</code>.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-1"></a><span class="kw">select</span>(dat_clean,distance,duration,avgHr,avgSpeed,avgPower,</span>
-<span id="cb227-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-2"></a>       calories,elevationGain,avgBikeCadence,activity_recoded) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb227-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb227-3"></a><span class="st">  </span><span class="kw">plot</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb228-1"></a><span class="co"># install.packages(&quot;GGally&quot;)</span></span>
-<span id="cb228-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb228-2"></a><span class="kw">require</span>(GGally)</span>
-<span id="cb228-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb228-3"></a><span class="kw">select</span>(dat_clean,distance,duration,avgSpeed,</span>
-<span id="cb228-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb228-4"></a>       calories,activity_recoded) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb228-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb228-5"></a><span class="st">  </span>GGally<span class="op">::</span><span class="kw">ggpairs</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-78-2.png" width="672" /></p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb228-1"></a><span class="kw">select</span>(dat_clean,distance,duration,avgHr,avgSpeed,avgPower,</span>
+<span id="cb228-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb228-2"></a>       calories,elevationGain,avgBikeCadence,activity_recoded) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb228-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb228-3"></a><span class="st">  </span><span class="kw">plot</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb229-1"></a><span class="co"># install.packages(&quot;GGally&quot;)</span></span>
+<span id="cb229-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb229-2"></a><span class="kw">require</span>(GGally)</span>
+<span id="cb229-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb229-3"></a><span class="kw">select</span>(dat_clean,distance,duration,avgSpeed,</span>
+<span id="cb229-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb229-4"></a>       calories,activity_recoded) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb229-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb229-5"></a><span class="st">  </span>GGally<span class="op">::</span><span class="kw">ggpairs</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-79-2.png" width="672" /></p>
 </div>
 <div id="correlation-plots" class="section level4">
 <h4><span class="header-section-number">6.1.2.2</span> Correlation plots</h4>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb229-1"></a><span class="kw">select</span>(dat_clean,distance,duration,avgHr,avgSpeed,avgPower,</span>
-<span id="cb229-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb229-2"></a>       calories,elevationGain,avgDoubleCadence,activity_recoded)  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb229-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb229-3"></a><span class="st">  </span>GGally<span class="op">::</span><span class="kw">ggcorr</span>(<span class="dt">geom =</span> <span class="st">&quot;circle&quot;</span>)</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb230-1"></a><span class="kw">select</span>(dat_clean,distance,duration,avgHr,avgSpeed,avgPower,</span>
+<span id="cb230-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb230-2"></a>       calories,elevationGain,avgDoubleCadence,activity_recoded)  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb230-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb230-3"></a><span class="st">  </span>GGally<span class="op">::</span><span class="kw">ggcorr</span>(<span class="dt">geom =</span> <span class="st">&quot;circle&quot;</span>)</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -480,8 +480,8 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 </ul>
 <p>The challenge here is to chose between “reflecting the instance’s originality” or “not creating noise”</p>
 <p>The following code counts the number of missing values per column and does a simple mean or median imputation. We will practice hte imputation via regression in the final chapter’s exercises.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb230-1"></a>dat_bike &lt;-<span class="st"> </span><span class="kw">filter</span>(dat_clean,is_bike) <span class="co"># Bike activities</span></span>
-<span id="cb230-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb230-2"></a><span class="kw">sapply</span>(dat_bike,<span class="cf">function</span>(xx) <span class="kw">sum</span>(<span class="kw">is.na</span>(xx)))</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb231-1"></a>dat_bike &lt;-<span class="st"> </span><span class="kw">filter</span>(dat_clean,is_bike) <span class="co"># Bike activities</span></span>
+<span id="cb231-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb231-2"></a><span class="kw">sapply</span>(dat_bike,<span class="cf">function</span>(xx) <span class="kw">sum</span>(<span class="kw">is.na</span>(xx)))</span></code></pre></div>
 <pre><code>##              activityId                 uuidMsb                 uuidLsb 
 ##                       0                     932                     932 
 ##                    name            activityType           userProfileId 
@@ -547,9 +547,9 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 ##        activity_recoded           qual_distance              qual_avgHr 
 ##                       0                       0                     914</code></pre>
 <p>For this use case, we will use a median imputation, because for some of the variables, the mean would not make sense (eg longitude and latitude).</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb232-1"></a>dat_bike_imp &lt;-<span class="st"> </span><span class="kw">mutate</span>(dat_bike,<span class="kw">across</span>(<span class="kw">where</span>(is.numeric),</span>
-<span id="cb232-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb232-2"></a>                                   <span class="cf">function</span>(xx) <span class="kw">ifelse</span>(<span class="kw">is.na</span>(xx),<span class="kw">mean</span>(xx,<span class="dt">na.rm=</span>T),xx)))</span>
-<span id="cb232-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb232-3"></a><span class="kw">sapply</span>(dat_bike_imp,<span class="cf">function</span>(xx) <span class="kw">sum</span>(<span class="kw">is.na</span>(xx)))</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb233-1"></a>dat_bike_imp &lt;-<span class="st"> </span><span class="kw">mutate</span>(dat_bike,<span class="kw">across</span>(<span class="kw">where</span>(is.numeric),</span>
+<span id="cb233-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb233-2"></a>                                   <span class="cf">function</span>(xx) <span class="kw">ifelse</span>(<span class="kw">is.na</span>(xx),<span class="kw">mean</span>(xx,<span class="dt">na.rm=</span>T),xx)))</span>
+<span id="cb233-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb233-3"></a><span class="kw">sapply</span>(dat_bike_imp,<span class="cf">function</span>(xx) <span class="kw">sum</span>(<span class="kw">is.na</span>(xx)))</span></code></pre></div>
 <pre><code>##              activityId                 uuidMsb                 uuidLsb 
 ##                       0                     932                     932 
 ##                    name            activityType           userProfileId 
@@ -581,7 +581,7 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 ##               totalReps              purposeful        autoCalcCalories 
 ##                       0                       0                    1246 
 ##                favorite                      pr      elevationCorrected 
-##                       0                       0                     871 
+##                       0                       0                       0 
 ##             atpActivity                  parent           maxRunCadence 
 ##                    1828                     474                       0 
 ##                   steps  avgVerticalOscillation    avgGroundContactTime 
@@ -615,16 +615,16 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 ##        activity_recoded           qual_distance              qual_avgHr 
 ##                       0                       0                     914</code></pre>
 <p>Let’s do the same for categorical (maximum frequency), even though it is not mandatory for PCA.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-1"></a>most_freq_cat &lt;-<span class="st"> </span><span class="cf">function</span>(xx)</span>
-<span id="cb234-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-2"></a>{</span>
-<span id="cb234-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-3"></a>  tab &lt;-<span class="st"> </span><span class="kw">table</span>(xx)</span>
-<span id="cb234-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-4"></a>  <span class="kw">return</span>(<span class="kw">names</span>(tab[<span class="kw">which.max</span>(tab)]))</span>
-<span id="cb234-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-5"></a>}</span>
-<span id="cb234-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-6"></a></span>
-<span id="cb234-7"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-7"></a>dat_bike_imp &lt;-<span class="st"> </span><span class="kw">mutate</span>(dat_bike_imp,<span class="kw">across</span>(<span class="kw">where</span>(is.character),</span>
-<span id="cb234-8"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-8"></a>                                           <span class="cf">function</span>(xx) <span class="kw">coalesce</span>(xx,<span class="kw">most_freq_cat</span>(xx))))</span>
-<span id="cb234-9"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-9"></a></span>
-<span id="cb234-10"><a href="multivariate-analysis-and-dimension-reduction.html#cb234-10"></a><span class="kw">sapply</span>(dat_bike_imp,<span class="cf">function</span>(xx) <span class="kw">sum</span>(<span class="kw">is.na</span>(xx)))</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-1"></a>most_freq_cat &lt;-<span class="st"> </span><span class="cf">function</span>(xx)</span>
+<span id="cb235-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-2"></a>{</span>
+<span id="cb235-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-3"></a>  tab &lt;-<span class="st"> </span><span class="kw">table</span>(xx)</span>
+<span id="cb235-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-4"></a>  <span class="kw">return</span>(<span class="kw">names</span>(tab[<span class="kw">which.max</span>(tab)]))</span>
+<span id="cb235-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-5"></a>}</span>
+<span id="cb235-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-6"></a></span>
+<span id="cb235-7"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-7"></a>dat_bike_imp &lt;-<span class="st"> </span><span class="kw">mutate</span>(dat_bike_imp,<span class="kw">across</span>(<span class="kw">where</span>(is.character),</span>
+<span id="cb235-8"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-8"></a>                                           <span class="cf">function</span>(xx) <span class="kw">coalesce</span>(xx,<span class="kw">most_freq_cat</span>(xx))))</span>
+<span id="cb235-9"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-9"></a></span>
+<span id="cb235-10"><a href="multivariate-analysis-and-dimension-reduction.html#cb235-10"></a><span class="kw">sapply</span>(dat_bike_imp,<span class="cf">function</span>(xx) <span class="kw">sum</span>(<span class="kw">is.na</span>(xx)))</span></code></pre></div>
 <pre><code>##              activityId                 uuidMsb                 uuidLsb 
 ##                       0                       0                       0 
 ##                    name            activityType           userProfileId 
@@ -656,7 +656,7 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 ##               totalReps              purposeful        autoCalcCalories 
 ##                       0                       0                    1246 
 ##                favorite                      pr      elevationCorrected 
-##                       0                       0                     871 
+##                       0                       0                       0 
 ##             atpActivity                  parent           maxRunCadence 
 ##                    1828                     474                       0 
 ##                   steps  avgVerticalOscillation    avgGroundContactTime 
@@ -689,16 +689,16 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 ##                       0                       0                       0 
 ##        activity_recoded           qual_distance              qual_avgHr 
 ##                       0                       0                       0</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-1"></a><span class="co"># replacements &lt;-   select(dat_bike_imp,activityId,where(is.character)) %&gt;%</span></span>
-<span id="cb236-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-2"></a><span class="co">#   pivot_longer(-activityId,names_to=&quot;name&quot;,values_to=&quot;val&quot;) %&gt;% </span></span>
-<span id="cb236-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-3"></a><span class="co">#   filter(!is.na(val)) %&gt;% </span></span>
-<span id="cb236-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-4"></a><span class="co">#   group_by(name,val) %&gt;% </span></span>
-<span id="cb236-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-5"></a><span class="co">#   summarise(cat_nb=n()) %&gt;% </span></span>
-<span id="cb236-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-6"></a><span class="co">#   arrange(name,-cat_nb) %&gt;% </span></span>
-<span id="cb236-7"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-7"></a><span class="co">#   group_by(name) %&gt;% </span></span>
-<span id="cb236-8"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-8"></a><span class="co">#   summarise(most_freq=first(val)) %&gt;% </span></span>
-<span id="cb236-9"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-9"></a><span class="co">#   pivot_wider(names_from = name,values_from=most_freq) %&gt;% </span></span>
-<span id="cb236-10"><a href="multivariate-analysis-and-dimension-reduction.html#cb236-10"></a><span class="co">#   rename_with(function(xx) paste0(xx,&quot;_imp&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-1"></a><span class="co"># replacements &lt;-   select(dat_bike_imp,activityId,where(is.character)) %&gt;%</span></span>
+<span id="cb237-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-2"></a><span class="co">#   pivot_longer(-activityId,names_to=&quot;name&quot;,values_to=&quot;val&quot;) %&gt;% </span></span>
+<span id="cb237-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-3"></a><span class="co">#   filter(!is.na(val)) %&gt;% </span></span>
+<span id="cb237-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-4"></a><span class="co">#   group_by(name,val) %&gt;% </span></span>
+<span id="cb237-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-5"></a><span class="co">#   summarise(cat_nb=n()) %&gt;% </span></span>
+<span id="cb237-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-6"></a><span class="co">#   arrange(name,-cat_nb) %&gt;% </span></span>
+<span id="cb237-7"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-7"></a><span class="co">#   group_by(name) %&gt;% </span></span>
+<span id="cb237-8"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-8"></a><span class="co">#   summarise(most_freq=first(val)) %&gt;% </span></span>
+<span id="cb237-9"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-9"></a><span class="co">#   pivot_wider(names_from = name,values_from=most_freq) %&gt;% </span></span>
+<span id="cb237-10"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-10"></a><span class="co">#   rename_with(function(xx) paste0(xx,&quot;_imp&quot;))</span></span></code></pre></div>
 </div>
 <div id="normalization" class="section level3">
 <h3><span class="header-section-number">6.2.2</span> Normalization</h3>
@@ -721,14 +721,14 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 <li>You can have supplementary continuous or categorical variables. They won’t be used in the construction of the eigenvectors, but you will be able to place them in the newly defined vector space.</li>
 <li>By default, almost all implementations of PCA standardizes the data, so you do not have to do it by yourself, but check in the documentation of the function you use</li>
 </ul>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-1"></a><span class="co"># install.packages(&quot;FactoMineR&quot;)</span></span>
-<span id="cb237-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-2"></a><span class="kw">require</span>(FactoMineR)</span>
-<span id="cb237-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-3"></a>acp_dat &lt;-<span class="st"> </span><span class="kw">select</span>(dat_bike_imp,deviceId,duration,distance,elevationGain,elevationLoss,avgSpeed,avgHr,calories,</span>
-<span id="cb237-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-4"></a>              minTemperature,maxTemperature,lapCount,avgBikeCadence,avgPower,vO2MaxValue,</span>
-<span id="cb237-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-5"></a>              max20MinPower) </span>
-<span id="cb237-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb237-6"></a>acp &lt;-<span class="st">   </span><span class="kw">PCA</span>(acp_dat,<span class="dt">graph =</span> F,<span class="dt">quali.sup =</span> <span class="kw">c</span>(<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb238-1"></a><span class="co"># install.packages(&quot;FactoMineR&quot;)</span></span>
+<span id="cb238-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb238-2"></a><span class="kw">require</span>(FactoMineR)</span>
+<span id="cb238-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb238-3"></a>acp_dat &lt;-<span class="st"> </span><span class="kw">select</span>(dat_bike_imp,deviceId,duration,distance,elevationGain,elevationLoss,avgSpeed,avgHr,calories,</span>
+<span id="cb238-4"><a href="multivariate-analysis-and-dimension-reduction.html#cb238-4"></a>              minTemperature,maxTemperature,lapCount,avgBikeCadence,avgPower,vO2MaxValue,</span>
+<span id="cb238-5"><a href="multivariate-analysis-and-dimension-reduction.html#cb238-5"></a>              max20MinPower) </span>
+<span id="cb238-6"><a href="multivariate-analysis-and-dimension-reduction.html#cb238-6"></a>acp &lt;-<span class="st">   </span><span class="kw">PCA</span>(acp_dat,<span class="dt">graph =</span> F,<span class="dt">quali.sup =</span> <span class="kw">c</span>(<span class="dv">1</span>))</span></code></pre></div>
 <p>What’s in this new object ?</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb238-1"></a><span class="kw">str</span>(acp)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb239-1"></a><span class="kw">str</span>(acp)</span></code></pre></div>
 <pre><code>## List of 6
 ##  $ eig      : num [1:14, 1:3] 4.71 2.03 1.65 1.31 1.26 ...
 ##   ..- attr(*, &quot;dimnames&quot;)=List of 2
@@ -794,17 +794,17 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 ##   ..$ col.w     : num [1:14] 1 1 1 1 1 1 1 1 1 1 ...
 ##   ..$ scale.unit: logi TRUE
 ##   ..$ ncp       : num 5
-##   ..$ centre    : num [1:14] 4.67e+06 2.98e+06 3.87e+04 3.76e+04 5.58e-01 ...
-##   ..$ ecart.type: num [1:14] 3.54e+06 3.50e+06 1.14e+05 1.12e+05 3.30e-01 ...
+##   ..$ centre    : num [1:14] 77.8 29.8 387.5 375.7 20.1 ...
+##   ..$ ecart.type: num [1:14] 59 35 1142.5 1119.5 11.9 ...
 ##   ..$ X         :&#39;data.frame&#39;:	2492 obs. of  15 variables:
 ##   .. ..$ deviceId      : Factor w/ 9 levels &quot;3454054575&quot;,&quot;3825981698&quot;,..: 9 9 2 9 9 9 9 2 2 9 ...
-##   .. ..$ duration      : num [1:2492] 15064570 10382433 3626825 8509404 8428058 ...
-##   .. ..$ distance      : num [1:2492] 12293220 8360927 3492347 7991330 7420050 ...
-##   .. ..$ elevationGain : num [1:2492] 200100 74500 16000 61900 111700 ...
-##   .. ..$ elevationLoss : num [1:2492] 196800 74200 0 61100 111400 ...
-##   .. ..$ avgSpeed      : num [1:2492] 0.816 0.805 0.963 0.939 0.88 ...
+##   .. ..$ duration      : num [1:2492] 251.1 173 60.4 141.8 140.5 ...
+##   .. ..$ distance      : num [1:2492] 122.9 83.6 34.9 79.9 74.2 ...
+##   .. ..$ elevationGain : num [1:2492] 2001 745 160 619 1117 ...
+##   .. ..$ elevationLoss : num [1:2492] 1968 742 0 611 1114 ...
+##   .. ..$ avgSpeed      : num [1:2492] 29.4 29 34.7 33.8 31.7 ...
 ##   .. ..$ avgHr         : num [1:2492] 144 117 138 140 140 126 138 128 120 151 ...
-##   .. ..$ calories      : num [1:2492] 16345 8745 3084 9327 9126 ...
+##   .. ..$ calories      : num [1:2492] 3907 2090 737 2229 2181 ...
 ##   .. ..$ minTemperature: num [1:2492] 19 18 18.3 21 22 ...
 ##   .. ..$ maxTemperature: num [1:2492] 29 29 26.2 30 32 ...
 ##   .. ..$ lapCount      : num [1:2492] 25 17 1 16 15 19 17 1 1 36 ...
@@ -820,13 +820,13 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 ##   .. ..$ modalite  : int 9
 ##   .. ..$ nombre    : num [1:9] 2 49 4 3 90 ...
 ##   .. ..$ barycentre:&#39;data.frame&#39;:	9 obs. of  14 variables:
-##   .. .. ..$ duration      : num [1:9] 5815565 3745269 4374888 6604228 3170817 ...
-##   .. .. ..$ distance      : num [1:9] 4241698 3402440 3889997 3052773 2049856 ...
-##   .. .. ..$ elevationGain : num [1:9] 41595 36724 28707 49032 41914 ...
-##   .. .. ..$ elevationLoss : num [1:9] 41333 0 30194 46806 41646 ...
-##   .. .. ..$ avgSpeed      : num [1:9] 0.701 0.904 0.812 0.264 0.622 ...
+##   .. .. ..$ duration      : num [1:9] 96.9 62.4 72.9 110.1 52.8 ...
+##   .. .. ..$ distance      : num [1:9] 42.4 34 38.9 30.5 20.5 ...
+##   .. .. ..$ elevationGain : num [1:9] 416 367 287 490 419 ...
+##   .. .. ..$ elevationLoss : num [1:9] 413 0 302 468 416 ...
+##   .. .. ..$ avgSpeed      : num [1:9] 25.22 32.54 29.22 9.52 22.39 ...
 ##   .. .. ..$ avgHr         : num [1:9] 145 132 125 134 127 ...
-##   .. .. ..$ calories      : num [1:9] 7924 3533 2740 4260 3524 ...
+##   .. .. ..$ calories      : num [1:9] 1894 844 655 1018 842 ...
 ##   .. .. ..$ minTemperature: num [1:9] 18.3 18.3 18.3 18.3 18.3 ...
 ##   .. .. ..$ maxTemperature: num [1:9] 26.2 26.2 26.2 26.2 26.2 ...
 ##   .. .. ..$ lapCount      : num [1:9] 10.15 1.29 10.15 10.15 10.15 ...
@@ -843,13 +843,13 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 <li><code>quali.sup</code> have the same elements than the previous ones (coordinates are the barycenter of each category of the qualitative variable)</li>
 </ul>
 <p>The first thing is to have a look at the eignevalues to see how well the PCA could summarize the information</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb240-1"></a><span class="kw">barplot</span>(acp<span class="op">$</span>eig[,<span class="dv">2</span>])</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb241-1"></a><span class="kw">barplot</span>(acp<span class="op">$</span>eig[,<span class="dv">3</span>])</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-85-2.png" width="672" /></p>
-<p>In our case, the first component bears 35% of the total inertia and the second 15%. Hence, the first factorial plane (the first 2 components) : let’s look at how the variable correlate with them :</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb242-1"></a><span class="kw">plot.PCA</span>(acp,<span class="dt">choix=</span><span class="st">&quot;var&quot;</span>,<span class="dt">col.var =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb241-1"></a><span class="kw">barplot</span>(acp<span class="op">$</span>eig[,<span class="dv">2</span>])</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb242-1"></a><span class="kw">barplot</span>(acp<span class="op">$</span>eig[,<span class="dv">3</span>])</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-86-2.png" width="672" /></p>
+<p>In our case, the first component bears 35% of the total inertia and the second 15%. Hence, the first factorial plane (the first 2 components) : let’s look at how the variable correlate with them :</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb243-1"></a><span class="kw">plot.PCA</span>(acp,<span class="dt">choix=</span><span class="st">&quot;var&quot;</span>,<span class="dt">col.var =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <p>What you can read at once on this plot is how important each variable is to construct the new variables. As a matter of fact, contribution, cos2 and coordinates are almost the same in PCA, meaning that the closer to the unit disc the coordinate is, the high are also contribution and quality of representation.</p>
 <p>What we deduct from this graph :</p>
 <ul>
@@ -859,13 +859,13 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 <li>There is a right angle between elevationGain and avgPower <span class="math inline">\(\rightarrow\)</span> the correlation is very small</li>
 </ul>
 <p>Let’s check the correlation matrix to be sure about what we are reading here</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb243-1"></a><span class="kw">select</span>(acp_dat,<span class="op">-</span>deviceId) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb243-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb243-2"></a><span class="st">  </span><span class="kw">cor</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb243-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb243-3"></a><span class="st">  </span>corrplot<span class="op">::</span><span class="kw">corrplot</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
-<p>How about the individuals ?</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb244-1"></a><span class="kw">plot.PCA</span>(acp,<span class="dt">choix=</span><span class="st">&quot;ind&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb244-1"></a><span class="kw">select</span>(acp_dat,<span class="op">-</span>deviceId) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb244-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb244-2"></a><span class="st">  </span><span class="kw">cor</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb244-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb244-3"></a><span class="st">  </span>corrplot<span class="op">::</span><span class="kw">corrplot</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<p>How about the individuals ?</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb245-1"></a><span class="kw">plot.PCA</span>(acp,<span class="dt">choix=</span><span class="st">&quot;ind&quot;</span>)</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 <p>This graph is harder to read, but we still can identify outliers and understand wht they are. Anyway in the top-right corner, those are long rides with a lot of ups and downs ! The most extreme is 380343030 which is another measurement error (indoor cycling with 34000 elevation meters !)</p>
 </div>
 <div id="exercises" class="section level3">
@@ -927,11 +927,11 @@ Side note : the ggpairs function does a lot of computation and can take a lot of
 <div id="web-based-graphics-with-plotly" class="section level3">
 <h3><span class="header-section-number">6.4.2</span> Web-based graphics with <code>plotly</code></h3>
 <p><a href="https://plotly.com/r/">plotly</a> is a graphical library that generate “interactive” web-based graphics. It is available for R, but also python and other programming languages. You can learn the syntax of this package too, but there is a very useful function, <code>plotly::ggplotly()</code> that translates your ggplot object into a <code>plotly</code> graphic. It works for most of the cases.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb245-1"></a><span class="co"># install.packages(&quot;plotly&quot;)</span></span>
-<span id="cb245-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb245-2"></a><span class="kw">require</span>(plotly)</span>
-<span id="cb245-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb245-3"></a><span class="kw">ggplotly</span>(gg1)</span></code></pre></div>
-<div id="htmlwidget-3fd8435e22e8bcaffc62" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3fd8435e22e8bcaffc62">{"x":{"data":[{"orientation":"v","width":[814154.0251699,814154.0251699,814154.0251699,814154.025169901,814154.0251699,814154.0251699,814154.025169902,814154.0251699,814154.0251699,814154.025169902,814154.025169898,814154.025169902,814154.025169902,814154.025169902,814154.025169902,814154.025169902,814154.025169902,814154.025169902,814154.025169902,814154.025169902,814154.025169898,814154.025169902,814154.025169902,814154.025169894,814154.025169902,814154.025169894,814154.025169902,814154.025169902,814154.025169894,814154.025169902],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[0,814154.0251699,1628308.0503398,2442462.0755097,3256616.1006796,4070770.1258495,4884924.1510194,5699078.1761893,6513232.2013592,7327386.2265291,8141540.251699,8955694.2768689,9769848.3020388,10584002.3272087,11398156.3523786,12212310.3775485,13026464.4027184,13840618.4278883,14654772.4530582,15468926.4782281,16283080.503398,17097234.5285679,17911388.5537378,18725542.5789077,19539696.6040776,20353850.6292475,21168004.6544174,21982158.6795873,22796312.7047572,23610466.7299271],"y":[1661,1109,1300,213,67,73,74,78,74,137,76,100,42,34,18,17,10,8,3,3,2,2,2,7,0,2,0,2,1,3],"text":["count: 1661<br />distance:        0","count: 1109<br />distance:   814154","count: 1300<br />distance:  1628308","count:  213<br />distance:  2442462","count:   67<br />distance:  3256616","count:   73<br />distance:  4070770","count:   74<br />distance:  4884924","count:   78<br />distance:  5699078","count:   74<br />distance:  6513232","count:  137<br />distance:  7327386","count:   76<br />distance:  8141540","count:  100<br />distance:  8955694","count:   42<br />distance:  9769848","count:   34<br />distance: 10584002","count:   18<br />distance: 11398156","count:   17<br />distance: 12212310","count:   10<br />distance: 13026464","count:    8<br />distance: 13840618","count:    3<br />distance: 14654772","count:    3<br />distance: 15468926","count:    2<br />distance: 16283081","count:    2<br />distance: 17097235","count:    2<br />distance: 17911389","count:    7<br />distance: 18725543","count:    0<br />distance: 19539697","count:    2<br />distance: 20353851","count:    0<br />distance: 21168005","count:    2<br />distance: 21982159","count:    1<br />distance: 22796313","count:    3<br />distance: 23610467"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(89,89,89,1)","line":{"width":1.88976377952756,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Age distribution","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1628308.0503398,25238774.7802669],"tickmode":"array","ticktext":["0.0e+00","5.0e+06","1.0e+07","1.5e+07","2.0e+07","2.5e+07"],"tickvals":[0,5000000,10000000,15000000,20000000,25000000],"categoryorder":"array","categoryarray":["0.0e+00","5.0e+06","1.0e+07","1.5e+07","2.0e+07","2.5e+07"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"distance","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-83.05,1744.05],"tickmode":"array","ticktext":["0","500","1000","1500"],"tickvals":[0,500,1000,1500],"categoryorder":"array","categoryarray":["0","500","1000","1500"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"24dc1edc5842":{"x":{},"type":"bar"}},"cur_data":"24dc1edc5842","visdat":{"24dc1edc5842":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="multivariate-analysis-and-dimension-reduction.html#cb246-1"></a><span class="co"># install.packages(&quot;plotly&quot;)</span></span>
+<span id="cb246-2"><a href="multivariate-analysis-and-dimension-reduction.html#cb246-2"></a><span class="kw">require</span>(plotly)</span>
+<span id="cb246-3"><a href="multivariate-analysis-and-dimension-reduction.html#cb246-3"></a><span class="kw">ggplotly</span>(gg1)</span></code></pre></div>
+<div id="htmlwidget-aeacc3c11f652ff84be9" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aeacc3c11f652ff84be9">{"x":{"data":[{"orientation":"v","width":[8.141540251699,8.141540251699,8.141540251699,8.141540251699,8.141540251699,8.14154025169901,8.141540251699,8.141540251699,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169901,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169904,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898,8.14154025169898],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[0,8.141540251699,16.283080503398,24.424620755097,32.566161006796,40.707701258495,48.849241510194,56.990781761893,65.132322013592,73.273862265291,81.41540251699,89.556942768689,97.698483020388,105.840023272087,113.981563523786,122.123103775485,130.264644027184,138.406184278883,146.547724530582,154.689264782281,162.83080503398,170.972345285679,179.113885537378,187.255425789077,195.396966040776,203.538506292475,211.680046544174,219.821586795873,227.963127047572,236.104667299271],"y":[1661,1109,1300,213,67,73,74,78,74,137,76,100,42,34,18,17,10,8,3,3,2,2,2,7,0,2,0,2,1,3],"text":["count: 1661<br />distance:   0.00000","count: 1109<br />distance:   8.14154","count: 1300<br />distance:  16.28308","count:  213<br />distance:  24.42462","count:   67<br />distance:  32.56616","count:   73<br />distance:  40.70770","count:   74<br />distance:  48.84924","count:   78<br />distance:  56.99078","count:   74<br />distance:  65.13232","count:  137<br />distance:  73.27386","count:   76<br />distance:  81.41540","count:  100<br />distance:  89.55694","count:   42<br />distance:  97.69848","count:   34<br />distance: 105.84002","count:   18<br />distance: 113.98156","count:   17<br />distance: 122.12310","count:   10<br />distance: 130.26464","count:    8<br />distance: 138.40618","count:    3<br />distance: 146.54772","count:    3<br />distance: 154.68926","count:    2<br />distance: 162.83081","count:    2<br />distance: 170.97235","count:    2<br />distance: 179.11389","count:    7<br />distance: 187.25543","count:    0<br />distance: 195.39697","count:    2<br />distance: 203.53851","count:    0<br />distance: 211.68005","count:    2<br />distance: 219.82159","count:    1<br />distance: 227.96313","count:    3<br />distance: 236.10467"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(89,89,89,1)","line":{"width":1.88976377952756,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Distance distribution","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-16.283080503398,252.387747802669],"tickmode":"array","ticktext":["0","50","100","150","200","250"],"tickvals":[0,50,100,150,200,250],"categoryorder":"array","categoryarray":["0","50","100","150","200","250"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"distance","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-83.05,1744.05],"tickmode":"array","ticktext":["0","500","1000","1500"],"tickvals":[0,500,1000,1500],"categoryorder":"array","categoryarray":["0","500","1000","1500"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"2d1128adcff4":{"x":{},"type":"bar"}},"cur_data":"2d1128adcff4","visdat":{"2d1128adcff4":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p>This is very useful to embed in a rmarkdown document or a shiny app !</p>
 </div>
 <div id="other-packages-widgets" class="section level3">

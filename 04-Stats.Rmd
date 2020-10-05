@@ -2,7 +2,7 @@
 
 Let's load and clean the data (which you have done during the exercises)
 
-```{r,results='hide'}
+```{r,echo=FALSE}
 source("ZZ2 - data_preparation.R")
 ```
 

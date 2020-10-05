@@ -57,6 +57,13 @@
 <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
 
 
 <style type="text/css">
@@ -283,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>A set of rows, or <strong>statistical individuals</strong>, aka observations (or instances in the galaxy of machine learning). This can be anything</p></li>
 <li><p>A set of columns, or <strong>variables</strong> that describe the individuals</p></li>
 </ul>
-<p>It is crucial to have a good understanding of <strong>what the statistical indvidual is</strong>, and that can be challenging !</p>
+<p>It is crucial to have a good understanding of <strong>what the statistical individual is</strong>, and that can be challenging !</p>
 <p>Some examples :</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="stats.html#cb115-1"></a><span class="kw">head</span>(dat)</span></code></pre></div>
 <pre><code>##   activityId              uuidMsb              uuidLsb                name
@@ -682,22 +689,19 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 <div id="quantifying-the-relationship-correlations" class="section level4">
 <h4><span class="header-section-number">5.3.1.2</span> Quantifying the relationship : correlation<strong>s</strong></h4>
 <p>To quantify this relationship, you can use the coefficients of correlation. There are 3 main coefficients : Pearson (the most famous and used), Kendall and Spearman. The latter can handle non-linear functional dependencies (ranks correlation) ; this is (roughly) equivalent to computing the coefficients on the log-transformed variables.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="stats.html#cb153-1"></a><span class="kw">print</span>(<span class="st">&quot;Pearson coeff&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Pearson coeff&quot;</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="stats.html#cb155-1"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="stats.html#cb153-1"></a><span class="co"># Pearson coeff</span></span>
+<span id="cb153-2"><a href="stats.html#cb153-2"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="stats.html#cb157-1"></a><span class="kw">print</span>(<span class="st">&quot;Pearson coeff, NAs removed&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Pearson coeff, NAs removed&quot;</code></pre>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="stats.html#cb159-1"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="stats.html#cb155-1"></a><span class="co"># Pearson coeff, NAs removed</span></span>
+<span id="cb155-2"><a href="stats.html#cb155-2"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5437859</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="stats.html#cb161-1"></a><span class="kw">print</span>(<span class="st">&quot;Spearman coeff&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Spearman coeff&quot;</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="stats.html#cb163-1"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;spearman&quot;</span>,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="stats.html#cb157-1"></a><span class="co"># Spearman coeff </span></span>
+<span id="cb157-2"><a href="stats.html#cb157-2"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;spearman&quot;</span>,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6316721</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="stats.html#cb165-1"></a><span class="co"># Why is R a beautiful language ? Do it at once, without loops (loops are evil) </span></span>
-<span id="cb165-2"><a href="stats.html#cb165-2"></a><span class="kw">print</span>(<span class="st">&quot;all coeffs&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="stats.html#cb159-1"></a><span class="co"># Why is R a beautiful language ? Do it at once, without loops (loops are evil) </span></span>
+<span id="cb159-2"><a href="stats.html#cb159-2"></a><span class="kw">print</span>(<span class="st">&quot;all coeffs&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;all coeffs&quot;</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="stats.html#cb167-1"></a><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="st">&quot;pearson&quot;</span>,<span class="st">&quot;spearman&quot;</span>,<span class="st">&quot;kendall&quot;</span>),<span class="cf">function</span>(xx) <span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span>xx,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="stats.html#cb161-1"></a><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="st">&quot;pearson&quot;</span>,<span class="st">&quot;spearman&quot;</span>,<span class="st">&quot;kendall&quot;</span>),<span class="cf">function</span>(xx) <span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span>xx,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))</span></code></pre></div>
 <pre><code>##   pearson  spearman   kendall 
 ## 0.5437859 0.6316721 0.4452121</code></pre>
 <p>More <a href="https://www.statisticssolutions.com/correlation-pearson-kendall-spearman/">info about correlation coefficients</a></p>
@@ -706,53 +710,59 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 </div>
 <div id="categorical-variables-1" class="section level3">
 <h3><span class="header-section-number">5.3.2</span> 2 categorical variables</h3>
-<p>For this part, I will create a discrete variable out of the distance variable (see previous exercises) to use it as second qualitative variable (the other are not really meaningful)</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="stats.html#cb169-1"></a>dat &lt;-<span class="st"> </span><span class="kw">mutate</span>(dat,<span class="dt">qual_distance=</span><span class="kw">as.character</span>(<span class="kw">cut</span>(distance,</span>
-<span id="cb169-2"><a href="stats.html#cb169-2"></a>                                                 <span class="kw">quantile</span>(distance,<span class="dt">probs =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">5</span><span class="op">/</span><span class="dv">5</span>,<span class="dt">na.rm=</span>T),</span>
-<span id="cb169-3"><a href="stats.html#cb169-3"></a>                                                 <span class="dt">include.lowest =</span> T,</span>
-<span id="cb169-4"><a href="stats.html#cb169-4"></a>                                                 <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Very short&quot;</span>,<span class="st">&quot;Short&quot;</span>,</span>
-<span id="cb169-5"><a href="stats.html#cb169-5"></a>                                                          <span class="st">&quot;Average&quot;</span>,<span class="st">&quot;Long&quot;</span>,<span class="st">&quot;Very long&quot;</span>))),</span>
-<span id="cb169-6"><a href="stats.html#cb169-6"></a>              <span class="dt">qual_avgHr=</span><span class="kw">as.character</span>(<span class="kw">cut</span>(avgHr,<span class="kw">quantile</span>(avgHr,<span class="dv">0</span><span class="op">:</span><span class="dv">3</span><span class="op">/</span><span class="dv">5</span>,<span class="dt">na.rm =</span> T),</span>
-<span id="cb169-7"><a href="stats.html#cb169-7"></a>                                          <span class="dt">include.lowest =</span> T,</span>
-<span id="cb169-8"><a href="stats.html#cb169-8"></a>                                          <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Low intensity&quot;</span>,<span class="st">&quot;Average intensity&quot;</span>,</span>
-<span id="cb169-9"><a href="stats.html#cb169-9"></a>                                                   <span class="st">&quot;High intensity&quot;</span>))),</span>
-<span id="cb169-10"><a href="stats.html#cb169-10"></a>              <span class="dt">qual_distance=</span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(qual_distance),<span class="st">&quot;Very short&quot;</span>,qual_distance))</span></code></pre></div>
+<p>For this part, I will create a discrete variable out of the distance variable (see previous exercises) to use it as second qualitative variable (the other ones are not really meaningful)</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="stats.html#cb163-1"></a>dat &lt;-<span class="st"> </span><span class="kw">mutate</span>(dat,<span class="dt">qual_distance=</span><span class="kw">as.character</span>(<span class="kw">cut</span>(distance,</span>
+<span id="cb163-2"><a href="stats.html#cb163-2"></a>                                                 <span class="kw">quantile</span>(distance,<span class="dt">probs =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">5</span><span class="op">/</span><span class="dv">5</span>,<span class="dt">na.rm=</span>T),</span>
+<span id="cb163-3"><a href="stats.html#cb163-3"></a>                                                 <span class="dt">include.lowest =</span> T,</span>
+<span id="cb163-4"><a href="stats.html#cb163-4"></a>                                                 <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Very short&quot;</span>,<span class="st">&quot;Short&quot;</span>,</span>
+<span id="cb163-5"><a href="stats.html#cb163-5"></a>                                                          <span class="st">&quot;Average&quot;</span>,<span class="st">&quot;Long&quot;</span>,<span class="st">&quot;Very long&quot;</span>))),</span>
+<span id="cb163-6"><a href="stats.html#cb163-6"></a>              <span class="dt">qual_avgHr=</span><span class="kw">as.character</span>(<span class="kw">cut</span>(avgHr,<span class="kw">quantile</span>(avgHr,<span class="dv">0</span><span class="op">:</span><span class="dv">3</span><span class="op">/</span><span class="dv">5</span>,<span class="dt">na.rm =</span> T),</span>
+<span id="cb163-7"><a href="stats.html#cb163-7"></a>                                          <span class="dt">include.lowest =</span> T,</span>
+<span id="cb163-8"><a href="stats.html#cb163-8"></a>                                          <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Low intensity&quot;</span>,<span class="st">&quot;Average intensity&quot;</span>,</span>
+<span id="cb163-9"><a href="stats.html#cb163-9"></a>                                                   <span class="st">&quot;High intensity&quot;</span>))),</span>
+<span id="cb163-10"><a href="stats.html#cb163-10"></a>              <span class="dt">qual_distance=</span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(qual_distance),<span class="st">&quot;Very short&quot;</span>,qual_distance))</span></code></pre></div>
 <p>Try different layouts with you barcharts !</p>
 <div id="barcharts-1" class="section level4">
 <h4><span class="header-section-number">5.3.2.1</span> Barcharts</h4>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="stats.html#cb170-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;stack&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="stats.html#cb164-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb164-2"><a href="stats.html#cb164-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;stack&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="stats.html#cb171-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="stats.html#cb165-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb165-2"><a href="stats.html#cb165-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-53-2.png" width="672" /></p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="stats.html#cb172-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb172-2"><a href="stats.html#cb172-2"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="stats.html#cb166-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb166-2"><a href="stats.html#cb166-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb166-3"><a href="stats.html#cb166-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-53-3.png" width="672" /></p>
 <p>You get really different insights depending on the representation you chose !</p>
 </div>
 <div id="contingency-tables-1" class="section level4">
 <h4><span class="header-section-number">5.3.2.2</span> Contingency tables</h4>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="stats.html#cb173-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) </span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="stats.html#cb167-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) </span></code></pre></div>
 <pre><code>##        
 ##         Average Long Short Very long Very short
 ##   Bike      530  297   186       986        558
 ##   Other      48   39    34        43        111
 ##   Run       523  764   311        70         88
 ##   Swim        0    1   554         3        368</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="stats.html#cb175-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span><span class="kw">prop.table</span>()<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="stats.html#cb169-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span></span>
+<span id="cb169-2"><a href="stats.html#cb169-2"></a><span class="st">  </span><span class="kw">prop.table</span>()<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>##        
 ##             Average        Long       Short   Very long  Very short
 ##   Bike   9.61189699  5.38628945  3.37323177 17.88175553 10.11969532
 ##   Other  0.87051143  0.70729053  0.61661226  0.77983315  2.01305767
 ##   Run    9.48494741 13.85564019  5.64018861  1.26949583  1.59593761
 ##   Swim   0.00000000  0.01813565 10.04715270  0.05440696  6.67392093</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="stats.html#cb177-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span><span class="kw">prop.table</span>(<span class="dt">margin =</span> <span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="stats.html#cb171-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span></span>
+<span id="cb171-2"><a href="stats.html#cb171-2"></a><span class="st">  </span><span class="kw">prop.table</span>(<span class="dt">margin =</span> <span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>##        
 ##            Average       Long      Short  Very long Very short
 ##   Bike  20.7274149 11.6151740  7.2741494 38.5608135 21.8224482
 ##   Other 17.4545455 14.1818182 12.3636364 15.6363636 40.3636364
 ##   Run   29.7835991 43.5079727 17.7107062  3.9863326  5.0113895
 ##   Swim   0.0000000  0.1079914 59.8272138  0.3239741 39.7408207</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="stats.html#cb179-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span><span class="kw">prop.table</span>(<span class="dt">margin =</span> <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="stats.html#cb173-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span></span>
+<span id="cb173-2"><a href="stats.html#cb173-2"></a><span class="st">  </span><span class="kw">prop.table</span>(<span class="dt">margin =</span> <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>##        
 ##             Average        Long       Short   Very long  Very short
 ##   Bike  48.13805631 26.97547684 17.14285714 89.47368421 49.60000000
@@ -801,14 +811,14 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 <p><strong>Note :</strong> if some cells of the contingency table have less than 5 cases, the statistic is not reliable (you’ll get a message in this case)</p>
 <p>The chi-square suffers 2 main drawbacks : its value depends on the number of observations and the total number of categories <span class="math inline">\(\Rightarrow\)</span> one cannot compare the <span class="math inline">\(\chi^2\)</span> values for 2 different tables that have different numbers of underlying observations and number of categories.
 To deal with that, you can use Cramer’s V, which is a (kind of) <em>normalized</em> <span class="math inline">\(\chi^2\)</span>. You can use the function built in the <code>lsr</code> package. Cramer’s V <span class="math inline">\(\in [0,1]\)</span> and the higher it is, the more intense the link between both variables.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="stats.html#cb183-1"></a><span class="co"># install.packages(&quot;lsr&quot;) # If not installed</span></span>
-<span id="cb183-2"><a href="stats.html#cb183-2"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb183-3"><a href="stats.html#cb183-3"></a><span class="st">  </span>lsr<span class="op">::</span><span class="kw">cramersV</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="stats.html#cb177-1"></a><span class="co"># install.packages(&quot;lsr&quot;) # If not installed</span></span>
+<span id="cb177-2"><a href="stats.html#cb177-2"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb177-3"><a href="stats.html#cb177-3"></a><span class="st">  </span>lsr<span class="op">::</span><span class="kw">cramersV</span>()</span></code></pre></div>
 <pre><code>## [1] 0.4454809</code></pre>
 <p>Let’s check with our 2 extreme examples :</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="stats.html#cb185-1"></a>lsr<span class="op">::</span><span class="kw">cramersV</span>(ex_dep[,<span class="op">-</span><span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="stats.html#cb179-1"></a>lsr<span class="op">::</span><span class="kw">cramersV</span>(ex_dep[,<span class="op">-</span><span class="dv">5</span>])</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="stats.html#cb187-1"></a>lsr<span class="op">::</span><span class="kw">cramersV</span>(ex_indep)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="stats.html#cb181-1"></a>lsr<span class="op">::</span><span class="kw">cramersV</span>(ex_indep)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>In practice, it is very rare to get high values ; a rule of thumb is that a value around 0.2-0.3 is already “decent”. The <span class="math inline">\(\chi^2\)</span> p-value (if under 0.05) shows that there is a relationship ; Cramer’s V allows to compare between two tables.</p>
 </div>
@@ -821,18 +831,18 @@ We will try to assess if there is a connection between the distance and the disc
 <h4><span class="header-section-number">5.3.3.1</span> Boxplots, violin plots</h4>
 <p>Boxplots are a simple, effective and compact representation of a variable’s distribution. It relies on quantiles.
 Vilin plots allows to see the ful distribution of both variables</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="stats.html#cb189-1"></a><span class="co"># Compute bounds of the boxplot</span></span>
-<span id="cb189-2"><a href="stats.html#cb189-2"></a><span class="co"># bounds &lt;- group_by(dat,activity_recoded) %&gt;% </span></span>
-<span id="cb189-3"><a href="stats.html#cb189-3"></a><span class="co">#   summarise(q1=quantile(distance,.25,na.rm = T),</span></span>
-<span id="cb189-4"><a href="stats.html#cb189-4"></a><span class="co">#             q2=quantile(distance,.50,na.rm = T),</span></span>
-<span id="cb189-5"><a href="stats.html#cb189-5"></a><span class="co">#             q3=quantile(distance,.75,na.rm = T),</span></span>
-<span id="cb189-6"><a href="stats.html#cb189-6"></a><span class="co">#             lower_bound=q1-1.5*IQR(distance,na.rm = T),</span></span>
-<span id="cb189-7"><a href="stats.html#cb189-7"></a><span class="co">#             upper_bound=q3+1.5*IQR(distance,na.rm = T)) %&gt;% </span></span>
-<span id="cb189-8"><a href="stats.html#cb189-8"></a><span class="co">#   pivot_longer(-activity_recoded)</span></span>
-<span id="cb189-9"><a href="stats.html#cb189-9"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,distance<span class="op">/</span><span class="fl">1E5</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="stats.html#cb183-1"></a><span class="co"># Compute bounds of the boxplot</span></span>
+<span id="cb183-2"><a href="stats.html#cb183-2"></a><span class="co"># bounds &lt;- group_by(dat,activity_recoded) %&gt;% </span></span>
+<span id="cb183-3"><a href="stats.html#cb183-3"></a><span class="co">#   summarise(q1=quantile(distance,.25,na.rm = T),</span></span>
+<span id="cb183-4"><a href="stats.html#cb183-4"></a><span class="co">#             q2=quantile(distance,.50,na.rm = T),</span></span>
+<span id="cb183-5"><a href="stats.html#cb183-5"></a><span class="co">#             q3=quantile(distance,.75,na.rm = T),</span></span>
+<span id="cb183-6"><a href="stats.html#cb183-6"></a><span class="co">#             lower_bound=q1-1.5*IQR(distance,na.rm = T),</span></span>
+<span id="cb183-7"><a href="stats.html#cb183-7"></a><span class="co">#             upper_bound=q3+1.5*IQR(distance,na.rm = T)) %&gt;% </span></span>
+<span id="cb183-8"><a href="stats.html#cb183-8"></a><span class="co">#   pivot_longer(-activity_recoded)</span></span>
+<span id="cb183-9"><a href="stats.html#cb183-9"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,distance<span class="op">/</span><span class="fl">1E5</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="stats.html#cb190-1"></a>  <span class="co"># geom_point(data = bounds,aes(activity_recoded,value,color=name))</span></span>
-<span id="cb190-2"><a href="stats.html#cb190-2"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,distance<span class="op">/</span><span class="fl">1E5</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>()<span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_log10</span>(<span class="dt">label=</span>scales<span class="op">::</span>comma)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="stats.html#cb184-1"></a>  <span class="co"># geom_point(data = bounds,aes(activity_recoded,value,color=name))</span></span>
+<span id="cb184-2"><a href="stats.html#cb184-2"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,distance<span class="op">/</span><span class="fl">1E5</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>()<span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_log10</span>(<span class="dt">label=</span>scales<span class="op">::</span>comma)</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-59-2.png" width="672" /></p>
 <p>It looks like bike activities are longer than the others ! Big surprise !</p>
 </div>
@@ -854,24 +864,22 @@ Vilin plots allows to see the ful distribution of both variables</p>
 <p>In this case, we see that all the variance lies between the subgroups : there is no dispersion within the groups.</p>
 <p><strong>Note :</strong> In practice, the previous situation will of course never happen, and a categorical variable can’t carry by itself a lot of variance (since the number of possible values are de facto limited).</p>
 <p>This is also the <span class="math inline">\(R^2\)</span> of the 1-factor ANOVA regression of distance explained by activty type,</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="stats.html#cb191-1"></a>anova &lt;-<span class="st"> </span><span class="kw">aov</span>(distance<span class="op">~</span>activity_recoded,<span class="dt">data=</span>dat) </span>
-<span id="cb191-2"><a href="stats.html#cb191-2"></a><span class="kw">print</span>(<span class="st">&quot;Variance decomposition&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Variance decomposition&quot;</code></pre>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="stats.html#cb193-1"></a><span class="kw">summary</span>(anova)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="stats.html#cb185-1"></a>anova &lt;-<span class="st"> </span><span class="kw">aov</span>(distance<span class="op">~</span>activity_recoded,<span class="dt">data=</span>dat) </span>
+<span id="cb185-2"><a href="stats.html#cb185-2"></a><span class="co"># Variance decomposition</span></span>
+<span id="cb185-3"><a href="stats.html#cb185-3"></a><span class="kw">summary</span>(anova)</span></code></pre></div>
 <pre><code>##                    Df  Sum Sq Mean Sq F value Pr(&gt;F)    
 ## activity_recoded    3  610577  203526   230.6 &lt;2e-16 ***
 ## Residuals        5503 4857888     883                   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 7 observations deleted due to missingness</code></pre>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="stats.html#cb195-1"></a><span class="kw">print</span>(<span class="st">&quot;eta squared&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="stats.html#cb187-1"></a><span class="kw">print</span>(<span class="st">&quot;eta squared&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;eta squared&quot;</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="stats.html#cb197-1"></a>lsr<span class="op">::</span><span class="kw">etaSquared</span>(anova)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="stats.html#cb189-1"></a>lsr<span class="op">::</span><span class="kw">etaSquared</span>(anova)</span></code></pre></div>
 <pre><code>##                     eta.sq eta.sq.part
 ## activity_recoded 0.1116542   0.1116542</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="stats.html#cb199-1"></a><span class="kw">print</span>(<span class="st">&quot;Alternatively&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Alternatively&quot;</code></pre>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="stats.html#cb201-1"></a><span class="kw">lm</span>(distance<span class="op">~</span>activity_recoded,<span class="dt">data=</span>dat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="stats.html#cb191-1"></a><span class="co"># Alternatively</span></span>
+<span id="cb191-2"><a href="stats.html#cb191-2"></a><span class="kw">lm</span>(distance<span class="op">~</span>activity_recoded,<span class="dt">data=</span>dat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = distance ~ activity_recoded, data = dat)
@@ -904,7 +912,7 @@ Vilin plots allows to see the ful distribution of both variables</p>
 <li>For all the the categorical variables, get the frequent category (with table AND dplyr/tidyr)</li>
 </ul>
 <p><strong>Very important :</strong> For the next parts, we will remove the extreme observation that is clearly an error</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="stats.html#cb203-1"></a>dat_clean &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,<span class="op">!</span>(activityId <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">407226313</span>,<span class="dv">2321338</span>)) <span class="op">&amp;</span><span class="st"> </span><span class="kw">year</span>(date)<span class="op">&gt;=</span><span class="dv">2012</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="stats.html#cb193-1"></a>dat_clean &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,<span class="op">!</span>(activityId <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">407226313</span>,<span class="dv">2321338</span>)) <span class="op">&amp;</span><span class="st"> </span><span class="kw">year</span>(date)<span class="op">&gt;=</span><span class="dv">2012</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="stat_inf" class="section level2">
@@ -985,7 +993,7 @@ It is up to you to decide, but you generally can’t have both an unbiased and v
 <p>where <span class="math inline">\(\hat{s}^2 = \dfrac{1}{n-1}\sum_{i=1}^n (D-\bar{D})^2\)</span> is the unbiased estimator of the variance.</p>
 <div id="implementation-in-r" class="section level5">
 <h5><span class="header-section-number">5.4.3.2.1</span> Implementation in R :</h5>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="stats.html#cb204-1"></a><span class="kw">t.test</span>(dat<span class="op">$</span>distance,<span class="dt">mu=</span><span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="stats.html#cb194-1"></a><span class="kw">t.test</span>(dat<span class="op">$</span>distance,<span class="dt">mu=</span><span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## 
 ## 	One Sample t-test
 ## 
@@ -1010,9 +1018,9 @@ In our case, this probability is very small, meaning that we should not consider
 <h4><span class="header-section-number">5.4.3.3</span> Student test to compare group means</h4>
 <p>You can also use the Student test to check whether the means of two sub-populations are equal or not. In this case, the tests checks whether the difference in means differs significantly from 0. We’ll check in this example if average distance differs between rides and other activities.
 For that we have to extract on the one hand the bike activities’ distance and the other activites’ distance on the other hand. We can run the test on those 2 vectors :</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="stats.html#cb206-1"></a>bike &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,is_bike) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(distance)</span>
-<span id="cb206-2"><a href="stats.html#cb206-2"></a>non_bike &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,<span class="op">!</span>is_bike) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(distance)</span>
-<span id="cb206-3"><a href="stats.html#cb206-3"></a><span class="kw">t.test</span>(bike,non_bike)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="stats.html#cb196-1"></a>bike &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,is_bike) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(distance)</span>
+<span id="cb196-2"><a href="stats.html#cb196-2"></a>non_bike &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,<span class="op">!</span>is_bike) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(distance)</span>
+<span id="cb196-3"><a href="stats.html#cb196-3"></a><span class="kw">t.test</span>(bike,non_bike)</span></code></pre></div>
 <pre><code>## 
 ## 	Welch Two Sample t-test
 ## 
@@ -1030,8 +1038,8 @@ For that we have to extract on the one hand the bike activities’ distance and 
 <h4><span class="header-section-number">5.4.3.4</span> Back to our <span class="math inline">\(\chi^2\)</span></h4>
 <p>Remember the <span class="math inline">\(\chi^2\)</span> test is used to assess if 2 categorical variables are independent or not. The null hypothesis in this test is “both variable are independant”. To check that, a test statistic, <span class="math inline">\(D^2\)</span> (X-squared in R output) is built, and under <span class="math inline">\(\mathcal{H_0}\)</span>, it is distributed with a <span class="math inline">\(\chi^2\)</span> probability distribution. We can can then test the validity of the null depending on the test value.</p>
 <p>Let’s check if there is a relationship between activity and distance in bins :</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="stats.html#cb208-1"></a>tab &lt;-<span class="st"> </span><span class="kw">table</span>(dat<span class="op">$</span>qual_distance,dat<span class="op">$</span>activity_recoded) </span>
-<span id="cb208-2"><a href="stats.html#cb208-2"></a>tab</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="stats.html#cb198-1"></a>tab &lt;-<span class="st"> </span><span class="kw">table</span>(dat<span class="op">$</span>qual_distance,dat<span class="op">$</span>activity_recoded) </span>
+<span id="cb198-2"><a href="stats.html#cb198-2"></a>tab</span></code></pre></div>
 <pre><code>##             
 ##              Bike Other Run Swim
 ##   Average     530    48 523    0
@@ -1039,7 +1047,7 @@ For that we have to extract on the one hand the bike activities’ distance and 
 ##   Short       186    34 311  554
 ##   Very long   986    43  70    3
 ##   Very short  558   111  88  368</code></pre>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="stats.html#cb210-1"></a>tab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">chisq.test</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="stats.html#cb200-1"></a>tab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">chisq.test</span>()</span></code></pre></div>
 <pre><code>## 
 ## 	Pearson&#39;s Chi-squared test
 ## 
@@ -1078,18 +1086,18 @@ For that we have to extract on the one hand the bike activities’ distance and 
 To check that, there are several tests called “unit-root” tests (if there is a unit root, the serie is not stationary).
 In this example, I simulate a time series and run the Phillips-Perron test. The alternative hypothesis is specified in the output ; please interpret the result.</li>
 </ul>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="stats.html#cb212-1"></a><span class="kw">library</span>(tseries)</span>
-<span id="cb212-2"><a href="stats.html#cb212-2"></a><span class="co"># generation of a random walk</span></span>
-<span id="cb212-3"><a href="stats.html#cb212-3"></a>Xt &lt;-<span class="st"> </span><span class="kw">cumsum</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>))</span>
-<span id="cb212-4"><a href="stats.html#cb212-4"></a><span class="kw">plot</span>(Xt,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">main=</span><span class="st">&quot;Random time serie&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="stats.html#cb202-1"></a><span class="kw">library</span>(tseries)</span>
+<span id="cb202-2"><a href="stats.html#cb202-2"></a><span class="co"># generation of a random walk</span></span>
+<span id="cb202-3"><a href="stats.html#cb202-3"></a>Xt &lt;-<span class="st"> </span><span class="kw">cumsum</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>))</span>
+<span id="cb202-4"><a href="stats.html#cb202-4"></a><span class="kw">plot</span>(Xt,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">main=</span><span class="st">&quot;Random time serie&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="stats.html#cb213-1"></a><span class="kw">pp.test</span>(Xt)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="stats.html#cb203-1"></a><span class="kw">pp.test</span>(Xt)</span></code></pre></div>
 <pre><code>## 
 ## 	Phillips-Perron Unit Root Test
 ## 
 ## data:  Xt
-## Dickey-Fuller Z(alpha) = -9.9662, Truncation lag parameter = 3, p-value
-## = 0.5376
+## Dickey-Fuller Z(alpha) = -3.5298, Truncation lag parameter = 3, p-value
+## = 0.9094
 ## alternative hypothesis: stationary</code></pre>
 
 </div>

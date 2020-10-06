@@ -22,19 +22,21 @@ What's on our agenda :
 
 **Important notes** : 
 
-+ of course, it's  not a linear path and the data science workflow is not a simple execution of those steps in a pre-determined order. It's all connected and you'll have to move back and forth between all of them to achieve your goal.  And this goal, what is it already ?
-+ in data science is the word "science". And what is science ? Huge topic... But a few keywords that you should always have in mind when starting a project
-    + reproducibility
-    + hypothesis testing
-    + incremental
-    + iterative
-    + monitored
++ Of course, it's  not a linear path and the data science workflow is not a simple execution of those steps in a pre-determined order. It's all connected and you'll have to move back and forth between all of them to achieve your goal.  And this goal, what is it already ?
++ In data science is the word "science". And what is science ? Huge topic... But a few keywords that you should always have in mind when starting a project
+    + Reproducibility
+    + Hypothesis testing
+    + Incremental
+    + Iterative
+    + Monitored
 
 ## The data science workflow
 
 A popular schematic overview of a the workflow
 
 ![](img/data-science-explore.png)
+
+The iteration loop has to be done taking the business perspective / constraint into account !
 
 ## Resources
 
@@ -51,9 +53,9 @@ You will find a lot of resources online. Here is a selection, mostly related to 
 
 In this course, we will handle with my *own* personal data (I give my consent ! ;) )
 Those are my sports activity data, which I got from garmin (thanks to the GDPR). If you want to get your own data from [this page](https://www.garmin.com/en-US/account/datamanagement/exportdata/).
-Being a triathlete, there are several sports involved and a lot of activities. The goal will be to import, clean, analyse the data with statistics and eventually build some first models (**explainable AI**).
+Being a triathlete, there are several sports involved and a lot of activities. The goal will be to import, clean, analyze the data with statistics and eventually build some first models (**explainable AI**).
 
-The export results in a lot of JSON files and we will focus on the summary data. It's real worl data and you'll see it's complicated, dirty and requires a lot of preparation/manipulation !
+The export results in a lot of JSON files and we will focus on the summary data. It's real world data and you'll see it's complicated, dirty and requires a lot of preparation/manipulation !
 
 ```{r}
 require(tidyverse)

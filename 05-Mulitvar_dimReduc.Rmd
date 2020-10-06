@@ -340,7 +340,7 @@ What we deduct from this graph :
 
 - Distance, calories and duration have the largest values on the first component $\rightarrow$ they contribute largely to the first component, which bears the 35% of total variance $\rightarrow$ those variables are the most discriminant
 - Those three variables are very close to each other, which means they are highly correlated
-- The average cadence is on the other side of the first component $\righarrow$ it is negatively correlated with those variables
+- The average cadence is on the other side of the first component $\rightarrow$ it is negatively correlated with those variables
 - There is a right angle between elevationGain and avgPower $\rightarrow$ the correlation is very small
 
 Let's check the correlation matrix to be sure about what we are reading here

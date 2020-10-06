@@ -50,7 +50,7 @@ The goodness of fit is measured through 2 main statistics :
 Back to original equation, we can understand how much each feature influences in average the output. 
 
 $$ \dfrac{\partial y}{\partial x_1} = b_1$$
-Meaning that the increase of $x_1$ by one unit causes the output to increase in average by $b_1$ (which can of course be negative). In our example, one additional watt will result in an increase of the average speed by 0.007 100m/min
+Meaning that the increase of $x_1$ by one unit causes the output to increase in average by $b_1$ (which can of course be negative). In our example, one additional watt will result in an increase of the average speed by 0.25 km/h
 
 The fundamental hypothesis being fulfilled and the sample being large enough, the distribution of the OLS estimate $(b_1,...,b_p)$ are jointly normally distributed, meaning that each $\hat{b_j} \hookrightarrow \mathcal{N}(b_j,\sigma_{b_j}^2)$
 We can therefore perform statistical tests following the previous methodology (see \@ref(stat_inf).
@@ -113,7 +113,7 @@ So far we focused on getting the best coefficient estimates to be able to interp
 
 This is illustration of the bias-variance trade-off which you will see more in depth during the machine learning session.
 
-![](img/Overfitting.svg)
+![](img/Overfitting.png)
 Regarding regression, avoiding overfitting can be done with variable selection : starting from an extensive model, the procedure will try every feature combination that leads to the best prediction. There are 3 ways of constructing the models :
 
 - backward selection : remove the less useful feature at a time
@@ -134,7 +134,54 @@ summary(selection)
 
 - From the last functional form used, design a graphic that shows the final impact of an increase in power to the average speed, taking the distance into account.
 - Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates...)
-- Develop a model that will help you identify the measurement errors
+- Develop a model that will help you identify the measurement errors (thanks to residuals)
 
 ## Logitic regression
 
+### Mathematical formulation
+
+Logistic regression aims to model a *binary* output. In this case, $y \in \{0,1\}$ and the previous specification can't apply. We still have a linear relationship, but which applies to the log-odd ratio :
+
+$$log \dfrac{\mathbb{P}(y=1|x)}{1-\mathbb{P}(y=1|x)} = log \dfrac{^p}{1-p} = x_ib + \epsilon_i$$
+
+This is called the **link function** and working the  expression further we find that : $p(x_i;b) = \mathbb{P}(y_i=1|x_i) = \dfrac{1}{1+e^{-x_ib}}$
+
+This allows us to derive the likelihood :
+
+$$\mathcal{L}(b) = \prod_{i=1}^n p(x_i;b)^{y_i} \cdot (1-p(x_i;b))^{1-y_i}$$
+
+This expression can be simplified, but there is no exact expression as for the OLS $\rightarrow$ the optimal solution has to be found via numerical optimization (eg Newton-Raphson).
+
+### Implementation in R and interpretation
+
+In R, we use the `glm` function while specifying the family. We model the probability of an activity to be bike or something else, which is a binary variable.
+
+```{r}
+logit <- glm(is_bike~distance+duration+elevationGain+avgSpeed+avgHr,data=dat_clean,family = "binomial")
+summary(logit)
+```
+
+The sign of the coefficient indicates whether the feature increases the probability for an activity to be a ride ride or not. However, the values cannot be interpreted as directly as in the case of the linear regression. But you can use the exponent of the value of the coefficient and interpret it in terms of odd-ratios. 
+For instance, adding one more kilometer to the average distance multiplies the probability for an activity to be a ride *rather than anything else* by `r exp(logit$coefficients["distance"])`, meaning 4% more chances. In the contrary, an activity that has 1 bpm more than the average HR has `r 100*(1-exp(logit$coefficients["avgHr"]))` 6% less chances to be a ride. This makes sense because, as observed earlier, rides are longer and the heart rate is a bit smaller than for other activities.
+
+
+### Goodness of fit
+
+As you might have noticed, there is no $R^2$ or RMSE in our case, just the AIC (which only allows you to compare different models, not know how good the model is). What we can do is check the fitted values of the model and the actual values
+
+```{r}
+pred <- predict(logit,dat_clean,type="response")
+pred_bin <- as.numeric(pred>.5)
+table(pred_bin,dat_clean$is_bike)
+```
+
+And we can compute the accuracy as the sum of correct predictions divided by total number of activities : `r (1418+1241)/(1418+1241+133+413)`
+You can derive other goodness of fit metrics from the previous **confusion matrix** :
+
+- Sensitivity (recall) : $\dfrac{TP}{TP+FN}$
+- Specificity : $\dfrac{TN}{TN+FP}$
+- Precision : $\dfrac{TP}{TP+FP}$
+
+![](img/conf_matrix.png)
+
+Depending on your business use case, you will focus more on one or the other metric. You will cover this in more detail durinng the machine learning week :)

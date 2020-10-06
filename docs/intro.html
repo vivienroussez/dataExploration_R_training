@@ -243,7 +243,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.5" data-path="reg.html"><a href="reg.html#variable-selection"><i class="fa fa-check"></i><b>7.1.5</b> Variable selection</a></li>
 <li class="chapter" data-level="7.1.6" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>7.1.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a></li>
+<li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reg.html"><a href="reg.html#mathematical-formulation"><i class="fa fa-check"></i><b>7.2.1</b> Mathematical formulation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reg.html"><a href="reg.html#implementation-in-r-and-interpretation"><i class="fa fa-check"></i><b>7.2.2</b> Implementation in R and interpretation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="reg.html"><a href="reg.html#goodness-of-fit"><i class="fa fa-check"></i><b>7.2.3</b> Goodness of fit</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -283,14 +287,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><strong>Important notes</strong> :</p>
 <ul>
-<li>of course, it’s not a linear path and the data science workflow is not a simple execution of those steps in a pre-determined order. It’s all connected and you’ll have to move back and forth between all of them to achieve your goal. And this goal, what is it already ?</li>
-<li>in data science is the word “science”. And what is science ? Huge topic… But a few keywords that you should always have in mind when starting a project
+<li>Of course, it’s not a linear path and the data science workflow is not a simple execution of those steps in a pre-determined order. It’s all connected and you’ll have to move back and forth between all of them to achieve your goal. And this goal, what is it already ?</li>
+<li>In data science is the word “science”. And what is science ? Huge topic… But a few keywords that you should always have in mind when starting a project
 <ul>
-<li>reproducibility</li>
-<li>hypothesis testing</li>
-<li>incremental</li>
-<li>iterative</li>
-<li>monitored</li>
+<li>Reproducibility</li>
+<li>Hypothesis testing</li>
+<li>Incremental</li>
+<li>Iterative</li>
+<li>Monitored</li>
 </ul></li>
 </ul>
 </div>
@@ -298,6 +302,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.2</span> The data science workflow</h2>
 <p>A popular schematic overview of a the workflow</p>
 <p><img src="img/data-science-explore.png" /></p>
+<p>The iteration loop has to be done taking the business perspective / constraint into account !</p>
 </div>
 <div id="resources" class="section level2">
 <h2><span class="header-section-number">2.3</span> Resources</h2>
@@ -315,8 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.4</span> Data of the week</h2>
 <p>In this course, we will handle with my <em>own</em> personal data (I give my consent ! ;) )
 Those are my sports activity data, which I got from garmin (thanks to the GDPR). If you want to get your own data from <a href="https://www.garmin.com/en-US/account/datamanagement/exportdata/">this page</a>.
-Being a triathlete, there are several sports involved and a lot of activities. The goal will be to import, clean, analyse the data with statistics and eventually build some first models (<strong>explainable AI</strong>).</p>
-<p>The export results in a lot of JSON files and we will focus on the summary data. It’s real worl data and you’ll see it’s complicated, dirty and requires a lot of preparation/manipulation !</p>
+Being a triathlete, there are several sports involved and a lot of activities. The goal will be to import, clean, analyze the data with statistics and eventually build some first models (<strong>explainable AI</strong>).</p>
+<p>The export results in a lot of JSON files and we will focus on the summary data. It’s real world data and you’ll see it’s complicated, dirty and requires a lot of preparation/manipulation !</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="intro.html#cb1-1"></a><span class="kw">require</span>(tidyverse)</span>
 <span id="cb1-2"><a href="intro.html#cb1-2"></a>dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/Sports/Activities.csv&quot;</span>,<span class="dt">header =</span> T)</span>
 <span id="cb1-3"><a href="intro.html#cb1-3"></a><span class="kw">head</span>(dat)</span></code></pre></div>

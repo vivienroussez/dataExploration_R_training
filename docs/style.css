@@ -12,3 +12,15 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+.title{
+  color: #f48e29;
+}
+
+.section h1,
+.section h2, 
+.section h3, 
+.section h4, 
+.section h5 { 
+  color: #f48e29;
+}

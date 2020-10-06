@@ -18,7 +18,7 @@ always_allow_html: yes
 Welcome to this learning week in Asigmo's program ! 
 
 
-This week will be dedicated to data exploration, manipulation and visualization using R and the tidyverse. To that end, we will also cover the basics of statistics, that are essential for your understanding of modeling and later on machine learning !
+This week will be dedicated to data exploration, manipulation and visualization using R and the tidyverse. To that end, we will also cover the basics of statistics, that are essential for your understanding of modeling and, later on, machine learning.
 
 
 We will deal with complex and pretty dirty data, but this is real-world data, and you will also see that, more than artificial intelligence, you need common sense to deal with data !

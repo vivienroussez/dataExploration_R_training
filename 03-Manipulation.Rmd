@@ -265,7 +265,7 @@ The data will almost never come in a ready-to-use format. Wrangling the data, be
 - `pivot_longer()` which will convert columns into rows
 - `pivot_wider()`, the reciprocate operation, which will convert rows into columns
 
-For example, we can chose that an observation is the combination of an activity and a metric. This representation can be useful in some cases (see \@ref(adv_viz)).
+For example, we can chose that an observation is the combination of an activity and a metric. This representation can be useful in some cases (see \@ref(multivar)).
 
 ```{r}
 dat_long <- dat %>% 

@@ -1,8 +1,8 @@
-# Multivariate analysis and dimension reduction
+# Multivariate analysis and dimension reduction  {#multivar}
 
-## Multivariate analysis {#multivar}
+## Multivariate analysis
 
-### Advanced visualization {#adv_viz}
+### Advanced visualization 
 
 #### The grammar of graphics 
 
@@ -273,6 +273,13 @@ sapply(dat_bike_imp,function(xx) sum(is.na(xx)))
 ```
 
 
+Some of the variables contain only missing values (and cannot be imputed) $\rightarrow$ we drop them
+
+```{r}
+missing <- which(sapply(dat_bike_imp,function(xx) sum(is.na(xx)))>0) %>%  names()
+dat_bike_imp <- select(dat_bike_imp,-missing)
+```
+
 ### Normalization
 
 Normalization is the operation consisting in scaling the columns so that their unit do not matter in the end. For example, the distance in meter is much larger than the cadence or the power, which have totally different units. To normalize the columns and make them unit-less, there are several methods among which the most common are the following  :
@@ -374,6 +381,8 @@ Dimension reduction aims to reduce the size of the data ; most of the time the g
 - Remove undesired noise
 - Avoid [multicollinearity](https://en.wikipedia.org/wiki/Multicollinearity) in the features
 
+Dimension reduction is, after normalization, a very common step to take prior training a machine learning algorithm.
+
 ### Use the results of the PCA
 
 After performing a PCA, you can select a limited number of principal components that you will use further in the modeling task. You can chose the number of components to keep with several criteria :
@@ -391,11 +400,61 @@ PCA is designed only for continuous variables, but you can use other methods for
 
 ### t-SNE
 
-t-SNE has a completely different approach to dimension reduction : it does not aim to preserve the total variance but rather the distances between the observations.
+#### Algorithm description
+
+t-SNE has a completely different approach to dimension reduction : it does not aim to preserve the total variance, but rather the proximity between the observations.
+
+The algorithm has 3 steps :
+
+- Compute the similarity between each pair of points using a gaussian distribution (instead of a raw euclidean distance) $\Rightarrow$ n collections (distributions) of similarity scores in the high-dimensional space
+- Initiate a low-dimensional space and map all high-dimensional points on it. Compute the same pairwise similarities in this space $\Rightarrow$ n collections (distributions) of similarity scores in the low-dimensional space
+- Gradually move the points in the low-dimensional space so that the sum of divergences between pairwise similarities in both spaces are minimal. The divergence is the [Kullback-Leibler](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) divergence between the 2 distributions of similarity scores
+
+You can watch this very well done [video](https://www.youtube.com/watch?v=NEaUSP4YerM) to understand how the algorithm precisely works
+
+How this similarity scores are computed.
+
+```{r}
+dd <- data.frame(xx=rnorm(100),yy=rnorm(100)) %>% 
+  mutate(col=ifelse(row_number()==1,"blue","black"))
+dd %>%   ggplot(aes(xx,yy,color=col)) + geom_point() + theme_minimal() + 
+  guides(color=F) + scale_color_manual(values = c("black","blue"))
+
+dd %>% mutate(xx_ref=dd$xx[1],yy_ref=dd$yy[1],
+              euclid = (yy_ref-yy)^2 + (yy_ref-yy)^2,
+              simil = 100*dnorm(euclid)) %>% 
+  ggplot(aes(euclid,simil)) + geom_point() + theme_minimal() + labs(title="Distance and similarity to the first point")
+
+```
+
+Pros and cons compared to PCA :
+
+- Preserves non-linear relationships and is robust to outliers
+- Much more computationally costly
+- Starts with a PCA
+
+#### Implementation in R
+
+```{r}
+# install.packages("Rtsne")
+require(Rtsne)
+tsne <- select(dat_bike_imp,where(is.numeric)) %>%  
+  Rtsne(dims=2,max_iter=500,check_duplicates = F)
+tsne$Y %>% as.data.frame() %>% 
+  ggplot(aes(V1,V2)) + geom_point() + theme_minimal() + 
+  labs(title="Low dimensional representation by t-SNE")
+```
+
+You can check this other extensive [blogpost](https://www.analyticsvidhya.com/blog/2017/01/t-sne-implementation-r-python/) with use cases and also python implementation.
 
 ### A word about clustering
 
+Clustering (or unsupervised machine learning) can also be considered as a dimension reduction technique, but which you operate on the observation rather than on the features. The aim of clustering techniques are to gather observations in homogeneous groups (wrt the features you observed).
+It can also be very effective to analyze and understand your data to check the characteristics of the sub-groups ; it can also be very insightful for business teams to have such "categories" they can relate with.
 
+### Exercise
+
+- Interpret the results of the T-SNE embedding
 
 ## Visualization bonus : dashboards and reports
 

@@ -133,8 +133,8 @@ summary(selection)
 ### Exercises
 
 - From the last functional form used, design a graphic that shows the final impact of an increase in power to the average speed, taking the distance into account.
-- Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates...)
-- Develop a model that will help you identify the measurement errors (thanks to residuals)
+- Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates...). Feature importance can be very important. Example : to prepare for competitions (that take place between may-september), I always follow a structured training plan at some point. This has a direct impact on the performances. Can you identify when this preparation starts and how to integrate it in the model ? This closely linked to your assignment ;)
+- Can you identify the measurement errors (thanks to residuals)
 
 ## Logitic regression
 

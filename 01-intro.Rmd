@@ -60,6 +60,18 @@ The export results in a lot of JSON files and we will focus on the summary data.
 ```{r}
 require(tidyverse)
 dat <- read.csv("Data/Sports/Activities.csv",header = T)
-head(dat)
+glimpse(dat)
 ```
 
+
+## Your mission 
+
+The data we will use as an example is quite messy, but it is a rather traditional tye of data that we will handle. However, you will face diverse type of data : time series, graphs, geospatial, panel,... That will require different analytical tools but also different ways to handle those objects. To provide you with a taste of those challenges ahead, your mission will be the following :
+
+- Select the most important metrics of the activities (distance, duration, speed, power, elevation, heart rate....) and create monthly time series out of it (you will have to aggregate it ; please choose wisely how to aggregate : simple average can be inaccurate for ratios). Pick 4 of them.
+- Learn by yourself the basics of time series and please describe for the chosen time series :
+    + Draw the autocorrelation function
+    + Is there a trend ?
+    + Is there a seasonal pattern ?
+    + Are those series stationary ? With which level of confidence can you assert so ? Please use 2 different tests.
+- Prediction is the most common ML task for time series. Try the `prophet` and `auto.arima` algorithms to predict each time series 12 months ahead. What can you conclude ?

@@ -64,16 +64,19 @@ ggplot(dat_clean,aes(x=distance)) + geom_histogram()+
   theme_minimal()
 ggplot(dat_clean,aes(distance,avgSpeed)) + geom_jitter()+
   theme_minimal()
-ggplot(dat_clean,aes(distance,avgSpeed,color=activity_recoded))  + geom_jitter()+
+ggplot(dat_clean,aes(distance,avgSpeed,color=activity_recoded))  + 
+  geom_jitter()+
   theme_minimal()
 
 # To 
-ggplot(dat_clean,aes(x=avgSpeed,y=calories,size=duration,color=qual_distance,shape=qual_avgHr)) + 
+ggplot(dat_clean,aes(x=avgSpeed,y=calories,size=duration,
+                     color=qual_distance,shape=qual_avgHr)) + 
   geom_jitter() + 
   facet_wrap(.~ activity_recoded,scales = "free")+
   theme_minimal()
 # Or maybe
-ggplot(dat_clean,aes(x=avgSpeed,y=elevationGain,size=calories,color=duration)) + 
+ggplot(dat_clean,aes(x=avgSpeed,y=elevationGain,
+                     size=calories,color=duration)) + 
   geom_jitter() + 
   facet_grid(activity_recoded~qual_distance,scales = "free" )+
   theme_minimal()
@@ -161,9 +164,11 @@ ggplot(reshaped,aes(values)) + geom_histogram() +
 ```{r,fig.width=8}
 # install.packages("ggpubr")
 require(ggpubr)
-gg1 <- ggplot(dat_clean,aes(distance)) + geom_histogram() + labs(title = "Distance distribution")+
+gg1 <- ggplot(dat_clean,aes(distance)) + geom_histogram() + 
+  labs(title = "Distance distribution")+
   theme_minimal()
-gg2 <- ggplot(dat_clean,aes(x=avgSpeed,y=elevationGain,size=calories,color=duration,size=distance)) + 
+gg2 <- ggplot(dat_clean,aes(x=avgSpeed,y=elevationGain,
+                            size=calories,color=duration,size=distance)) + 
   geom_jitter() + 
   facet_grid(activity_recoded~qual_distance,scales = "free" ) +
   theme_minimal() + labs(title = "Beautiful but useless plot")+
@@ -407,7 +412,7 @@ t-SNE has a completely different approach to dimension reduction : it does not a
 The algorithm has 3 steps :
 
 - Compute the similarity between each pair of points using a gaussian distribution (instead of a raw euclidean distance) $\Rightarrow$ n collections (distributions) of similarity scores in the high-dimensional space
-- Initiate a low-dimensional space and map all high-dimensional points on it. Compute the same pairwise similarities in this space $\Rightarrow$ n collections (distributions) of similarity scores in the low-dimensional space
+- Initiate a low-dimensional space and map all high-dimensional points on it. Compute the same pairwise similarities with Student distribution (hence the t in t-SNE) in this space $\Rightarrow$ n collections (distributions) of similarity scores in the low-dimensional space
 - Gradually move the points in the low-dimensional space so that the sum of divergences between pairwise similarities in both spaces are minimal. The divergence is the [Kullback-Leibler](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) divergence between the 2 distributions of similarity scores
 
 You can watch this very well done [video](https://www.youtube.com/watch?v=NEaUSP4YerM) to understand how the algorithm precisely works
@@ -423,7 +428,8 @@ dd %>%   ggplot(aes(xx,yy,color=col)) + geom_point() + theme_minimal() +
 dd %>% mutate(xx_ref=dd$xx[1],yy_ref=dd$yy[1],
               euclid = (yy_ref-yy)^2 + (yy_ref-yy)^2,
               simil = 100*dnorm(euclid)) %>% 
-  ggplot(aes(euclid,simil)) + geom_point() + theme_minimal() + labs(title="Distance and similarity to the first point")
+  ggplot(aes(euclid,simil)) + geom_point() + theme_minimal() + 
+  labs(title="Distance and similarity to the first point")
 
 ```
 
@@ -489,10 +495,10 @@ You can use a lot of other [html widgets](https://www.htmlwidgets.org/index.html
 Example of leaflet :
 
 ```{r}
-filter(dat,is_bike) %>% 
-  leaflet::leaflet(data=.) %>% 
+filter(dat,is_bike) %>%
+  leaflet::leaflet(data=.) %>%
   leaflet::addMarkers(lng = ~startLongitude,lat = ~startLatitude,
-                             popup = ~activityId) %>% 
+                             popup = ~activityId) %>%
   leaflet::addTiles()
 ```
 

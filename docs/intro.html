@@ -151,9 +151,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#topics-of-the-week"><i class="fa fa-check"></i><b>2.1</b> Topics of the week</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#the-data-science-workflow"><i class="fa fa-check"></i><b>2.2</b> The data science workflow</a></li>
-<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#resources"><i class="fa fa-check"></i><b>2.3</b> Resources</a></li>
-<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#data-of-the-week"><i class="fa fa-check"></i><b>2.4</b> Data of the week</a></li>
-<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#your-mission"><i class="fa fa-check"></i><b>2.5</b> Your mission</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#about-the-interactions-with-other-colleagues"><i class="fa fa-check"></i><b>2.3</b> About the interactions with other colleagues</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#resources"><i class="fa fa-check"></i><b>2.4</b> Resources</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#data-of-the-week"><i class="fa fa-check"></i><b>2.5</b> Data of the week</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#your-mission"><i class="fa fa-check"></i><b>2.6</b> Your mission</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="intro-r.html"><a href="intro-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to R</a><ul>
 <li class="chapter" data-level="3.1" data-path="intro-r.html"><a href="intro-r.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is R</a><ul>
@@ -302,12 +303,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="the-data-science-workflow" class="section level2">
 <h2><span class="header-section-number">2.2</span> The data science workflow</h2>
-<p>A popular schematic overview of a the workflow</p>
+<p>A very synthetic schematic of the data science workflow</p>
 <p><img src="img/data-science-explore.png" /></p>
-<p>The iteration loop has to be done taking the business perspective / constraint into account !</p>
+<p>To which you could add <strong>deployment</strong> in some cases.</p>
+</div>
+<div id="about-the-interactions-with-other-colleagues" class="section level2">
+<h2><span class="header-section-number">2.3</span> About the interactions with other colleagues</h2>
+<p>The previous iteration loop has to be done taking the business perspective / constraint into account !
+More generally, the role of the data scientist is pretty central in use cases development. You will collaborate with other data/IT and business professionals :</p>
+<ul>
+<li><p>Data engineers</p></li>
+<li><p>Data architects</p></li>
+<li><p>Software engineers (DevOps)</p></li>
+<li><p>Machine learning engineers</p></li>
+<li><p>Data analysts</p></li>
+<li><p>Data strategists</p></li>
+<li><p>Program managers / product owners</p></li>
+<li><p>Business teams</p></li>
+</ul>
+<p>And one challenge is to have all those different profiles working for one common goal and <em>communicate</em> together. My experience is that the data scientist can really put some oil in the machinery, aand one of her/his duty is to bridge the gap between business and IT worlds.</p>
 </div>
 <div id="resources" class="section level2">
-<h2><span class="header-section-number">2.3</span> Resources</h2>
+<h2><span class="header-section-number">2.4</span> Resources</h2>
 <p>You will find a lot of resources online. Here is a selection, mostly related to R. However, our goal for this session is to have you understand how all the methods we will cover are related to each other and when you should consider using them</p>
 <ul>
 <li><a href="https://r4ds.had.co.nz/">R for data science</a></li>
@@ -319,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="data-of-the-week" class="section level2">
-<h2><span class="header-section-number">2.4</span> Data of the week</h2>
+<h2><span class="header-section-number">2.5</span> Data of the week</h2>
 <p>In this course, we will handle with my <em>own</em> personal data (I give my consent ! ;) )
 Those are my sports activity data, which I got from garmin (thanks to the GDPR). If you want to get your own data from <a href="https://www.garmin.com/en-US/account/datamanagement/exportdata/">this page</a>.
 Being a triathlete, there are several sports involved and a lot of activities. The goal will be to import, clean, analyze the data with statistics and eventually build some first models (<strong>explainable AI</strong>).</p>
@@ -420,7 +437,7 @@ Being a triathlete, there are several sports involved and a lot of activities. T
 ## $ bottomTime              &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</code></pre>
 </div>
 <div id="your-mission" class="section level2">
-<h2><span class="header-section-number">2.5</span> Your mission</h2>
+<h2><span class="header-section-number">2.6</span> Your mission</h2>
 <p>The data we will use as an example is quite messy, but it is a rather traditional tye of data that we will handle. However, you will face diverse type of data : time series, graphs, geospatial, panel,… That will require different analytical tools but also different ways to handle those objects. To provide you with a taste of those challenges ahead, your mission will be the following :</p>
 <ul>
 <li>Select the most important metrics of the activities (distance, duration, speed, power, elevation, heart rate….) and create monthly time series out of it (you will have to aggregate it ; please choose wisely how to aggregate : simple average can be inaccurate for ratios). Pick 4 of them.</li>

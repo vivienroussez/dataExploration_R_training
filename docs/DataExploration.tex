@@ -194,11 +194,38 @@ What's on our agenda :
 \hypertarget{the-data-science-workflow}{%
 \section{The data science workflow}\label{the-data-science-workflow}}
 
-A popular schematic overview of a the workflow
+A very synthetic schematic of the data science workflow
 
 \includegraphics{img/data-science-explore.png}
 
-The iteration loop has to be done taking the business perspective / constraint into account !
+To which you could add \textbf{deployment} in some cases.
+
+\hypertarget{about-the-interactions-with-other-colleagues}{%
+\section{About the interactions with other colleagues}\label{about-the-interactions-with-other-colleagues}}
+
+The previous iteration loop has to be done taking the business perspective / constraint into account !
+More generally, the role of the data scientist is pretty central in use cases development. You will collaborate with other data/IT and business professionals :
+
+\begin{itemize}
+\item
+  Data engineers
+\item
+  Data architects
+\item
+  Software engineers (DevOps)
+\item
+  Machine learning engineers
+\item
+  Data analysts
+\item
+  Data strategists
+\item
+  Program managers / product owners
+\item
+  Business teams
+\end{itemize}
+
+And one challenge is to have all those different profiles working for one common goal and \emph{communicate} together. My experience is that the data scientist can really put some oil in the machinery, aand one of her/his duty is to bridge the gap between business and IT worlds.
 
 \hypertarget{resources}{%
 \section{Resources}\label{resources}}
@@ -234,138 +261,130 @@ The export results in a lot of JSON files and we will focus on the summary data.
 \begin{Highlighting}[]
 \KeywordTok{require}\NormalTok{(tidyverse)}
 \NormalTok{dat <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Data/Sports/Activities.csv"}\NormalTok{,}\DataTypeTok{header =}\NormalTok{ T)}
-\KeywordTok{head}\NormalTok{(dat)}
+\KeywordTok{glimpse}\NormalTok{(dat)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##   activityId       uuidMsb       uuidLsb                name activityType
-## 1 5570974040  3.695224e+18 -7.098507e+18          En piscine lap_swimming
-## 2 5566524321 -5.212790e+18 -8.140623e+18     Vienna Cyclisme      cycling
-## 3 5561266034  1.271356e+18 -5.522844e+18 Korneuburg Cyclisme      cycling
-## 4 5555881653 -2.923938e+18 -4.676832e+18       Vienna Course      running
-## 5 5551811953  7.859043e+18 -7.909532e+18      Zwift - London virtual_ride
-## 6 5551052200 -9.554086e+17 -6.866435e+18          En piscine lap_swimming
-##   userProfileId timeZoneId beginTimestamp eventTypeId   rule sportType
-## 1       1141258        124   1.600700e+12           9 public   GENERIC
-## 2       1141258        124   1.600602e+12           9 public   CYCLING
-## 3       1141258        124   1.600523e+12           9 public   CYCLING
-## 4       1141258        124   1.600439e+12           9 public   RUNNING
-## 5       1141258        124   1.600362e+12           9 public   GENERIC
-## 6       1141258        124   1.600353e+12           9 public   GENERIC
-##   startTimeGmt startTimeLocal duration distance elevationGain elevationLoss
-## 1 1.600700e+12   1.600708e+12  3640221   300000            NA            NA
-## 2 1.600602e+12   1.600609e+12 15064570 12293220        200100        196800
-## 3 1.600523e+12   1.600530e+12 10382433  8360927         74500         74200
-## 4 1.600439e+12   1.600447e+12  5393830  1792890         42600         42500
-## 5 1.600362e+12   1.600369e+12  3626825  3492347         16000             0
-## 6 1.600353e+12   1.600360e+12  3359145   285000            NA            NA
-##   avgSpeed maxSpeed avgHr maxHr  calories startLongitude startLatitude
-## 1   0.0986   0.1122    NA    NA  2547.532             NA            NA
-## 2   0.8160   1.9315   144   176 16345.268       16.31524      48.20915
-## 3   0.8053   1.9557   117   161  8744.572       16.33986      48.34994
-## 4   0.3324   1.2475   155   176  4923.274       16.31587      48.21432
-## 5   0.9629   1.6364   138   163  3083.855        0.00000       0.00000
-## 6   0.1011   0.3524    NA    NA  2505.632             NA            NA
-##   aerobicTrainingEffect avgFractionalCadence maxFractionalCadence
-## 1                    NA               0.0000                    0
-## 2                   3.5               0.0000                    0
-## 3                   2.4               0.0000                    0
-## 4                   3.0               0.1875                    0
-## 5                   0.0               0.0000                    0
-## 6                    NA               0.0000                    0
-##   elapsedDuration movingDuration anaerobicTrainingEffect   deviceId
-## 1         3955901        3099653                      NA 3968818126
-## 2        16176575       15000179                     0.0 3968818126
-## 3        11319866       10356078                     0.0 3968818126
-## 4         5538505        5389603                     0.2 3968818126
-## 5         3629000        3611000                      NA 3825981698
-## 6         3585826        2858951                      NA 3968818126
-##   minTemperature maxTemperature minElevation maxElevation        locationName
-## 1             25             26           NA           NA                <NA>
-## 2             19             29        18480        95480              Vienna
-## 3             18             29        13980        32200          Korneuburg
-## 4             19             27        24920        54400              Vienna
-## 5             NA             NA          300         3420 City of Westminster
-## 6             26             27           NA           NA                <NA>
-##   maxVerticalSpeed lapCount endLongitude endLatitude activeSets totalSets
-## 1               NA       34           NA          NA         NA        NA
-## 2       0.43999939       25     16.25314    48.20399         NA        NA
-## 3       0.34000092       17     16.38793    48.38009         NA        NA
-## 4       0.08000183       18     16.31980    48.22264         NA        NA
-## 5       0.16000004        1           NA          NA         NA        NA
-## 6               NA       32           NA          NA         NA        NA
-##   totalReps purposeful autoCalcCalories favorite    pr elevationCorrected
-## 1        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 2        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 3        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 4        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 5        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 6        NA      FALSE            FALSE    FALSE FALSE              FALSE
-##   atpActivity parent maxRunCadence steps avgVerticalOscillation
-## 1       FALSE  FALSE            NA    NA                     NA
-## 2       FALSE  FALSE            NA    NA                     NA
-## 3       FALSE  FALSE            NA    NA                     NA
-## 4       FALSE  FALSE           104 15620                     NA
-## 5       FALSE  FALSE            NA    NA                     NA
-## 6       FALSE  FALSE            NA    NA                     NA
-##   avgGroundContactTime avgStrideLength vO2MaxValue avgVerticalRatio
-## 1                   NA              NA          NA               NA
-## 2                   NA              NA          72               NA
-## 3                   NA              NA          71               NA
-## 4                   NA        115.6389          58               NA
-## 5                   NA              NA          NA               NA
-## 6                   NA              NA          NA               NA
-##   avgGroundContactBalance avgDoubleCadence maxDoubleCadence avgPower
-## 1                      NA               NA               NA       NA
-## 2                      NA               NA               NA      260
-## 3                      NA               NA               NA      202
-## 4                      NA          172.375              208       NA
-## 5                      NA               NA               NA      212
-## 6                      NA               NA               NA       NA
-##   avgBikeCadence maxBikeCadence strokes normPower avgLeftBalance
-## 1             NA             NA    1198        NA             NA
-## 2             83            114   17968  296.0000          49.92
-## 3             82            107   12571  231.0000          49.90
-## 4             NA             NA      NA        NA             NA
-## 5             91            114       0  218.3049             NA
-## 6             NA             NA    1152        NA             NA
-##   avgRightBalance max20MinPower trainingStressScore intensityFactor
-## 1              NA            NA                  NA              NA
-## 2           50.08      375.1583               291.4           0.835
-## 3           50.10      242.7692               122.8           0.653
-## 4              NA            NA                  NA              NA
-## 5              NA      221.0525                  NA              NA
-## 6              NA            NA                  NA              NA
-##   lactateThresholdBpm lactateThresholdSpeed avgStrokes activeLengths avgSwolf
-## 1                  NA                    NA       23.0            60       74
-## 2                  NA                    NA         NA            NA       NA
-## 3                  NA                    NA         NA            NA       NA
-## 4                  NA                    NA         NA            NA       NA
-## 5                  NA                    NA         NA            NA       NA
-## 6                  NA                    NA       22.6            57       72
-##   poolLength avgStrokeDistance avgSwimCadence maxSwimCadence maxFtp workoutId
-## 1       5000               217             27             29     NA        NA
-## 2         NA                NA             NA             NA     NA        NA
-## 3         NA                NA             NA             NA     NA        NA
-## 4         NA                NA             NA             NA     NA        NA
-## 5         NA                NA             NA             NA     NA        NA
-## 6       5000               221             27             30     NA        NA
-##   decoDive parentId avgVerticalSpeed maxDepth avgDepth surfaceInterval
-## 1       NA       NA               NA       NA       NA              NA
-## 2       NA       NA               NA       NA       NA              NA
-## 3       NA       NA               NA       NA       NA              NA
-## 4       NA       NA               NA       NA       NA              NA
-## 5       NA       NA               NA       NA       NA              NA
-## 6       NA       NA               NA       NA       NA              NA
-##   floorsDescended bottomTime
-## 1              NA         NA
-## 2              NA         NA
-## 3              NA         NA
-## 4              NA         NA
-## 5              NA         NA
-## 6              NA         NA
+## Rows: 5,514
+## Columns: 89
+## $ activityId              <dbl> 5570974040, 5566524321, 5561266034, 5555881...
+## $ uuidMsb                 <dbl> 3.695224e+18, -5.212790e+18, 1.271356e+18, ...
+## $ uuidLsb                 <dbl> -7.098507e+18, -8.140623e+18, -5.522844e+18...
+## $ name                    <chr> "En piscine", "Vienna Cyclisme", "Korneubur...
+## $ activityType            <chr> "lap_swimming", "cycling", "cycling", "runn...
+## $ userProfileId           <int> 1141258, 1141258, 1141258, 1141258, 1141258...
+## $ timeZoneId              <int> 124, 124, 124, 124, 124, 124, 124, 124, 124...
+## $ beginTimestamp          <dbl> 1.600700e+12, 1.600602e+12, 1.600523e+12, 1...
+## $ eventTypeId             <int> 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9...
+## $ rule                    <chr> "public", "public", "public", "public", "pu...
+## $ sportType               <chr> "GENERIC", "CYCLING", "CYCLING", "RUNNING",...
+## $ startTimeGmt            <dbl> 1.600700e+12, 1.600602e+12, 1.600523e+12, 1...
+## $ startTimeLocal          <dbl> 1.600708e+12, 1.600609e+12, 1.600530e+12, 1...
+## $ duration                <dbl> 3640221, 15064570, 10382433, 5393830, 36268...
+## $ distance                <dbl> 300000, 12293220, 8360927, 1792890, 3492347...
+## $ elevationGain           <dbl> NA, 200100, 74500, 42600, 16000, NA, 61900,...
+## $ elevationLoss           <dbl> NA, 196800, 74200, 42500, 0, NA, 61100, 240...
+## $ avgSpeed                <dbl> 0.0986000, 0.8160000, 0.8053000, 0.3324000,...
+## $ maxSpeed                <dbl> 0.1122, 1.9315, 1.9557, 1.2475, 1.6364, 0.3...
+## $ avgHr                   <int> NA, 144, 117, 155, 138, NA, 140, 156, 140, ...
+## $ maxHr                   <int> NA, 176, 161, 176, 163, NA, 161, 186, 174, ...
+## $ calories                <dbl> 2547.53216, 16345.26802, 8744.57174, 4923.2...
+## $ startLongitude          <dbl> NA, 16.31524, 16.33986, 16.31587, 0.00000, ...
+## $ startLatitude           <dbl> NA, 48.20915, 48.34994, 48.21432, 0.00000, ...
+## $ aerobicTrainingEffect   <dbl> NA, 3.5, 2.4, 3.0, 0.0, NA, 2.9, 3.3, 2.8, ...
+## $ avgFractionalCadence    <dbl> 0.0000000, 0.0000000, 0.0000000, 0.1875000,...
+## $ maxFractionalCadence    <dbl> 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0...
+## $ elapsedDuration         <dbl> 3955901, 16176575, 11319866, 5538505, 36290...
+## $ movingDuration          <dbl> 3099653, 15000179, 10356078, 5389603, 36110...
+## $ anaerobicTrainingEffect <dbl> NA, 0.0, 0.0, 0.2, NA, NA, 0.0, 0.0, 0.0, N...
+## $ deviceId                <dbl> 3968818126, 3968818126, 3968818126, 3968818...
+## $ minTemperature          <int> 25, 19, 18, 19, NA, 26, 21, 23, 22, 26, 23,...
+## $ maxTemperature          <int> 26, 29, 29, 27, NA, 27, 30, 28, 32, 27, 32,...
+## $ minElevation            <dbl> NA, 18480, 13980, 24920, 300, NA, 12940, 25...
+## $ maxElevation            <dbl> NA, 95480, 32200, 54400, 3420, NA, 38160, 4...
+## $ locationName            <chr> NA, "Vienna", "Korneuburg", "Vienna", "City...
+## $ maxVerticalSpeed        <dbl> NA, 0.43999939, 0.34000092, 0.08000183, 0.1...
+## $ lapCount                <int> 34, 25, 17, 18, 1, 32, 16, 13, 15, 34, 19, ...
+## $ endLongitude            <dbl> NA, 16.25314, 16.38793, 16.31980, NA, NA, 1...
+## $ endLatitude             <dbl> NA, 48.20399, 48.38009, 48.22264, NA, NA, 4...
+## $ activeSets              <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ totalSets               <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ totalReps               <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ purposeful              <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F...
+## $ autoCalcCalories        <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F...
+## $ favorite                <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F...
+## $ pr                      <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F...
+## $ elevationCorrected      <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F...
+## $ atpActivity             <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F...
+## $ parent                  <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F...
+## $ maxRunCadence           <int> NA, NA, NA, 104, NA, NA, NA, 102, NA, NA, N...
+## $ steps                   <int> NA, NA, NA, 15620, NA, NA, NA, 10314, NA, N...
+## $ avgVerticalOscillation  <dbl> NA, NA, NA, NA, NA, NA, NA, 8.87, NA, NA, N...
+## $ avgGroundContactTime    <dbl> NA, NA, NA, NA, NA, NA, NA, 259.0, NA, NA, ...
+## $ avgStrideLength         <dbl> NA, NA, NA, 115.63892, NA, NA, NA, 110.2600...
+## $ vO2MaxValue             <int> NA, 72, 71, 58, NA, NA, 71, 58, 71, NA, 71,...
+## $ avgVerticalRatio        <dbl> NA, NA, NA, NA, NA, NA, NA, 7.98, NA, NA, N...
+## $ avgGroundContactBalance <dbl> NA, NA, NA, NA, NA, NA, NA, 48.31, NA, NA, ...
+## $ avgDoubleCadence        <dbl> NA, NA, NA, 172.37500, NA, NA, NA, 171.5937...
+## $ maxDoubleCadence        <int> NA, NA, NA, 208, NA, NA, NA, 205, NA, NA, N...
+## $ avgPower                <int> NA, 260, 202, NA, 212, NA, 263, NA, 259, NA...
+## $ avgBikeCadence          <int> NA, 83, 82, NA, 91, NA, 88, NA, 87, NA, 82,...
+## $ maxBikeCadence          <int> NA, 114, 107, NA, 114, NA, 109, NA, 108, NA...
+## $ strokes                 <int> 1198, 17968, 12571, NA, 0, 1152, 11208, NA,...
+## $ normPower               <dbl> NA, 296.0000, 231.0000, NA, 218.3049, NA, 2...
+## $ avgLeftBalance          <dbl> NA, 49.92, 49.90, NA, NA, NA, 49.92, NA, 49...
+## $ avgRightBalance         <dbl> NA, 50.08, 50.10, NA, NA, NA, 50.08, NA, 50...
+## $ max20MinPower           <dbl> NA, 375.1583, 242.7692, NA, 221.0525, NA, 2...
+## $ trainingStressScore     <dbl> NA, 291.4, 122.8, NA, NA, NA, 143.3, NA, 15...
+## $ intensityFactor         <dbl> NA, 0.835, 0.653, NA, NA, NA, 0.780, NA, 0....
+## $ lactateThresholdBpm     <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ lactateThresholdSpeed   <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ avgStrokes              <dbl> 23.0, NA, NA, NA, NA, 22.6, NA, NA, NA, 23....
+## $ activeLengths           <int> 60, NA, NA, NA, NA, 57, NA, NA, NA, 60, NA,...
+## $ avgSwolf                <int> 74, NA, NA, NA, NA, 72, NA, NA, NA, 75, NA,...
+## $ poolLength              <dbl> 5000, NA, NA, NA, NA, 5000, NA, NA, NA, 500...
+## $ avgStrokeDistance       <dbl> 217, NA, NA, NA, NA, 221, NA, NA, NA, 214, ...
+## $ avgSwimCadence          <int> 27, NA, NA, NA, NA, 27, NA, NA, NA, 27, NA,...
+## $ maxSwimCadence          <int> 29, NA, NA, NA, NA, 30, NA, NA, NA, 30, NA,...
+## $ maxFtp                  <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ workoutId               <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ decoDive                <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ parentId                <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ avgVerticalSpeed        <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ maxDepth                <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ avgDepth                <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ surfaceInterval         <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ floorsDescended         <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ bottomTime              <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
 \end{verbatim}
+
+\hypertarget{your-mission}{%
+\section{Your mission}\label{your-mission}}
+
+The data we will use as an example is quite messy, but it is a rather traditional tye of data that we will handle. However, you will face diverse type of data : time series, graphs, geospatial, panel,\ldots{} That will require different analytical tools but also different ways to handle those objects. To provide you with a taste of those challenges ahead, your mission will be the following :
+
+\begin{itemize}
+\tightlist
+\item
+  Select the most important metrics of the activities (distance, duration, speed, power, elevation, heart rate\ldots.) and create monthly time series out of it (you will have to aggregate it ; please choose wisely how to aggregate : simple average can be inaccurate for ratios). Pick 4 of them.
+\item
+  Learn by yourself the basics of time series and please describe for the chosen time series :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Draw the autocorrelation function
+  \item
+    Is there a trend ?
+  \item
+    Is there a seasonal pattern ?
+  \item
+    Are those series stationary ? With which level of confidence can you assert so ? Please use 2 different tests.
+  \end{itemize}
+\item
+  Prediction is the most common ML task for time series. Try the \texttt{prophet} and \texttt{auto.arima} algorithms to predict each time series 12 months ahead. What can you conclude ?
+\end{itemize}
 
 \hypertarget{intro_r}{%
 \chapter{Introduction to R}\label{intro_r}}
@@ -570,17 +589,18 @@ Now you can use all functions of this packages !
 ## loaded via a namespace (and not attached):
 ##  [1] tidyselect_1.1.0 xfun_0.17        haven_2.3.1      colorspace_1.4-1
 ##  [5] vctrs_0.3.4      generics_0.0.2   htmltools_0.5.0  yaml_2.2.1      
-##  [9] blob_1.2.1       rlang_0.4.7      pillar_1.4.6     glue_1.4.2      
-## [13] withr_2.2.0      DBI_1.1.0        dbplyr_1.4.4     modelr_0.1.8    
-## [17] readxl_1.3.1     lifecycle_0.2.0  munsell_0.5.0    gtable_0.3.0    
-## [21] cellranger_1.1.0 rvest_0.3.6      evaluate_0.14    knitr_1.29      
-## [25] class_7.3-17     fansi_0.4.1      broom_0.7.0      Rcpp_1.0.5      
-## [29] scales_1.1.1     backports_1.1.10 jsonlite_1.7.1   fs_1.5.0        
-## [33] hms_0.5.3        digest_0.6.25    stringi_1.5.3    bookdown_0.20   
-## [37] grid_4.0.2       cli_2.0.2        tools_4.0.2      magrittr_1.5    
-## [41] crayon_1.3.4     pkgconfig_2.0.3  ellipsis_0.3.1   xml2_1.3.2      
-## [45] reprex_0.3.0     lubridate_1.7.9  assertthat_0.2.1 rmarkdown_2.3   
-## [49] httr_1.4.2       rstudioapi_0.11  R6_2.4.1         compiler_4.0.2
+##  [9] utf8_1.1.4       blob_1.2.1       rlang_0.4.7      pillar_1.4.6    
+## [13] glue_1.4.2       withr_2.2.0      DBI_1.1.0        dbplyr_1.4.4    
+## [17] modelr_0.1.8     readxl_1.3.1     lifecycle_0.2.0  munsell_0.5.0   
+## [21] gtable_0.3.0     cellranger_1.1.0 rvest_0.3.6      evaluate_0.14   
+## [25] knitr_1.29       class_7.3-17     fansi_0.4.1      broom_0.7.0     
+## [29] Rcpp_1.0.5       scales_1.1.1     backports_1.1.10 jsonlite_1.7.1  
+## [33] fs_1.5.0         hms_0.5.3        digest_0.6.25    stringi_1.5.3   
+## [37] bookdown_0.20    grid_4.0.2       cli_2.0.2        tools_4.0.2     
+## [41] magrittr_1.5     crayon_1.3.4     pkgconfig_2.0.3  ellipsis_0.3.1  
+## [45] xml2_1.3.2       reprex_0.3.0     lubridate_1.7.9  assertthat_0.2.1
+## [49] rmarkdown_2.3    httr_1.4.2       rstudioapi_0.11  R6_2.4.1        
+## [53] compiler_4.0.2
 \end{verbatim}
 
 \begin{Shaded}
@@ -685,7 +705,7 @@ Now you can use all functions of this packages !
 ##         z$qr <- NULL
 ##     z
 ## }
-## <bytecode: 0x7f86369af408>
+## <bytecode: 0x7ff77bf384c0>
 ## <environment: namespace:stats>
 \end{verbatim}
 
@@ -881,23 +901,23 @@ Vectors are the basic data structure : it is a unidimensional collection of valu
 \end{Shaded}
 
 \begin{verbatim}
-##   [1] -1.21004842 -1.06121248  0.71634673  1.47637602  0.48728132 -1.40233045
-##   [7] -0.01020396 -1.00491601 -1.13058465 -0.51105332 -3.04697783 -0.41697855
-##  [13]  1.14776250 -0.06190428 -0.61406102  1.08143552  2.37724254  2.27646272
-##  [19]  0.91724004 -0.44129808  0.03188855 -0.89633876  0.18671548 -0.23189549
-##  [25]  1.67617991 -0.27757116  0.26018862  2.00163360 -1.41111960 -0.55119739
-##  [31]  1.42648442  0.73438772  0.86664661 -0.89074131  0.32450045  0.86402894
-##  [37] -1.85744581  0.82117312  0.20926134 -1.02316778 -0.69767865 -0.77886117
-##  [43] -0.42240714  0.41656734  0.51914181 -0.20057167  0.19494615  0.01393820
-##  [49] -0.99481747  0.54007011  0.49309055 -0.79606589 -2.36025571  0.48564480
-##  [55]  0.29072507 -0.38146633  0.56337763 -0.48490022  1.06052814  0.24571570
-##  [61]  0.46890216 -0.24452292 -0.92088724 -0.86546828 -0.18666685  0.78926829
-##  [67] -0.78086945  0.46444770 -0.76284691  0.61650581  0.59103079 -0.17137042
-##  [73]  0.12108668 -1.63122288 -0.80778850  1.06061406 -0.95744478  0.36101337
-##  [79]  0.05042920 -0.97059999 -1.80390869  0.15294386  0.32179016  1.11523338
-##  [85]  0.33365395 -1.17738912  1.46300597 -0.29402040 -0.06691599 -0.45963294
-##  [91]  0.46536078  1.06914660 -1.00272811 -1.26934158 -0.55375181 -0.09793410
-##  [97] -2.65666912 -0.76039332  0.33721873 -0.39925402
+##   [1]  0.06644765 -0.37065184 -1.32326150 -1.40127961  0.79345777 -0.13105132
+##   [7] -0.25594277  1.65543686 -0.94802878 -0.09756107  0.03999892 -0.25991512
+##  [13]  0.59439833  1.40121485  3.49949450 -0.18652854  0.84989038  1.23440042
+##  [19] -0.30683880 -0.85998799 -0.58377134  0.25928855 -0.01265825 -1.08218477
+##  [25] -1.66501167  0.52112825 -0.35318677  2.56592278  1.66932029 -0.89933037
+##  [31]  0.42312466  0.22735947 -1.99868060  2.52009656 -0.52833072  2.27434507
+##  [37]  2.44287111 -1.55803181  2.04463780 -0.81970083 -1.00870153 -0.51447334
+##  [43]  0.07256322  0.16796344 -0.41161008  0.39376677 -1.90245894  0.75309870
+##  [49] -0.30866139  1.37929629  1.39070479  1.43739464 -1.39097790  1.37947465
+##  [55]  0.07340296  0.41780054  1.68828661  0.45103363 -0.81716274 -0.48344504
+##  [61]  1.59846745 -0.35532663 -1.02584070 -0.40655655  1.81506124 -1.97851830
+##  [67] -0.96256394 -0.51891666  0.20912826  0.31885506 -0.58499058 -0.07470406
+##  [73] -0.81413364 -0.17736923  1.02623420 -1.49147693 -1.64772949  0.13474791
+##  [79]  0.62240371  1.08461682 -2.07195003  0.36155525 -0.85001664  0.28295415
+##  [85]  0.43032020  1.49322404 -1.08605036 -1.29218711 -0.05877985  0.86148635
+##  [91] -0.78399195 -0.61129091 -0.35475922 -1.73303491 -0.35639273  0.52109329
+##  [97]  0.53284393 -0.35243461  0.24444313  0.42672222
 \end{verbatim}
 
 \begin{Shaded}
@@ -907,12 +927,12 @@ Vectors are the basic data structure : it is a unidimensional collection of valu
 \end{Shaded}
 
 \begin{verbatim}
-##   [1] "u" "x" "a" "g" "m" "f" "a" "y" "p" "i" "n" "r" "i" "m" "d" "u" "c" "v"
-##  [19] "p" "k" "e" "d" "f" "n" "i" "h" "d" "h" "z" "f" "t" "s" "g" "t" "b" "m"
-##  [37] "a" "f" "a" "s" "z" "c" "u" "g" "s" "t" "t" "l" "g" "j" "g" "i" "v" "o"
-##  [55] "k" "n" "l" "l" "k" "d" "t" "m" "v" "p" "t" "z" "q" "t" "o" "d" "v" "j"
-##  [73] "l" "t" "h" "u" "m" "f" "q" "b" "c" "q" "s" "w" "j" "j" "s" "m" "o" "z"
-##  [91] "h" "n" "y" "d" "w" "f" "r" "z" "h" "e"
+##   [1] "s" "h" "j" "x" "l" "n" "e" "d" "d" "o" "g" "q" "a" "r" "k" "q" "h" "l"
+##  [19] "m" "d" "u" "v" "z" "h" "i" "k" "w" "v" "v" "i" "y" "l" "f" "q" "t" "v"
+##  [37] "e" "f" "e" "e" "v" "h" "h" "k" "k" "j" "s" "n" "m" "t" "y" "r" "e" "u"
+##  [55] "y" "u" "c" "n" "s" "h" "v" "t" "y" "p" "k" "a" "o" "l" "f" "h" "z" "l"
+##  [73] "u" "u" "w" "k" "u" "a" "s" "t" "e" "n" "p" "f" "o" "a" "p" "o" "d" "t"
+##  [91] "a" "x" "s" "n" "z" "x" "t" "o" "e" "f"
 \end{verbatim}
 
 You can access vector values with integer indexes (that are vector themselves). \textbf{Note :} unlike Python, the indexes start with the value 1, not 0 !
@@ -924,7 +944,7 @@ You can access vector values with integer indexes (that are vector themselves). 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "g"
+## [1] "x"
 \end{verbatim}
 
 \begin{Shaded}
@@ -934,7 +954,7 @@ You can access vector values with integer indexes (that are vector themselves). 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "u" "x" "a" "g"
+## [1] "s" "h" "j" "x"
 \end{verbatim}
 
 A vector can be \emph{named} meaning that each element has a name through which it can be accessed.
@@ -2087,11 +2107,11 @@ JSON are lists, and to iterate over list elements, you can either use \texttt{fo
 
 \begin{verbatim}
 ## List of 5
-##  $ : num [1:100] 0.653 0.839 0.952 0.781 0.758 ...
-##  $ : num [1:100] 1.305 2.453 0.972 2.419 1.907 ...
-##  $ : num [1:100] 2.38 3.31 2.65 3.27 3.2 ...
-##  $ : num [1:100] 4.95 3.46 4.23 5.08 5.37 ...
-##  $ : num [1:100] 4.53 6.16 5.43 5.09 3.46 ...
+##  $ : num [1:100] 0.87 0.986 1.128 0.914 1.04 ...
+##  $ : num [1:100] 2.13 2.46 1.78 1.71 1.84 ...
+##  $ : num [1:100] 3.49 2.6 1.47 3.24 2.8 ...
+##  $ : num [1:100] 4.3 3.65 4.69 4.03 4.61 ...
+##  $ : num [1:100] 5.14 4.4 6.89 4.85 3.69 ...
 \end{verbatim}
 
 \textbf{Attention :} be careful with the squared brackets
@@ -2104,21 +2124,21 @@ JSON are lists, and to iterate over list elements, you can either use \texttt{fo
 
 \begin{verbatim}
 ## [[1]]
-##   [1] 0.6534956 0.8394734 0.9520231 0.7810726 0.7577881 1.1833391 1.2953283
-##   [8] 1.1170205 0.7598093 0.9069834 1.0612687 0.4860967 0.9583442 1.2883162
-##  [15] 0.7559182 0.9321351 1.1605419 0.8560776 1.2296965 1.1961155 1.1452899
-##  [22] 0.8937648 1.1180562 1.1291864 1.1588141 0.7867302 1.2711314 0.8855429
-##  [29] 1.2287864 0.7456788 0.9652640 0.7649677 0.9147540 0.8360354 1.3852953
-##  [36] 1.0987498 0.9648034 0.6702452 0.8118263 0.8490696 1.1890466 1.0536951
-##  [43] 0.9466750 1.1516804 1.2437038 1.3202114 1.0162013 0.3732095 0.8947668
-##  [50] 1.1670457 1.0740586 0.9312860 1.1014046 1.2574607 0.8831380 1.2873086
-##  [57] 1.3694036 1.2518263 1.1654449 0.5834937 0.6536882 0.9924216 1.1499586
-##  [64] 1.1995749 1.4525548 0.9177919 1.0160229 0.7752616 1.0055312 0.9059316
-##  [71] 0.8091390 0.6507289 0.9291632 0.9774625 0.9732182 0.9829048 1.1303813
-##  [78] 1.0197155 0.8936495 0.7905860 1.1401793 1.1591278 1.2085776 1.3789252
-##  [85] 1.1331738 0.7921537 1.3730403 0.8314237 0.9845227 0.7082945 0.9509746
-##  [92] 1.1636481 1.0714989 0.9785293 1.0279219 1.0541376 1.1354783 0.8092468
-##  [99] 0.8652608 0.7311741
+##   [1] 0.8698922 0.9855696 1.1275356 0.9143010 1.0401444 1.1753487 1.2569269
+##   [8] 0.7546059 1.1637610 1.1922671 1.0442791 0.7805398 0.9202213 0.7790667
+##  [15] 1.0586499 1.3028850 0.8503477 1.1272942 1.1150135 0.8972296 1.2327237
+##  [22] 1.3012847 1.1312409 0.9795587 1.0020896 1.2741198 1.3574757 1.1454441
+##  [29] 1.0184827 0.6842692 0.6882959 0.8426286 0.9304516 0.9145730 1.0212102
+##  [36] 1.1126385 0.9790642 1.0786568 0.8416128 1.0240752 0.6488221 1.2865520
+##  [43] 1.1357279 1.2193107 0.9727213 0.7992228 1.0429577 1.0339433 1.1576357
+##  [50] 0.9511823 1.0164660 0.9024059 1.0092870 0.8460931 0.4819867 0.8265190
+##  [57] 0.7934446 0.8959070 0.9261423 1.2180073 0.9517475 1.2525245 0.9995272
+##  [64] 0.7767601 1.1141133 1.2294906 0.3624752 1.1635755 1.1387238 1.1361419
+##  [71] 0.9187508 1.0333073 1.2581904 1.1105624 0.9387423 1.0022803 1.0391250
+##  [78] 0.7858008 0.8904386 1.2509701 0.7903731 1.0756922 1.2326853 1.3173177
+##  [85] 1.1681208 0.8184754 1.2049275 0.8660067 1.1456330 0.8106469 0.8645045
+##  [92] 0.9964328 1.1781359 1.0022769 0.9203491 0.6103902 0.6330703 1.3491216
+##  [99] 0.8109877 0.9448941
 \end{verbatim}
 
 \begin{Shaded}
@@ -2128,21 +2148,21 @@ JSON are lists, and to iterate over list elements, you can either use \texttt{fo
 \end{Shaded}
 
 \begin{verbatim}
-##   [1] 0.6534956 0.8394734 0.9520231 0.7810726 0.7577881 1.1833391 1.2953283
-##   [8] 1.1170205 0.7598093 0.9069834 1.0612687 0.4860967 0.9583442 1.2883162
-##  [15] 0.7559182 0.9321351 1.1605419 0.8560776 1.2296965 1.1961155 1.1452899
-##  [22] 0.8937648 1.1180562 1.1291864 1.1588141 0.7867302 1.2711314 0.8855429
-##  [29] 1.2287864 0.7456788 0.9652640 0.7649677 0.9147540 0.8360354 1.3852953
-##  [36] 1.0987498 0.9648034 0.6702452 0.8118263 0.8490696 1.1890466 1.0536951
-##  [43] 0.9466750 1.1516804 1.2437038 1.3202114 1.0162013 0.3732095 0.8947668
-##  [50] 1.1670457 1.0740586 0.9312860 1.1014046 1.2574607 0.8831380 1.2873086
-##  [57] 1.3694036 1.2518263 1.1654449 0.5834937 0.6536882 0.9924216 1.1499586
-##  [64] 1.1995749 1.4525548 0.9177919 1.0160229 0.7752616 1.0055312 0.9059316
-##  [71] 0.8091390 0.6507289 0.9291632 0.9774625 0.9732182 0.9829048 1.1303813
-##  [78] 1.0197155 0.8936495 0.7905860 1.1401793 1.1591278 1.2085776 1.3789252
-##  [85] 1.1331738 0.7921537 1.3730403 0.8314237 0.9845227 0.7082945 0.9509746
-##  [92] 1.1636481 1.0714989 0.9785293 1.0279219 1.0541376 1.1354783 0.8092468
-##  [99] 0.8652608 0.7311741
+##   [1] 0.8698922 0.9855696 1.1275356 0.9143010 1.0401444 1.1753487 1.2569269
+##   [8] 0.7546059 1.1637610 1.1922671 1.0442791 0.7805398 0.9202213 0.7790667
+##  [15] 1.0586499 1.3028850 0.8503477 1.1272942 1.1150135 0.8972296 1.2327237
+##  [22] 1.3012847 1.1312409 0.9795587 1.0020896 1.2741198 1.3574757 1.1454441
+##  [29] 1.0184827 0.6842692 0.6882959 0.8426286 0.9304516 0.9145730 1.0212102
+##  [36] 1.1126385 0.9790642 1.0786568 0.8416128 1.0240752 0.6488221 1.2865520
+##  [43] 1.1357279 1.2193107 0.9727213 0.7992228 1.0429577 1.0339433 1.1576357
+##  [50] 0.9511823 1.0164660 0.9024059 1.0092870 0.8460931 0.4819867 0.8265190
+##  [57] 0.7934446 0.8959070 0.9261423 1.2180073 0.9517475 1.2525245 0.9995272
+##  [64] 0.7767601 1.1141133 1.2294906 0.3624752 1.1635755 1.1387238 1.1361419
+##  [71] 0.9187508 1.0333073 1.2581904 1.1105624 0.9387423 1.0022803 1.0391250
+##  [78] 0.7858008 0.8904386 1.2509701 0.7903731 1.0756922 1.2326853 1.3173177
+##  [85] 1.1681208 0.8184754 1.2049275 0.8660067 1.1456330 0.8106469 0.8645045
+##  [92] 0.9964328 1.1781359 1.0022769 0.9203491 0.6103902 0.6330703 1.3491216
+##  [99] 0.8109877 0.9448941
 \end{verbatim}
 
 \hypertarget{tidy-your-data}{%
@@ -2158,7 +2178,7 @@ The data will almost never come in a ready-to-use format. Wrangling the data, be
   \texttt{pivot\_wider()}, the reciprocate operation, which will convert rows into columns
 \end{itemize}
 
-For example, we can chose that an observation is the combination of an activity and a metric. This representation can be useful in some cases (see @ref(adv\_viz)).
+For example, we can chose that an observation is the combination of an activity and a metric. This representation can be useful in some cases (see \ref{multivar}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3641,19 +3661,19 @@ MLE is also used for machine learning/econometrics, especially when relationship
 ## 	Phillips-Perron Unit Root Test
 ## 
 ## data:  Xt
-## Dickey-Fuller Z(alpha) = -17.901, Truncation lag parameter = 3, p-value
-## = 0.09351
+## Dickey-Fuller Z(alpha) = -3.2269, Truncation lag parameter = 3, p-value
+## = 0.9229
 ## alternative hypothesis: stationary
 \end{verbatim}
 
-\hypertarget{multivariate-analysis-and-dimension-reduction}{%
-\chapter{Multivariate analysis and dimension reduction}\label{multivariate-analysis-and-dimension-reduction}}
-
 \hypertarget{multivar}{%
-\section{Multivariate analysis}\label{multivar}}
+\chapter{Multivariate analysis and dimension reduction}\label{multivar}}
 
-\hypertarget{adv_viz}{%
-\subsection{Advanced visualization}\label{adv_viz}}
+\hypertarget{multivariate-analysis}{%
+\section{Multivariate analysis}\label{multivariate-analysis}}
+
+\hypertarget{advanced-visualization}{%
+\subsection{Advanced visualization}\label{advanced-visualization}}
 
 \hypertarget{the-grammar-of-graphics}{%
 \subsubsection{The grammar of graphics}\label{the-grammar-of-graphics}}
@@ -3773,7 +3793,8 @@ A short list of most common geometries :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(distance,avgSpeed,}\DataTypeTok{color=}\NormalTok{activity_recoded))  }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_jitter}\NormalTok{()}\OperatorTok{+}
+\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(distance,avgSpeed,}\DataTypeTok{color=}\NormalTok{activity_recoded))  }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_jitter}\NormalTok{()}\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -3783,7 +3804,8 @@ A short list of most common geometries :
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# To }
-\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{avgSpeed,}\DataTypeTok{y=}\NormalTok{calories,}\DataTypeTok{size=}\NormalTok{duration,}\DataTypeTok{color=}\NormalTok{qual_distance,}\DataTypeTok{shape=}\NormalTok{qual_avgHr)) }\OperatorTok{+}\StringTok{ }
+\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{avgSpeed,}\DataTypeTok{y=}\NormalTok{calories,}\DataTypeTok{size=}\NormalTok{duration,}
+                     \DataTypeTok{color=}\NormalTok{qual_distance,}\DataTypeTok{shape=}\NormalTok{qual_avgHr)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_jitter}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(.}\OperatorTok{~}\StringTok{ }\NormalTok{activity_recoded,}\DataTypeTok{scales =} \StringTok{"free"}\NormalTok{)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
@@ -3795,7 +3817,8 @@ A short list of most common geometries :
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Or maybe}
-\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{avgSpeed,}\DataTypeTok{y=}\NormalTok{elevationGain,}\DataTypeTok{size=}\NormalTok{calories,}\DataTypeTok{color=}\NormalTok{duration)) }\OperatorTok{+}\StringTok{ }
+\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{avgSpeed,}\DataTypeTok{y=}\NormalTok{elevationGain,}
+                     \DataTypeTok{size=}\NormalTok{calories,}\DataTypeTok{color=}\NormalTok{duration)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_jitter}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{facet_grid}\NormalTok{(activity_recoded}\OperatorTok{~}\NormalTok{qual_distance,}\DataTypeTok{scales =} \StringTok{"free"}\NormalTok{ )}\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
@@ -3934,9 +3957,11 @@ Or you can even skip the standardization step thanks to facets :
 \begin{Highlighting}[]
 \CommentTok{# install.packages("ggpubr")}
 \KeywordTok{require}\NormalTok{(ggpubr)}
-\NormalTok{gg1 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(distance)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Distance distribution"}\NormalTok{)}\OperatorTok{+}
+\NormalTok{gg1 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(distance)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Distance distribution"}\NormalTok{)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
-\NormalTok{gg2 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{avgSpeed,}\DataTypeTok{y=}\NormalTok{elevationGain,}\DataTypeTok{size=}\NormalTok{calories,}\DataTypeTok{color=}\NormalTok{duration,}\DataTypeTok{size=}\NormalTok{distance)) }\OperatorTok{+}\StringTok{ }
+\NormalTok{gg2 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(dat_clean,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{avgSpeed,}\DataTypeTok{y=}\NormalTok{elevationGain,}
+                            \DataTypeTok{size=}\NormalTok{calories,}\DataTypeTok{color=}\NormalTok{duration,}\DataTypeTok{size=}\NormalTok{distance)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom_jitter}\NormalTok{() }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{facet_grid}\NormalTok{(activity_recoded}\OperatorTok{~}\NormalTok{qual_distance,}\DataTypeTok{scales =} \StringTok{"free"}\NormalTok{ ) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Beautiful but useless plot"}\NormalTok{)}\OperatorTok{+}
@@ -3998,8 +4023,8 @@ Side note : the \texttt{ggpairs()} function does a lot of computation and can ta
 
 \includegraphics{DataExploration_files/figure-latex/unnamed-chunk-80-1.pdf}
 
-\hypertarget{multivariate-analysis-and-dimension-reduction-1}{%
-\section{Multivariate analysis and dimension reduction}\label{multivariate-analysis-and-dimension-reduction-1}}
+\hypertarget{multivariate-analysis-and-dimension-reduction}{%
+\section{Multivariate analysis and dimension reduction}\label{multivariate-analysis-and-dimension-reduction}}
 
 In this section, we will focus on the bike activities, which have the highest number of metrics. However, before we can go further, we have to deal with missing data and scale them to avoid that the column with a large order of magnitude are over-weighted.
 
@@ -4292,6 +4317,15 @@ Let's do the same for categorical (maximum frequency), even though it is not man
 \end{Highlighting}
 \end{Shaded}
 
+Some of the variables contain only missing values (and cannot be imputed) \(\rightarrow\) we drop them
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{missing <-}\StringTok{ }\KeywordTok{which}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(dat_bike_imp,}\ControlFlowTok{function}\NormalTok{(xx) }\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(xx)))}\OperatorTok{>}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{  }\KeywordTok{names}\NormalTok{()}
+\NormalTok{dat_bike_imp <-}\StringTok{ }\KeywordTok{select}\NormalTok{(dat_bike_imp,}\OperatorTok{-}\NormalTok{missing)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{normalization}{%
 \subsection{Normalization}\label{normalization}}
 
@@ -4479,7 +4513,7 @@ The first thing is to have a look at the eignevalues to see how well the PCA cou
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-86-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-87-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4487,7 +4521,7 @@ The first thing is to have a look at the eignevalues to see how well the PCA cou
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-86-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-87-2.pdf}
 
 In our case, the first component bears 35\% of the total inertia and the second 15\%. Hence, the first factorial plane (the first 2 components) : let's look at how the variable correlate with them :
 
@@ -4497,7 +4531,7 @@ In our case, the first component bears 35\% of the total inertia and the second 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-87-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-88-1.pdf}
 
 What you can read at once on this plot is how important each variable is to construct the new variables. As a matter of fact, contribution, cos2 and coordinates are almost the same in PCA, meaning that the closer to the unit disc the coordinate is, the higher both contribution and quality of representation.
 
@@ -4525,7 +4559,7 @@ Let's check the correlation matrix to be sure about what we are reading here
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-88-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-89-1.pdf}
 
 How about the individuals ?
 
@@ -4535,7 +4569,7 @@ How about the individuals ?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-89-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-90-1.pdf}
 
 This graph is harder to read, but we still can identify outliers and understand what they are. Anyway in the top-right corner, those are long rides with a lot of ups and downs ! The most extreme is 380343030 which is another measurement error (indoor cycling with 34000 elevation meters !)
 
@@ -4564,6 +4598,8 @@ Dimension reduction aims to reduce the size of the data ; most of the time the g
 \item
   Avoid \href{https://en.wikipedia.org/wiki/Multicollinearity}{multicollinearity} in the features
 \end{itemize}
+
+Dimension reduction is, after normalization, a very common step to take prior training a machine learning algorithm.
 
 \hypertarget{use-the-results-of-the-pca}{%
 \subsection{Use the results of the PCA}\label{use-the-results-of-the-pca}}
@@ -4596,10 +4632,95 @@ PCA is designed only for continuous variables, but you can use other methods for
 \hypertarget{t-sne}{%
 \subsection{t-SNE}\label{t-sne}}
 
-t-SNE has a completely different approach to dimension reduction : it does not aim to preserve the total variance but rather the distances between the observations.
+\hypertarget{algorithm-description}{%
+\subsubsection{Algorithm description}\label{algorithm-description}}
+
+t-SNE has a completely different approach to dimension reduction : it does not aim to preserve the total variance, but rather the proximity between the observations.
+
+The algorithm has 3 steps :
+
+\begin{itemize}
+\tightlist
+\item
+  Compute the similarity between each pair of points using a gaussian distribution (instead of a raw euclidean distance) \(\Rightarrow\) n collections (distributions) of similarity scores in the high-dimensional space
+\item
+  Initiate a low-dimensional space and map all high-dimensional points on it. Compute the same pairwise similarities with Student distribution (hence the t in t-SNE) in this space \(\Rightarrow\) n collections (distributions) of similarity scores in the low-dimensional space
+\item
+  Gradually move the points in the low-dimensional space so that the sum of divergences between pairwise similarities in both spaces are minimal. The divergence is the \href{https://en.wikipedia.org/wiki/Kullback\%E2\%80\%93Leibler_divergence}{Kullback-Leibler} divergence between the 2 distributions of similarity scores
+\end{itemize}
+
+You can watch this very well done \href{https://www.youtube.com/watch?v=NEaUSP4YerM}{video} to understand how the algorithm precisely works
+
+How this similarity scores are computed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dd <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{xx=}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{),}\DataTypeTok{yy=}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{col=}\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{row_number}\NormalTok{()}\OperatorTok{==}\DecValTok{1}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"black"}\NormalTok{))}
+\NormalTok{dd }\OperatorTok{%>%}\StringTok{   }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(xx,yy,}\DataTypeTok{color=}\NormalTok{col)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{color=}\NormalTok{F) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-91-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dd }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{xx_ref=}\NormalTok{dd}\OperatorTok{$}\NormalTok{xx[}\DecValTok{1}\NormalTok{],}\DataTypeTok{yy_ref=}\NormalTok{dd}\OperatorTok{$}\NormalTok{yy[}\DecValTok{1}\NormalTok{],}
+              \DataTypeTok{euclid =}\NormalTok{ (yy_ref}\OperatorTok{-}\NormalTok{yy)}\OperatorTok{^}\DecValTok{2} \OperatorTok{+}\StringTok{ }\NormalTok{(yy_ref}\OperatorTok{-}\NormalTok{yy)}\OperatorTok{^}\DecValTok{2}\NormalTok{,}
+              \DataTypeTok{simil =} \DecValTok{100}\OperatorTok{*}\KeywordTok{dnorm}\NormalTok{(euclid)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(euclid,simil)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Distance and similarity to the first point"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-91-2.pdf}
+
+Pros and cons compared to PCA :
+
+\begin{itemize}
+\tightlist
+\item
+  Preserves non-linear relationships and is robust to outliers
+\item
+  Much more computationally costly
+\item
+  Starts with a PCA
+\end{itemize}
+
+\hypertarget{implementation-in-r}{%
+\subsubsection{Implementation in R}\label{implementation-in-r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# install.packages("Rtsne")}
+\KeywordTok{require}\NormalTok{(Rtsne)}
+\NormalTok{tsne <-}\StringTok{ }\KeywordTok{select}\NormalTok{(dat_bike_imp,}\KeywordTok{where}\NormalTok{(is.numeric)) }\OperatorTok{%>%}\StringTok{  }
+\StringTok{  }\KeywordTok{Rtsne}\NormalTok{(}\DataTypeTok{dims=}\DecValTok{2}\NormalTok{,}\DataTypeTok{max_iter=}\DecValTok{500}\NormalTok{,}\DataTypeTok{check_duplicates =}\NormalTok{ F)}
+\NormalTok{tsne}\OperatorTok{$}\NormalTok{Y }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(V1,V2)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Low dimensional representation by t-SNE"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-92-1.pdf}
+
+You can check this other extensive \href{https://www.analyticsvidhya.com/blog/2017/01/t-sne-implementation-r-python/}{blogpost} with use cases and also python implementation.
 
 \hypertarget{a-word-about-clustering}{%
 \subsection{A word about clustering}\label{a-word-about-clustering}}
+
+Clustering (or unsupervised machine learning) can also be considered as a dimension reduction technique, but which you operate on the observation rather than on the features. The aim of clustering techniques are to gather observations in homogeneous groups (wrt the features you observed).
+It can also be very effective to analyze and understand your data to check the characteristics of the sub-groups ; it can also be very insightful for business teams to have such ``categories'' they can relate with.
+
+\hypertarget{exercise}{%
+\subsection{Exercise}\label{exercise}}
+
+\begin{itemize}
+\tightlist
+\item
+  Interpret the results of the T-SNE embedding
+\end{itemize}
 
 \hypertarget{visualization-bonus-dashboards-and-reports}{%
 \section{Visualization bonus : dashboards and reports}\label{visualization-bonus-dashboards-and-reports}}
@@ -4636,7 +4757,7 @@ In the course material, you'll find one example for each package. You'll easily 
 \begin{Highlighting}[]
 \CommentTok{# install.packages("plotly")}
 \KeywordTok{require}\NormalTok{(plotly)}
-\KeywordTok{ggplotly}\NormalTok{(gg1)}
+\CommentTok{# ggplotly(gg1)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4651,11 +4772,11 @@ Example of leaflet :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{filter}\NormalTok{(dat,is_bike) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{leaflet}\OperatorTok{::}\KeywordTok{leaflet}\NormalTok{(}\DataTypeTok{data=}\NormalTok{.) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{leaflet}\OperatorTok{::}\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{lng =} \OperatorTok{~}\NormalTok{startLongitude,}\DataTypeTok{lat =} \OperatorTok{~}\NormalTok{startLatitude,}
-                             \DataTypeTok{popup =} \OperatorTok{~}\NormalTok{activityId) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{leaflet}\OperatorTok{::}\KeywordTok{addTiles}\NormalTok{()}
+\CommentTok{# filter(dat,is_bike) %>%}
+\CommentTok{#   leaflet::leaflet(data=.) %>%}
+\CommentTok{#   leaflet::addMarkers(lng = ~startLongitude,lat = ~startLatitude,}
+\CommentTok{#                              popup = ~activityId) %>%}
+\CommentTok{#   leaflet::addTiles()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4779,7 +4900,7 @@ But you have to check your residuals !
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-93-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-96-1.pdf}
 Those are pretty long tailed, which might reflect some outliers or a wrong functional specification !
 
 \hypertarget{the-frischwaugh-theorem-and-the-omitted-variable-bias}{%
@@ -5106,9 +5227,9 @@ We can implement this method easily
 \item
   From the last functional form used, design a graphic that shows the final impact of an increase in power to the average speed, taking the distance into account.
 \item
-  Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates\ldots)
+  Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates\ldots). Feature importance can be very important. Example : to prepare for competitions (that take place between may-september), I always follow a structured training plan at some point. This has a direct impact on the performances. Can you identify when this preparation starts and how to integrate it in the model ? This closely linked to your assignment ;)
 \item
-  Develop a model that will help you identify the measurement errors (thanks to residuals)
+  Can you identify the measurement errors (thanks to residuals)
 \end{itemize}
 
 \hypertarget{logitic-regression}{%

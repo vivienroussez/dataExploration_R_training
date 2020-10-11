@@ -32,11 +32,30 @@ What's on our agenda :
 
 ## The data science workflow
 
-A popular schematic overview of a the workflow
+A very synthetic schematic of the data science workflow
 
 ![](img/data-science-explore.png)
 
-The iteration loop has to be done taking the business perspective / constraint into account !
+To which you could add **deployment** in some cases.
+
+## About the interactions with other colleagues
+
+The previous iteration loop has to be done taking the business perspective / constraint into account !
+More generally, the role of the data scientist is pretty central in use cases development. You will collaborate with other data/IT and business professionals :
+
+- Data engineers
+- Data architects
+- Software engineers (DevOps)
+- Machine learning engineers
+- Data analysts
+- Data strategists
+
+- Program managers / product owners
+- Business teams
+
+
+And one challenge is to have all those different profiles working for one common goal and *communicate* together. My experience is that the data scientist can really put some oil in the machinery, aand one of her/his duty is to bridge the gap between business and IT worlds.
+
 
 ## Resources
 

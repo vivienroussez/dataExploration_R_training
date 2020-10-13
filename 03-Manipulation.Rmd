@@ -199,6 +199,18 @@ dat %>% summarise(avg_distance=mean(distance,na.rm = T))
 dat %>% summarise(median_distance=median(distance,na.rm = T))
 ```
 
+### Join with other tables
+
+Thanks to the `xxx_join(table_a,table_b)` functions you can combine several dataframes into one, matching the rows on chosen columns. 
+
+- `left_join()` will keep the rows coming from table_a
+- `right_join()` will keep the rows coming from table_b
+- `inner_join()` will keep the rows present in both tables
+- `full_join()` will keep the rows from both tables
+- `anti_join()` will keep the rows from table_a that are not in table_b
+
+![](img/dplyr-joins.png)
+
 ### Manipulate several data in the same time
 
 With all previous verbs above, you can use the `across` function to apply the same operation over a bunch of columns that you can select depending a simple enumeration or a condition (on their type or their name). This is a really powerful tool !

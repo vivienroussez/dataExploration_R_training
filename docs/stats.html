@@ -278,14 +278,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This session aims to give a practical guide to explore a dataset you’ve never seen before and to understand some of the key statistical concepts. You will learn to describe each <em>variable</em> of a dataset and assess the strength of the relationship between two variables whatever their types may be. For that, we’ll see how to visually explore a dataset and to quantify what the graphics show. We will also give an overview of what statistical inference is and what it can be used for.</p>
 <p>This section covers the following topics :</p>
 <ul>
-<li><p>Definitions</p></li>
-<li><p>Descriptive statistics</p></li>
-<li><p>Univariate statistics</p></li>
-<li><p>Bivariate statistics</p></li>
-<li><p>Statistical inference :</p></li>
-<li><p>The statistical model</p></li>
-<li><p>Main theorems to be aware of</p></li>
-<li><p>Introduction to statistical tests</p></li>
+<li>Definitions</li>
+<li>Descriptive statistics
+<ul>
+<li>Univariate statistics</li>
+<li>Bivariate statistics</li>
+</ul></li>
+<li>Statistical inference :
+<ul>
+<li>The statistical model</li>
+<li>Main theorems to be aware of</li>
+<li>Introduction to statistical tests</li>
+</ul></li>
 </ul>
 <div id="definitions" class="section level2">
 <h2><span class="header-section-number">5.1</span> Definitions</h2>
@@ -553,11 +557,13 @@ Quantile-based statistics are said to be <strong>robust</strong> because much le
 </div>
 <div id="exercises" class="section level4">
 <h4><span class="header-section-number">5.2.1.4</span> Exercises :</h4>
-<p>What can you tell about the distance variable ?
-- Draw the distribution of this variable. How much is the maximum distance of the 20% shortest activities ; the minimum distance of the 5% longest activities ?
-- What unit do you think it is ? Did you check the maximum value ?
-- Is there more dispersion in the distance or the average power ? using the <code>facet_wrap</code> function of <code>ggplot2</code>, compare the distributions of distance and avgPower.
-- I want to group activities in 5 categories based on the distance. This operation is called discretization (very useful for choropleth maps). Search for available methods, and apply some of them. Which one is best suited to this variable ? Which one should you avoid ?</p>
+<p>What can you tell about the distance variable ?</p>
+<ul>
+<li>Draw the distribution of this variable. How much is the maximum distance of the 20% shortest activities ; the minimum distance of the 5% longest activities ?</li>
+<li>What unit do you think it is ? Did you check the maximum value ?</li>
+<li>Is there more dispersion in the distance or the average power ? using the <code>facet_wrap</code> function of <code>ggplot2</code>, compare the distributions of distance and avgPower.</li>
+<li>I want to group activities in 5 categories based on the distance. This operation is called discretization (very useful for choropleth maps). Search for available methods, and apply some of them. Which one is best suited to this variable ? Which one should you avoid ?</li>
+</ul>
 </div>
 </div>
 <div id="categorical-variables" class="section level3">
@@ -1102,8 +1108,8 @@ In this example, I simulate a time series and run the Phillips-Perron test. The 
 ## 	Phillips-Perron Unit Root Test
 ## 
 ## data:  Xt
-## Dickey-Fuller Z(alpha) = -1.407, Truncation lag parameter = 3, p-value
-## = 0.9799
+## Dickey-Fuller Z(alpha) = -10.732, Truncation lag parameter = 3, p-value
+## = 0.4931
 ## alternative hypothesis: stationary</code></pre>
 
 </div>

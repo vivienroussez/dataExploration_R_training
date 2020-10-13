@@ -12,13 +12,13 @@ This section covers the following topics :
 
 - Definitions
 - Descriptive statistics
-- Univariate statistics
-- Bivariate statistics
+    + Univariate statistics
+    + Bivariate statistics
 
 - Statistical inference :
-- The statistical model
-- Main theorems to be aware of
-- Introduction to statistical tests
+    + The statistical model
+    + Main theorems to be aware of
+    + Introduction to statistical tests
 
 ## Definitions
 
@@ -152,6 +152,7 @@ ggplot(dat,aes(distance)) + geom_histogram() + scale_x_log10() + theme_minimal()
 #### Exercises :
 
 What can you tell about the distance variable ?
+
 - Draw the distribution of this variable. How much is the maximum distance of the 20% shortest activities ; the minimum distance of the 5% longest activities ? 
 - What unit do you think it is ? Did you check the maximum value ?
 - Is there more dispersion in the distance or the average power ? using the `facet_wrap` function of `ggplot2`, compare the distributions of distance and avgPower.

@@ -152,6 +152,8 @@ Syntax            | Condition
 %in%  c(...)      |  Is in this list of values
 $>, >=$   $<, <=$ |  Greater/less than 
 ! (x %in% c(...)) |  Not in the list
+&                 | And
+\|                | Or
 
 ### Mutate
 

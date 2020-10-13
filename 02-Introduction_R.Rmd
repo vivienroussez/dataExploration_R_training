@@ -46,9 +46,9 @@ R's core relies in data manipulation and statistical analysis. But the community
 
 ### Quick presentation of the ecosystem
 
-The core functionalities are available with base R on [CRAN](https://cran.r-project.org/). On top of that, you can install several IDEs, the most popular ones being [Rstudio](https://rstudio.com/), [jupyter](https://jupyter.org/) or [VSCode](https://code.visualstudio.com/)
+The core functionalities are available with base R on [CRAN](https://cran.r-project.org/). On top of that, you can install several IDEs, the most popular ones being [Rstudio](https://rstudio.com/), [Jupyter](https://jupyter.org/) or [VSCode](https://code.visualstudio.com/)
 
-For this training, we will use the [R kernel](https://code.visualstudio.com/) of google collabs, but for many purposes, you'll have to use another IDE (shiny, markdown...). This kernel comes with basics packages AND the **tidyverse**
+For this training, we will use the [R kernel](https://colab.research.google.com/#create=true&language=r) of google collabs, but for many purposes, you'll have to use another IDE (shiny, markdown...). This kernel comes with basics packages AND the **tidyverse**
 
 To add features to R, you'll have then to install [**packages**](https://cran.r-project.org/). Generally, when facing a problem (eg : I have to implement a naive Bayes estimator), you google it adding r at the beginning of the query and you'll get the name of the packages that allow you to do that. Then you can install and activate it.
 
@@ -290,3 +290,5 @@ Ok, that's it, I have almost all that I wanted ! We'll cover the rest at the end
 #### Exercise
 
 On the `iris` dataset, use the `kmeans` function to cluster the flowers with respect to Sepal.Length and Petal.Length and try to find your way in the resulting object.
+
+If you want to know more about the kmeans algorithm, you can check [this video](https://www.youtube.com/watch?v=4b5d3muPQmA)

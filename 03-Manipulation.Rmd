@@ -210,6 +210,20 @@ Thanks to the `xxx_join(table_a,table_b)` functions you can combine several data
 - `anti_join()` will keep the rows from table_a that are not in table_b
 
 ![](img/dplyr-joins.png)
+In the following code, we first compute a summary of distance and power for each combination of activity_recoded and deviceId and combine it together with the initial dataframe in order to compute a "distance percentage" for each activity, as the activity distance divided by the total distance recorded for the same type of activity and with the same device.
+
+```{r}
+agg <- dat %>%
+  group_by(activity_recoded,deviceId) %>%
+  summarise(total_distance=sum(distance,na.rm = T),
+            avgPower = mean(avgPower,na.rm=T))
+dat %>%
+  select(distance,activityId,activity_recoded,deviceId) %>%
+  left_join(agg,by=c("activity_recoded","deviceId")) %>%
+  mutate(distance_pct = 100*distance/total_distance) %>%
+  head()
+```
+
 
 ### Manipulate several data in the same time
 

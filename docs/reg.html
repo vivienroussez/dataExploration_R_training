@@ -302,8 +302,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="img/ols-regression-geometry.png" />
 ### Implementation and diagnostics</p>
 <p>To implement a linear regression with R, we use the lm function :</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="reg.html#cb241-1"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span>avgPower <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span>distance <span class="op">+</span><span class="st"> </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower, <span class="dt">data=</span>dat_bike)</span>
-<span id="cb241-2"><a href="reg.html#cb241-2"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="reg.html#cb243-1"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span>avgPower <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span>distance <span class="op">+</span><span class="st"> </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower, <span class="dt">data=</span>dat_bike)</span>
+<span id="cb243-2"><a href="reg.html#cb243-2"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = avgSpeed ~ avgPower + avgBikeCadence + distance + 
@@ -343,18 +343,18 @@ Meaning that the increase of <span class="math inline">\(x_1\)</span> by one uni
 We can therefore perform statistical tests following the previous methodology (see @ref(stat_inf).</p>
 <p>The most common test is the Student test which tests the null hypothesis <span class="math inline">\(b_i=0\)</span>. This allows to check whether a regressor has a significant effect on the target variable or not.</p>
 <p>But you have to check your residuals !</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="reg.html#cb243-1"></a><span class="kw">residuals</span>(reg) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb243-2"><a href="reg.html#cb243-2"></a><span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">res=</span>.) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb243-3"><a href="reg.html#cb243-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(res)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-96-1.png" width="672" />
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="reg.html#cb245-1"></a><span class="kw">residuals</span>(reg) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb245-2"><a href="reg.html#cb245-2"></a><span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">res=</span>.) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb245-3"><a href="reg.html#cb245-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(res)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-97-1.png" width="672" />
 Those are pretty long tailed, which might reflect some outliers or a wrong functional specification !</p>
 </div>
 <div id="the-frischwaugh-theorem-and-the-omitted-variable-bias" class="section level3">
 <h3><span class="header-section-number">7.1.3</span> The Frisch–Waugh Theorem and the omitted variable bias</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem">Frisch-Waugh theorem</a> tells us that adding a variable as regressor ensures that our estimates controls for the effect of this variable. In other words, you can interpret the coefficients’ values <em>ceteris paribus</em> (other things equal).</p>
 <p>This also means that if you omit a variable, the coefficient of the other variables are likely to be biased, because you did not take an important variable into account. Back to our example, we can add the elevationGain variable and check what happens :</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="reg.html#cb244-1"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span>avgPower <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span>distance <span class="op">+</span><span class="st"> </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower <span class="op">+</span><span class="st"> </span>elevationGain, <span class="dt">data=</span>dat_bike)</span>
-<span id="cb244-2"><a href="reg.html#cb244-2"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="reg.html#cb246-1"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span>avgPower <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span>distance <span class="op">+</span><span class="st"> </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower <span class="op">+</span><span class="st"> </span>elevationGain, <span class="dt">data=</span>dat_bike)</span>
+<span id="cb246-2"><a href="reg.html#cb246-2"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = avgSpeed ~ avgPower + avgBikeCadence + distance + 
@@ -397,9 +397,9 @@ Those are pretty long tailed, which might reflect some outliers or a wrong funct
 </ul>
 <p>Example with 2 variables <span class="math inline">\(y=b_1x_1 + b_2x_2 + b_3x_1^2 + b_4x_1x_2 + \epsilon\)</span></p>
 <p>In this case : <span class="math inline">\(\dfrac{\partial y}{\partial x1} = b_1+2b_3x_1+b_4x_2\)</span></p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="reg.html#cb246-1"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span><span class="st"> </span>avgPower <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(avgPower<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span></span>
-<span id="cb246-2"><a href="reg.html#cb246-2"></a><span class="st">             </span>distance <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(avgPower<span class="op">*</span>distance)<span class="op">+</span><span class="st">  </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower , <span class="dt">data=</span>dat_bike)</span>
-<span id="cb246-3"><a href="reg.html#cb246-3"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="reg.html#cb248-1"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span><span class="st"> </span>avgPower <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(avgPower<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span></span>
+<span id="cb248-2"><a href="reg.html#cb248-2"></a><span class="st">             </span>distance <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(avgPower<span class="op">*</span>distance)<span class="op">+</span><span class="st">  </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower , <span class="dt">data=</span>dat_bike)</span>
+<span id="cb248-3"><a href="reg.html#cb248-3"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = avgSpeed ~ avgPower + I(avgPower^2) + avgBikeCadence + 
@@ -427,8 +427,8 @@ Those are pretty long tailed, which might reflect some outliers or a wrong funct
 ##   (1870 observations deleted due to missingness)
 ## Multiple R-squared:  0.8372,	Adjusted R-squared:  0.8354 
 ## F-statistic: 451.1 on 7 and 614 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="reg.html#cb248-1"></a>reg_full &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span>(avgPower <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span>distance <span class="op">+</span><span class="st"> </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower <span class="op">+</span><span class="st"> </span>elevationGain)<span class="op">^</span><span class="dv">2</span>, <span class="dt">data=</span>dat_bike)</span>
-<span id="cb248-2"><a href="reg.html#cb248-2"></a><span class="kw">summary</span>(reg_full)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="reg.html#cb250-1"></a>reg_full &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span>(avgPower <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span>distance <span class="op">+</span><span class="st"> </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower <span class="op">+</span><span class="st"> </span>elevationGain)<span class="op">^</span><span class="dv">2</span>, <span class="dt">data=</span>dat_bike)</span>
+<span id="cb250-2"><a href="reg.html#cb250-2"></a><span class="kw">summary</span>(reg_full)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = avgSpeed ~ (avgPower + avgBikeCadence + distance + 
@@ -483,7 +483,7 @@ Regarding regression, avoiding overfitting can be done with variable selection :
 </ul>
 <p>The quality of each model is determined by the <a href="https://en.wikipedia.org/wiki/Akaike_information_criterion">AIC</a> or <a href="https://en.wikipedia.org/wiki/Bayesian_information_criterion">BIC</a> which are a function of the opposite of the log-likelihood (because OLS can also be estimated with MLE) and the number of parameters. The lower this number, the better the model.</p>
 <p>We can implement this method easily</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="reg.html#cb250-1"></a>selection &lt;-<span class="st"> </span><span class="kw">step</span>(reg_full)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="reg.html#cb252-1"></a>selection &lt;-<span class="st"> </span><span class="kw">step</span>(reg_full)</span></code></pre></div>
 <pre><code>## Start:  AIC=1219.11
 ## avgSpeed ~ (avgPower + avgBikeCadence + distance + avgHr + max20MinPower + 
 ##     elevationGain)^2
@@ -554,7 +554,7 @@ Regarding regression, avoiding overfitting can be done with variable selection :
 ## - avgBikeCadence:max20MinPower  1   1102.37 7083.5 1290.6
 ## - avgPower:avgBikeCadence       1   1747.29 7728.4 1330.4
 ## - avgBikeCadence:distance       1   2673.93 8655.1 1382.1</code></pre>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="reg.html#cb252-1"></a><span class="kw">summary</span>(selection)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="reg.html#cb254-1"></a><span class="kw">summary</span>(selection)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = avgSpeed ~ avgPower + avgBikeCadence + distance + 
@@ -622,8 +622,8 @@ Regarding regression, avoiding overfitting can be done with variable selection :
 <div id="implementation-in-r-and-interpretation" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> Implementation in R and interpretation</h3>
 <p>In R, we use the <code>glm</code> function while specifying the family. We model the probability of an activity to be bike or something else, which is a binary variable.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="reg.html#cb254-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(is_bike<span class="op">~</span>distance<span class="op">+</span>duration<span class="op">+</span>elevationGain<span class="op">+</span>avgSpeed<span class="op">+</span>avgHr,<span class="dt">data=</span>dat_clean,<span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb254-2"><a href="reg.html#cb254-2"></a><span class="kw">summary</span>(logit)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="reg.html#cb256-1"></a>logit &lt;-<span class="st"> </span><span class="kw">glm</span>(is_bike<span class="op">~</span>distance<span class="op">+</span>duration<span class="op">+</span>elevationGain<span class="op">+</span>avgSpeed<span class="op">+</span>avgHr,<span class="dt">data=</span>dat_clean,<span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb256-2"><a href="reg.html#cb256-2"></a><span class="kw">summary</span>(logit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = is_bike ~ distance + duration + elevationGain + 
@@ -658,9 +658,9 @@ For instance, adding one more kilometer to the average distance multiplies the p
 <div id="goodness-of-fit" class="section level3">
 <h3><span class="header-section-number">7.2.3</span> Goodness of fit</h3>
 <p>As you might have noticed, there is no <span class="math inline">\(R^2\)</span> or RMSE in our case, just the AIC (which only allows you to compare different models, not know how good the model is). What we can do is check the fitted values of the model and the actual values</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="reg.html#cb256-1"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(logit,dat_clean,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb256-2"><a href="reg.html#cb256-2"></a>pred_bin &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(pred<span class="op">&gt;</span>.<span class="dv">5</span>)</span>
-<span id="cb256-3"><a href="reg.html#cb256-3"></a><span class="kw">table</span>(pred_bin,dat_clean<span class="op">$</span>is_bike)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="reg.html#cb258-1"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(logit,dat_clean,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb258-2"><a href="reg.html#cb258-2"></a>pred_bin &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(pred<span class="op">&gt;</span>.<span class="dv">5</span>)</span>
+<span id="cb258-3"><a href="reg.html#cb258-3"></a><span class="kw">table</span>(pred_bin,dat_clean<span class="op">$</span>is_bike)</span></code></pre></div>
 <pre><code>##         
 ## pred_bin FALSE TRUE
 ##        0  1418  413
@@ -674,45 +674,6 @@ You can derive other goodness of fit metrics from the previous <strong>confusion
 </ul>
 <p><img src="img/conf_matrix.png" /></p>
 <p>Depending on your business use case, you will focus more on one or the other metric. You will cover this in more detail durinng the machine learning week :)</p>
-
-<table>
-<thead>
-<tr class="header">
-<th>Syntax</th>
-<th>Condition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>==</td>
-<td>Equality test</td>
-</tr>
-<tr class="even">
-<td>!=</td>
-<td>Different than</td>
-</tr>
-<tr class="odd">
-<td>%in% c(…)</td>
-<td>Is in this list of values</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(&gt;, &gt;=\)</span> <span class="math inline">\(&lt;, &lt;=\)</span></td>
-<td>Greater/less than</td>
-</tr>
-<tr class="odd">
-<td>! (x %in% c(…))</td>
-<td>Not in the list</td>
-</tr>
-<tr class="even">
-<td>&amp;</td>
-<td>And</td>
-</tr>
-<tr class="odd">
-<td>|</td>
-<td>Or</td>
-</tr>
-</tbody>
-</table>
 
 </div>
 </div>

@@ -200,7 +200,7 @@ table(dat$activityType) %>%
   prop.table()*100 
 ```
 
-Another solution is to use what you've learned in the previous section (\@ref()) : aggregation !
+Another solution is to use what you've learned in the previous section (\@ref(manip)) : aggregation !
 
 ```{r}
 group_by(dat,activityType) %>% 

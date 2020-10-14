@@ -659,18 +659,42 @@ Let’s extract the last 3 characters of “hello world”</p>
 <li><code>full_join()</code> will keep the rows from both tables</li>
 <li><code>anti_join()</code> will keep the rows from table_a that are not in table_b</li>
 </ul>
-<p><img src="img/dplyr-joins.png" /></p>
+<p><img src="img/dplyr-joins.png" />
+In the following code, we first compute a summary of distance and power for each combination of activity_recoded and deviceId and combine it together with the initial dataframe in order to compute a “distance percentage” for each activity, as the activity distance divided by the total distance recorded for the same type of activity and with the same device.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="manip.html#cb100-1"></a>agg &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span></span>
+<span id="cb100-2"><a href="manip.html#cb100-2"></a><span class="st">  </span><span class="kw">group_by</span>(activity_recoded,deviceId) <span class="op">%&gt;%</span></span>
+<span id="cb100-3"><a href="manip.html#cb100-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total_distance=</span><span class="kw">sum</span>(distance,<span class="dt">na.rm =</span> T),</span>
+<span id="cb100-4"><a href="manip.html#cb100-4"></a>            <span class="dt">avgPower =</span> <span class="kw">mean</span>(avgPower,<span class="dt">na.rm=</span>T))</span>
+<span id="cb100-5"><a href="manip.html#cb100-5"></a>dat <span class="op">%&gt;%</span></span>
+<span id="cb100-6"><a href="manip.html#cb100-6"></a><span class="st">  </span><span class="kw">select</span>(distance,activityId,activity_recoded,deviceId) <span class="op">%&gt;%</span></span>
+<span id="cb100-7"><a href="manip.html#cb100-7"></a><span class="st">  </span><span class="kw">left_join</span>(agg,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;activity_recoded&quot;</span>,<span class="st">&quot;deviceId&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb100-8"><a href="manip.html#cb100-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">distance_pct =</span> <span class="dv">100</span><span class="op">*</span>distance<span class="op">/</span>total_distance) <span class="op">%&gt;%</span></span>
+<span id="cb100-9"><a href="manip.html#cb100-9"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
+<pre><code>##   distance activityId activity_recoded   deviceId total_distance avgPower
+## 1   300000 5570974040             Swim 3968818126       55009104      NaN
+## 2 12293220 5566524321             Bike 3968818126     1419582250 241.7049
+## 3  8360927 5561266034             Bike 3968818126     1419582250 241.7049
+## 4  1792890 5555881653              Run 3968818126      453582639      NaN
+## 5  3492347 5551811953             Bike 3825981698      166719556 228.2449
+## 6   285000 5551052200             Swim 3968818126       55009104      NaN
+##   distance_pct
+## 1    0.5453643
+## 2    0.8659745
+## 3    0.5889710
+## 4    0.3952731
+## 5    2.0947434
+## 6    0.5180961</code></pre>
 </div>
 <div id="manipulate-several-data-in-the-same-time" class="section level3">
 <h3><span class="header-section-number">4.2.7</span> Manipulate several data in the same time</h3>
 <p>With all previous verbs above, you can use the <code>across</code> function to apply the same operation over a bunch of columns that you can select depending a simple enumeration or a condition (on their type or their name). This is a really powerful tool !</p>
 <p>Example : we will convert all columns that are identifiers as character variables because the numbers have no meaning</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="manip.html#cb100-1"></a>dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb100-2"><a href="manip.html#cb100-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="kw">c</span>(<span class="kw">contains</span>(<span class="st">&quot;Id&quot;</span>),<span class="kw">contains</span>(<span class="st">&quot;uuid&quot;</span>)),</span>
-<span id="cb100-3"><a href="manip.html#cb100-3"></a>                as.character))</span>
-<span id="cb100-4"><a href="manip.html#cb100-4"></a><span class="co"># Other stupid examples</span></span>
-<span id="cb100-5"><a href="manip.html#cb100-5"></a>dat <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise</span>(<span class="kw">across</span>(<span class="kw">where</span>(is.numeric),</span>
-<span id="cb100-6"><a href="manip.html#cb100-6"></a>                          <span class="cf">function</span>(xx) <span class="kw">sum</span>(xx,<span class="dt">na.rm=</span>T)))</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="manip.html#cb102-1"></a>dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb102-2"><a href="manip.html#cb102-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="kw">c</span>(<span class="kw">contains</span>(<span class="st">&quot;Id&quot;</span>),<span class="kw">contains</span>(<span class="st">&quot;uuid&quot;</span>)),</span>
+<span id="cb102-3"><a href="manip.html#cb102-3"></a>                as.character))</span>
+<span id="cb102-4"><a href="manip.html#cb102-4"></a><span class="co"># Other stupid examples</span></span>
+<span id="cb102-5"><a href="manip.html#cb102-5"></a>dat <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise</span>(<span class="kw">across</span>(<span class="kw">where</span>(is.numeric),</span>
+<span id="cb102-6"><a href="manip.html#cb102-6"></a>                          <span class="cf">function</span>(xx) <span class="kw">sum</span>(xx,<span class="dt">na.rm=</span>T)))</span></code></pre></div>
 <pre><code>##   beginTimestamp startTimeGmt startTimeLocal    duration    distance
 ## 1   8.021486e+15 8.036783e+15   8.036814e+15 22850917079 10693637146
 ##   elevationGain elevationLoss avgSpeed maxSpeed  avgHr  maxHr calories
@@ -731,48 +755,48 @@ You will have to :</p>
 <div id="one-tool-you-will-need-lapply" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> One tool you will need : <code>lapply()</code></h3>
 <p>JSON are lists, and to iterate over list elements, you can either use <code>for</code> loops, which is highly <em>not recommended</em> (R is no good with loops), or use <code>lapply()</code>. This function applies an operation over all elements of a list (or vector) and returns a list containing the result. You can also use <code>sapply()</code> which tries to coerce the result to a vector (if possible) if the expected output is not a list.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="manip.html#cb102-1"></a>random_list &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,<span class="cf">function</span>(xx) <span class="kw">rnorm</span>(<span class="dv">100</span>,xx,xx<span class="op">/</span><span class="dv">5</span>))</span>
-<span id="cb102-2"><a href="manip.html#cb102-2"></a><span class="kw">str</span>(random_list[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="manip.html#cb104-1"></a>random_list &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,<span class="cf">function</span>(xx) <span class="kw">rnorm</span>(<span class="dv">100</span>,xx,xx<span class="op">/</span><span class="dv">5</span>))</span>
+<span id="cb104-2"><a href="manip.html#cb104-2"></a><span class="kw">str</span>(random_list[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span></code></pre></div>
 <pre><code>## List of 5
-##  $ : num [1:100] 0.941 0.731 0.971 1.264 0.952 ...
-##  $ : num [1:100] 2.29 2.23 1.52 2.2 1.77 ...
-##  $ : num [1:100] 3.36 2.51 3.84 3.1 2.67 ...
-##  $ : num [1:100] 3.65 4.33 4.24 3.55 3.92 ...
-##  $ : num [1:100] 5.11 5.85 5.51 3.69 5.55 ...</code></pre>
+##  $ : num [1:100] 0.944 1.183 1.093 0.928 0.754 ...
+##  $ : num [1:100] 2.68 2.3 1.77 2.12 2.07 ...
+##  $ : num [1:100] 4.05 2.54 4.76 3.83 2.79 ...
+##  $ : num [1:100] 4.4 4.42 4.65 3.6 4.48 ...
+##  $ : num [1:100] 5.9 4.62 5.83 6.25 5.82 ...</code></pre>
 <p><strong>Attention :</strong> be careful with the squared brackets</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="manip.html#cb104-1"></a>random_list[<span class="dv">1</span>] <span class="co"># is a list</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manip.html#cb106-1"></a>random_list[<span class="dv">1</span>] <span class="co"># is a list</span></span></code></pre></div>
 <pre><code>## [[1]]
-##   [1] 0.9412276 0.7311783 0.9706699 1.2638613 0.9515198 1.3435952 0.8034582
-##   [8] 0.8062974 0.8781465 0.8687452 1.1791948 1.0637890 1.1440395 0.9196213
-##  [15] 1.1103546 1.3066656 0.6777244 0.9097271 0.9905580 0.8036604 1.2715467
-##  [22] 1.1429824 1.0795862 0.9491531 0.9684086 1.1041913 1.0425216 1.1043123
-##  [29] 1.2635501 0.8500148 1.3215701 0.9482428 0.6894775 0.9288882 1.0746705
-##  [36] 1.2528229 0.8088795 0.7732567 0.8542693 0.8390136 1.3440506 1.3241702
-##  [43] 0.9283452 1.1827841 0.9788587 0.7086204 1.2900652 1.2369693 1.1726374
-##  [50] 0.8276708 0.6782664 0.8618531 0.7587175 1.0809484 1.2787719 1.1412457
-##  [57] 1.1167786 1.0983255 0.7944430 1.2110984 0.6705549 0.6274138 1.3264535
-##  [64] 0.5780811 1.0371383 0.9557278 0.8519526 0.8239867 0.9615452 1.4405950
-##  [71] 0.9478557 0.8323504 0.9475640 0.8034711 1.1775351 1.1075861 1.0317228
-##  [78] 0.9223540 1.5074540 0.8516877 1.0889121 1.1926488 1.3805686 0.8516552
-##  [85] 0.7203217 0.8411980 0.7789838 1.0312112 0.9162744 0.7382325 0.8665093
-##  [92] 0.8979509 1.0041361 1.3410432 1.1304505 1.2080677 0.8717329 0.9054949
-##  [99] 1.3027158 1.3051137</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manip.html#cb106-1"></a>random_list[[<span class="dv">1</span>]] <span class="co"># is a vector</span></span></code></pre></div>
-<pre><code>##   [1] 0.9412276 0.7311783 0.9706699 1.2638613 0.9515198 1.3435952 0.8034582
-##   [8] 0.8062974 0.8781465 0.8687452 1.1791948 1.0637890 1.1440395 0.9196213
-##  [15] 1.1103546 1.3066656 0.6777244 0.9097271 0.9905580 0.8036604 1.2715467
-##  [22] 1.1429824 1.0795862 0.9491531 0.9684086 1.1041913 1.0425216 1.1043123
-##  [29] 1.2635501 0.8500148 1.3215701 0.9482428 0.6894775 0.9288882 1.0746705
-##  [36] 1.2528229 0.8088795 0.7732567 0.8542693 0.8390136 1.3440506 1.3241702
-##  [43] 0.9283452 1.1827841 0.9788587 0.7086204 1.2900652 1.2369693 1.1726374
-##  [50] 0.8276708 0.6782664 0.8618531 0.7587175 1.0809484 1.2787719 1.1412457
-##  [57] 1.1167786 1.0983255 0.7944430 1.2110984 0.6705549 0.6274138 1.3264535
-##  [64] 0.5780811 1.0371383 0.9557278 0.8519526 0.8239867 0.9615452 1.4405950
-##  [71] 0.9478557 0.8323504 0.9475640 0.8034711 1.1775351 1.1075861 1.0317228
-##  [78] 0.9223540 1.5074540 0.8516877 1.0889121 1.1926488 1.3805686 0.8516552
-##  [85] 0.7203217 0.8411980 0.7789838 1.0312112 0.9162744 0.7382325 0.8665093
-##  [92] 0.8979509 1.0041361 1.3410432 1.1304505 1.2080677 0.8717329 0.9054949
-##  [99] 1.3027158 1.3051137</code></pre>
+##   [1] 0.9436880 1.1831262 1.0925724 0.9280188 0.7540469 0.9104209 0.8712381
+##   [8] 0.9704622 1.0341959 0.8505307 0.8451915 0.8265596 0.9910725 0.8276541
+##  [15] 1.1416869 1.3554439 0.8770533 0.8934530 0.5983482 1.1486400 1.1270992
+##  [22] 0.9776215 1.1796192 0.9405892 1.0088531 0.7025829 0.5881996 1.3322965
+##  [29] 0.9360755 1.0658787 1.1266269 0.9540235 0.7489310 0.8694687 1.2280474
+##  [36] 1.2087421 1.0449005 1.3480429 0.8021613 1.3107555 0.8493253 0.9014136
+##  [43] 0.7113485 1.3169345 1.0737419 0.9787257 1.1642485 0.5714994 1.1188988
+##  [50] 1.4262235 1.1007646 1.0715430 1.0299048 0.8500849 0.8922556 1.0105037
+##  [57] 0.9473563 0.7583478 0.4443807 0.9510481 1.1715465 1.0068420 1.4001446
+##  [64] 0.8123661 1.3846631 1.3299469 1.4670911 0.5322030 1.1211732 1.0770184
+##  [71] 0.8741614 1.0802569 0.9200197 0.7028054 0.8608827 1.1757180 1.0645214
+##  [78] 1.1666853 1.3398172 0.6935351 1.0937889 0.8936660 0.8756284 0.9336252
+##  [85] 1.1585959 0.7589066 1.2015276 0.8559701 1.3121365 1.0196669 1.1283086
+##  [92] 1.0126564 0.9858663 1.0507537 0.9218198 0.9830380 1.0204346 0.6423202
+##  [99] 0.9263616 1.0201048</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="manip.html#cb108-1"></a>random_list[[<span class="dv">1</span>]] <span class="co"># is a vector</span></span></code></pre></div>
+<pre><code>##   [1] 0.9436880 1.1831262 1.0925724 0.9280188 0.7540469 0.9104209 0.8712381
+##   [8] 0.9704622 1.0341959 0.8505307 0.8451915 0.8265596 0.9910725 0.8276541
+##  [15] 1.1416869 1.3554439 0.8770533 0.8934530 0.5983482 1.1486400 1.1270992
+##  [22] 0.9776215 1.1796192 0.9405892 1.0088531 0.7025829 0.5881996 1.3322965
+##  [29] 0.9360755 1.0658787 1.1266269 0.9540235 0.7489310 0.8694687 1.2280474
+##  [36] 1.2087421 1.0449005 1.3480429 0.8021613 1.3107555 0.8493253 0.9014136
+##  [43] 0.7113485 1.3169345 1.0737419 0.9787257 1.1642485 0.5714994 1.1188988
+##  [50] 1.4262235 1.1007646 1.0715430 1.0299048 0.8500849 0.8922556 1.0105037
+##  [57] 0.9473563 0.7583478 0.4443807 0.9510481 1.1715465 1.0068420 1.4001446
+##  [64] 0.8123661 1.3846631 1.3299469 1.4670911 0.5322030 1.1211732 1.0770184
+##  [71] 0.8741614 1.0802569 0.9200197 0.7028054 0.8608827 1.1757180 1.0645214
+##  [78] 1.1666853 1.3398172 0.6935351 1.0937889 0.8936660 0.8756284 0.9336252
+##  [85] 1.1585959 0.7589066 1.2015276 0.8559701 1.3121365 1.0196669 1.1283086
+##  [92] 1.0126564 0.9858663 1.0507537 0.9218198 0.9830380 1.0204346 0.6423202
+##  [99] 0.9263616 1.0201048</code></pre>
 <!-- ## The split-apply-combine operation -->
 <!-- ![](img/split-apply-combine.png) -->
 </div>
@@ -785,10 +809,10 @@ You will have to :</p>
 <li><code>pivot_wider()</code>, the reciprocate operation, which will convert rows into columns</li>
 </ul>
 <p>For example, we can chose that an observation is the combination of an activity and a metric. This representation can be useful in some cases (see <a href="multivar.html#multivar">6</a>).</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="manip.html#cb108-1"></a>dat_long &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb108-2"><a href="manip.html#cb108-2"></a><span class="st">  </span><span class="kw">select</span>(activityId,<span class="kw">where</span>(is.numeric)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb108-3"><a href="manip.html#cb108-3"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>activityId,<span class="dt">names_to=</span><span class="st">&quot;metric&quot;</span>,<span class="dt">values_to=</span><span class="st">&quot;value&quot;</span>)</span>
-<span id="cb108-4"><a href="manip.html#cb108-4"></a>dat_long</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="manip.html#cb110-1"></a>dat_long &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb110-2"><a href="manip.html#cb110-2"></a><span class="st">  </span><span class="kw">select</span>(activityId,<span class="kw">where</span>(is.numeric)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb110-3"><a href="manip.html#cb110-3"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>activityId,<span class="dt">names_to=</span><span class="st">&quot;metric&quot;</span>,<span class="dt">values_to=</span><span class="st">&quot;value&quot;</span>)</span>
+<span id="cb110-4"><a href="manip.html#cb110-4"></a>dat_long</span></code></pre></div>
 <pre><code>## # A tibble: 363,924 x 3
 ##    activityId metric             value
 ##    &lt;chr&gt;      &lt;chr&gt;              &lt;dbl&gt;
@@ -804,8 +828,8 @@ You will have to :</p>
 ## 10 5570974040 avgHr          NA       
 ## # … with 363,914 more rows</code></pre>
 <p>With this format you can get summary statistics for all metrics also easily :</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="manip.html#cb110-1"></a><span class="kw">group_by</span>(dat_long,metric) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb110-2"><a href="manip.html#cb110-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_val=</span><span class="kw">mean</span>(value,<span class="dt">na.rm=</span>T))</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="manip.html#cb112-1"></a><span class="kw">group_by</span>(dat_long,metric) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb112-2"><a href="manip.html#cb112-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_val=</span><span class="kw">mean</span>(value,<span class="dt">na.rm=</span>T))</span></code></pre></div>
 <pre><code>## # A tibble: 66 x 2
 ##    metric                  mean_val
 ##    &lt;chr&gt;                      &lt;dbl&gt;
@@ -821,9 +845,9 @@ You will have to :</p>
 ## 10 avgGroundContactTime    252.    
 ## # … with 56 more rows</code></pre>
 <p>And you you can go back to the original format if you want :</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="manip.html#cb112-1"></a><span class="kw">group_by</span>(dat_long,metric) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb112-2"><a href="manip.html#cb112-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_val=</span><span class="kw">mean</span>(value,<span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb112-3"><a href="manip.html#cb112-3"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> metric,<span class="dt">values_from=</span>mean_val)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="manip.html#cb114-1"></a><span class="kw">group_by</span>(dat_long,metric) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb114-2"><a href="manip.html#cb114-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_val=</span><span class="kw">mean</span>(value,<span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb114-3"><a href="manip.html#cb114-3"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> metric,<span class="dt">values_from=</span>mean_val)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 66
 ##   activeLengths activeSets aerobicTraining… anaerobicTraini… avgBikeCadence
 ##           &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;

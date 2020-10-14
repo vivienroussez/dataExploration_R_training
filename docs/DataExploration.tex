@@ -462,9 +462,9 @@ R's core relies in data manipulation and statistical analysis. But the community
 \hypertarget{quick-presentation-of-the-ecosystem}{%
 \subsection{Quick presentation of the ecosystem}\label{quick-presentation-of-the-ecosystem}}
 
-The core functionalities are available with base R on \href{https://cran.r-project.org/}{CRAN}. On top of that, you can install several IDEs, the most popular ones being \href{https://rstudio.com/}{Rstudio}, \href{https://jupyter.org/}{jupyter} or \href{https://code.visualstudio.com/}{VSCode}
+The core functionalities are available with base R on \href{https://cran.r-project.org/}{CRAN}. On top of that, you can install several IDEs, the most popular ones being \href{https://rstudio.com/}{Rstudio}, \href{https://jupyter.org/}{Jupyter} or \href{https://code.visualstudio.com/}{VSCode}
 
-For this training, we will use the \href{https://code.visualstudio.com/}{R kernel} of google collabs, but for many purposes, you'll have to use another IDE (shiny, markdown\ldots). This kernel comes with basics packages AND the \textbf{tidyverse}
+For this training, we will use the \href{https://colab.research.google.com/\#create=true\&language=r}{R kernel} of google collabs, but for many purposes, you'll have to use another IDE (shiny, markdown\ldots). This kernel comes with basics packages AND the \textbf{tidyverse}
 
 To add features to R, you'll have then to install \href{https://cran.r-project.org/}{\textbf{packages}}. Generally, when facing a problem (eg : I have to implement a naive Bayes estimator), you google it adding r at the beginning of the query and you'll get the name of the packages that allow you to do that. Then you can install and activate it.
 
@@ -705,7 +705,7 @@ Now you can use all functions of this packages !
 ##         z$qr <- NULL
 ##     z
 ## }
-## <bytecode: 0x7ff77bf384c0>
+## <bytecode: 0x7f9415e487a8>
 ## <environment: namespace:stats>
 \end{verbatim}
 
@@ -901,23 +901,23 @@ Vectors are the basic data structure : it is a unidimensional collection of valu
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.06644765 -0.37065184 -1.32326150 -1.40127961  0.79345777 -0.13105132
-##   [7] -0.25594277  1.65543686 -0.94802878 -0.09756107  0.03999892 -0.25991512
-##  [13]  0.59439833  1.40121485  3.49949450 -0.18652854  0.84989038  1.23440042
-##  [19] -0.30683880 -0.85998799 -0.58377134  0.25928855 -0.01265825 -1.08218477
-##  [25] -1.66501167  0.52112825 -0.35318677  2.56592278  1.66932029 -0.89933037
-##  [31]  0.42312466  0.22735947 -1.99868060  2.52009656 -0.52833072  2.27434507
-##  [37]  2.44287111 -1.55803181  2.04463780 -0.81970083 -1.00870153 -0.51447334
-##  [43]  0.07256322  0.16796344 -0.41161008  0.39376677 -1.90245894  0.75309870
-##  [49] -0.30866139  1.37929629  1.39070479  1.43739464 -1.39097790  1.37947465
-##  [55]  0.07340296  0.41780054  1.68828661  0.45103363 -0.81716274 -0.48344504
-##  [61]  1.59846745 -0.35532663 -1.02584070 -0.40655655  1.81506124 -1.97851830
-##  [67] -0.96256394 -0.51891666  0.20912826  0.31885506 -0.58499058 -0.07470406
-##  [73] -0.81413364 -0.17736923  1.02623420 -1.49147693 -1.64772949  0.13474791
-##  [79]  0.62240371  1.08461682 -2.07195003  0.36155525 -0.85001664  0.28295415
-##  [85]  0.43032020  1.49322404 -1.08605036 -1.29218711 -0.05877985  0.86148635
-##  [91] -0.78399195 -0.61129091 -0.35475922 -1.73303491 -0.35639273  0.52109329
-##  [97]  0.53284393 -0.35243461  0.24444313  0.42672222
+##   [1] -0.04818293 -1.68751571 -0.97663961 -1.61445211 -1.41978080  0.33824582
+##   [7] -0.27923147  0.18858585  1.77942377 -0.20170833  0.09147775 -0.50709574
+##  [13]  0.23217865 -2.01557789  0.73342791 -0.31072813 -0.13641356 -0.50196359
+##  [19] -0.54427274 -0.87079223  0.42330182  1.21079863  1.70876389  0.74426261
+##  [25] -0.71099597 -0.64226535  0.50088886  0.35466088  0.95153082  0.89063080
+##  [31]  1.72317043  0.07678337 -0.95472138  0.28941867 -1.44526968 -0.58704679
+##  [37] -1.08293159 -1.10801355 -2.53147461 -1.82324608  1.47495207 -1.11546818
+##  [43]  0.36196568  1.34861283 -0.47045287 -0.35899707 -0.44949937  0.44548583
+##  [49] -0.77167382 -0.03745031 -1.41217661 -1.09683790 -0.74011963 -1.72398792
+##  [55]  2.21510334 -0.90943317 -0.41440891  0.45773250 -0.33628420 -0.40548583
+##  [61] -0.21527788 -0.55134257  0.19391748 -0.87640807  0.58151715  0.21250376
+##  [67]  1.50827721  1.81382582 -0.33266627 -0.44008749  0.63565452 -1.05974410
+##  [73]  0.65811990  0.19202277 -0.39681728  0.98782654  2.54160654 -0.13275755
+##  [79]  1.52244235 -1.67738962  0.80716068  0.55332602  0.28369605 -0.44718168
+##  [85]  0.32515254 -0.33640388  0.38701385  0.62813877 -0.22699140 -0.94634488
+##  [91]  1.04060900  0.79692719  0.91317082 -0.19927480 -0.04261671 -0.72666254
+##  [97]  0.58022990 -0.70577469  0.99077311  0.06107534
 \end{verbatim}
 
 \begin{Shaded}
@@ -927,12 +927,12 @@ Vectors are the basic data structure : it is a unidimensional collection of valu
 \end{Shaded}
 
 \begin{verbatim}
-##   [1] "s" "h" "j" "x" "l" "n" "e" "d" "d" "o" "g" "q" "a" "r" "k" "q" "h" "l"
-##  [19] "m" "d" "u" "v" "z" "h" "i" "k" "w" "v" "v" "i" "y" "l" "f" "q" "t" "v"
-##  [37] "e" "f" "e" "e" "v" "h" "h" "k" "k" "j" "s" "n" "m" "t" "y" "r" "e" "u"
-##  [55] "y" "u" "c" "n" "s" "h" "v" "t" "y" "p" "k" "a" "o" "l" "f" "h" "z" "l"
-##  [73] "u" "u" "w" "k" "u" "a" "s" "t" "e" "n" "p" "f" "o" "a" "p" "o" "d" "t"
-##  [91] "a" "x" "s" "n" "z" "x" "t" "o" "e" "f"
+##   [1] "m" "x" "n" "g" "o" "y" "r" "w" "h" "f" "o" "y" "t" "e" "p" "a" "o" "s"
+##  [19] "o" "x" "z" "q" "x" "p" "c" "w" "w" "d" "f" "q" "k" "i" "d" "f" "v" "c"
+##  [37] "k" "g" "g" "t" "r" "z" "g" "z" "h" "p" "x" "f" "l" "m" "k" "j" "p" "z"
+##  [55] "h" "q" "v" "c" "i" "d" "m" "z" "q" "n" "i" "s" "q" "g" "i" "v" "x" "o"
+##  [73] "e" "c" "p" "s" "o" "a" "m" "v" "v" "t" "q" "g" "d" "p" "u" "d" "e" "u"
+##  [91] "j" "f" "g" "b" "t" "p" "r" "f" "h" "c"
 \end{verbatim}
 
 You can access vector values with integer indexes (that are vector themselves). \textbf{Note :} unlike Python, the indexes start with the value 1, not 0 !
@@ -944,7 +944,7 @@ You can access vector values with integer indexes (that are vector themselves). 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "x"
+## [1] "g"
 \end{verbatim}
 
 \begin{Shaded}
@@ -954,7 +954,7 @@ You can access vector values with integer indexes (that are vector themselves). 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "s" "h" "j" "x"
+## [1] "m" "x" "n" "g"
 \end{verbatim}
 
 A vector can be \emph{named} meaning that each element has a name through which it can be accessed.
@@ -1475,6 +1475,8 @@ Ok, that's it, I have almost all that I wanted ! We'll cover the rest at the end
 
 On the \texttt{iris} dataset, use the \texttt{kmeans} function to cluster the flowers with respect to Sepal.Length and Petal.Length and try to find your way in the resulting object.
 
+If you want to know more about the kmeans algorithm, you can check \href{https://www.youtube.com/watch?v=4b5d3muPQmA}{this video}
+
 \hypertarget{manip}{%
 \chapter{Data manipulation}\label{manip}}
 
@@ -1897,6 +1899,8 @@ Syntax & Condition\tabularnewline
 \%in\% c(\ldots) & Is in this list of values\tabularnewline
 \(>, >=\) \(<, <=\) & Greater/less than\tabularnewline
 ! (x \%in\% c(\ldots)) & Not in the list\tabularnewline
+\& & And\tabularnewline
+\textbar{} & Or\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -1993,6 +1997,59 @@ Simple summary statistics over one numerical variable :
 \begin{verbatim}
 ##   median_distance
 ## 1         1186419
+\end{verbatim}
+
+\hypertarget{join-with-other-tables}{%
+\subsection{Join with other tables}\label{join-with-other-tables}}
+
+Thanks to the \texttt{xxx\_join(table\_a,table\_b)} functions you can combine several dataframes into one, matching the rows on chosen columns.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{left\_join()} will keep the rows coming from table\_a
+\item
+  \texttt{right\_join()} will keep the rows coming from table\_b
+\item
+  \texttt{inner\_join()} will keep the rows present in both tables
+\item
+  \texttt{full\_join()} will keep the rows from both tables
+\item
+  \texttt{anti\_join()} will keep the rows from table\_a that are not in table\_b
+\end{itemize}
+
+\includegraphics{img/dplyr-joins.png}
+In the following code, we first compute a summary of distance and power for each combination of activity\_recoded and deviceId and combine it together with the initial dataframe in order to compute a ``distance percentage'' for each activity, as the activity distance divided by the total distance recorded for the same type of activity and with the same device.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{agg <-}\StringTok{ }\NormalTok{dat }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(activity_recoded,deviceId) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{total_distance=}\KeywordTok{sum}\NormalTok{(distance,}\DataTypeTok{na.rm =}\NormalTok{ T),}
+            \DataTypeTok{avgPower =} \KeywordTok{mean}\NormalTok{(avgPower,}\DataTypeTok{na.rm=}\NormalTok{T))}
+\NormalTok{dat }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(distance,activityId,activity_recoded,deviceId) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{left_join}\NormalTok{(agg,}\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"activity_recoded"}\NormalTok{,}\StringTok{"deviceId"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{distance_pct =} \DecValTok{100}\OperatorTok{*}\NormalTok{distance}\OperatorTok{/}\NormalTok{total_distance) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   distance activityId activity_recoded   deviceId total_distance avgPower
+## 1   300000 5570974040             Swim 3968818126       55009104      NaN
+## 2 12293220 5566524321             Bike 3968818126     1419582250 241.7049
+## 3  8360927 5561266034             Bike 3968818126     1419582250 241.7049
+## 4  1792890 5555881653              Run 3968818126      453582639      NaN
+## 5  3492347 5551811953             Bike 3825981698      166719556 228.2449
+## 6   285000 5551052200             Swim 3968818126       55009104      NaN
+##   distance_pct
+## 1    0.5453643
+## 2    0.8659745
+## 3    0.5889710
+## 4    0.3952731
+## 5    2.0947434
+## 6    0.5180961
 \end{verbatim}
 
 \hypertarget{manipulate-several-data-in-the-same-time}{%
@@ -2107,11 +2164,11 @@ JSON are lists, and to iterate over list elements, you can either use \texttt{fo
 
 \begin{verbatim}
 ## List of 5
-##  $ : num [1:100] 0.87 0.986 1.128 0.914 1.04 ...
-##  $ : num [1:100] 2.13 2.46 1.78 1.71 1.84 ...
-##  $ : num [1:100] 3.49 2.6 1.47 3.24 2.8 ...
-##  $ : num [1:100] 4.3 3.65 4.69 4.03 4.61 ...
-##  $ : num [1:100] 5.14 4.4 6.89 4.85 3.69 ...
+##  $ : num [1:100] 1.074 1.247 1.178 1.267 0.941 ...
+##  $ : num [1:100] 2.29 2.5 2.64 1.39 1.91 ...
+##  $ : num [1:100] 2.84 3.26 2.67 1.97 3.67 ...
+##  $ : num [1:100] 4.18 4.39 3.48 4 3.14 ...
+##  $ : num [1:100] 3.83 5.42 5.04 4.85 3.57 ...
 \end{verbatim}
 
 \textbf{Attention :} be careful with the squared brackets
@@ -2124,21 +2181,21 @@ JSON are lists, and to iterate over list elements, you can either use \texttt{fo
 
 \begin{verbatim}
 ## [[1]]
-##   [1] 0.8698922 0.9855696 1.1275356 0.9143010 1.0401444 1.1753487 1.2569269
-##   [8] 0.7546059 1.1637610 1.1922671 1.0442791 0.7805398 0.9202213 0.7790667
-##  [15] 1.0586499 1.3028850 0.8503477 1.1272942 1.1150135 0.8972296 1.2327237
-##  [22] 1.3012847 1.1312409 0.9795587 1.0020896 1.2741198 1.3574757 1.1454441
-##  [29] 1.0184827 0.6842692 0.6882959 0.8426286 0.9304516 0.9145730 1.0212102
-##  [36] 1.1126385 0.9790642 1.0786568 0.8416128 1.0240752 0.6488221 1.2865520
-##  [43] 1.1357279 1.2193107 0.9727213 0.7992228 1.0429577 1.0339433 1.1576357
-##  [50] 0.9511823 1.0164660 0.9024059 1.0092870 0.8460931 0.4819867 0.8265190
-##  [57] 0.7934446 0.8959070 0.9261423 1.2180073 0.9517475 1.2525245 0.9995272
-##  [64] 0.7767601 1.1141133 1.2294906 0.3624752 1.1635755 1.1387238 1.1361419
-##  [71] 0.9187508 1.0333073 1.2581904 1.1105624 0.9387423 1.0022803 1.0391250
-##  [78] 0.7858008 0.8904386 1.2509701 0.7903731 1.0756922 1.2326853 1.3173177
-##  [85] 1.1681208 0.8184754 1.2049275 0.8660067 1.1456330 0.8106469 0.8645045
-##  [92] 0.9964328 1.1781359 1.0022769 0.9203491 0.6103902 0.6330703 1.3491216
-##  [99] 0.8109877 0.9448941
+##   [1] 1.0743118 1.2467266 1.1777700 1.2669141 0.9413598 1.1114248 1.0259053
+##   [8] 0.7726407 0.9034288 1.1053722 1.2654562 1.5199624 1.1069346 0.9893979
+##  [15] 1.1912401 0.6102078 0.9130393 1.0682958 1.4397580 1.1224986 0.8491097
+##  [22] 1.3272768 0.8828969 0.6600867 0.7873598 1.0086052 1.1744338 1.3326147
+##  [29] 1.1169272 1.1751850 0.9523449 1.0241890 1.0090760 0.8694066 0.9499105
+##  [36] 1.0494161 1.2664022 0.9113197 1.4487778 0.8718128 1.1349759 1.0430354
+##  [43] 0.8916251 1.0707323 1.3031802 0.6181093 1.0785756 1.3434938 1.0861130
+##  [50] 1.0993846 1.0518901 1.2721445 0.7798339 0.7238030 1.2486516 1.0760023
+##  [57] 1.1765942 0.8572552 1.1738617 1.4256066 0.9198568 1.2999461 0.8974760
+##  [64] 1.1703839 0.8892239 0.8771916 1.3147872 0.7938408 0.8673936 1.1836734
+##  [71] 1.4427429 0.8964463 0.7130495 0.8252115 1.1055190 1.1133014 1.0978111
+##  [78] 1.1201609 0.7019945 0.9663967 0.9243364 1.1846978 0.8012329 0.9810417
+##  [85] 0.6955541 0.6657884 0.9827831 0.9511444 0.9357611 0.7889945 1.0705330
+##  [92] 1.2126832 1.1780833 1.1985162 0.9382742 1.2018843 1.0521819 1.3941183
+##  [99] 1.2507438 1.0273537
 \end{verbatim}
 
 \begin{Shaded}
@@ -2148,21 +2205,21 @@ JSON are lists, and to iterate over list elements, you can either use \texttt{fo
 \end{Shaded}
 
 \begin{verbatim}
-##   [1] 0.8698922 0.9855696 1.1275356 0.9143010 1.0401444 1.1753487 1.2569269
-##   [8] 0.7546059 1.1637610 1.1922671 1.0442791 0.7805398 0.9202213 0.7790667
-##  [15] 1.0586499 1.3028850 0.8503477 1.1272942 1.1150135 0.8972296 1.2327237
-##  [22] 1.3012847 1.1312409 0.9795587 1.0020896 1.2741198 1.3574757 1.1454441
-##  [29] 1.0184827 0.6842692 0.6882959 0.8426286 0.9304516 0.9145730 1.0212102
-##  [36] 1.1126385 0.9790642 1.0786568 0.8416128 1.0240752 0.6488221 1.2865520
-##  [43] 1.1357279 1.2193107 0.9727213 0.7992228 1.0429577 1.0339433 1.1576357
-##  [50] 0.9511823 1.0164660 0.9024059 1.0092870 0.8460931 0.4819867 0.8265190
-##  [57] 0.7934446 0.8959070 0.9261423 1.2180073 0.9517475 1.2525245 0.9995272
-##  [64] 0.7767601 1.1141133 1.2294906 0.3624752 1.1635755 1.1387238 1.1361419
-##  [71] 0.9187508 1.0333073 1.2581904 1.1105624 0.9387423 1.0022803 1.0391250
-##  [78] 0.7858008 0.8904386 1.2509701 0.7903731 1.0756922 1.2326853 1.3173177
-##  [85] 1.1681208 0.8184754 1.2049275 0.8660067 1.1456330 0.8106469 0.8645045
-##  [92] 0.9964328 1.1781359 1.0022769 0.9203491 0.6103902 0.6330703 1.3491216
-##  [99] 0.8109877 0.9448941
+##   [1] 1.0743118 1.2467266 1.1777700 1.2669141 0.9413598 1.1114248 1.0259053
+##   [8] 0.7726407 0.9034288 1.1053722 1.2654562 1.5199624 1.1069346 0.9893979
+##  [15] 1.1912401 0.6102078 0.9130393 1.0682958 1.4397580 1.1224986 0.8491097
+##  [22] 1.3272768 0.8828969 0.6600867 0.7873598 1.0086052 1.1744338 1.3326147
+##  [29] 1.1169272 1.1751850 0.9523449 1.0241890 1.0090760 0.8694066 0.9499105
+##  [36] 1.0494161 1.2664022 0.9113197 1.4487778 0.8718128 1.1349759 1.0430354
+##  [43] 0.8916251 1.0707323 1.3031802 0.6181093 1.0785756 1.3434938 1.0861130
+##  [50] 1.0993846 1.0518901 1.2721445 0.7798339 0.7238030 1.2486516 1.0760023
+##  [57] 1.1765942 0.8572552 1.1738617 1.4256066 0.9198568 1.2999461 0.8974760
+##  [64] 1.1703839 0.8892239 0.8771916 1.3147872 0.7938408 0.8673936 1.1836734
+##  [71] 1.4427429 0.8964463 0.7130495 0.8252115 1.1055190 1.1133014 1.0978111
+##  [78] 1.1201609 0.7019945 0.9663967 0.9243364 1.1846978 0.8012329 0.9810417
+##  [85] 0.6955541 0.6657884 0.9827831 0.9511444 0.9357611 0.7889945 1.0705330
+##  [92] 1.2126832 1.1780833 1.1985162 0.9382742 1.2018843 1.0521819 1.3941183
+##  [99] 1.2507438 1.0273537
 \end{verbatim}
 
 \hypertarget{tidy-your-data}{%
@@ -2276,27 +2333,42 @@ The result looks very much like the one we had with \texttt{across} but the inte
 
 Let's load and clean the data (which you have done during the exercises)
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{source}\NormalTok{(}\StringTok{"ZZ2 - data_preparation.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 This session aims to give a practical guide to explore a dataset you've never seen before and to understand some of the key statistical concepts. You will learn to describe each \emph{variable} of a dataset and assess the strength of the relationship between two variables whatever their types may be. For that, we'll see how to visually explore a dataset and to quantify what the graphics show. We will also give an overview of what statistical inference is and what it can be used for.
 
 This section covers the following topics :
 
 \begin{itemize}
+\tightlist
 \item
   Definitions
 \item
   Descriptive statistics
-\item
-  Univariate statistics
-\item
-  Bivariate statistics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Univariate statistics
+  \item
+    Bivariate statistics
+  \end{itemize}
 \item
   Statistical inference :
-\item
-  The statistical model
-\item
-  Main theorems to be aware of
-\item
-  Introduction to statistical tests
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The statistical model
+  \item
+    Main theorems to be aware of
+  \item
+    Introduction to statistical tests
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{definitions}{%
@@ -2542,7 +2614,7 @@ The distribution of a variable quantifies the number of individuals how have a c
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-38-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-39-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2550,7 +2622,7 @@ The distribution of a variable quantifies the number of individuals how have a c
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-38-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-39-2.pdf}
 
 \hypertarget{descriptive-statistics}{%
 \subsubsection{Descriptive statistics}\label{descriptive-statistics}}
@@ -2569,7 +2641,7 @@ Quantile-based statistics are said to be \textbf{robust} because much less sensi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-39-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-40-1.pdf}
 
 \hypertarget{central-tendency}{%
 \paragraph{Central tendency}\label{central-tendency}}
@@ -2659,7 +2731,7 @@ The traditional example of a distribution is the gaussian distribution
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-42-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-43-1.pdf}
 
 In this case, we have a very interesting property : symmetry, which makes mean and median very close. If the coefficient of variation is not too high, the \textbf{tail} is pretty short.
 
@@ -2691,7 +2763,7 @@ In real life,it (almost) never happens. Therefore, to understand what happens, y
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-43-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-44-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2699,7 +2771,7 @@ In real life,it (almost) never happens. Therefore, to understand what happens, y
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-44-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-45-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2707,16 +2779,66 @@ In real life,it (almost) never happens. Therefore, to understand what happens, y
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-44-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-45-2.pdf}
 
 \hypertarget{exercises}{%
 \subsubsection{Exercises :}\label{exercises}}
 
 What can you tell about the distance variable ?
-- Draw the distribution of this variable. How much is the maximum distance of the 20\% shortest activities ; the minimum distance of the 5\% longest activities ?
-- What unit do you think it is ? Did you check the maximum value ?
-- Is there more dispersion in the distance or the average power ? using the \texttt{facet\_wrap} function of \texttt{ggplot2}, compare the distributions of distance and avgPower.
-- I want to group activities in 5 categories based on the distance. This operation is called discretization (very useful for choropleth maps). Search for available methods, and apply some of them. Which one is best suited to this variable ? Which one should you avoid ?
+
+\begin{itemize}
+\tightlist
+\item
+  Draw the distribution of this variable. How much is the maximum distance of the 20\% shortest activities ; the minimum distance of the 5\% longest activities ?
+\item
+  What unit do you think it is ? Did you check the maximum value ?
+\item
+  Is there more dispersion in the distance or the average power ? using the \texttt{facet\_wrap} function of \texttt{ggplot2}, compare the distributions of distance and avgPower.
+\item
+  I want to group activities in 5 categories based on the distance. This operation is called discretization (very useful for choropleth maps). Search for available methods, and apply some of them. Which one is best suited to this variable ? Which one should you avoid ?
+\end{itemize}
+
+\hypertarget{bonus-overlay-the-distribution-of-two-variables}{%
+\subsubsection{Bonus : overlay the distribution of two variables}\label{bonus-overlay-the-distribution-of-two-variables}}
+
+If you want to compare the distribution of several variables, you can use several methods with \texttt{ggplot} :
+
+\begin{itemize}
+\tightlist
+\item
+  Brute-force overlaying 2 \texttt{geom\_density()} plots
+\item
+  Pivot your data to exhibit an underlying variable that you will use in the aesthetics
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dat) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{(}\KeywordTok{aes}\NormalTok{(distance),}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_density}\NormalTok{(}\KeywordTok{aes}\NormalTok{(avgPower))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-46-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{long_data <-}\StringTok{ }\KeywordTok{select}\NormalTok{(dat,distance,avgPower,avgSpeed,activityId) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pivot_longer}\NormalTok{(}\OperatorTok{-}\NormalTok{activityId,}\DataTypeTok{names_to=}\StringTok{"metric"}\NormalTok{,}\DataTypeTok{values_to=}\StringTok{"val"}\NormalTok{)}
+
+\KeywordTok{ggplot}\NormalTok{(long_data,}\KeywordTok{aes}\NormalTok{(val)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_wrap}\NormalTok{(. }\OperatorTok{~}\StringTok{ }\NormalTok{metric,}
+                                                           \DataTypeTok{scales =} \StringTok{"free"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-46-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(long_data,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{val,}\DataTypeTok{color=}\NormalTok{metric)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-46-3.pdf}
 
 \hypertarget{categorical-variables}{%
 \subsection{Categorical variables}\label{categorical-variables}}
@@ -2781,7 +2903,7 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-46-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-48-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2792,7 +2914,7 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-46-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-48-2.pdf}
 
 \hypertarget{contingency-tables}{%
 \subsubsection{Contingency tables}\label{contingency-tables}}
@@ -2852,7 +2974,7 @@ After visualizing, how can we measure the number of cases and the percent in eac
 ##              0.88864708              0.03627131
 \end{verbatim}
 
-Another solution is to use what you've learned in the previous section (@ref()) : aggregation !
+Another solution is to use what you've learned in the previous section (\ref{manip}) : aggregation !
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2898,7 +3020,7 @@ To visualize the relationship between two numerical variables, we can use the sc
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-49-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-51-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2907,7 +3029,7 @@ To visualize the relationship between two numerical variables, we can use the sc
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-49-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-51-2.pdf}
 
 We can pimp up the graphics a bit to visualize the correlation
 
@@ -2918,7 +3040,7 @@ We can pimp up the graphics a bit to visualize the correlation
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-50-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-52-1.pdf}
 
 We can see here that there is a positive relationship between distance and data usage and that this relationship has an exponential shape, meaning that the usage increases A LOT when the age drops.
 
@@ -3018,7 +3140,7 @@ Try different layouts with you barcharts !
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-53-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-55-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3027,7 +3149,7 @@ Try different layouts with you barcharts !
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-53-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-55-2.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3037,7 +3159,7 @@ Try different layouts with you barcharts !
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-53-3.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-55-3.pdf}
 
 You get really different insights depending on the representation you chose !
 
@@ -3110,27 +3232,27 @@ You get really different insights depending on the representation you chose !
 \hypertarget{quantifying-relationships-chi2-cramers-v}{%
 \subsubsection{\texorpdfstring{Quantifying relationships : \(\chi^2\), Cramer's V}{Quantifying relationships : \textbackslash chi\^{}2, Cramer's V}}\label{quantifying-relationships-chi2-cramers-v}}
 
-The Chi-square (\(\chi^2\)) statistics is used to measure the distance between the actual distribution of cases among categories of both variables and the distribution if the variables were independant. The higher the \texttt{X-squared}, the higher the divergence with independance, meaning that the variables are likely \emph{linked} (correlation does not apply to categorical variables). The \texttt{p-value} indicates whether this relationship is \textbf{statistically significant} or not. We will see this in more details in the last chapter (Inference).
+The Chi-square (\(\chi^2\)) statistics is used to measure the distance between the actual distribution of cases among categories of both variables and the distribution if the variables were independent. The higher the \texttt{X-squared}, the higher the divergence with independence, meaning that the variables are likely \emph{linked} (correlation does not apply to categorical variables). The \texttt{p-value} indicates whether this relationship is \textbf{statistically significant} or not. We will see this in more details in the last chapter (Inference).
 
 More info and detailed way to compute the value : \href{https://www.statisticshowto.com/probability-and-statistics/chi-square/}{this website}
 
 \hypertarget{extreme-examples}{%
 \subsubsection{Extreme examples :}\label{extreme-examples}}
 
-Let's assume we want to assess the relationship between gender and churn. Further assumption, we have 100 customers, 50 males, 50 females on the one hand, 50 churners, 50 non churners on the other hand.
+Let's assume we want to assess the relationship between distance and activity type.
 
 \begin{itemize}
 \tightlist
 \item
-  If the variables are independent, the cross table would look that way :
+  If the variables are independent, the contingency table would look that way :
 \end{itemize}
 
 \begin{verbatim}
-## 
-## 	Pearson's Chi-squared test
-## 
-## data:  .
-## X-squared = 0, df = 12, p-value = 1
+##       Short Very long Long Average
+## Swim     10        10   10      10
+## Bike     10        10   10      10
+## Run      10        10   10      10
+## Other    10        10   10      10
 \end{verbatim}
 
 \begin{itemize}
@@ -3141,10 +3263,10 @@ Let's assume we want to assess the relationship between gender and churn. Furthe
 
 \begin{verbatim}
 ##       Short Very long Long Average
-## Swim     25         0    0       0
-## Bike      0        25    0       0
-## Run       0         0   25       0
-## Other     0         0    0      25
+## Swim     40         0    0       0
+## Bike      0        40    0       0
+## Run       0         0   40       0
+## Other     0         0    0      40
 \end{verbatim}
 
 The \(\chi^2\) statistic measures the ``distance'' between reality and the first case (independence)
@@ -3216,7 +3338,7 @@ Vilin plots allows to see the ful distribution of both variables
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-59-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-61-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3225,7 +3347,7 @@ Vilin plots allows to see the ful distribution of both variables
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-59-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-61-2.pdf}
 
 It looks like bike activities are longer than the others ! Big surprise !
 
@@ -3245,7 +3367,7 @@ Using the decomposition of the variance formula \(SS_{total} = SS_{between} + SS
   If the variables are independent, the boxplots should look like this (almost no difference in the distributions) :
 \end{itemize}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-60-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-62-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -3253,7 +3375,7 @@ Using the decomposition of the variance formula \(SS_{total} = SS_{between} + SS
   If they are fully ``correlated'', the activity variable would explain all variance in the data set :
 \end{itemize}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-61-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-63-1.pdf}
 
 In this case, we see that all the variance lies between the subgroups : there is no dispersion within the groups.
 
@@ -3404,7 +3526,7 @@ Meaning that :
   The larger the sample size, the smaller the average deviation to the true value \(\rightarrow\) the variance of my estimator reduces when the sample size increases.
 \end{itemize}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-64-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-66-1.pdf}
 
 Take away :
 
@@ -3432,7 +3554,7 @@ Let's assume the \textbf{true} average of the usage is 10, what do you prefer ov
   The second with mean 10.5 and variance 1 \(\rightarrow\) biased but with low variance
 \end{itemize}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-65-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-67-1.pdf}
 
 In the first case, the estimator is unbiased, but with a higher variance than the second : if we go for it, we take the chance to have an estimate (depending on our sample) of eg 15 or 5, which is almost unlikely to happen with the second estimator, although this second is not centered on the true value.
 It is up to you to decide, but you generally can't have both an unbiased and very precise estimator\ldots{}
@@ -3445,11 +3567,11 @@ It is up to you to decide, but you generally can't have both an unbiased and ver
 
 Knowing the theoretical probability distribution of our estimator, we can assess the likelihood of an hypothesis. For the example, let's make the hypothesis (\(\mathcal{H_0}\)) that the true mean is 10 and standard deviation is \(2\sqrt{n}\). If this hypothesis is true, thanks to the CTL, the distribution of \(\bar{D}\) would be the following :
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-66-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-68-1.pdf}
 
 Now, I can compute my sample mean and check its value against the hypothetical distribution :
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-67-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-69-1.pdf}
 
 Obviously my actual value doesn't fit with my hypothesis : the probability of getting such a sample mean under \(\mathcal{H_O}\) is very small \(\rightarrow\) my hypothesis is very unlikely to be valid \(\rightarrow\) the true mean is probably not 10.
 
@@ -3596,7 +3718,7 @@ In this case, you can use the \textbf{maximum likelihood estimator} (MLE). The \
 
 \[L_X(s) = \prod_{i=1}^n f(k;s,N)\]
 
-Since we state that the underlying probability distribution is Zipf's law, we can express the likelihood as a function of the \(s\) parameter. The idea of the MLE is since this sample happened, it was the \emph{most likely} to happen, hence the value of \(s\) is such that it maximizes the likelihood for my sample. And finding the maximum value is something for which we have a few algorithms !
+Since we state that the underlying probability distribution is Zipf's law, we can express the likelihood as a function of the \(s\) parameter. The idea of the MLE is since this sample happened, it was the \emph{most likely} to happen, hence the value of \(s\) is such that it maximizes the likelihood for this particular sample. And finding the maximum value is something for which we have a few algorithms !
 
 For this estimator, we also know some asymptotic properties that allows to build tests, which you can interpret in the same manner. Namely, you have three tests :
 
@@ -3644,11 +3766,14 @@ MLE is also used for machine learning/econometrics, especially when relationship
 \KeywordTok{library}\NormalTok{(tseries)}
 \CommentTok{# generation of a random walk}
 \NormalTok{Xt <-}\StringTok{ }\KeywordTok{cumsum}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(Xt,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{main=}\StringTok{"Random time serie"}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\NormalTok{series <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{Xt=}\NormalTok{Xt) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{index=}\KeywordTok{row_number}\NormalTok{())}
+\KeywordTok{ggplot}\NormalTok{(series,}\KeywordTok{aes}\NormalTok{(index,Xt)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"A random walk"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-71-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-73-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3661,8 +3786,8 @@ MLE is also used for machine learning/econometrics, especially when relationship
 ## 	Phillips-Perron Unit Root Test
 ## 
 ## data:  Xt
-## Dickey-Fuller Z(alpha) = -3.2269, Truncation lag parameter = 3, p-value
-## = 0.9229
+## Dickey-Fuller Z(alpha) = -10.014, Truncation lag parameter = 3, p-value
+## = 0.5349
 ## alternative hypothesis: stationary
 \end{verbatim}
 
@@ -3771,7 +3896,7 @@ A short list of most common geometries :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-72-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-74-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3780,7 +3905,7 @@ A short list of most common geometries :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-72-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-74-2.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3789,7 +3914,7 @@ A short list of most common geometries :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-72-3.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-74-3.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3799,7 +3924,7 @@ A short list of most common geometries :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-72-4.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-74-4.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3812,7 +3937,7 @@ A short list of most common geometries :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-72-5.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-74-5.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3825,7 +3950,7 @@ A short list of most common geometries :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-72-6.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-74-6.pdf}
 
 \hypertarget{important-options}{%
 \subsubsection{Important options}\label{important-options}}
@@ -3867,7 +3992,7 @@ Here is an example :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-73-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-75-1.pdf}
 
 \hypertarget{some-tricks-with-ggplot}{%
 \subsubsection{Some tricks with ggplot}\label{some-tricks-with-ggplot}}
@@ -3889,7 +4014,7 @@ You can brute-force the graph by superposing different geometries. But first, yo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-74-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-76-1.pdf}
 
 This solution can be also used if you want to superpose different geometries (bars and lines, bars and hlines,\ldots), and is in this case legal :D
 
@@ -3934,7 +4059,7 @@ Now I can use the latent\_variable variable as a dimension in a classic ggplot s
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-76-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-78-1.pdf}
 
 Or you can even skip the standardization step thanks to facets :
 
@@ -3946,7 +4071,7 @@ Or you can even skip the standardization step thanks to facets :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-77-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-79-1.pdf}
 
 \hypertarget{combine-different-plots-with-ggpubr}{%
 \paragraph{Combine different plots with ggpubr}\label{combine-different-plots-with-ggpubr}}
@@ -3971,7 +4096,7 @@ Or you can even skip the standardization step thanks to facets :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-78-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-80-1.pdf}
 
 There are a lot of options in this function (common legend, height and width of each plot,\ldots). You can check the full \href{http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/}{documentation of this package}.
 
@@ -3996,7 +4121,7 @@ Side note : the \texttt{ggpairs()} function does a lot of computation and can ta
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-79-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-81-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4008,7 +4133,7 @@ Side note : the \texttt{ggpairs()} function does a lot of computation and can ta
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-79-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-81-2.pdf}
 
 \hypertarget{correlation-plots}{%
 \subsubsection{Correlation plots}\label{correlation-plots}}
@@ -4021,7 +4146,7 @@ Side note : the \texttt{ggpairs()} function does a lot of computation and can ta
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-80-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-82-1.pdf}
 
 \hypertarget{multivariate-analysis-and-dimension-reduction}{%
 \section{Multivariate analysis and dimension reduction}\label{multivariate-analysis-and-dimension-reduction}}
@@ -4513,7 +4638,7 @@ The first thing is to have a look at the eignevalues to see how well the PCA cou
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-87-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-89-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4521,7 +4646,7 @@ The first thing is to have a look at the eignevalues to see how well the PCA cou
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-87-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-89-2.pdf}
 
 In our case, the first component bears 35\% of the total inertia and the second 15\%. Hence, the first factorial plane (the first 2 components) : let's look at how the variable correlate with them :
 
@@ -4531,7 +4656,7 @@ In our case, the first component bears 35\% of the total inertia and the second 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-88-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-90-1.pdf}
 
 What you can read at once on this plot is how important each variable is to construct the new variables. As a matter of fact, contribution, cos2 and coordinates are almost the same in PCA, meaning that the closer to the unit disc the coordinate is, the higher both contribution and quality of representation.
 
@@ -4559,7 +4684,7 @@ Let's check the correlation matrix to be sure about what we are reading here
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-89-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-91-1.pdf}
 
 How about the individuals ?
 
@@ -4569,7 +4694,7 @@ How about the individuals ?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-90-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-92-1.pdf}
 
 This graph is harder to read, but we still can identify outliers and understand what they are. Anyway in the top-right corner, those are long rides with a lot of ups and downs ! The most extreme is 380343030 which is another measurement error (indoor cycling with 34000 elevation meters !)
 
@@ -4662,7 +4787,7 @@ How this similarity scores are computed.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-91-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-93-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4674,7 +4799,7 @@ How this similarity scores are computed.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-91-2.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-93-2.pdf}
 
 Pros and cons compared to PCA :
 
@@ -4703,7 +4828,7 @@ Pros and cons compared to PCA :
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-92-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-94-1.pdf}
 
 You can check this other extensive \href{https://www.analyticsvidhya.com/blog/2017/01/t-sne-implementation-r-python/}{blogpost} with use cases and also python implementation.
 
@@ -4756,7 +4881,7 @@ In the course material, you'll find one example for each package. You'll easily 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# install.packages("plotly")}
-\KeywordTok{require}\NormalTok{(plotly)}
+\CommentTok{# require(plotly)}
 \CommentTok{# ggplotly(gg1)}
 \end{Highlighting}
 \end{Shaded}
@@ -4900,7 +5025,7 @@ But you have to check your residuals !
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-96-1.pdf}
+\includegraphics{DataExploration_files/figure-latex/unnamed-chunk-98-1.pdf}
 Those are pretty long tailed, which might reflect some outliers or a wrong functional specification !
 
 \hypertarget{the-frischwaugh-theorem-and-the-omitted-variable-bias}{%

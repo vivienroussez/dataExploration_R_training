@@ -2,7 +2,7 @@
 
 Let's load and clean the data (which you have done during the exercises)
 
-```{r,echo=FALSE}
+```{r}
 source("ZZ2 - data_preparation.R")
 ```
 
@@ -157,6 +157,28 @@ What can you tell about the distance variable ?
 - What unit do you think it is ? Did you check the maximum value ?
 - Is there more dispersion in the distance or the average power ? using the `facet_wrap` function of `ggplot2`, compare the distributions of distance and avgPower.
 - I want to group activities in 5 categories based on the distance. This operation is called discretization (very useful for choropleth maps). Search for available methods, and apply some of them. Which one is best suited to this variable ? Which one should you avoid ?
+
+
+#### Bonus : overlay the distribution of two variables
+
+If you want to compare the distribution of several variables, you can use several methods with `ggplot` :
+
+- Brute-force overlaying 2 `geom_density()` plots
+- Pivot your data to exhibit an underlying variable that you will use in the aesthetics 
+
+
+```{r}
+ggplot(dat) + geom_density(aes(distance),color="blue") + 
+  geom_density(aes(avgPower))
+
+long_data <- select(dat,distance,avgPower,avgSpeed,activityId) %>% 
+  pivot_longer(-activityId,names_to="metric",values_to="val")
+
+ggplot(long_data,aes(val)) + geom_histogram() + facet_wrap(. ~ metric,
+                                                           scales = "free")
+ggplot(long_data,aes(x=val,color=metric)) + geom_density()
+```
+
 
 ### Categorical variables
 
@@ -338,27 +360,27 @@ table(dat$activity_recoded,dat$qual_distance) %>%
 
 #### Quantifying relationships : $\chi^2$, Cramer's V
 
-The Chi-square ($\chi^2$) statistics is used to measure the distance between the actual distribution of cases among categories of both variables and the distribution if the variables were independant. The higher the `X-squared`, the higher the divergence with independance, meaning that the variables are likely *linked* (correlation does not apply to categorical variables). The `p-value` indicates whether this relationship is **statistically significant** or not. We will see this in more details in the last chapter (Inference).
+The Chi-square ($\chi^2$) statistics is used to measure the distance between the actual distribution of cases among categories of both variables and the distribution if the variables were independent. The higher the `X-squared`, the higher the divergence with independence, meaning that the variables are likely *linked* (correlation does not apply to categorical variables). The `p-value` indicates whether this relationship is **statistically significant** or not. We will see this in more details in the last chapter (Inference).
 
 More info and detailed way to compute the value : [this website](https://www.statisticshowto.com/probability-and-statistics/chi-square/)
 
 #### Extreme examples :
 
-Let's assume we want to assess the relationship between gender and churn. Further assumption, we have 100 customers, 50 males, 50 females on the one hand, 50 churners, 50 non churners on the other hand. 
+Let's assume we want to assess the relationship between distance and activity type.
 
-- If the variables are independent, the cross table would look that way :
+- If the variables are independent, the contingency table would look that way :
 
 ```{r,echo=FALSE}
-ex_indep <- matrix(100/16,n_distinct(dat$activity_recoded),n_distinct(dat$qual_distance))
+ex_indep <- matrix(160/16,n_distinct(dat$activity_recoded),n_distinct(dat$qual_distance))
 rownames(ex_indep) <- unique(dat$activity_recoded)
 colnames(ex_indep) <- unique(dat$qual_distance)
-ex_indep %>% chisq.test()
+ex_indep[,-5] 
 ```
 
 - In the opposite situation (full dependency), the contingency table would look like that :
 
 ```{r,echo=FALSE}
-ex_dep <- diag(100/4,n_distinct(dat$activity_recoded),n_distinct(dat$qual_distance))
+ex_dep <- diag(160/4,n_distinct(dat$activity_recoded),n_distinct(dat$qual_distance))
 rownames(ex_dep) <- unique(dat$activity_recoded)
 colnames(ex_dep) <- unique(dat$qual_distance)
 ex_dep[,-5] 
@@ -367,7 +389,6 @@ ex_dep[,-5]
 The $\chi^2$ statistic measures the "distance" between reality and the first case (independence)
 
 **Note :** if some cells of the contingency table have less than 5 cases, the statistic is not reliable (you'll get a message in this case)
-
 
 The chi-square suffers 2 main drawbacks : its value depends on the number of observations and the total number of categories $\Rightarrow$ one cannot compare the $\chi^2$ values for 2 different tables that have different numbers of underlying observations and number of categories.
 To deal with that, you can use Cramer's V, which is a (kind of) *normalized* $\chi^2$. You can use the function built in the `lsr` package. Cramer's V $\in [0,1]$ and the higher it is, the more intense the link between both variables.
@@ -651,7 +672,7 @@ In this case, you can use the **maximum likelihood estimator** (MLE). The [likel
 
 $$L_X(s) = \prod_{i=1}^n f(k;s,N)$$
 
-Since we state that the underlying probability distribution is Zipf's law, we can express the likelihood as a function of the $s$ parameter. The idea of the MLE is since this sample happened, it was the *most likely* to happen, hence the value of $s$ is such that it maximizes the likelihood for my sample. And finding the maximum value is something for which we have a few algorithms !
+Since we state that the underlying probability distribution is Zipf's law, we can express the likelihood as a function of the $s$ parameter. The idea of the MLE is since this sample happened, it was the *most likely* to happen, hence the value of $s$ is such that it maximizes the likelihood for this particular sample. And finding the maximum value is something for which we have a few algorithms !
 
 For this estimator, we also know some asymptotic properties that allows to build tests, which you can interpret in the same manner. Namely, you have three tests :
 
@@ -681,6 +702,9 @@ In this example, I simulate a time series and run the Phillips-Perron test. The 
 library(tseries)
 # generation of a random walk
 Xt <- cumsum(rnorm(100))
-plot(Xt,type="l",main="Random time serie",col="blue")
+series <- data.frame(Xt=Xt) %>% 
+  mutate(index=row_number())
+ggplot(series,aes(index,Xt)) + geom_line() + theme_minimal() +
+  labs(title="A random walk")
 pp.test(Xt)
 ```

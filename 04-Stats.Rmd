@@ -3,7 +3,7 @@
 Let's load and clean the data (which you have done during the exercises)
 
 ```{r}
-source("ZZ2 - data_preparation.R")
+source("ZZ2-data_preparation.R")
 ```
 
 This session aims to give a practical guide to explore a dataset you've never seen before and to understand some of the key statistical concepts. You will learn to describe each *variable* of a dataset and assess the strength of the relationship between two variables whatever their types may be. For that, we'll see how to visually explore a dataset and to quantify what the graphics show. We will also give an overview of what statistical inference is and what it can be used for.

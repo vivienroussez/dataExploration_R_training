@@ -589,7 +589,7 @@ sim %>% ggplot(aes(gauss)) + geom_density() +
   geom_vline(xintercept = 10+2*1.96,linetype=4,color="red") +
   annotate(geom="label",x=10,y=.05,label="95% of all possible values \nfor the sample mean \nunder H0",color="red") +
   geom_vline(xintercept = 15,color="purple",linetype=5) + 
-  annotate(geom = "label",x=16,y=.1,label="Sample mean",color="purple") +
+  annotate(geom = "label",x=16,y=.1,label="True mean value ?",color="purple") +
   annotate(geom = "label",x=16.2,y=.07,label=paste("proba",round(pnorm(15,10,2,lower.tail = F),4)),color="purple")  + 
   theme_minimal()
 ```

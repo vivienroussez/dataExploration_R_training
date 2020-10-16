@@ -27,11 +27,12 @@ The biggest assumptions of this model are :
 
 This last condition helps us to derive an estimator for b (which can be derived in several ways) which is called the OLS estimator (Ordinary Least Squares), which is the solution of the optimization program : 
 
-$$\hat{b}=argmin_b \sum_{i=1}^n \epsilon_i^2 = argmin_b \sum_{i=1}^n (x_i-x_i \cdot b)^2$$
+$$\hat{b}=argmin_b \sum_{i=1}^n \epsilon_i^2 = argmin_b \sum_{i=1}^n (y_i-x_i \cdot b)^2$$
 
 The solution is $\hat{b} = (X'X)^{-1}X'y$ where $X'=t(X)$. $(X'X)^{-1}X$ is the projection matrix over the hyperplane defined by the features.
 
 ![](img/ols-regression-geometry.png)
+
 ### Implementation and diagnostics
 
 To implement a linear regression with R, we use the lm function :
@@ -132,9 +133,10 @@ summary(selection)
 
 ### Exercises
 
-- From the last functional form used, design a graphic that shows the final impact of an increase in power to the average speed, taking the distance into account.
-- Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates...). Feature importance can be very important. Example : to prepare for competitions (that take place between may-september), I always follow a structured training plan at some point. This has a direct impact on the performances. Can you identify when this preparation starts and how to integrate it in the model ? This closely linked to your assignment ;)
+- Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates...). 
+- Feature importance can be very important. Example : to prepare for competitions (that take place between may-september), I always follow a structured training plan at some point. This has a direct impact on the performances. Can you identify when this preparation starts and how to integrate it in the model ? This is somehow connected to your assignment ;)
 - Can you identify the measurement errors (thanks to residuals)
+- From the last functional specification used, design a graphic that shows the final impact of an increase in power to the average speed, taking the distance into account.
 
 ## Logitic regression
 
@@ -185,3 +187,9 @@ You can derive other goodness of fit metrics from the previous **confusion matri
 ![](img/conf_matrix.png)
 
 Depending on your business use case, you will focus more on one or the other metric. You will cover this in more detail durinng the machine learning week :)
+
+
+### Exercises
+
+- Fit a model for avgSpeed with all activities (including the activity type)
+- Fit a model to guess whether an activity is a run or something else

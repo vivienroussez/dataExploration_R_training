@@ -49,5 +49,6 @@ dat_bike_imp <- mutate(dat_bike_imp,across(where(is.character),
                                            function(xx) coalesce(xx,most_freq_cat(xx))))
 
 sapply(dat_bike_imp,function(xx) sum(is.na(xx)))
-missing <- which(sapply(dat_bike_imp,function(xx) sum(is.na(xx)))>0) %>%  names()
+missing <- which(sapply(dat_bike_imp,function(xx) sum(is.na(xx)))>0) %>%  
+  names()
 dat_bike_imp <- select(dat_bike_imp,-missing)

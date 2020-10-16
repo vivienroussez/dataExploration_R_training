@@ -241,16 +241,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>7</b> Linear and logistic regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="reg.html"><a href="reg.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear regression</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="reg.html"><a href="reg.html#general-presentation"><i class="fa fa-check"></i><b>7.1.1</b> General presentation</a></li>
-<li class="chapter" data-level="7.1.2" data-path="reg.html"><a href="reg.html#coefficients-interpretation-and-inference"><i class="fa fa-check"></i><b>7.1.2</b> Coefficients interpretation and inference</a></li>
-<li class="chapter" data-level="7.1.3" data-path="reg.html"><a href="reg.html#the-frischwaugh-theorem-and-the-omitted-variable-bias"><i class="fa fa-check"></i><b>7.1.3</b> The Frisch–Waugh Theorem and the omitted variable bias</a></li>
-<li class="chapter" data-level="7.1.4" data-path="reg.html"><a href="reg.html#feature-engineering-and-functional-specification"><i class="fa fa-check"></i><b>7.1.4</b> Feature engineering and functional specification</a></li>
-<li class="chapter" data-level="7.1.5" data-path="reg.html"><a href="reg.html#variable-selection"><i class="fa fa-check"></i><b>7.1.5</b> Variable selection</a></li>
-<li class="chapter" data-level="7.1.6" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>7.1.6</b> Exercises</a></li>
+<li class="chapter" data-level="7.1.2" data-path="reg.html"><a href="reg.html#implementation-and-diagnostics"><i class="fa fa-check"></i><b>7.1.2</b> Implementation and diagnostics</a></li>
+<li class="chapter" data-level="7.1.3" data-path="reg.html"><a href="reg.html#coefficients-interpretation-and-inference"><i class="fa fa-check"></i><b>7.1.3</b> Coefficients interpretation and inference</a></li>
+<li class="chapter" data-level="7.1.4" data-path="reg.html"><a href="reg.html#the-frischwaugh-theorem-and-the-omitted-variable-bias"><i class="fa fa-check"></i><b>7.1.4</b> The Frisch–Waugh Theorem and the omitted variable bias</a></li>
+<li class="chapter" data-level="7.1.5" data-path="reg.html"><a href="reg.html#feature-engineering-and-functional-specification"><i class="fa fa-check"></i><b>7.1.5</b> Feature engineering and functional specification</a></li>
+<li class="chapter" data-level="7.1.6" data-path="reg.html"><a href="reg.html#variable-selection"><i class="fa fa-check"></i><b>7.1.6</b> Variable selection</a></li>
+<li class="chapter" data-level="7.1.7" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>7.1.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="reg.html"><a href="reg.html#mathematical-formulation"><i class="fa fa-check"></i><b>7.2.1</b> Mathematical formulation</a></li>
 <li class="chapter" data-level="7.2.2" data-path="reg.html"><a href="reg.html#implementation-in-r-and-interpretation"><i class="fa fa-check"></i><b>7.2.2</b> Implementation in R and interpretation</a></li>
 <li class="chapter" data-level="7.2.3" data-path="reg.html"><a href="reg.html#goodness-of-fit"><i class="fa fa-check"></i><b>7.2.3</b> Goodness of fit</a></li>
+<li class="chapter" data-level="7.2.4" data-path="stats.html"><a href="stats.html#exercises-1"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -297,10 +299,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\epsilon_i\)</span> has a zero conditional mean <span class="math inline">\(\mathbb{E}(\epsilon | X)=0\)</span></li>
 </ul>
 <p>This last condition helps us to derive an estimator for b (which can be derived in several ways) which is called the OLS estimator (Ordinary Least Squares), which is the solution of the optimization program :</p>
-<p><span class="math display">\[\hat{b}=argmin_b \sum_{i=1}^n \epsilon_i^2 = argmin_b \sum_{i=1}^n (x_i-x_i \cdot b)^2\]</span></p>
+<p><span class="math display">\[\hat{b}=argmin_b \sum_{i=1}^n \epsilon_i^2 = argmin_b \sum_{i=1}^n (y_i-x_i \cdot b)^2\]</span></p>
 <p>The solution is <span class="math inline">\(\hat{b} = (X&#39;X)^{-1}X&#39;y\)</span> where <span class="math inline">\(X&#39;=t(X)\)</span>. <span class="math inline">\((X&#39;X)^{-1}X\)</span> is the projection matrix over the hyperplane defined by the features.</p>
-<p><img src="img/ols-regression-geometry.png" />
-### Implementation and diagnostics</p>
+<p><img src="img/ols-regression-geometry.png" /></p>
+</div>
+<div id="implementation-and-diagnostics" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Implementation and diagnostics</h3>
 <p>To implement a linear regression with R, we use the lm function :</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="reg.html#cb247-1"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span>avgPower <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span>distance <span class="op">+</span><span class="st"> </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower, <span class="dt">data=</span>dat_bike)</span>
 <span id="cb247-2"><a href="reg.html#cb247-2"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
@@ -335,7 +339,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="coefficients-interpretation-and-inference" class="section level3">
-<h3><span class="header-section-number">7.1.2</span> Coefficients interpretation and inference</h3>
+<h3><span class="header-section-number">7.1.3</span> Coefficients interpretation and inference</h3>
 <p>Back to original equation, we can understand how much each feature influences in average the output.</p>
 <p><span class="math display">\[ \dfrac{\partial y}{\partial x_1} = b_1\]</span>
 Meaning that the increase of <span class="math inline">\(x_1\)</span> by one unit causes the output to increase in average by <span class="math inline">\(b_1\)</span> (which can of course be negative). In our example, one additional watt will result in an increase of the average speed by 0.25 km/h</p>
@@ -350,7 +354,7 @@ We can therefore perform statistical tests following the previous methodology (s
 Those are pretty long tailed, which might reflect some outliers or a wrong functional specification !</p>
 </div>
 <div id="the-frischwaugh-theorem-and-the-omitted-variable-bias" class="section level3">
-<h3><span class="header-section-number">7.1.3</span> The Frisch–Waugh Theorem and the omitted variable bias</h3>
+<h3><span class="header-section-number">7.1.4</span> The Frisch–Waugh Theorem and the omitted variable bias</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem">Frisch-Waugh theorem</a> tells us that adding a variable as regressor ensures that our estimates controls for the effect of this variable. In other words, you can interpret the coefficients’ values <em>ceteris paribus</em> (other things equal).</p>
 <p>This also means that if you omit a variable, the coefficient of the other variables are likely to be biased, because you did not take an important variable into account. Back to our example, we can add the elevationGain variable and check what happens :</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="reg.html#cb250-1"></a>reg &lt;-<span class="st"> </span><span class="kw">lm</span>(avgSpeed<span class="op">~</span>avgPower <span class="op">+</span><span class="st"> </span>avgBikeCadence <span class="op">+</span><span class="st"> </span>distance <span class="op">+</span><span class="st"> </span>avgHr <span class="op">+</span><span class="st"> </span>max20MinPower <span class="op">+</span><span class="st"> </span>elevationGain, <span class="dt">data=</span>dat_bike)</span>
@@ -389,7 +393,7 @@ Those are pretty long tailed, which might reflect some outliers or a wrong funct
 <p>Notice though that the RMSE and the adjusted <span class="math inline">\(R^2\)</span> degraded… See the variable selection to see how to mitigate that problem.</p>
 </div>
 <div id="feature-engineering-and-functional-specification" class="section level3">
-<h3><span class="header-section-number">7.1.4</span> Feature engineering and functional specification</h3>
+<h3><span class="header-section-number">7.1.5</span> Feature engineering and functional specification</h3>
 <p>The omitted variable bias makes it very important to include as much variables as possible if you want to be able to estimate the coefficient as accurately as possible. What you can do is add :</p>
 <ul>
 <li>Exponents to the regressors</li>
@@ -471,7 +475,7 @@ Those are pretty long tailed, which might reflect some outliers or a wrong funct
 ## F-statistic: 266.5 on 21 and 435 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div id="variable-selection" class="section level3">
-<h3><span class="header-section-number">7.1.5</span> Variable selection</h3>
+<h3><span class="header-section-number">7.1.6</span> Variable selection</h3>
 <p>So far we focused on getting the best coefficient estimates to be able to interpret how features impact our target variable (“explainable AI”), but following the previous logic, adding the more feature the better ! However, when focusing on the best prediction, you are more interested in finding the most general model which will perform well <em>out of sample</em> adding more and more variables can lead, as a matter of fact, to an overfitted model, which will hardly generalize.</p>
 <p>This is illustration of the bias-variance trade-off which you will see more in depth during the machine learning session.</p>
 <p><img src="img/Overfitting.png" />
@@ -600,11 +604,12 @@ Regarding regression, avoiding overfitting can be done with variable selection :
 ## F-statistic: 295.8 on 19 and 437 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div id="exercises" class="section level3">
-<h3><span class="header-section-number">7.1.6</span> Exercises</h3>
+<h3><span class="header-section-number">7.1.7</span> Exercises</h3>
 <ul>
-<li>From the last functional form used, design a graphic that shows the final impact of an increase in power to the average speed, taking the distance into account.</li>
-<li>Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates…). Feature importance can be very important. Example : to prepare for competitions (that take place between may-september), I always follow a structured training plan at some point. This has a direct impact on the performances. Can you identify when this preparation starts and how to integrate it in the model ? This closely linked to your assignment ;)</li>
+<li>Design a regression model that will predict best the theoretical average speed for indoor bike activities (that have no speed, no coordinates…).</li>
+<li>Feature importance can be very important. Example : to prepare for competitions (that take place between may-september), I always follow a structured training plan at some point. This has a direct impact on the performances. Can you identify when this preparation starts and how to integrate it in the model ? This is somehow connected to your assignment ;)</li>
 <li>Can you identify the measurement errors (thanks to residuals)</li>
+<li>From the last functional specification used, design a graphic that shows the final impact of an increase in power to the average speed, taking the distance into account.</li>
 </ul>
 </div>
 </div>
@@ -674,6 +679,13 @@ You can derive other goodness of fit metrics from the previous <strong>confusion
 </ul>
 <p><img src="img/conf_matrix.png" /></p>
 <p>Depending on your business use case, you will focus more on one or the other metric. You will cover this in more detail durinng the machine learning week :)</p>
+</div>
+<div id="exercises-1" class="section level3">
+<h3><span class="header-section-number">7.2.4</span> Exercises</h3>
+<ul>
+<li>Fit a model for avgSpeed with all activities (including the activity type)</li>
+<li>Fit a model to guess whether an activity is a run or something else</li>
+</ul>
 
 </div>
 </div>

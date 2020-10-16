@@ -241,16 +241,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>7</b> Linear and logistic regression</a><ul>
 <li class="chapter" data-level="7.1" data-path="reg.html"><a href="reg.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear regression</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="reg.html"><a href="reg.html#general-presentation"><i class="fa fa-check"></i><b>7.1.1</b> General presentation</a></li>
-<li class="chapter" data-level="7.1.2" data-path="reg.html"><a href="reg.html#coefficients-interpretation-and-inference"><i class="fa fa-check"></i><b>7.1.2</b> Coefficients interpretation and inference</a></li>
-<li class="chapter" data-level="7.1.3" data-path="reg.html"><a href="reg.html#the-frischwaugh-theorem-and-the-omitted-variable-bias"><i class="fa fa-check"></i><b>7.1.3</b> The Frisch–Waugh Theorem and the omitted variable bias</a></li>
-<li class="chapter" data-level="7.1.4" data-path="reg.html"><a href="reg.html#feature-engineering-and-functional-specification"><i class="fa fa-check"></i><b>7.1.4</b> Feature engineering and functional specification</a></li>
-<li class="chapter" data-level="7.1.5" data-path="reg.html"><a href="reg.html#variable-selection"><i class="fa fa-check"></i><b>7.1.5</b> Variable selection</a></li>
-<li class="chapter" data-level="7.1.6" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>7.1.6</b> Exercises</a></li>
+<li class="chapter" data-level="7.1.2" data-path="reg.html"><a href="reg.html#implementation-and-diagnostics"><i class="fa fa-check"></i><b>7.1.2</b> Implementation and diagnostics</a></li>
+<li class="chapter" data-level="7.1.3" data-path="reg.html"><a href="reg.html#coefficients-interpretation-and-inference"><i class="fa fa-check"></i><b>7.1.3</b> Coefficients interpretation and inference</a></li>
+<li class="chapter" data-level="7.1.4" data-path="reg.html"><a href="reg.html#the-frischwaugh-theorem-and-the-omitted-variable-bias"><i class="fa fa-check"></i><b>7.1.4</b> The Frisch–Waugh Theorem and the omitted variable bias</a></li>
+<li class="chapter" data-level="7.1.5" data-path="reg.html"><a href="reg.html#feature-engineering-and-functional-specification"><i class="fa fa-check"></i><b>7.1.5</b> Feature engineering and functional specification</a></li>
+<li class="chapter" data-level="7.1.6" data-path="reg.html"><a href="reg.html#variable-selection"><i class="fa fa-check"></i><b>7.1.6</b> Variable selection</a></li>
+<li class="chapter" data-level="7.1.7" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>7.1.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="reg.html"><a href="reg.html#mathematical-formulation"><i class="fa fa-check"></i><b>7.2.1</b> Mathematical formulation</a></li>
 <li class="chapter" data-level="7.2.2" data-path="reg.html"><a href="reg.html#implementation-in-r-and-interpretation"><i class="fa fa-check"></i><b>7.2.2</b> Implementation in R and interpretation</a></li>
 <li class="chapter" data-level="7.2.3" data-path="reg.html"><a href="reg.html#goodness-of-fit"><i class="fa fa-check"></i><b>7.2.3</b> Goodness of fit</a></li>
+<li class="chapter" data-level="7.2.4" data-path="stats.html"><a href="stats.html#exercises-1"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -478,7 +480,7 @@ Another very interesting characteristic of the language is that it is by design 
 ##         z$qr &lt;- NULL
 ##     z
 ## }
-## &lt;bytecode: 0x7f98b85338f0&gt;
+## &lt;bytecode: 0x7faadb9eff70&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="intro-r.html#cb16-1"></a>obj &lt;-<span class="st"> </span><span class="dv">3</span></span>
 <span id="cb16-2"><a href="intro-r.html#cb16-2"></a>obj</span></code></pre></div>
@@ -612,35 +614,35 @@ Another very interesting characteristic of the language is that it is by design 
 ## [1129]  97.8  97.9  98.0  98.1  98.2  98.3  98.4  98.5  98.6  98.7  98.8  98.9
 ## [1141]  99.0  99.1  99.2  99.3  99.4  99.5  99.6  99.7  99.8  99.9 100.0</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="intro-r.html#cb24-1"></a>my_vect &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>) ; <span class="kw">print</span>(my_vect)</span></code></pre></div>
-<pre><code>##   [1]  0.14417695  0.12660674  0.07054141 -1.41341092  0.70440379 -0.14516983
-##   [7] -0.09957803 -1.59084689  0.95832608 -0.23785753  0.12794339 -0.56150269
-##  [13] -0.57734839  0.75321875 -0.02104187  0.91656225  1.22500748 -0.70486928
-##  [19]  1.11985292  0.45832759 -0.24017263  0.81315536 -0.33523432  0.11924386
-##  [25]  0.40694399  0.85520686  0.79607275  0.62149110  0.55629945  0.82695413
-##  [31] -0.07239496  0.53134553  1.04862451  2.00756490 -2.14751583 -0.53790642
-##  [37]  0.75978010  0.18058449 -0.82969261 -0.43976701  0.11121754  0.51801549
-##  [43] -0.15181694  0.30687580 -1.03911428 -0.34984995 -0.26013172  0.18174283
-##  [49] -0.87142503  0.59707232  1.07298398 -0.77839347 -1.66108189  0.53610844
-##  [55]  0.28614679 -1.20888034  1.41278276  0.82211391  0.79356500 -0.46731816
-##  [61]  0.41161025  0.02739379  0.48079325  0.28059719  0.17727339 -0.61901070
-##  [67] -0.01484188  1.10841053  0.48407263  1.04632523  0.40614788 -0.12084580
-##  [73]  0.02955537  0.69723729 -1.32585905  0.20178032 -1.59565982  0.38106267
-##  [79] -0.64639052 -1.71535663 -0.91024074 -0.35047443 -0.02547521 -0.56872698
-##  [85]  0.20587236  0.95008420  0.55007812  1.44480188  0.33084768 -0.66773052
-##  [91]  0.27866752 -0.26830326 -0.07523347  0.96832185  0.67609415 -0.05113028
-##  [97] -0.92928919  1.06845321  0.99080307 -0.65708133</code></pre>
+<pre><code>##   [1]  0.83584019 -0.44735350 -0.68212838 -0.34514150 -0.70168738 -1.19510032
+##   [7] -0.13208693 -0.18899438 -1.56796209 -0.29847142 -2.48318251  0.43150326
+##  [13] -0.85941414  0.26982906  0.18244317 -0.37376001 -1.02135178  0.19058138
+##  [19] -0.12251906  2.21251319  0.11882820 -1.07984804  0.68392499  1.38602493
+##  [25] -0.96732149  1.28066059  0.20689982 -0.37377199 -1.19601512 -2.33450912
+##  [31] -1.82624203 -0.19851965  0.48175253  1.38338034  1.41554216 -0.28445933
+##  [37] -1.17395811 -0.97232981 -0.64896085  2.22416528 -0.01116127 -0.83412788
+##  [43]  0.79097906  0.07026784  1.62492312  1.39436166 -0.84110349 -0.57651103
+##  [49]  0.61074412  1.52179856 -0.42332982 -0.19059241  0.23622710 -2.13740940
+##  [55] -2.54848377  0.23998506 -1.00741970 -0.10378630 -0.41682175 -0.83167442
+##  [61]  1.10274327  0.08965672  0.72389057  0.69604488 -1.09347707 -0.95054248
+##  [67] -0.18721050  0.02425375 -1.26198598  0.03250545 -0.03921135  0.54629676
+##  [73] -1.82991541  0.83396502 -0.10948124 -0.77278356  1.06819052 -1.73029104
+##  [79] -1.33171269 -0.94700301 -1.21639033 -1.39296564  0.37232487  0.47810419
+##  [85] -0.97458682 -0.66184315  0.46731359 -1.03177600  1.18511678  0.40427166
+##  [91]  0.69354406 -0.05298171  1.70466336 -1.20585922 -0.60184794 -1.20761513
+##  [97]  0.72798997  0.28146655  0.49499855 -1.75206010</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="intro-r.html#cb26-1"></a>my_vect &lt;-<span class="st"> </span><span class="kw">sample</span>(letters,<span class="dv">100</span>,<span class="dt">replace =</span> T) ; <span class="kw">print</span>(my_vect)</span></code></pre></div>
-<pre><code>##   [1] &quot;m&quot; &quot;v&quot; &quot;w&quot; &quot;m&quot; &quot;k&quot; &quot;x&quot; &quot;c&quot; &quot;j&quot; &quot;g&quot; &quot;l&quot; &quot;j&quot; &quot;u&quot; &quot;c&quot; &quot;s&quot; &quot;o&quot; &quot;f&quot; &quot;a&quot; &quot;a&quot;
-##  [19] &quot;i&quot; &quot;r&quot; &quot;j&quot; &quot;i&quot; &quot;z&quot; &quot;y&quot; &quot;s&quot; &quot;n&quot; &quot;l&quot; &quot;e&quot; &quot;e&quot; &quot;x&quot; &quot;e&quot; &quot;z&quot; &quot;r&quot; &quot;z&quot; &quot;j&quot; &quot;e&quot;
-##  [37] &quot;c&quot; &quot;r&quot; &quot;x&quot; &quot;j&quot; &quot;v&quot; &quot;n&quot; &quot;j&quot; &quot;w&quot; &quot;z&quot; &quot;p&quot; &quot;f&quot; &quot;c&quot; &quot;d&quot; &quot;k&quot; &quot;x&quot; &quot;m&quot; &quot;b&quot; &quot;p&quot;
-##  [55] &quot;g&quot; &quot;d&quot; &quot;f&quot; &quot;r&quot; &quot;t&quot; &quot;r&quot; &quot;d&quot; &quot;h&quot; &quot;q&quot; &quot;b&quot; &quot;e&quot; &quot;l&quot; &quot;u&quot; &quot;m&quot; &quot;x&quot; &quot;o&quot; &quot;u&quot; &quot;h&quot;
-##  [73] &quot;s&quot; &quot;u&quot; &quot;i&quot; &quot;p&quot; &quot;z&quot; &quot;q&quot; &quot;x&quot; &quot;u&quot; &quot;m&quot; &quot;y&quot; &quot;a&quot; &quot;n&quot; &quot;k&quot; &quot;q&quot; &quot;e&quot; &quot;w&quot; &quot;v&quot; &quot;x&quot;
-##  [91] &quot;v&quot; &quot;f&quot; &quot;j&quot; &quot;c&quot; &quot;n&quot; &quot;c&quot; &quot;e&quot; &quot;n&quot; &quot;g&quot; &quot;a&quot;</code></pre>
+<pre><code>##   [1] &quot;m&quot; &quot;g&quot; &quot;m&quot; &quot;e&quot; &quot;q&quot; &quot;b&quot; &quot;p&quot; &quot;y&quot; &quot;l&quot; &quot;m&quot; &quot;o&quot; &quot;i&quot; &quot;f&quot; &quot;a&quot; &quot;m&quot; &quot;p&quot; &quot;c&quot; &quot;u&quot;
+##  [19] &quot;m&quot; &quot;q&quot; &quot;d&quot; &quot;x&quot; &quot;m&quot; &quot;t&quot; &quot;a&quot; &quot;n&quot; &quot;b&quot; &quot;z&quot; &quot;k&quot; &quot;b&quot; &quot;m&quot; &quot;f&quot; &quot;v&quot; &quot;e&quot; &quot;y&quot; &quot;x&quot;
+##  [37] &quot;n&quot; &quot;g&quot; &quot;k&quot; &quot;a&quot; &quot;u&quot; &quot;w&quot; &quot;m&quot; &quot;m&quot; &quot;n&quot; &quot;c&quot; &quot;w&quot; &quot;s&quot; &quot;u&quot; &quot;r&quot; &quot;f&quot; &quot;f&quot; &quot;y&quot; &quot;m&quot;
+##  [55] &quot;e&quot; &quot;f&quot; &quot;w&quot; &quot;c&quot; &quot;j&quot; &quot;t&quot; &quot;p&quot; &quot;s&quot; &quot;e&quot; &quot;a&quot; &quot;v&quot; &quot;o&quot; &quot;j&quot; &quot;i&quot; &quot;n&quot; &quot;f&quot; &quot;j&quot; &quot;f&quot;
+##  [73] &quot;z&quot; &quot;x&quot; &quot;b&quot; &quot;q&quot; &quot;e&quot; &quot;l&quot; &quot;z&quot; &quot;v&quot; &quot;u&quot; &quot;n&quot; &quot;r&quot; &quot;k&quot; &quot;i&quot; &quot;l&quot; &quot;l&quot; &quot;n&quot; &quot;w&quot; &quot;s&quot;
+##  [91] &quot;a&quot; &quot;l&quot; &quot;g&quot; &quot;g&quot; &quot;o&quot; &quot;q&quot; &quot;t&quot; &quot;a&quot; &quot;z&quot; &quot;q&quot;</code></pre>
 <p>You can access vector values with integer indexes (that are vector themselves). <strong>Note :</strong> unlike Python, the indexes start with the value 1, not 0 !</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="intro-r.html#cb28-1"></a>my_vect[<span class="dv">4</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;m&quot;</code></pre>
+<pre><code>## [1] &quot;e&quot;</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="intro-r.html#cb30-1"></a>my_vect[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;m&quot; &quot;v&quot; &quot;w&quot; &quot;m&quot;</code></pre>
+<pre><code>## [1] &quot;m&quot; &quot;g&quot; &quot;m&quot; &quot;e&quot;</code></pre>
 <p>A vector can be <em>named</em> meaning that each element has a name through which it can be accessed.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="intro-r.html#cb32-1"></a>my_vect &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
 <span id="cb32-2"><a href="intro-r.html#cb32-2"></a><span class="kw">names</span>(my_vect) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] ; <span class="kw">print</span>(my_vect)</span></code></pre></div>

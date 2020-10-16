@@ -359,8 +359,7 @@ Let's check the correlation matrix to be sure about what we are reading here
 
 ```{r}
 select(acp_dat,-deviceId) %>% 
-  cor() %>% 
-  corrplot::corrplot()
+  GGally::ggcorr()
 ```
 
 How about the individuals ?
@@ -483,7 +482,7 @@ In the course material, you'll find one example for each package. You'll easily 
 ```{r}
 # install.packages("plotly")
 require(plotly)
-ggplotly(gg1)
+# ggplotly(gg1)
 ```
 
 This is very useful to embed in a rmarkdown document or a shiny app !
@@ -495,10 +494,10 @@ You can use a lot of other [html widgets](https://www.htmlwidgets.org/index.html
 Example of leaflet :
 
 ```{r}
-filter(dat,is_bike) %>%
-  leaflet::leaflet(data=.) %>%
-  leaflet::addMarkers(lng = ~startLongitude,lat = ~startLatitude,
-                             popup = ~activityId) %>%
-  leaflet::addTiles()
+# filter(dat,is_bike) %>%
+#   leaflet::leaflet(data=.) %>%
+#   leaflet::addMarkers(lng = ~startLongitude,lat = ~startLatitude,
+#                              popup = ~activityId) %>%
+#   leaflet::addTiles()
 ```
 

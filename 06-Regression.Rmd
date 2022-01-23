@@ -35,7 +35,7 @@ The solution is $\hat{b} = (X'X)^{-1}X'y$ where $X'=t(X)$. $(X'X)^{-1}X$ is the 
 
 ### Implementation and diagnostics
 
-To implement a linear regression with R, we use the lm function :
+To implement a linear regression with R, we use the `lm` function :
 
 ```{r}
 reg <- lm(avgSpeed~avgPower + avgBikeCadence + distance + avgHr + max20MinPower, data=dat_bike)

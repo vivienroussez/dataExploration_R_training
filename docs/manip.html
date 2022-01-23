@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Data manipulation | Data exploration and statistics with R and the tidyverse</title>
   <meta name="description" content="Welcome to the wonderful world of data science and R !" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Data manipulation | Data exploration and statistics with R and the tidyverse" />
   <meta property="og:type" content="book" />
@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Welcome to the wonderful world of data science and R !" />
   
 
-<meta name="author" content="Vivien Roussez (A1 Telekom Austria Group)" />
+<meta name="author" content="Vivien Roussez (GoStudent)" />
 
 
 
@@ -30,9 +30,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro-r.html"/>
+<link rel="prev" href="intro_r.html"/>
 <link rel="next" href="stats.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -48,37 +50,23 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -98,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -148,7 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Foreword</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#topics-of-the-week"><i class="fa fa-check"></i><b>2.1</b> Topics of the week</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#the-data-science-workflow"><i class="fa fa-check"></i><b>2.2</b> The data science workflow</a></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#about-the-interactions-with-other-colleagues"><i class="fa fa-check"></i><b>2.3</b> About the interactions with other colleagues</a></li>
@@ -156,27 +146,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#data-of-the-week"><i class="fa fa-check"></i><b>2.5</b> Data of the week</a></li>
 <li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#your-mission"><i class="fa fa-check"></i><b>2.6</b> Your mission</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="intro-r.html"><a href="intro-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to R</a><ul>
-<li class="chapter" data-level="3.1" data-path="intro-r.html"><a href="intro-r.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is R</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="intro-r.html"><a href="intro-r.html#description"><i class="fa fa-check"></i><b>3.1.1</b> Description</a></li>
-<li class="chapter" data-level="3.1.2" data-path="intro-r.html"><a href="intro-r.html#objective-comparison-with-pyhton"><i class="fa fa-check"></i><b>3.1.2</b> (Objective) comparison with Pyhton</a></li>
-<li class="chapter" data-level="3.1.3" data-path="intro-r.html"><a href="intro-r.html#what-can-i-do-with-r"><i class="fa fa-check"></i><b>3.1.3</b> What can I do with R</a></li>
-<li class="chapter" data-level="3.1.4" data-path="intro-r.html"><a href="intro-r.html#quick-presentation-of-the-ecosystem"><i class="fa fa-check"></i><b>3.1.4</b> Quick presentation of the ecosystem</a></li>
+<li class="chapter" data-level="3" data-path="intro_r.html"><a href="intro_r.html"><i class="fa fa-check"></i><b>3</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="intro_r.html"><a href="intro_r.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is R</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="intro_r.html"><a href="intro_r.html#description"><i class="fa fa-check"></i><b>3.1.1</b> Description</a></li>
+<li class="chapter" data-level="3.1.2" data-path="intro_r.html"><a href="intro_r.html#objective-comparison-with-pyhton"><i class="fa fa-check"></i><b>3.1.2</b> (Objective) comparison with Pyhton</a></li>
+<li class="chapter" data-level="3.1.3" data-path="intro_r.html"><a href="intro_r.html#what-can-i-do-with-r"><i class="fa fa-check"></i><b>3.1.3</b> What can I do with R</a></li>
+<li class="chapter" data-level="3.1.4" data-path="intro_r.html"><a href="intro_r.html#quick-presentation-of-the-ecosystem"><i class="fa fa-check"></i><b>3.1.4</b> Quick presentation of the ecosystem</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="intro-r.html"><a href="intro-r.html#basic-commands-to-know"><i class="fa fa-check"></i><b>3.2</b> Basic commands to know</a></li>
-<li class="chapter" data-level="3.3" data-path="intro-r.html"><a href="intro-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>3.3</b> Data structures in R</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="intro-r.html"><a href="intro-r.html#basic-data-structures"><i class="fa fa-check"></i><b>3.3.1</b> Basic data structures</a></li>
-<li class="chapter" data-level="3.3.2" data-path="intro-r.html"><a href="intro-r.html#explore-a-new-data-structure-or-object"><i class="fa fa-check"></i><b>3.3.2</b> Explore a new data structure (or object)</a></li>
+<li class="chapter" data-level="3.2" data-path="intro_r.html"><a href="intro_r.html#basic-commands-to-know"><i class="fa fa-check"></i><b>3.2</b> Basic commands to know</a></li>
+<li class="chapter" data-level="3.3" data-path="intro_r.html"><a href="intro_r.html#data-structures-in-r"><i class="fa fa-check"></i><b>3.3</b> Data structures in R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="intro_r.html"><a href="intro_r.html#basic-data-structures"><i class="fa fa-check"></i><b>3.3.1</b> Basic data structures</a></li>
+<li class="chapter" data-level="3.3.2" data-path="intro_r.html"><a href="intro_r.html#explore-a-new-data-structure-or-object"><i class="fa fa-check"></i><b>3.3.2</b> Explore a new data structure (or object)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="manip.html"><a href="manip.html"><i class="fa fa-check"></i><b>4</b> Data manipulation</a><ul>
-<li class="chapter" data-level="4.1" data-path="manip.html"><a href="manip.html#import"><i class="fa fa-check"></i><b>4.1</b> Import</a><ul>
+<li class="chapter" data-level="4" data-path="manip.html"><a href="manip.html"><i class="fa fa-check"></i><b>4</b> Data manipulation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="manip.html"><a href="manip.html#import"><i class="fa fa-check"></i><b>4.1</b> Import</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="manip.html"><a href="manip.html#text-files"><i class="fa fa-check"></i><b>4.1.1</b> Text files</a></li>
 <li class="chapter" data-level="4.1.2" data-path="manip.html"><a href="manip.html#excel-files"><i class="fa fa-check"></i><b>4.1.2</b> Excel files</a></li>
 <li class="chapter" data-level="4.1.3" data-path="manip.html"><a href="manip.html#more-formats"><i class="fa fa-check"></i><b>4.1.3</b> More formats</a></li>
 <li class="chapter" data-level="4.1.4" data-path="manip.html"><a href="manip.html#read-from-databases-big-data"><i class="fa fa-check"></i><b>4.1.4</b> Read from databases / big data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="manip.html"><a href="manip.html#the-grammar-of-data-manipulation"><i class="fa fa-check"></i><b>4.2</b> The grammar of data manipulation</a><ul>
+<li class="chapter" data-level="4.2" data-path="manip.html"><a href="manip.html#the-grammar-of-data-manipulation"><i class="fa fa-check"></i><b>4.2</b> The grammar of data manipulation</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="manip.html"><a href="manip.html#the-pipe"><i class="fa fa-check"></i><b>4.2.1</b> The pipe</a></li>
 <li class="chapter" data-level="4.2.2" data-path="manip.html"><a href="manip.html#the-verbs-of-manipulation"><i class="fa fa-check"></i><b>4.2.2</b> The verbs of manipulation</a></li>
 <li class="chapter" data-level="4.2.3" data-path="manip.html"><a href="manip.html#filter-conditions"><i class="fa fa-check"></i><b>4.2.3</b> Filter : conditions</a></li>
@@ -185,28 +181,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.6" data-path="manip.html"><a href="manip.html#join-with-other-tables"><i class="fa fa-check"></i><b>4.2.6</b> Join with other tables</a></li>
 <li class="chapter" data-level="4.2.7" data-path="manip.html"><a href="manip.html#manipulate-several-data-in-the-same-time"><i class="fa fa-check"></i><b>4.2.7</b> Manipulate several data in the same time</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="manip.html"><a href="manip.html#lets-import-and-wrangle-some-data"><i class="fa fa-check"></i><b>4.3</b> Let’s import and wrangle some data !</a><ul>
+<li class="chapter" data-level="4.3" data-path="manip.html"><a href="manip.html#lets-import-and-wrangle-some-data"><i class="fa fa-check"></i><b>4.3</b> Let’s import and wrangle some data !</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="manip.html"><a href="manip.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
 <li class="chapter" data-level="4.3.2" data-path="manip.html"><a href="manip.html#one-tool-you-will-need-lapply"><i class="fa fa-check"></i><b>4.3.2</b> One tool you will need : <code>lapply()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="manip.html"><a href="manip.html#tidy-your-data"><i class="fa fa-check"></i><b>4.4</b> Tidy your data</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Statistics</a><ul>
-<li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#definitions"><i class="fa fa-check"></i><b>5.1</b> Definitions</a><ul>
+<li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#definitions"><i class="fa fa-check"></i><b>5.1</b> Definitions</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="stats.html"><a href="stats.html#terminology"><i class="fa fa-check"></i><b>5.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="5.1.2" data-path="stats.html"><a href="stats.html#types-of-variables"><i class="fa fa-check"></i><b>5.1.2</b> Types of variables</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#univariate-statistics"><i class="fa fa-check"></i><b>5.2</b> Univariate statistics</a><ul>
+<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#univariate-statistics"><i class="fa fa-check"></i><b>5.2</b> Univariate statistics</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="stats.html"><a href="stats.html#numerical-variables"><i class="fa fa-check"></i><b>5.2.1</b> Numerical variables</a></li>
 <li class="chapter" data-level="5.2.2" data-path="stats.html"><a href="stats.html#categorical-variables"><i class="fa fa-check"></i><b>5.2.2</b> Categorical variables</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#bivariate-statistics"><i class="fa fa-check"></i><b>5.3</b> Bivariate statistics</a><ul>
+<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#bivariate-statistics"><i class="fa fa-check"></i><b>5.3</b> Bivariate statistics</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="stats.html"><a href="stats.html#continuous-variables"><i class="fa fa-check"></i><b>5.3.1</b> 2 continuous variables</a></li>
 <li class="chapter" data-level="5.3.2" data-path="stats.html"><a href="stats.html#categorical-variables-1"><i class="fa fa-check"></i><b>5.3.2</b> 2 categorical variables</a></li>
 <li class="chapter" data-level="5.3.3" data-path="stats.html"><a href="stats.html#continuous-1-categorical-variable"><i class="fa fa-check"></i><b>5.3.3</b> 1 continuous, 1 categorical variable</a></li>
 <li class="chapter" data-level="5.3.4" data-path="stats.html"><a href="stats.html#exercises-1"><i class="fa fa-check"></i><b>5.3.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#stat_inf"><i class="fa fa-check"></i><b>5.4</b> Statistical inference</a><ul>
+<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#stat_inf"><i class="fa fa-check"></i><b>5.4</b> Statistical inference</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="stats.html"><a href="stats.html#the-statistical-model"><i class="fa fa-check"></i><b>5.4.1</b> The statistical model</a></li>
 <li class="chapter" data-level="5.4.2" data-path="stats.html"><a href="stats.html#two-fundamental-theorems"><i class="fa fa-check"></i><b>5.4.2</b> Two fundamental theorems</a></li>
 <li class="chapter" data-level="5.4.3" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>5.4.3</b> Statistical tests</a></li>
@@ -214,45 +216,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.5" data-path="stats.html"><a href="stats.html#exercises-interprete-a-test-you-dont-know"><i class="fa fa-check"></i><b>5.4.5</b> Exercises : interprete a test you don’t know</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="multivar.html"><a href="multivar.html"><i class="fa fa-check"></i><b>6</b> Multivariate analysis and dimension reduction</a><ul>
-<li class="chapter" data-level="6.1" data-path="multivar.html"><a href="multivar.html#multivariate-analysis"><i class="fa fa-check"></i><b>6.1</b> Multivariate analysis</a><ul>
+<li class="chapter" data-level="6" data-path="multivar.html"><a href="multivar.html"><i class="fa fa-check"></i><b>6</b> Multivariate analysis and dimension reduction</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="multivar.html"><a href="multivar.html#multivariate-analysis"><i class="fa fa-check"></i><b>6.1</b> Multivariate analysis</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="multivar.html"><a href="multivar.html#advanced-visualization"><i class="fa fa-check"></i><b>6.1.1</b> Advanced visualization</a></li>
 <li class="chapter" data-level="6.1.2" data-path="multivar.html"><a href="multivar.html#easily-explore-an-entire-dataset"><i class="fa fa-check"></i><b>6.1.2</b> Easily explore an entire dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="multivar.html"><a href="multivar.html#multivariate-analysis-and-dimension-reduction"><i class="fa fa-check"></i><b>6.2</b> Multivariate analysis and dimension reduction</a><ul>
+<li class="chapter" data-level="6.2" data-path="multivar.html"><a href="multivar.html#multivariate-analysis-and-dimension-reduction"><i class="fa fa-check"></i><b>6.2</b> Multivariate analysis and dimension reduction</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="multivar.html"><a href="multivar.html#imputation"><i class="fa fa-check"></i><b>6.2.1</b> Imputation</a></li>
 <li class="chapter" data-level="6.2.2" data-path="multivar.html"><a href="multivar.html#normalization"><i class="fa fa-check"></i><b>6.2.2</b> Normalization</a></li>
 <li class="chapter" data-level="6.2.3" data-path="multivar.html"><a href="multivar.html#pca"><i class="fa fa-check"></i><b>6.2.3</b> PCA</a></li>
-<li class="chapter" data-level="6.2.4" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>6.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.2.4" data-path="multivar.html"><a href="multivar.html#exercises-2"><i class="fa fa-check"></i><b>6.2.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="multivar.html"><a href="multivar.html#dimension-reduction"><i class="fa fa-check"></i><b>6.3</b> Dimension reduction</a><ul>
+<li class="chapter" data-level="6.3" data-path="multivar.html"><a href="multivar.html#dimension-reduction"><i class="fa fa-check"></i><b>6.3</b> Dimension reduction</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="multivar.html"><a href="multivar.html#use-the-results-of-the-pca"><i class="fa fa-check"></i><b>6.3.1</b> Use the results of the PCA</a></li>
 <li class="chapter" data-level="6.3.2" data-path="multivar.html"><a href="multivar.html#other-inertia-based-methods"><i class="fa fa-check"></i><b>6.3.2</b> Other inertia-based methods</a></li>
 <li class="chapter" data-level="6.3.3" data-path="multivar.html"><a href="multivar.html#t-sne"><i class="fa fa-check"></i><b>6.3.3</b> t-SNE</a></li>
 <li class="chapter" data-level="6.3.4" data-path="multivar.html"><a href="multivar.html#a-word-about-clustering"><i class="fa fa-check"></i><b>6.3.4</b> A word about clustering</a></li>
-<li class="chapter" data-level="6.3.5" data-path="intro-r.html"><a href="intro-r.html#exercise"><i class="fa fa-check"></i><b>6.3.5</b> Exercise</a></li>
+<li class="chapter" data-level="6.3.5" data-path="multivar.html"><a href="multivar.html#exercise-1"><i class="fa fa-check"></i><b>6.3.5</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="multivar.html"><a href="multivar.html#visualization-bonus-dashboards-and-reports"><i class="fa fa-check"></i><b>6.4</b> Visualization bonus : dashboards and reports</a><ul>
+<li class="chapter" data-level="6.4" data-path="multivar.html"><a href="multivar.html#visualization-bonus-dashboards-and-reports"><i class="fa fa-check"></i><b>6.4</b> Visualization bonus : dashboards and reports</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="multivar.html"><a href="multivar.html#shiny-and-rmarkdown"><i class="fa fa-check"></i><b>6.4.1</b> Shiny and rmarkdown</a></li>
 <li class="chapter" data-level="6.4.2" data-path="multivar.html"><a href="multivar.html#web-based-graphics-with-plotly"><i class="fa fa-check"></i><b>6.4.2</b> Web-based graphics with <code>plotly</code></a></li>
 <li class="chapter" data-level="6.4.3" data-path="multivar.html"><a href="multivar.html#other-packages-widgets"><i class="fa fa-check"></i><b>6.4.3</b> Other packages &amp; widgets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>7</b> Linear and logistic regression</a><ul>
-<li class="chapter" data-level="7.1" data-path="reg.html"><a href="reg.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear regression</a><ul>
+<li class="chapter" data-level="7" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>7</b> Linear and logistic regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reg.html"><a href="reg.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear regression</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="reg.html"><a href="reg.html#general-presentation"><i class="fa fa-check"></i><b>7.1.1</b> General presentation</a></li>
 <li class="chapter" data-level="7.1.2" data-path="reg.html"><a href="reg.html#implementation-and-diagnostics"><i class="fa fa-check"></i><b>7.1.2</b> Implementation and diagnostics</a></li>
 <li class="chapter" data-level="7.1.3" data-path="reg.html"><a href="reg.html#coefficients-interpretation-and-inference"><i class="fa fa-check"></i><b>7.1.3</b> Coefficients interpretation and inference</a></li>
 <li class="chapter" data-level="7.1.4" data-path="reg.html"><a href="reg.html#the-frischwaugh-theorem-and-the-omitted-variable-bias"><i class="fa fa-check"></i><b>7.1.4</b> The Frisch–Waugh Theorem and the omitted variable bias</a></li>
 <li class="chapter" data-level="7.1.5" data-path="reg.html"><a href="reg.html#feature-engineering-and-functional-specification"><i class="fa fa-check"></i><b>7.1.5</b> Feature engineering and functional specification</a></li>
 <li class="chapter" data-level="7.1.6" data-path="reg.html"><a href="reg.html#variable-selection"><i class="fa fa-check"></i><b>7.1.6</b> Variable selection</a></li>
-<li class="chapter" data-level="7.1.7" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>7.1.7</b> Exercises</a></li>
+<li class="chapter" data-level="7.1.7" data-path="reg.html"><a href="reg.html#exercises-3"><i class="fa fa-check"></i><b>7.1.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a><ul>
+<li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="reg.html"><a href="reg.html#mathematical-formulation"><i class="fa fa-check"></i><b>7.2.1</b> Mathematical formulation</a></li>
 <li class="chapter" data-level="7.2.2" data-path="reg.html"><a href="reg.html#implementation-in-r-and-interpretation"><i class="fa fa-check"></i><b>7.2.2</b> Implementation in R and interpretation</a></li>
 <li class="chapter" data-level="7.2.3" data-path="reg.html"><a href="reg.html#goodness-of-fit"><i class="fa fa-check"></i><b>7.2.3</b> Goodness of fit</a></li>
-<li class="chapter" data-level="7.2.4" data-path="stats.html"><a href="stats.html#exercises-1"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="7.2.4" data-path="reg.html"><a href="reg.html#exercises-4"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -275,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="manip" class="section level1">
+<div id="manip" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Data manipulation</h1>
 <p><img src="img/data-viz.jpg" /></p>
 <p>In order to manipulate and wrangle data, there are (at least) 3 frameworks available :</p>
@@ -292,139 +302,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>You can check further details and visualization on the <a href="https://r4ds.had.co.nz/tidy-data.html">R for data science online book</a></p>
 <p>Those principles have been largely adopted by the community (powered by Rstudio) and created a full parallel dialect in R for almost all data science tasks : the <a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a> which offers a coherent set of features that are, in addition, often nicely optimized (written in C++)</p>
-<div id="import" class="section level2">
+<div id="import" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Import</h2>
-<div id="text-files" class="section level3">
+<div id="text-files" class="section level3" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Text files</h3>
 <p>You can either use the basic <code>read.table</code> and related functions (eg <code>read.csv</code>) which work pretty fine. If the file is large, you might consider tools from other package such as read_csv and others from the <code>readr</code> package (part of the tidyverse)</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="manip.html#cb77-1"></a>dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/Sports/Activities.csv&quot;</span>,<span class="dt">header =</span> T)</span>
-<span id="cb77-2"><a href="manip.html#cb77-2"></a><span class="kw">head</span>(dat)</span></code></pre></div>
-<pre><code>##   activityId       uuidMsb       uuidLsb                name activityType
-## 1 5570974040  3.695224e+18 -7.098507e+18          En piscine lap_swimming
-## 2 5566524321 -5.212790e+18 -8.140623e+18     Vienna Cyclisme      cycling
-## 3 5561266034  1.271356e+18 -5.522844e+18 Korneuburg Cyclisme      cycling
-## 4 5555881653 -2.923938e+18 -4.676832e+18       Vienna Course      running
-## 5 5551811953  7.859043e+18 -7.909532e+18      Zwift - London virtual_ride
-## 6 5551052200 -9.554086e+17 -6.866435e+18          En piscine lap_swimming
-##   userProfileId timeZoneId beginTimestamp eventTypeId   rule sportType
-## 1       1141258        124   1.600700e+12           9 public   GENERIC
-## 2       1141258        124   1.600602e+12           9 public   CYCLING
-## 3       1141258        124   1.600523e+12           9 public   CYCLING
-## 4       1141258        124   1.600439e+12           9 public   RUNNING
-## 5       1141258        124   1.600362e+12           9 public   GENERIC
-## 6       1141258        124   1.600353e+12           9 public   GENERIC
-##   startTimeGmt startTimeLocal duration distance elevationGain elevationLoss
-## 1 1.600700e+12   1.600708e+12  3640221   300000            NA            NA
-## 2 1.600602e+12   1.600609e+12 15064570 12293220        200100        196800
-## 3 1.600523e+12   1.600530e+12 10382433  8360927         74500         74200
-## 4 1.600439e+12   1.600447e+12  5393830  1792890         42600         42500
-## 5 1.600362e+12   1.600369e+12  3626825  3492347         16000             0
-## 6 1.600353e+12   1.600360e+12  3359145   285000            NA            NA
-##   avgSpeed maxSpeed avgHr maxHr  calories startLongitude startLatitude
-## 1   0.0986   0.1122    NA    NA  2547.532             NA            NA
-## 2   0.8160   1.9315   144   176 16345.268       16.31524      48.20915
-## 3   0.8053   1.9557   117   161  8744.572       16.33986      48.34994
-## 4   0.3324   1.2475   155   176  4923.274       16.31587      48.21432
-## 5   0.9629   1.6364   138   163  3083.855        0.00000       0.00000
-## 6   0.1011   0.3524    NA    NA  2505.632             NA            NA
-##   aerobicTrainingEffect avgFractionalCadence maxFractionalCadence
-## 1                    NA               0.0000                    0
-## 2                   3.5               0.0000                    0
-## 3                   2.4               0.0000                    0
-## 4                   3.0               0.1875                    0
-## 5                   0.0               0.0000                    0
-## 6                    NA               0.0000                    0
-##   elapsedDuration movingDuration anaerobicTrainingEffect   deviceId
-## 1         3955901        3099653                      NA 3968818126
-## 2        16176575       15000179                     0.0 3968818126
-## 3        11319866       10356078                     0.0 3968818126
-## 4         5538505        5389603                     0.2 3968818126
-## 5         3629000        3611000                      NA 3825981698
-## 6         3585826        2858951                      NA 3968818126
-##   minTemperature maxTemperature minElevation maxElevation        locationName
-## 1             25             26           NA           NA                &lt;NA&gt;
-## 2             19             29        18480        95480              Vienna
-## 3             18             29        13980        32200          Korneuburg
-## 4             19             27        24920        54400              Vienna
-## 5             NA             NA          300         3420 City of Westminster
-## 6             26             27           NA           NA                &lt;NA&gt;
-##   maxVerticalSpeed lapCount endLongitude endLatitude activeSets totalSets
-## 1               NA       34           NA          NA         NA        NA
-## 2       0.43999939       25     16.25314    48.20399         NA        NA
-## 3       0.34000092       17     16.38793    48.38009         NA        NA
-## 4       0.08000183       18     16.31980    48.22264         NA        NA
-## 5       0.16000004        1           NA          NA         NA        NA
-## 6               NA       32           NA          NA         NA        NA
-##   totalReps purposeful autoCalcCalories favorite    pr elevationCorrected
-## 1        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 2        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 3        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 4        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 5        NA      FALSE            FALSE    FALSE FALSE              FALSE
-## 6        NA      FALSE            FALSE    FALSE FALSE              FALSE
-##   atpActivity parent maxRunCadence steps avgVerticalOscillation
-## 1       FALSE  FALSE            NA    NA                     NA
-## 2       FALSE  FALSE            NA    NA                     NA
-## 3       FALSE  FALSE            NA    NA                     NA
-## 4       FALSE  FALSE           104 15620                     NA
-## 5       FALSE  FALSE            NA    NA                     NA
-## 6       FALSE  FALSE            NA    NA                     NA
-##   avgGroundContactTime avgStrideLength vO2MaxValue avgVerticalRatio
-## 1                   NA              NA          NA               NA
-## 2                   NA              NA          72               NA
-## 3                   NA              NA          71               NA
-## 4                   NA        115.6389          58               NA
-## 5                   NA              NA          NA               NA
-## 6                   NA              NA          NA               NA
-##   avgGroundContactBalance avgDoubleCadence maxDoubleCadence avgPower
-## 1                      NA               NA               NA       NA
-## 2                      NA               NA               NA      260
-## 3                      NA               NA               NA      202
-## 4                      NA          172.375              208       NA
-## 5                      NA               NA               NA      212
-## 6                      NA               NA               NA       NA
-##   avgBikeCadence maxBikeCadence strokes normPower avgLeftBalance
-## 1             NA             NA    1198        NA             NA
-## 2             83            114   17968  296.0000          49.92
-## 3             82            107   12571  231.0000          49.90
-## 4             NA             NA      NA        NA             NA
-## 5             91            114       0  218.3049             NA
-## 6             NA             NA    1152        NA             NA
-##   avgRightBalance max20MinPower trainingStressScore intensityFactor
-## 1              NA            NA                  NA              NA
-## 2           50.08      375.1583               291.4           0.835
-## 3           50.10      242.7692               122.8           0.653
-## 4              NA            NA                  NA              NA
-## 5              NA      221.0525                  NA              NA
-## 6              NA            NA                  NA              NA
-##   lactateThresholdBpm lactateThresholdSpeed avgStrokes activeLengths avgSwolf
-## 1                  NA                    NA       23.0            60       74
-## 2                  NA                    NA         NA            NA       NA
-## 3                  NA                    NA         NA            NA       NA
-## 4                  NA                    NA         NA            NA       NA
-## 5                  NA                    NA         NA            NA       NA
-## 6                  NA                    NA       22.6            57       72
-##   poolLength avgStrokeDistance avgSwimCadence maxSwimCadence maxFtp workoutId
-## 1       5000               217             27             29     NA        NA
-## 2         NA                NA             NA             NA     NA        NA
-## 3         NA                NA             NA             NA     NA        NA
-## 4         NA                NA             NA             NA     NA        NA
-## 5         NA                NA             NA             NA     NA        NA
-## 6       5000               221             27             30     NA        NA
-##   decoDive parentId avgVerticalSpeed maxDepth avgDepth surfaceInterval
-## 1       NA       NA               NA       NA       NA              NA
-## 2       NA       NA               NA       NA       NA              NA
-## 3       NA       NA               NA       NA       NA              NA
-## 4       NA       NA               NA       NA       NA              NA
-## 5       NA       NA               NA       NA       NA              NA
-## 6       NA       NA               NA       NA       NA              NA
-##   floorsDescended bottomTime
-## 1              NA         NA
-## 2              NA         NA
-## 3              NA         NA
-## 4              NA         NA
-## 5              NA         NA
-## 6              NA         NA</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="manip.html#cb77-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Sports/Activities_2022.csv&quot;</span>,<span class="at">header =</span> T)</span>
+<span id="cb77-2"><a href="manip.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
+<pre><code>##   activityId       uuidMsb       uuidLsb                                                   name activityType
+## 1 8117908979  1.389057e+18 -8.816745e+18                                          Pool Swimming lap_swimming
+## 2 8112025942 -8.579595e+18 -6.087296e+18              Zwift - WTRL Team Time Trial - Zone 6 (C) virtual_ride
+## 3 8111738850  4.389923e+18 -4.813906e+18 Zwift - .. *3.JOKE?(INC#EA2)&#39;s Meetup - Sleepless City virtual_ride
+## 4 8106509382 -3.409299e+18 -6.907548e+18                                         Vienna Running      running
+## 5 8101019939  8.398595e+18 -7.204024e+18                                         Zwift - London virtual_ride
+## 6 8100932442 -6.116764e+18 -8.563845e+18                         Zwift - TdZ Stage 1: Long Ride virtual_ride
+##   userProfileId timeZoneId beginTimestamp eventTypeId   rule sportType startTimeGmt startTimeLocal duration distance
+## 1       1141258        124   1.642184e+12           9 public  SWIMMING 1.642184e+12   1.642188e+12  4271050   340000
+## 2       1141258        124   1.642096e+12           9 public   CYCLING 1.642096e+12   1.642099e+12  2275000  2771270
+## 3       1141258        124   1.642094e+12           9 public   CYCLING 1.642094e+12   1.642097e+12  1707000  1640097
+## 4       1141258        124   1.642009e+12           9 public   RUNNING 1.642009e+12   1.642012e+12  4224043  1499398
+## 5       1141258        124   1.641928e+12           9 public   CYCLING 1.641928e+12   1.641932e+12   622000   624256
+## 6       1141258        124   1.641924e+12           9 public   CYCLING 1.641924e+12   1.641928e+12  3954000  4927470
+##   avgSpeed avgHr maxHr avgPower avgBikeCadence maxBikeCadence  calories aerobicTrainingEffect strokes normPower
+## 1   0.0993    NA    NA       NA             NA             NA 3033.5745                    NA    1390        NA
+## 2   1.2181   168   181      333             86            104 3104.8048                    NA       0  348.5247
+## 3   0.9608   135   154      240             83            200 1638.2978                    NA       0  249.8839
+## 4   0.3550   148   162       NA             NA             NA 3720.7378                   2.4      NA        NA
+## 5   1.0036   138   151      186             78            100  460.9022                    NA       0  194.3214
+## 6   1.2461   130   180      266             84            103 4290.5805                    NA       0  275.7212
+##   avgLeftBalance avgRightBalance max20MinPower avgFractionalCadence maxFractionalCadence trainingStressScore
+## 1             NA              NA            NA              0.00000                  0.0                  NA
+## 2             NA              NA      342.2592              0.00000                  0.0                  NA
+## 3             NA              NA      252.1425              0.00000                  0.0                  NA
+## 4             NA              NA            NA              0.15625                  0.5                  NA
+## 5             NA              NA            NA              0.00000                  0.0                  NA
+## 6             NA              NA      291.5917              0.00000                  0.0                  NA
+##   intensityFactor elapsedDuration movingDuration anaerobicTrainingEffect   deviceId minTemperature maxTemperature
+## 1              NA         4685234        3466198                      NA 3968818126             26             27
+## 2              NA         2273000        2270000                      NA 3825981698             NA             NA
+## 3              NA         1706000        1706000                      NA 3825981698             NA             NA
+## 4              NA         4293429        4220701                       0 3968818126              7             24
+## 5              NA          620000         618000                      NA 3825981698             NA             NA
+## 6              NA         3953000        3950000                      NA 3825981698             NA             NA
+##   lapCount aerobicTrainingEffectMessage anaerobicTrainingEffectMessage purposeful autoCalcCalories favorite pr
+## 1       39                           NA                             NA          0                0        0  0
+## 2        1                           NA                             NA          0                0        0  0
+## 3        1                           NA                             NA          0                0        0  0
+## 4       15                           NA                             NA          0                0        0  0
+## 5        1                           NA                             NA          0                0        0  0
+## 6        1                           NA                             NA          0                0        0  0
+##   elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed maxRunCadence steps startLongitude
+## 1                  0           0      0            NA            NA   0.3865            NA    NA             NA
+## 2                  0           0      0         32500             0   1.9172            NA    NA        0.00000
+## 3                  0           0      0          7600             0   1.2852            NA    NA        0.00000
+## 4                  0           0      0         16000         18300   0.4161           112 12014       16.31589
+## 5                  0           0      0          3800             0   1.6083            NA    NA        0.00000
+## 6                  0           0      0         26600             0   1.7015            NA    NA        0.00000
+##   startLatitude avgVerticalOscillation avgGroundContactTime avgStrideLength vO2MaxValue avgVerticalRatio
+## 1            NA                     NA                   NA              NA          NA               NA
+## 2       0.00000                     NA                   NA              NA          NA               NA
+## 3       0.00000                     NA                   NA              NA          NA               NA
+## 4      48.21407                   8.26                248.1          118.24          60             6.83
+## 5       0.00000                     NA                   NA              NA          NA               NA
+## 6       0.00000                     NA                   NA              NA          NA               NA
+##   avgGroundContactBalance minElevation maxElevation avgDoubleCadence maxDoubleCadence  locationName maxVerticalSpeed
+## 1                      NA           NA           NA               NA               NA          &lt;NA&gt;               NA
+## 2                      NA          120         5780               NA               NA          &lt;NA&gt;       0.11999998
+## 3                      NA        12180        13040               NA               NA          &lt;NA&gt;       0.05999985
+## 4                   48.93        19480        34900         172.3125              225        Vienna       0.10000000
+## 5                      NA          400         2900               NA               NA Tower Hamlets       0.06000004
+## 6                      NA         1040         3400               NA               NA          Thio       0.06000004
+##   endLongitude endLatitude avgStrokes activeLengths avgSwolf poolLength avgStrokeDistance avgSwimCadence
+## 1           NA          NA       22.4            68       73       5000               223             27
+## 2  166.9529124   -11.63601         NA            NA       NA         NA                NA             NA
+## 3  165.8442626   -10.79433         NA            NA       NA         NA                NA             NA
+## 4   16.3033489    48.21414         NA            NA       NA         NA                NA             NA
+## 5   -0.1127895    51.49451         NA            NA       NA         NA                NA             NA
+## 6  166.1724174   -21.73831         NA            NA       NA         NA                NA             NA
+##   maxSwimCadence workoutId activeSets totalSets totalReps parentId manufacturer courseId maxFtp avgVerticalSpeed
+## 1             31        NA         NA        NA        NA       NA           NA       NA     NA               NA
+## 2             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
+## 3             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
+## 4             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
+## 5             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
+## 6             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
+##   decoDive lactateThresholdBpm lactateThresholdSpeed
+## 1        0                  NA                    NA
+## 2        0                  NA                    NA
+## 3        0                  NA                    NA
+## 4        0                  NA                    NA
+## 5        0                  NA                    NA
+## 6        0                  NA                    NA</code></pre>
 <p>You have many options to deal with issues :</p>
 <ul>
 <li><code>sep</code> to specify the separator (<code>\t</code> for tabulation, <code>';'</code> for semicolon… )</li>
@@ -434,46 +402,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>help(read.table)</code> for more options !</li>
 </ul>
 </div>
-<div id="excel-files" class="section level3">
+<div id="excel-files" class="section level3" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Excel files</h3>
 <p>You can import excel files (.xls and .xlsx) with the <code>readxl</code> package</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="manip.html#cb79-1"></a>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&quot;Data/Sports/Activities.xlsx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb79-2"><a href="manip.html#cb79-2"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 89
-##   activityId uuidMsb uuidLsb name  activityType userProfileId timeZoneId
-##        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt;
-## 1 5570974040 3.6952… -7.098… En p… lap_swimming       1141258        124
-## 2 5566524321 -5.212… -8.140… Vien… cycling            1141258        124
-## 3 5561266034 1.2713… -5.522… Korn… cycling            1141258        124
-## 4 5555881653 -2.923… -4.676… Vien… running            1141258        124
-## 5 5551811953 7.8590… -7.909… Zwif… virtual_ride       1141258        124
-## 6 5551052200 -9.554… -6.866… En p… lap_swimming       1141258        124
-## # … with 82 more variables: beginTimestamp &lt;chr&gt;, eventTypeId &lt;dbl&gt;,
-## #   rule &lt;chr&gt;, sportType &lt;chr&gt;, startTimeGmt &lt;dbl&gt;, startTimeLocal &lt;chr&gt;,
-## #   duration &lt;chr&gt;, distance &lt;chr&gt;, elevationGain &lt;chr&gt;, elevationLoss &lt;chr&gt;,
-## #   avgSpeed &lt;chr&gt;, maxSpeed &lt;chr&gt;, avgHr &lt;chr&gt;, maxHr &lt;chr&gt;, calories &lt;chr&gt;,
-## #   startLongitude &lt;chr&gt;, startLatitude &lt;chr&gt;, aerobicTrainingEffect &lt;chr&gt;,
-## #   avgFractionalCadence &lt;chr&gt;, maxFractionalCadence &lt;chr&gt;,
-## #   elapsedDuration &lt;chr&gt;, movingDuration &lt;chr&gt;, anaerobicTrainingEffect &lt;chr&gt;,
-## #   deviceId &lt;dbl&gt;, minTemperature &lt;chr&gt;, maxTemperature &lt;chr&gt;,
-## #   minElevation &lt;chr&gt;, maxElevation &lt;chr&gt;, locationName &lt;chr&gt;,
-## #   maxVerticalSpeed &lt;chr&gt;, lapCount &lt;dbl&gt;, endLongitude &lt;chr&gt;,
-## #   endLatitude &lt;chr&gt;, activeSets &lt;chr&gt;, totalSets &lt;chr&gt;, totalReps &lt;chr&gt;,
-## #   purposeful &lt;chr&gt;, autoCalcCalories &lt;chr&gt;, favorite &lt;chr&gt;, pr &lt;chr&gt;,
-## #   elevationCorrected &lt;chr&gt;, atpActivity &lt;chr&gt;, parent &lt;chr&gt;,
-## #   maxRunCadence &lt;chr&gt;, steps &lt;chr&gt;, avgVerticalOscillation &lt;chr&gt;,
-## #   avgGroundContactTime &lt;chr&gt;, avgStrideLength &lt;chr&gt;, vO2MaxValue &lt;chr&gt;,
-## #   avgVerticalRatio &lt;chr&gt;, avgGroundContactBalance &lt;chr&gt;,
-## #   avgDoubleCadence &lt;chr&gt;, maxDoubleCadence &lt;chr&gt;, avgPower &lt;chr&gt;,
-## #   avgBikeCadence &lt;chr&gt;, maxBikeCadence &lt;chr&gt;, strokes &lt;chr&gt;, normPower &lt;chr&gt;,
-## #   avgLeftBalance &lt;chr&gt;, avgRightBalance &lt;chr&gt;, max20MinPower &lt;chr&gt;,
-## #   trainingStressScore &lt;chr&gt;, intensityFactor &lt;chr&gt;,
-## #   lactateThresholdBpm &lt;chr&gt;, lactateThresholdSpeed &lt;chr&gt;, avgStrokes &lt;chr&gt;,
-## #   activeLengths &lt;chr&gt;, avgSwolf &lt;chr&gt;, poolLength &lt;chr&gt;,
-## #   avgStrokeDistance &lt;chr&gt;, avgSwimCadence &lt;chr&gt;, maxSwimCadence &lt;chr&gt;,
-## #   maxFtp &lt;chr&gt;, workoutId &lt;chr&gt;, decoDive &lt;chr&gt;, parentId &lt;chr&gt;,
-## #   avgVerticalSpeed &lt;chr&gt;, maxDepth &lt;chr&gt;, avgDepth &lt;chr&gt;,
-## #   surfaceInterval &lt;chr&gt;, floorsDescended &lt;chr&gt;, bottomTime &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="manip.html#cb79-1" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;Data/Sports/Activities.xlsx&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb79-2"><a href="manip.html#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 89
+##   activityId uuidMsb   uuidLsb  name   activityType userProfileId timeZoneId beginTimestamp eventTypeId rule  sportType
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    
+## 1 5570974040 3.695223… -7.0985… En pi… lap_swimming       1141258        124 1600700451000            9 publ… GENERIC  
+## 2 5566524321 -5.21279… -8.1406… Vienn… cycling            1141258        124 1600601823000            9 publ… CYCLING  
+## 3 5561266034 1.271355… -5.5228… Korne… cycling            1141258        124 1600522721000            9 publ… CYCLING  
+## 4 5555881653 -2.92393… -4.6768… Vienn… running            1141258        124 1600439317000            9 publ… RUNNING  
+## 5 5551811953 7.859042… -7.9095… Zwift… virtual_ride       1141258        124 1600361706000            9 publ… GENERIC  
+## 6 5551052200 -9.55408… -6.8664… En pi… lap_swimming       1141258        124 1600353189000            9 publ… GENERIC  
+## # … with 78 more variables: startTimeGmt &lt;dbl&gt;, startTimeLocal &lt;chr&gt;, duration &lt;chr&gt;, distance &lt;chr&gt;,
+## #   elevationGain &lt;chr&gt;, elevationLoss &lt;chr&gt;, avgSpeed &lt;chr&gt;, maxSpeed &lt;chr&gt;, avgHr &lt;chr&gt;, maxHr &lt;chr&gt;,
+## #   calories &lt;chr&gt;, startLongitude &lt;chr&gt;, startLatitude &lt;chr&gt;, aerobicTrainingEffect &lt;chr&gt;,
+## #   avgFractionalCadence &lt;chr&gt;, maxFractionalCadence &lt;chr&gt;, elapsedDuration &lt;chr&gt;, movingDuration &lt;chr&gt;,
+## #   anaerobicTrainingEffect &lt;chr&gt;, deviceId &lt;dbl&gt;, minTemperature &lt;chr&gt;, maxTemperature &lt;chr&gt;, minElevation &lt;chr&gt;,
+## #   maxElevation &lt;chr&gt;, locationName &lt;chr&gt;, maxVerticalSpeed &lt;chr&gt;, lapCount &lt;dbl&gt;, endLongitude &lt;chr&gt;,
+## #   endLatitude &lt;chr&gt;, activeSets &lt;chr&gt;, totalSets &lt;chr&gt;, totalReps &lt;chr&gt;, purposeful &lt;chr&gt;, autoCalcCalories &lt;chr&gt;, …</code></pre>
 <p>Options :</p>
 <ul>
 <li><code>sheet</code> to select whioch you want to import</li>
@@ -482,13 +431,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>?readxl::read_excel</code> for more information</li>
 </ul>
 </div>
-<div id="more-formats" class="section level3">
+<div id="more-formats" class="section level3" number="4.1.3">
 <h3><span class="header-section-number">4.1.3</span> More formats</h3>
 <p>The <code>readr</code> package provides other convenient functions to read the most common (open) formats. With <code>haven</code>, you can also read data from proprietary formats (SPSS, SAS, Stat,…).</p>
 <p>JSON files can be read with for example <code>rjsonlite</code> and we will use it in an applicaiton example.</p>
 <p>XML and HTML files can be parsed with the <code>xml2</code>package.</p>
 </div>
-<div id="read-from-databases-big-data" class="section level3">
+<div id="read-from-databases-big-data" class="section level3" number="4.1.4">
 <h3><span class="header-section-number">4.1.4</span> Read from databases / big data</h3>
 <p>This is a huge topic that we will only mention here, but for (almost) each database engine, there is a package available in order to be able to read data from databases</p>
 <ul>
@@ -499,39 +448,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In addition, the <code>sparlyr</code> package allows you to interact with a spark cluster (using <code>dplyr syntax</code>)</p>
 </div>
 </div>
-<div id="the-grammar-of-data-manipulation" class="section level2">
+<div id="the-grammar-of-data-manipulation" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> The grammar of data manipulation</h2>
 <p><strong>Alert :</strong> After this section, pandas will appear much less appealing….
 <img src="img/pandas-fun.jpg" /></p>
 <p>Following the tidy data principles, <code>dplyr</code> implements an actual grammar of data manipulation with verbs and human-readable syntax.</p>
-<div id="the-pipe" class="section level3">
+<div id="the-pipe" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> The pipe</h3>
 <p><img src="img/pipe.png" /></p>
 <p>The first operator to know is the <em>pipe</em> operator, <code>%&gt;%</code> which allows you to redirect the output of a command “to the right” and hence create readable chains of commands.
 Let’s extract the last 3 characters of “hello world”</p>
 <p>First solution : create useless objects</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="manip.html#cb81-1"></a>char &lt;-<span class="st"> &quot;hello world&quot;</span></span>
-<span id="cb81-2"><a href="manip.html#cb81-2"></a>rev_char &lt;-<span class="st"> </span>stringi<span class="op">::</span><span class="kw">stri_reverse</span>(char)</span>
-<span id="cb81-3"><a href="manip.html#cb81-3"></a>sub3 &lt;-<span class="st"> </span><span class="kw">substr</span>(rev_char,<span class="dv">1</span>,<span class="dv">3</span>)</span>
-<span id="cb81-4"><a href="manip.html#cb81-4"></a>stringi<span class="op">::</span><span class="kw">stri_reverse</span>(sub3)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="manip.html#cb81-1" aria-hidden="true" tabindex="-1"></a>char <span class="ot">&lt;-</span> <span class="st">&quot;hello world&quot;</span></span>
+<span id="cb81-2"><a href="manip.html#cb81-2" aria-hidden="true" tabindex="-1"></a>rev_char <span class="ot">&lt;-</span> stringi<span class="sc">::</span><span class="fu">stri_reverse</span>(char)</span>
+<span id="cb81-3"><a href="manip.html#cb81-3" aria-hidden="true" tabindex="-1"></a>sub3 <span class="ot">&lt;-</span> <span class="fu">substr</span>(rev_char,<span class="dv">1</span>,<span class="dv">3</span>)</span>
+<span id="cb81-4"><a href="manip.html#cb81-4" aria-hidden="true" tabindex="-1"></a>stringi<span class="sc">::</span><span class="fu">stri_reverse</span>(sub3)</span></code></pre></div>
 <pre><code>## [1] &quot;rld&quot;</code></pre>
 <p>Second solution : where’s the beginning ????</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="manip.html#cb83-1"></a>stringi<span class="op">::</span><span class="kw">stri_reverse</span>(<span class="kw">substr</span>(stringi<span class="op">::</span><span class="kw">stri_reverse</span>(<span class="st">&quot;Hello World&quot;</span>),<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="manip.html#cb83-1" aria-hidden="true" tabindex="-1"></a>stringi<span class="sc">::</span><span class="fu">stri_reverse</span>(<span class="fu">substr</span>(stringi<span class="sc">::</span><span class="fu">stri_reverse</span>(<span class="st">&quot;Hello World&quot;</span>),<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;rld&quot;</code></pre>
 <p>Third solution : using the pipe</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="manip.html#cb85-1"></a><span class="st">&quot;Hello world&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb85-2"><a href="manip.html#cb85-2"></a><span class="st">  </span>stringi<span class="op">::</span><span class="kw">stri_reverse</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb85-3"><a href="manip.html#cb85-3"></a><span class="st">  </span><span class="kw">substr</span>(<span class="dv">1</span>,<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb85-4"><a href="manip.html#cb85-4"></a><span class="st">  </span>stringi<span class="op">::</span><span class="kw">stri_reverse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="manip.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Hello world&quot;</span> <span class="sc">%&gt;%</span> </span>
+<span id="cb85-2"><a href="manip.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  stringi<span class="sc">::</span><span class="fu">stri_reverse</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb85-3"><a href="manip.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">substr</span>(<span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-4"><a href="manip.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  stringi<span class="sc">::</span><span class="fu">stri_reverse</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;rld&quot;</code></pre>
 <p>Under the hood : the dot represents the result of the previous step and can be placed somewhere else in the next function (rather than the first argument)</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="manip.html#cb87-1"></a><span class="st">&quot;Hello world&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb87-2"><a href="manip.html#cb87-2"></a><span class="st">  </span>stringi<span class="op">::</span><span class="kw">stri_reverse</span>(.) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb87-3"><a href="manip.html#cb87-3"></a><span class="st">  </span><span class="kw">substr</span>(.,<span class="dv">1</span>,<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb87-4"><a href="manip.html#cb87-4"></a><span class="st">  </span>stringi<span class="op">::</span><span class="kw">stri_reverse</span>(.)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="manip.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Hello world&quot;</span> <span class="sc">%&gt;%</span> </span>
+<span id="cb87-2"><a href="manip.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  stringi<span class="sc">::</span><span class="fu">stri_reverse</span>(.) <span class="sc">%&gt;%</span> </span>
+<span id="cb87-3"><a href="manip.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">substr</span>(.,<span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb87-4"><a href="manip.html#cb87-4" aria-hidden="true" tabindex="-1"></a>  stringi<span class="sc">::</span><span class="fu">stri_reverse</span>(.)</span></code></pre></div>
 <pre><code>## [1] &quot;rld&quot;</code></pre>
 </div>
-<div id="the-verbs-of-manipulation" class="section level3">
+<div id="the-verbs-of-manipulation" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> The verbs of manipulation</h3>
 <p>What do you do with data ?</p>
 <ul>
@@ -543,13 +492,13 @@ Let’s extract the last 3 characters of “hello world”</p>
 <li>Join with other tables <span class="math inline">\(\rightarrow\)</span> <code>left_join()</code>,<code>right_join()</code>, <code>inner_join()</code>, <code>anti_join()</code>, <code>full_join()</code></li>
 </ul>
 <p>I have the verbs, now I can associate them to make a sentence ! All those functions take as first argument a dataframe, which makes it very easy when chaining them with the pipe.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="manip.html#cb89-1"></a><span class="kw">read.csv</span>(<span class="st">&quot;Data/Sports/Activities.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb89-2"><a href="manip.html#cb89-2"></a><span class="st">  </span><span class="kw">select</span>(activityType,avgSpeed,distance,startLongitude,startLatitude,sportType) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#select some metrics</span></span>
-<span id="cb89-3"><a href="manip.html#cb89-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">distance=</span>distance<span class="op">/</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># distances are in decameter (?)</span></span>
-<span id="cb89-4"><a href="manip.html#cb89-4"></a><span class="st">  </span><span class="kw">filter</span>(activityType<span class="op">!=</span><span class="st">&quot;other&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># remove activities &quot;other</span></span>
-<span id="cb89-5"><a href="manip.html#cb89-5"></a><span class="st">  </span><span class="kw">group_by</span>(activityType) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb89-6"><a href="manip.html#cb89-6"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total_dist=</span><span class="kw">mean</span>(distance))</span></code></pre></div>
-<pre><code>## # A tibble: 22 x 2
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="manip.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;Data/Sports/Activities.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-2"><a href="manip.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(activityType,avgSpeed,distance,startLongitude,startLatitude,sportType) <span class="sc">%&gt;%</span> <span class="co">#select some metrics</span></span>
+<span id="cb89-3"><a href="manip.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">distance=</span>distance<span class="sc">/</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="co"># distances are in decameter (?)</span></span>
+<span id="cb89-4"><a href="manip.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(activityType<span class="sc">!=</span><span class="st">&quot;other&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># remove activities &quot;other</span></span>
+<span id="cb89-5"><a href="manip.html#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(activityType) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-6"><a href="manip.html#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_dist=</span><span class="fu">mean</span>(distance))</span></code></pre></div>
+<pre><code>## # A tibble: 22 × 2
 ##    activityType            total_dist
 ##    &lt;chr&gt;                        &lt;dbl&gt;
 ##  1 cross_country_skiing_ws     16717.
@@ -564,7 +513,7 @@ Let’s extract the last 3 characters of “hello world”</p>
 ## 10 open_water_swimming          2359.
 ## # … with 12 more rows</code></pre>
 </div>
-<div id="filter-conditions" class="section level3">
+<div id="filter-conditions" class="section level3" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Filter : conditions</h3>
 <p>This is the way you write conditions in R :</p>
 <table>
@@ -606,7 +555,7 @@ Let’s extract the last 3 characters of “hello world”</p>
 </tbody>
 </table>
 </div>
-<div id="mutate" class="section level3">
+<div id="mutate" class="section level3" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Mutate</h3>
 <p>Most of the data manipulation will be done in a mutate statement. This is where you can create additional columns, modify the ones existing. You can do any kind of transformation you want with this one. Depending on the type of the data, here are some additional packages that will help you :</p>
 <ul>
@@ -615,22 +564,22 @@ Let’s extract the last 3 characters of “hello world”</p>
 <li><code>stringr</code> (and <code>stringi</code>) to handle strings variables and work with regular expressions</li>
 <li><code>ifelse()</code> and <code>case_when()</code> to handle conditional operations</li>
 </ul>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="manip.html#cb91-1"></a><span class="kw">require</span>(lubridate)</span>
-<span id="cb91-2"><a href="manip.html#cb91-2"></a><span class="kw">require</span>(stringr)</span>
-<span id="cb91-3"><a href="manip.html#cb91-3"></a></span>
-<span id="cb91-4"><a href="manip.html#cb91-4"></a>dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb91-5"><a href="manip.html#cb91-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">start_time=</span><span class="kw">as_datetime</span>(startTimeLocal<span class="op">/</span><span class="dv">1000</span>), <span class="co"># create a timestamp</span></span>
-<span id="cb91-6"><a href="manip.html#cb91-6"></a>         <span class="dt">date =</span> <span class="kw">floor_date</span>(start_time,<span class="st">&quot;day&quot;</span>), <span class="co"># round to the day</span></span>
-<span id="cb91-7"><a href="manip.html#cb91-7"></a>         <span class="dt">is_bike=</span><span class="kw">ifelse</span>(activityType <span class="op">%in%</span></span>
-<span id="cb91-8"><a href="manip.html#cb91-8"></a><span class="st">                          </span><span class="kw">c</span>(<span class="st">&quot;cycling&quot;</span>,<span class="st">&quot;virtual_ride&quot;</span>,<span class="st">&quot;indoor_cycling&quot;</span>,<span class="st">&quot;road_biking&quot;</span>,<span class="st">&quot;cyclocross&quot;</span>),T,F),</span>
-<span id="cb91-9"><a href="manip.html#cb91-9"></a>         <span class="co"># is it bike or not ?</span></span>
-<span id="cb91-10"><a href="manip.html#cb91-10"></a>         <span class="dt">is_run =</span> <span class="kw">str_detect</span>(activityType,<span class="st">&quot;running|hicking&quot;</span>),</span>
-<span id="cb91-11"><a href="manip.html#cb91-11"></a>         <span class="dt">activity_recoded =</span> <span class="kw">case_when</span>(is_bike <span class="op">~</span><span class="st"> &quot;Bike&quot;</span>,</span>
-<span id="cb91-12"><a href="manip.html#cb91-12"></a>                                      is_run <span class="op">~</span><span class="st"> &quot;Run&quot;</span>,</span>
-<span id="cb91-13"><a href="manip.html#cb91-13"></a>                                      <span class="kw">str_detect</span>(activityType,<span class="st">&quot;swim&quot;</span>) <span class="op">~</span><span class="st">&quot;Swim&quot;</span>,</span>
-<span id="cb91-14"><a href="manip.html#cb91-14"></a>                                      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;Other&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="manip.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(lubridate)</span>
+<span id="cb91-2"><a href="manip.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(stringr)</span>
+<span id="cb91-3"><a href="manip.html#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-4"><a href="manip.html#cb91-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb91-5"><a href="manip.html#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">start_time=</span><span class="fu">as_datetime</span>(startTimeLocal<span class="sc">/</span><span class="dv">1000</span>), <span class="co"># create a timestamp</span></span>
+<span id="cb91-6"><a href="manip.html#cb91-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">date =</span> <span class="fu">floor_date</span>(start_time,<span class="st">&quot;day&quot;</span>), <span class="co"># round to the day</span></span>
+<span id="cb91-7"><a href="manip.html#cb91-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">is_bike=</span><span class="fu">ifelse</span>(activityType <span class="sc">%in%</span></span>
+<span id="cb91-8"><a href="manip.html#cb91-8" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">c</span>(<span class="st">&quot;cycling&quot;</span>,<span class="st">&quot;virtual_ride&quot;</span>,<span class="st">&quot;indoor_cycling&quot;</span>,<span class="st">&quot;road_biking&quot;</span>,<span class="st">&quot;cyclocross&quot;</span>),T,F),</span>
+<span id="cb91-9"><a href="manip.html#cb91-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># is it bike or not ?</span></span>
+<span id="cb91-10"><a href="manip.html#cb91-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">is_run =</span> <span class="fu">str_detect</span>(activityType,<span class="st">&quot;running|hicking&quot;</span>),</span>
+<span id="cb91-11"><a href="manip.html#cb91-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">activity_recoded =</span> <span class="fu">case_when</span>(is_bike <span class="sc">~</span> <span class="st">&quot;Bike&quot;</span>,</span>
+<span id="cb91-12"><a href="manip.html#cb91-12" aria-hidden="true" tabindex="-1"></a>                                      is_run <span class="sc">~</span> <span class="st">&quot;Run&quot;</span>,</span>
+<span id="cb91-13"><a href="manip.html#cb91-13" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">str_detect</span>(activityType,<span class="st">&quot;swim&quot;</span>) <span class="sc">~</span><span class="st">&quot;Swim&quot;</span>,</span>
+<span id="cb91-14"><a href="manip.html#cb91-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Other&quot;</span>))</span></code></pre></div>
 </div>
-<div id="summarize" class="section level3">
+<div id="summarize" class="section level3" number="4.2.5">
 <h3><span class="header-section-number">4.2.5</span> Summarize</h3>
 <p>This operation consists in summarizing several rows ofinto one or more synthetic value(s). We will cover the topic more in detail <a href="stats.html#stats">5</a> but the most common summary function that you can use are :</p>
 <ul>
@@ -638,20 +587,20 @@ Let’s extract the last 3 characters of “hello world”</p>
 <li>For categorical variables : count, count distinct, concentration indexes,…</li>
 </ul>
 <p>Simple summary statistics over one numerical variable :</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="manip.html#cb92-1"></a>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">total_distance=</span><span class="kw">sum</span>(distance)) <span class="co"># Oups</span></span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="manip.html#cb92-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">total_distance=</span><span class="fu">sum</span>(distance)) <span class="co"># Oups</span></span></code></pre></div>
 <pre><code>##   total_distance
 ## 1             NA</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="manip.html#cb94-1"></a>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">total_distance=</span><span class="kw">sum</span>(distance,<span class="dt">na.rm =</span> T))</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="manip.html#cb94-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">total_distance=</span><span class="fu">sum</span>(distance,<span class="at">na.rm =</span> T))</span></code></pre></div>
 <pre><code>##   total_distance
-## 1    10693637146</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="manip.html#cb96-1"></a>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">avg_distance=</span><span class="kw">mean</span>(distance,<span class="dt">na.rm =</span> T))</span></code></pre></div>
+## 1    12460037061</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="manip.html#cb96-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">avg_distance=</span><span class="fu">mean</span>(distance,<span class="at">na.rm =</span> T))</span></code></pre></div>
 <pre><code>##   avg_distance
-## 1      1941826</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="manip.html#cb98-1"></a>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">median_distance=</span><span class="kw">median</span>(distance,<span class="dt">na.rm =</span> T))</span></code></pre></div>
+## 1      2015861</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="manip.html#cb98-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">median_distance=</span><span class="fu">median</span>(distance,<span class="at">na.rm =</span> T))</span></code></pre></div>
 <pre><code>##   median_distance
-## 1         1186419</code></pre>
+## 1         1205483</code></pre>
 </div>
-<div id="join-with-other-tables" class="section level3">
+<div id="join-with-other-tables" class="section level3" number="4.2.6">
 <h3><span class="header-section-number">4.2.6</span> Join with other tables</h3>
 <p>Thanks to the <code>xxx_join(table_a,table_b)</code> functions you can combine several dataframes into one, matching the rows on chosen columns.</p>
 <ul>
@@ -663,73 +612,56 @@ Let’s extract the last 3 characters of “hello world”</p>
 </ul>
 <p><img src="img/dplyr-joins.png" />
 In the following code, we first compute a summary of distance and power for each combination of activity_recoded and deviceId and combine it together with the initial dataframe in order to compute a “distance percentage” for each activity, as the activity distance divided by the total distance recorded for the same type of activity and with the same device.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="manip.html#cb100-1"></a>agg &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span></span>
-<span id="cb100-2"><a href="manip.html#cb100-2"></a><span class="st">  </span><span class="kw">group_by</span>(activity_recoded,deviceId) <span class="op">%&gt;%</span></span>
-<span id="cb100-3"><a href="manip.html#cb100-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total_distance=</span><span class="kw">sum</span>(distance,<span class="dt">na.rm =</span> T),</span>
-<span id="cb100-4"><a href="manip.html#cb100-4"></a>            <span class="dt">avgPower =</span> <span class="kw">mean</span>(avgPower,<span class="dt">na.rm=</span>T))</span>
-<span id="cb100-5"><a href="manip.html#cb100-5"></a>dat <span class="op">%&gt;%</span></span>
-<span id="cb100-6"><a href="manip.html#cb100-6"></a><span class="st">  </span><span class="kw">select</span>(distance,activityId,activity_recoded,deviceId) <span class="op">%&gt;%</span></span>
-<span id="cb100-7"><a href="manip.html#cb100-7"></a><span class="st">  </span><span class="kw">left_join</span>(agg,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;activity_recoded&quot;</span>,<span class="st">&quot;deviceId&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb100-8"><a href="manip.html#cb100-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">distance_pct =</span> <span class="dv">100</span><span class="op">*</span>distance<span class="op">/</span>total_distance) <span class="op">%&gt;%</span></span>
-<span id="cb100-9"><a href="manip.html#cb100-9"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
-<pre><code>##   distance activityId activity_recoded   deviceId total_distance avgPower
-## 1   300000 5570974040             Swim 3968818126       55009104      NaN
-## 2 12293220 5566524321             Bike 3968818126     1419582250 241.7049
-## 3  8360927 5561266034             Bike 3968818126     1419582250 241.7049
-## 4  1792890 5555881653              Run 3968818126      453582639      NaN
-## 5  3492347 5551811953             Bike 3825981698      166719556 228.2449
-## 6   285000 5551052200             Swim 3968818126       55009104      NaN
-##   distance_pct
-## 1    0.5453643
-## 2    0.8659745
-## 3    0.5889710
-## 4    0.3952731
-## 5    2.0947434
-## 6    0.5180961</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="manip.html#cb100-1" aria-hidden="true" tabindex="-1"></a>agg <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="manip.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(activity_recoded,deviceId) <span class="sc">%&gt;%</span></span>
+<span id="cb100-3"><a href="manip.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_distance=</span><span class="fu">sum</span>(distance,<span class="at">na.rm =</span> T),</span>
+<span id="cb100-4"><a href="manip.html#cb100-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">avgPower =</span> <span class="fu">mean</span>(avgPower,<span class="at">na.rm=</span>T))</span>
+<span id="cb100-5"><a href="manip.html#cb100-5" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb100-6"><a href="manip.html#cb100-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(distance,activityId,activity_recoded,deviceId) <span class="sc">%&gt;%</span></span>
+<span id="cb100-7"><a href="manip.html#cb100-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(agg,<span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;activity_recoded&quot;</span>,<span class="st">&quot;deviceId&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb100-8"><a href="manip.html#cb100-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">distance_pct =</span> <span class="dv">100</span><span class="sc">*</span>distance<span class="sc">/</span>total_distance) <span class="sc">%&gt;%</span></span>
+<span id="cb100-9"><a href="manip.html#cb100-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##   distance activityId activity_recoded   deviceId total_distance avgPower distance_pct
+## 1   340000 8117908979             Swim 3968818126       75093816      NaN   0.45276698
+## 2  2771270 8112025942             Bike 3825981698     1237962879  251.009   0.22385727
+## 3  1640097 8111738850             Bike 3825981698     1237962879  251.009   0.13248354
+## 4  1499398 8106509382              Run 3968818126      694501042      NaN   0.21589572
+## 5   624256 8101019939             Bike 3825981698     1237962879  251.009   0.05042607
+## 6  4927470 8100932442             Bike 3825981698     1237962879  251.009   0.39803051</code></pre>
 </div>
-<div id="manipulate-several-data-in-the-same-time" class="section level3">
+<div id="manipulate-several-data-in-the-same-time" class="section level3" number="4.2.7">
 <h3><span class="header-section-number">4.2.7</span> Manipulate several data in the same time</h3>
 <p>With all previous verbs above, you can use the <code>across</code> function to apply the same operation over a bunch of columns that you can select depending a simple enumeration or a condition (on their type or their name). This is a really powerful tool !</p>
 <p>Example : we will convert all columns that are identifiers as character variables because the numbers have no meaning</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="manip.html#cb102-1"></a>dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb102-2"><a href="manip.html#cb102-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="kw">c</span>(<span class="kw">contains</span>(<span class="st">&quot;Id&quot;</span>),<span class="kw">contains</span>(<span class="st">&quot;uuid&quot;</span>)),</span>
-<span id="cb102-3"><a href="manip.html#cb102-3"></a>                as.character))</span>
-<span id="cb102-4"><a href="manip.html#cb102-4"></a><span class="co"># Other stupid examples</span></span>
-<span id="cb102-5"><a href="manip.html#cb102-5"></a>dat <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">summarise</span>(<span class="kw">across</span>(<span class="kw">where</span>(is.numeric),</span>
-<span id="cb102-6"><a href="manip.html#cb102-6"></a>                          <span class="cf">function</span>(xx) <span class="kw">sum</span>(xx,<span class="dt">na.rm=</span>T)))</span></code></pre></div>
-<pre><code>##   beginTimestamp startTimeGmt startTimeLocal    duration    distance
-## 1   8.021486e+15 8.036783e+15   8.036814e+15 22850917079 10693637146
-##   elevationGain elevationLoss avgSpeed maxSpeed  avgHr  maxHr calories
-## 1     163374842     149923907 2186.754 113881.5 538175 637627 20569669
-##   startLongitude startLatitude aerobicTrainingEffect avgFractionalCadence
-## 1        18707.3      190193.1                7579.3             383.8125
-##   maxFractionalCadence elapsedDuration movingDuration anaerobicTrainingEffect
-## 1                170.5     11995810258     6623490405                   276.1
-##   minTemperature maxTemperature minElevation maxElevation maxVerticalSpeed
-## 1          46890          65603     35504232     66534189         322.7602
-##   lapCount endLongitude endLatitude activeSets totalSets totalReps
-## 1    26369     10138.19    39058.89          0         0         0
-##   maxRunCadence    steps avgVerticalOscillation avgGroundContactTime
-## 1         81893 27827620                5202.02             149787.7
-##   vO2MaxValue avgVerticalRatio avgGroundContactBalance avgDoubleCadence
-## 1       50052          4590.83                29360.86         124685.3
-##   maxDoubleCadence avgPower avgBikeCadence maxBikeCadence  strokes normPower
-## 1           163305   159062         120499         160192 11984172  172253.5
-##   avgLeftBalance avgRightBalance max20MinPower trainingStressScore
-## 1       29746.24        29853.76      178191.6            146746.6
-##   intensityFactor lactateThresholdBpm lactateThresholdSpeed avgStrokes
-## 1         640.338               12296               28.8716   36334.99
-##   activeLengths avgSwolf poolLength avgStrokeDistance avgSwimCadence
-## 1         82178    38881    2028199            113919          21590
-##   maxSwimCadence maxFtp avgVerticalSpeed maxDepth avgDepth surfaceInterval
-## 1          28979  28273                0        0        0               0
-##   floorsDescended bottomTime
-## 1               0          0</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="manip.html#cb102-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb102-2"><a href="manip.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="fu">contains</span>(<span class="st">&quot;Id&quot;</span>),<span class="fu">contains</span>(<span class="st">&quot;uuid&quot;</span>)),</span>
+<span id="cb102-3"><a href="manip.html#cb102-3" aria-hidden="true" tabindex="-1"></a>                as.character))</span>
+<span id="cb102-4"><a href="manip.html#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Other stupid examples</span></span>
+<span id="cb102-5"><a href="manip.html#cb102-5" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric),</span>
+<span id="cb102-6"><a href="manip.html#cb102-6" aria-hidden="true" tabindex="-1"></a>                          <span class="cf">function</span>(xx) <span class="fu">sum</span>(xx,<span class="at">na.rm=</span>T)))</span></code></pre></div>
+<pre><code>##   beginTimestamp startTimeGmt startTimeLocal    duration    distance avgSpeed  avgHr  maxHr avgPower avgBikeCadence
+## 1   9.115198e+15 9.130494e+15   9.130529e+15 25615640953 12460037061 2604.539 622949 736233   244072         148991
+##   maxBikeCadence calories aerobicTrainingEffect  strokes normPower avgLeftBalance avgRightBalance max20MinPower
+## 1         196512 23068547                8194.2 12586771  263186.2       32092.28        32207.72      266312.1
+##   avgFractionalCadence maxFractionalCadence trainingStressScore intensityFactor elapsedDuration movingDuration
+## 1             498.5859                  232            153951.3         677.757     14915022075     9035529534
+##   anaerobicTrainingEffect minTemperature maxTemperature lapCount purposeful autoCalcCalories favorite pr
+## 1                   328.2          54208          75796    35699          0               19        1  8
+##   elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed maxRunCadence    steps startLongitude
+## 1                  6           0     52     181365816     157535613 114630.2        104583 30070036       22364.53
+##   startLatitude avgVerticalOscillation avgGroundContactTime vO2MaxValue avgVerticalRatio avgGroundContactBalance
+## 1      203830.2                6380.52             184995.2       62584          5628.33                 36199.7
+##   minElevation maxElevation avgDoubleCadence maxDoubleCadence maxVerticalSpeed endLongitude endLatitude avgStrokes
+## 1     44510572     84601757         160554.9           208808         412.4803     24056.88    51257.07   37535.92
+##   activeLengths avgSwolf poolLength avgStrokeDistance avgSwimCadence maxSwimCadence activeSets totalSets totalReps
+## 1         86201    42980    2300698            128108          23258          30877          0         0         0
+##   maxFtp avgVerticalSpeed decoDive lactateThresholdBpm lactateThresholdSpeed
+## 1  42787                0        0               12296               28.8716</code></pre>
 </div>
 </div>
-<div id="lets-import-and-wrangle-some-data" class="section level2">
+<div id="lets-import-and-wrangle-some-data" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Let’s import and wrangle some data !</h2>
-<div id="the-data" class="section level3">
+<div id="the-data" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> The data</h3>
 <p>We will work on the summary data of all past activities, which come in JSON files. So basically, the data is contained in (nested) lists. This is real word data, it’s super messy and dirty !
 You will have to :</p>
@@ -754,56 +686,46 @@ You will have to :</p>
 </ul>
 <p>A lot of reverse engineering ahead</p>
 </div>
-<div id="one-tool-you-will-need-lapply" class="section level3">
+<div id="one-tool-you-will-need-lapply" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> One tool you will need : <code>lapply()</code></h3>
 <p>JSON are lists, and to iterate over list elements, you can either use <code>for</code> loops, which is highly <em>not recommended</em> (R is no good with loops), or use <code>lapply()</code>. This function applies an operation over all elements of a list (or vector) and returns a list containing the result. You can also use <code>sapply()</code> which tries to coerce the result to a vector (if possible) if the expected output is not a list.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="manip.html#cb104-1"></a>random_list &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,<span class="cf">function</span>(xx) <span class="kw">rnorm</span>(<span class="dv">100</span>,xx,xx<span class="op">/</span><span class="dv">5</span>))</span>
-<span id="cb104-2"><a href="manip.html#cb104-2"></a><span class="kw">str</span>(random_list[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="manip.html#cb104-1" aria-hidden="true" tabindex="-1"></a>random_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="cf">function</span>(xx) <span class="fu">rnorm</span>(<span class="dv">100</span>,xx,xx<span class="sc">/</span><span class="dv">5</span>))</span>
+<span id="cb104-2"><a href="manip.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(random_list[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
 <pre><code>## List of 5
-##  $ : num [1:100] 0.777 1.16 0.869 1.118 1.06 ...
-##  $ : num [1:100] 1.73 2.06 1.69 2.16 2.53 ...
-##  $ : num [1:100] 3.26 2.97 2.49 3.35 2.34 ...
-##  $ : num [1:100] 4.06 3.13 4.6 3.33 3.42 ...
-##  $ : num [1:100] 6.04 5.9 5.89 4.79 6.02 ...</code></pre>
+##  $ : num [1:100] 0.876 1.185 0.889 1.089 0.784 ...
+##  $ : num [1:100] 2.861 0.965 2.361 2.17 1.598 ...
+##  $ : num [1:100] 2.83 3.18 3.26 2.83 2.91 ...
+##  $ : num [1:100] 4.98 4.11 4.47 3.99 3.22 ...
+##  $ : num [1:100] 4.6 5.38 4.55 4.9 4.17 ...</code></pre>
 <p><strong>Attention :</strong> be careful with the squared brackets</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manip.html#cb106-1"></a>random_list[<span class="dv">1</span>] <span class="co"># is a list</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manip.html#cb106-1" aria-hidden="true" tabindex="-1"></a>random_list[<span class="dv">1</span>] <span class="co"># is a list</span></span></code></pre></div>
 <pre><code>## [[1]]
-##   [1] 0.7774295 1.1602645 0.8691831 1.1184810 1.0603015 1.1239807 1.0477205
-##   [8] 1.0293540 1.0624447 0.9534012 1.0231844 1.1950824 0.7507718 1.2294079
-##  [15] 0.7313733 1.0997680 1.2850380 1.2556339 1.2147174 0.8651562 1.2283634
-##  [22] 0.9402525 1.3958619 0.9580570 1.2411237 1.0978790 0.7552836 0.8004207
-##  [29] 1.2217787 1.0116003 0.9503184 1.0365179 1.0625259 0.5556958 0.9083012
-##  [36] 0.7754117 1.2648131 1.1321204 0.8872693 0.9170744 1.0119861 0.9981346
-##  [43] 0.8715303 0.8982911 0.9567074 0.6563836 1.1664279 1.1225749 0.9646945
-##  [50] 0.4447446 0.6339729 1.0927149 0.8998871 1.1585166 1.0128518 1.1296900
-##  [57] 0.8864183 0.8075143 1.1500378 1.0507844 0.9080133 0.9543901 1.1416045
-##  [64] 1.0386505 1.0960596 1.0021648 1.1543056 0.8230741 0.8393396 1.3355130
-##  [71] 0.6865805 0.7011605 0.9112471 1.0529881 1.0412790 0.8688418 1.1725704
-##  [78] 1.1904479 1.0439103 0.9573078 0.7168007 1.2490408 0.8987375 0.9356704
-##  [85] 0.7399853 0.8507939 1.2154036 0.5796883 0.8764677 1.0435075 0.9928969
-##  [92] 0.9261532 0.9144678 1.1719654 0.6758922 1.0356824 1.3138917 1.2481140
-##  [99] 0.9540898 1.4537677</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="manip.html#cb108-1"></a>random_list[[<span class="dv">1</span>]] <span class="co"># is a vector</span></span></code></pre></div>
-<pre><code>##   [1] 0.7774295 1.1602645 0.8691831 1.1184810 1.0603015 1.1239807 1.0477205
-##   [8] 1.0293540 1.0624447 0.9534012 1.0231844 1.1950824 0.7507718 1.2294079
-##  [15] 0.7313733 1.0997680 1.2850380 1.2556339 1.2147174 0.8651562 1.2283634
-##  [22] 0.9402525 1.3958619 0.9580570 1.2411237 1.0978790 0.7552836 0.8004207
-##  [29] 1.2217787 1.0116003 0.9503184 1.0365179 1.0625259 0.5556958 0.9083012
-##  [36] 0.7754117 1.2648131 1.1321204 0.8872693 0.9170744 1.0119861 0.9981346
-##  [43] 0.8715303 0.8982911 0.9567074 0.6563836 1.1664279 1.1225749 0.9646945
-##  [50] 0.4447446 0.6339729 1.0927149 0.8998871 1.1585166 1.0128518 1.1296900
-##  [57] 0.8864183 0.8075143 1.1500378 1.0507844 0.9080133 0.9543901 1.1416045
-##  [64] 1.0386505 1.0960596 1.0021648 1.1543056 0.8230741 0.8393396 1.3355130
-##  [71] 0.6865805 0.7011605 0.9112471 1.0529881 1.0412790 0.8688418 1.1725704
-##  [78] 1.1904479 1.0439103 0.9573078 0.7168007 1.2490408 0.8987375 0.9356704
-##  [85] 0.7399853 0.8507939 1.2154036 0.5796883 0.8764677 1.0435075 0.9928969
-##  [92] 0.9261532 0.9144678 1.1719654 0.6758922 1.0356824 1.3138917 1.2481140
-##  [99] 0.9540898 1.4537677</code></pre>
+##   [1] 0.8762579 1.1847322 0.8894186 1.0885496 0.7842904 1.0868630 0.9707225 0.7042148 0.8791926 1.1901618 1.2059422
+##  [12] 0.8361683 0.8028438 0.8453620 1.1883960 0.8592794 1.2346351 0.5714095 0.5868384 0.8403402 0.9547395 0.9232981
+##  [23] 0.8736897 1.0154564 1.1842713 0.8953028 0.7105368 0.9654275 1.0736669 1.0171087 1.1385832 0.9779842 1.2855125
+##  [34] 0.8600799 1.0656875 0.9532695 1.0905608 1.2626257 0.9034522 1.4887389 1.2437893 1.0017677 1.0482679 1.3534238
+##  [45] 1.2382150 1.0077574 1.0306095 0.9037012 1.1903217 0.9172878 1.2586481 1.4085976 0.7471268 1.2147218 1.1365606
+##  [56] 0.6883287 1.0184002 1.0261762 1.5795826 0.8519094 0.9071928 1.0488016 1.1892730 1.0604149 0.8092711 1.2777698
+##  [67] 1.3484682 1.1167283 0.7210837 1.1141198 1.2526091 0.8732426 0.9369893 1.0553987 1.2096500 1.0153447 1.0896273
+##  [78] 1.0623083 0.9412501 1.1729047 0.9554398 0.7967397 1.2279968 0.9001226 1.1318012 0.7118117 1.3900315 1.2528391
+##  [89] 0.7792249 0.4889133 1.2154665 1.0288691 0.6976595 0.5154510 0.9041581 1.1290166 0.8295818 0.7789798 0.7826941
+## [100] 1.0047529</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="manip.html#cb108-1" aria-hidden="true" tabindex="-1"></a>random_list[[<span class="dv">1</span>]] <span class="co"># is a vector</span></span></code></pre></div>
+<pre><code>##   [1] 0.8762579 1.1847322 0.8894186 1.0885496 0.7842904 1.0868630 0.9707225 0.7042148 0.8791926 1.1901618 1.2059422
+##  [12] 0.8361683 0.8028438 0.8453620 1.1883960 0.8592794 1.2346351 0.5714095 0.5868384 0.8403402 0.9547395 0.9232981
+##  [23] 0.8736897 1.0154564 1.1842713 0.8953028 0.7105368 0.9654275 1.0736669 1.0171087 1.1385832 0.9779842 1.2855125
+##  [34] 0.8600799 1.0656875 0.9532695 1.0905608 1.2626257 0.9034522 1.4887389 1.2437893 1.0017677 1.0482679 1.3534238
+##  [45] 1.2382150 1.0077574 1.0306095 0.9037012 1.1903217 0.9172878 1.2586481 1.4085976 0.7471268 1.2147218 1.1365606
+##  [56] 0.6883287 1.0184002 1.0261762 1.5795826 0.8519094 0.9071928 1.0488016 1.1892730 1.0604149 0.8092711 1.2777698
+##  [67] 1.3484682 1.1167283 0.7210837 1.1141198 1.2526091 0.8732426 0.9369893 1.0553987 1.2096500 1.0153447 1.0896273
+##  [78] 1.0623083 0.9412501 1.1729047 0.9554398 0.7967397 1.2279968 0.9001226 1.1318012 0.7118117 1.3900315 1.2528391
+##  [89] 0.7792249 0.4889133 1.2154665 1.0288691 0.6976595 0.5154510 0.9041581 1.1290166 0.8295818 0.7789798 0.7826941
+## [100] 1.0047529</code></pre>
 <!-- ## The split-apply-combine operation -->
 <!-- ![](img/split-apply-combine.png) -->
 </div>
 </div>
-<div id="tidy-your-data" class="section level2">
+<div id="tidy-your-data" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Tidy your data</h2>
 <p>The data will almost never come in a ready-to-use format. Wrangling the data, beyond <em>cleaning</em> it also sometimes imply to <em>reshape</em> it so that it conforms to the tidy principles. For that you have 2 functions :</p>
 <ul>
@@ -811,69 +733,56 @@ You will have to :</p>
 <li><code>pivot_wider()</code>, the reciprocate operation, which will convert rows into columns</li>
 </ul>
 <p>For example, we can chose that an observation is the combination of an activity and a metric. This representation can be useful in some cases (see <a href="multivar.html#multivar">6</a>).</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="manip.html#cb110-1"></a>dat_long &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb110-2"><a href="manip.html#cb110-2"></a><span class="st">  </span><span class="kw">select</span>(activityId,<span class="kw">where</span>(is.numeric)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb110-3"><a href="manip.html#cb110-3"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>activityId,<span class="dt">names_to=</span><span class="st">&quot;metric&quot;</span>,<span class="dt">values_to=</span><span class="st">&quot;value&quot;</span>)</span>
-<span id="cb110-4"><a href="manip.html#cb110-4"></a>dat_long</span></code></pre></div>
-<pre><code>## # A tibble: 363,924 x 3
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="manip.html#cb110-1" aria-hidden="true" tabindex="-1"></a>dat_long <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb110-2"><a href="manip.html#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(activityId,<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb110-3"><a href="manip.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>activityId,<span class="at">names_to=</span><span class="st">&quot;metric&quot;</span>,<span class="at">values_to=</span><span class="st">&quot;value&quot;</span>)</span>
+<span id="cb110-4"><a href="manip.html#cb110-4" aria-hidden="true" tabindex="-1"></a>dat_long</span></code></pre></div>
+<pre><code>## # A tibble: 426,972 × 3
 ##    activityId metric             value
 ##    &lt;chr&gt;      &lt;chr&gt;              &lt;dbl&gt;
-##  1 5570974040 beginTimestamp  1.60e+12
-##  2 5570974040 startTimeGmt    1.60e+12
-##  3 5570974040 startTimeLocal  1.60e+12
-##  4 5570974040 duration        3.64e+ 6
-##  5 5570974040 distance        3.00e+ 5
-##  6 5570974040 elevationGain  NA       
-##  7 5570974040 elevationLoss  NA       
-##  8 5570974040 avgSpeed        9.86e- 2
-##  9 5570974040 maxSpeed        1.12e- 1
-## 10 5570974040 avgHr          NA       
-## # … with 363,914 more rows</code></pre>
+##  1 8117908979 beginTimestamp  1.64e+12
+##  2 8117908979 startTimeGmt    1.64e+12
+##  3 8117908979 startTimeLocal  1.64e+12
+##  4 8117908979 duration        4.27e+ 6
+##  5 8117908979 distance        3.4 e+ 5
+##  6 8117908979 avgSpeed        9.93e- 2
+##  7 8117908979 avgHr          NA       
+##  8 8117908979 maxHr          NA       
+##  9 8117908979 avgPower       NA       
+## 10 8117908979 avgBikeCadence NA       
+## # … with 426,962 more rows</code></pre>
 <p>With this format you can get summary statistics for all metrics also easily :</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="manip.html#cb112-1"></a><span class="kw">group_by</span>(dat_long,metric) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb112-2"><a href="manip.html#cb112-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_val=</span><span class="kw">mean</span>(value,<span class="dt">na.rm=</span>T))</span></code></pre></div>
-<pre><code>## # A tibble: 66 x 2
-##    metric                  mean_val
-##    &lt;chr&gt;                      &lt;dbl&gt;
-##  1 activeLengths            61.8   
-##  2 activeSets                0     
-##  3 aerobicTrainingEffect     2.88  
-##  4 anaerobicTrainingEffect   0.298 
-##  5 avgBikeCadence           91.2   
-##  6 avgDepth                  0     
-##  7 avgDoubleCadence        162.    
-##  8 avgFractionalCadence      0.0696
-##  9 avgGroundContactBalance  49.4   
-## 10 avgGroundContactTime    252.    
-## # … with 56 more rows</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="manip.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dat_long,metric) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-2"><a href="manip.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_val=</span><span class="fu">mean</span>(value,<span class="at">na.rm=</span>T))</span></code></pre></div>
+<pre><code>## # A tibble: 69 × 2
+##    metric                   mean_val
+##    &lt;chr&gt;                       &lt;dbl&gt;
+##  1 activeLengths            62.1    
+##  2 activeSets                0      
+##  3 aerobicTrainingEffect     2.64   
+##  4 anaerobicTrainingEffect   0.270  
+##  5 atpActivity               0      
+##  6 autoCalcCalories          0.00621
+##  7 avgBikeCadence           90.1    
+##  8 avgDoubleCadence        162.     
+##  9 avgFractionalCadence      0.0806 
+## 10 avgGroundContactBalance  49.3    
+## # … with 59 more rows</code></pre>
 <p>And you you can go back to the original format if you want :</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="manip.html#cb114-1"></a><span class="kw">group_by</span>(dat_long,metric) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb114-2"><a href="manip.html#cb114-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_val=</span><span class="kw">mean</span>(value,<span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb114-3"><a href="manip.html#cb114-3"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> metric,<span class="dt">values_from=</span>mean_val)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 66
-##   activeLengths activeSets aerobicTraining… anaerobicTraini… avgBikeCadence
-##           &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;
-## 1          61.8          0             2.88            0.298           91.2
-## # … with 61 more variables: avgDepth &lt;dbl&gt;, avgDoubleCadence &lt;dbl&gt;,
-## #   avgFractionalCadence &lt;dbl&gt;, avgGroundContactBalance &lt;dbl&gt;,
-## #   avgGroundContactTime &lt;dbl&gt;, avgHr &lt;dbl&gt;, avgLeftBalance &lt;dbl&gt;,
-## #   avgPower &lt;dbl&gt;, avgRightBalance &lt;dbl&gt;, avgSpeed &lt;dbl&gt;,
-## #   avgStrokeDistance &lt;dbl&gt;, avgStrokes &lt;dbl&gt;, avgSwimCadence &lt;dbl&gt;,
-## #   avgSwolf &lt;dbl&gt;, avgVerticalOscillation &lt;dbl&gt;, avgVerticalRatio &lt;dbl&gt;,
-## #   avgVerticalSpeed &lt;dbl&gt;, beginTimestamp &lt;dbl&gt;, bottomTime &lt;dbl&gt;,
-## #   calories &lt;dbl&gt;, distance &lt;dbl&gt;, duration &lt;dbl&gt;, elapsedDuration &lt;dbl&gt;,
-## #   elevationGain &lt;dbl&gt;, elevationLoss &lt;dbl&gt;, endLatitude &lt;dbl&gt;,
-## #   endLongitude &lt;dbl&gt;, floorsDescended &lt;dbl&gt;, intensityFactor &lt;dbl&gt;,
-## #   lactateThresholdBpm &lt;dbl&gt;, lactateThresholdSpeed &lt;dbl&gt;, lapCount &lt;dbl&gt;,
-## #   max20MinPower &lt;dbl&gt;, maxBikeCadence &lt;dbl&gt;, maxDepth &lt;dbl&gt;,
-## #   maxDoubleCadence &lt;dbl&gt;, maxElevation &lt;dbl&gt;, maxFractionalCadence &lt;dbl&gt;,
-## #   maxFtp &lt;dbl&gt;, maxHr &lt;dbl&gt;, maxRunCadence &lt;dbl&gt;, maxSpeed &lt;dbl&gt;,
-## #   maxSwimCadence &lt;dbl&gt;, maxTemperature &lt;dbl&gt;, maxVerticalSpeed &lt;dbl&gt;,
-## #   minElevation &lt;dbl&gt;, minTemperature &lt;dbl&gt;, movingDuration &lt;dbl&gt;,
-## #   normPower &lt;dbl&gt;, poolLength &lt;dbl&gt;, startLatitude &lt;dbl&gt;,
-## #   startLongitude &lt;dbl&gt;, startTimeGmt &lt;dbl&gt;, startTimeLocal &lt;dbl&gt;,
-## #   steps &lt;dbl&gt;, strokes &lt;dbl&gt;, surfaceInterval &lt;dbl&gt;, totalReps &lt;dbl&gt;,
-## #   totalSets &lt;dbl&gt;, trainingStressScore &lt;dbl&gt;, vO2MaxValue &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="manip.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dat_long,metric) <span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href="manip.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_val=</span><span class="fu">mean</span>(value,<span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb114-3"><a href="manip.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> metric,<span class="at">values_from=</span>mean_val)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 69
+##   activeLengths activeSets aerobicTrainingEffect anaerobicTrainingEffect atpActivity autoCalcCalories avgBikeCadence
+##           &lt;dbl&gt;      &lt;dbl&gt;                 &lt;dbl&gt;                   &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;
+## 1          62.1          0                  2.64                   0.270           0          0.00621           90.1
+## # … with 62 more variables: avgDoubleCadence &lt;dbl&gt;, avgFractionalCadence &lt;dbl&gt;, avgGroundContactBalance &lt;dbl&gt;,
+## #   avgGroundContactTime &lt;dbl&gt;, avgHr &lt;dbl&gt;, avgLeftBalance &lt;dbl&gt;, avgPower &lt;dbl&gt;, avgRightBalance &lt;dbl&gt;,
+## #   avgSpeed &lt;dbl&gt;, avgStrokeDistance &lt;dbl&gt;, avgStrokes &lt;dbl&gt;, avgSwimCadence &lt;dbl&gt;, avgSwolf &lt;dbl&gt;,
+## #   avgVerticalOscillation &lt;dbl&gt;, avgVerticalRatio &lt;dbl&gt;, avgVerticalSpeed &lt;dbl&gt;, beginTimestamp &lt;dbl&gt;,
+## #   calories &lt;dbl&gt;, decoDive &lt;dbl&gt;, distance &lt;dbl&gt;, duration &lt;dbl&gt;, elapsedDuration &lt;dbl&gt;, elevationCorrected &lt;dbl&gt;,
+## #   elevationGain &lt;dbl&gt;, elevationLoss &lt;dbl&gt;, endLatitude &lt;dbl&gt;, endLongitude &lt;dbl&gt;, favorite &lt;dbl&gt;,
+## #   intensityFactor &lt;dbl&gt;, lactateThresholdBpm &lt;dbl&gt;, lactateThresholdSpeed &lt;dbl&gt;, lapCount &lt;dbl&gt;, …</code></pre>
 <p>The result looks very much like the one we had with <code>across</code> but the intermediate manipulationsncan be very useful in some cases. For instance, you could join the <code>dat_long</code> dataframe or its summary with an external data that has values by metrics (eg the average metric values for pro athletes).</p>
 
 </div>
@@ -883,12 +792,11 @@ You will have to :</p>
           </div>
         </div>
       </div>
-<a href="intro-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro_r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="stats.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -907,6 +815,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -927,6 +836,10 @@ gitbook.start({
 "text": null
 },
 "download": ["DataExploration.pdf", "DataExploration.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Data exploration and statistics with R and the tidyverse</title>
   <meta name="description" content="Welcome to the wonderful world of data science and R !" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Data exploration and statistics with R and the tidyverse" />
   <meta property="og:type" content="book" />
@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Welcome to the wonderful world of data science and R !" />
   
 
-<meta name="author" content="Vivien Roussez (A1 Telekom Austria Group)" />
+<meta name="author" content="Vivien Roussez (GoStudent)" />
 
 
 
@@ -32,7 +32,9 @@
   
 
 <link rel="next" href="intro.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -48,37 +50,23 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -98,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -148,7 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Foreword</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#topics-of-the-week"><i class="fa fa-check"></i><b>2.1</b> Topics of the week</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#the-data-science-workflow"><i class="fa fa-check"></i><b>2.2</b> The data science workflow</a></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#about-the-interactions-with-other-colleagues"><i class="fa fa-check"></i><b>2.3</b> About the interactions with other colleagues</a></li>
@@ -156,27 +146,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#data-of-the-week"><i class="fa fa-check"></i><b>2.5</b> Data of the week</a></li>
 <li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#your-mission"><i class="fa fa-check"></i><b>2.6</b> Your mission</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="intro-r.html"><a href="intro-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to R</a><ul>
-<li class="chapter" data-level="3.1" data-path="intro-r.html"><a href="intro-r.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is R</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="intro-r.html"><a href="intro-r.html#description"><i class="fa fa-check"></i><b>3.1.1</b> Description</a></li>
-<li class="chapter" data-level="3.1.2" data-path="intro-r.html"><a href="intro-r.html#objective-comparison-with-pyhton"><i class="fa fa-check"></i><b>3.1.2</b> (Objective) comparison with Pyhton</a></li>
-<li class="chapter" data-level="3.1.3" data-path="intro-r.html"><a href="intro-r.html#what-can-i-do-with-r"><i class="fa fa-check"></i><b>3.1.3</b> What can I do with R</a></li>
-<li class="chapter" data-level="3.1.4" data-path="intro-r.html"><a href="intro-r.html#quick-presentation-of-the-ecosystem"><i class="fa fa-check"></i><b>3.1.4</b> Quick presentation of the ecosystem</a></li>
+<li class="chapter" data-level="3" data-path="intro_r.html"><a href="intro_r.html"><i class="fa fa-check"></i><b>3</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="intro_r.html"><a href="intro_r.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is R</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="intro_r.html"><a href="intro_r.html#description"><i class="fa fa-check"></i><b>3.1.1</b> Description</a></li>
+<li class="chapter" data-level="3.1.2" data-path="intro_r.html"><a href="intro_r.html#objective-comparison-with-pyhton"><i class="fa fa-check"></i><b>3.1.2</b> (Objective) comparison with Pyhton</a></li>
+<li class="chapter" data-level="3.1.3" data-path="intro_r.html"><a href="intro_r.html#what-can-i-do-with-r"><i class="fa fa-check"></i><b>3.1.3</b> What can I do with R</a></li>
+<li class="chapter" data-level="3.1.4" data-path="intro_r.html"><a href="intro_r.html#quick-presentation-of-the-ecosystem"><i class="fa fa-check"></i><b>3.1.4</b> Quick presentation of the ecosystem</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="intro-r.html"><a href="intro-r.html#basic-commands-to-know"><i class="fa fa-check"></i><b>3.2</b> Basic commands to know</a></li>
-<li class="chapter" data-level="3.3" data-path="intro-r.html"><a href="intro-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>3.3</b> Data structures in R</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="intro-r.html"><a href="intro-r.html#basic-data-structures"><i class="fa fa-check"></i><b>3.3.1</b> Basic data structures</a></li>
-<li class="chapter" data-level="3.3.2" data-path="intro-r.html"><a href="intro-r.html#explore-a-new-data-structure-or-object"><i class="fa fa-check"></i><b>3.3.2</b> Explore a new data structure (or object)</a></li>
+<li class="chapter" data-level="3.2" data-path="intro_r.html"><a href="intro_r.html#basic-commands-to-know"><i class="fa fa-check"></i><b>3.2</b> Basic commands to know</a></li>
+<li class="chapter" data-level="3.3" data-path="intro_r.html"><a href="intro_r.html#data-structures-in-r"><i class="fa fa-check"></i><b>3.3</b> Data structures in R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="intro_r.html"><a href="intro_r.html#basic-data-structures"><i class="fa fa-check"></i><b>3.3.1</b> Basic data structures</a></li>
+<li class="chapter" data-level="3.3.2" data-path="intro_r.html"><a href="intro_r.html#explore-a-new-data-structure-or-object"><i class="fa fa-check"></i><b>3.3.2</b> Explore a new data structure (or object)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="manip.html"><a href="manip.html"><i class="fa fa-check"></i><b>4</b> Data manipulation</a><ul>
-<li class="chapter" data-level="4.1" data-path="manip.html"><a href="manip.html#import"><i class="fa fa-check"></i><b>4.1</b> Import</a><ul>
+<li class="chapter" data-level="4" data-path="manip.html"><a href="manip.html"><i class="fa fa-check"></i><b>4</b> Data manipulation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="manip.html"><a href="manip.html#import"><i class="fa fa-check"></i><b>4.1</b> Import</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="manip.html"><a href="manip.html#text-files"><i class="fa fa-check"></i><b>4.1.1</b> Text files</a></li>
 <li class="chapter" data-level="4.1.2" data-path="manip.html"><a href="manip.html#excel-files"><i class="fa fa-check"></i><b>4.1.2</b> Excel files</a></li>
 <li class="chapter" data-level="4.1.3" data-path="manip.html"><a href="manip.html#more-formats"><i class="fa fa-check"></i><b>4.1.3</b> More formats</a></li>
 <li class="chapter" data-level="4.1.4" data-path="manip.html"><a href="manip.html#read-from-databases-big-data"><i class="fa fa-check"></i><b>4.1.4</b> Read from databases / big data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="manip.html"><a href="manip.html#the-grammar-of-data-manipulation"><i class="fa fa-check"></i><b>4.2</b> The grammar of data manipulation</a><ul>
+<li class="chapter" data-level="4.2" data-path="manip.html"><a href="manip.html#the-grammar-of-data-manipulation"><i class="fa fa-check"></i><b>4.2</b> The grammar of data manipulation</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="manip.html"><a href="manip.html#the-pipe"><i class="fa fa-check"></i><b>4.2.1</b> The pipe</a></li>
 <li class="chapter" data-level="4.2.2" data-path="manip.html"><a href="manip.html#the-verbs-of-manipulation"><i class="fa fa-check"></i><b>4.2.2</b> The verbs of manipulation</a></li>
 <li class="chapter" data-level="4.2.3" data-path="manip.html"><a href="manip.html#filter-conditions"><i class="fa fa-check"></i><b>4.2.3</b> Filter : conditions</a></li>
@@ -185,28 +181,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.6" data-path="manip.html"><a href="manip.html#join-with-other-tables"><i class="fa fa-check"></i><b>4.2.6</b> Join with other tables</a></li>
 <li class="chapter" data-level="4.2.7" data-path="manip.html"><a href="manip.html#manipulate-several-data-in-the-same-time"><i class="fa fa-check"></i><b>4.2.7</b> Manipulate several data in the same time</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="manip.html"><a href="manip.html#lets-import-and-wrangle-some-data"><i class="fa fa-check"></i><b>4.3</b> Let’s import and wrangle some data !</a><ul>
+<li class="chapter" data-level="4.3" data-path="manip.html"><a href="manip.html#lets-import-and-wrangle-some-data"><i class="fa fa-check"></i><b>4.3</b> Let’s import and wrangle some data !</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="manip.html"><a href="manip.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
 <li class="chapter" data-level="4.3.2" data-path="manip.html"><a href="manip.html#one-tool-you-will-need-lapply"><i class="fa fa-check"></i><b>4.3.2</b> One tool you will need : <code>lapply()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="manip.html"><a href="manip.html#tidy-your-data"><i class="fa fa-check"></i><b>4.4</b> Tidy your data</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Statistics</a><ul>
-<li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#definitions"><i class="fa fa-check"></i><b>5.1</b> Definitions</a><ul>
+<li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#definitions"><i class="fa fa-check"></i><b>5.1</b> Definitions</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="stats.html"><a href="stats.html#terminology"><i class="fa fa-check"></i><b>5.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="5.1.2" data-path="stats.html"><a href="stats.html#types-of-variables"><i class="fa fa-check"></i><b>5.1.2</b> Types of variables</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#univariate-statistics"><i class="fa fa-check"></i><b>5.2</b> Univariate statistics</a><ul>
+<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#univariate-statistics"><i class="fa fa-check"></i><b>5.2</b> Univariate statistics</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="stats.html"><a href="stats.html#numerical-variables"><i class="fa fa-check"></i><b>5.2.1</b> Numerical variables</a></li>
 <li class="chapter" data-level="5.2.2" data-path="stats.html"><a href="stats.html#categorical-variables"><i class="fa fa-check"></i><b>5.2.2</b> Categorical variables</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#bivariate-statistics"><i class="fa fa-check"></i><b>5.3</b> Bivariate statistics</a><ul>
+<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#bivariate-statistics"><i class="fa fa-check"></i><b>5.3</b> Bivariate statistics</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="stats.html"><a href="stats.html#continuous-variables"><i class="fa fa-check"></i><b>5.3.1</b> 2 continuous variables</a></li>
 <li class="chapter" data-level="5.3.2" data-path="stats.html"><a href="stats.html#categorical-variables-1"><i class="fa fa-check"></i><b>5.3.2</b> 2 categorical variables</a></li>
 <li class="chapter" data-level="5.3.3" data-path="stats.html"><a href="stats.html#continuous-1-categorical-variable"><i class="fa fa-check"></i><b>5.3.3</b> 1 continuous, 1 categorical variable</a></li>
 <li class="chapter" data-level="5.3.4" data-path="stats.html"><a href="stats.html#exercises-1"><i class="fa fa-check"></i><b>5.3.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#stat_inf"><i class="fa fa-check"></i><b>5.4</b> Statistical inference</a><ul>
+<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#stat_inf"><i class="fa fa-check"></i><b>5.4</b> Statistical inference</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="stats.html"><a href="stats.html#the-statistical-model"><i class="fa fa-check"></i><b>5.4.1</b> The statistical model</a></li>
 <li class="chapter" data-level="5.4.2" data-path="stats.html"><a href="stats.html#two-fundamental-theorems"><i class="fa fa-check"></i><b>5.4.2</b> Two fundamental theorems</a></li>
 <li class="chapter" data-level="5.4.3" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>5.4.3</b> Statistical tests</a></li>
@@ -214,45 +216,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.5" data-path="stats.html"><a href="stats.html#exercises-interprete-a-test-you-dont-know"><i class="fa fa-check"></i><b>5.4.5</b> Exercises : interprete a test you don’t know</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="multivar.html"><a href="multivar.html"><i class="fa fa-check"></i><b>6</b> Multivariate analysis and dimension reduction</a><ul>
-<li class="chapter" data-level="6.1" data-path="multivar.html"><a href="multivar.html#multivariate-analysis"><i class="fa fa-check"></i><b>6.1</b> Multivariate analysis</a><ul>
+<li class="chapter" data-level="6" data-path="multivar.html"><a href="multivar.html"><i class="fa fa-check"></i><b>6</b> Multivariate analysis and dimension reduction</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="multivar.html"><a href="multivar.html#multivariate-analysis"><i class="fa fa-check"></i><b>6.1</b> Multivariate analysis</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="multivar.html"><a href="multivar.html#advanced-visualization"><i class="fa fa-check"></i><b>6.1.1</b> Advanced visualization</a></li>
 <li class="chapter" data-level="6.1.2" data-path="multivar.html"><a href="multivar.html#easily-explore-an-entire-dataset"><i class="fa fa-check"></i><b>6.1.2</b> Easily explore an entire dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="multivar.html"><a href="multivar.html#multivariate-analysis-and-dimension-reduction"><i class="fa fa-check"></i><b>6.2</b> Multivariate analysis and dimension reduction</a><ul>
+<li class="chapter" data-level="6.2" data-path="multivar.html"><a href="multivar.html#multivariate-analysis-and-dimension-reduction"><i class="fa fa-check"></i><b>6.2</b> Multivariate analysis and dimension reduction</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="multivar.html"><a href="multivar.html#imputation"><i class="fa fa-check"></i><b>6.2.1</b> Imputation</a></li>
 <li class="chapter" data-level="6.2.2" data-path="multivar.html"><a href="multivar.html#normalization"><i class="fa fa-check"></i><b>6.2.2</b> Normalization</a></li>
 <li class="chapter" data-level="6.2.3" data-path="multivar.html"><a href="multivar.html#pca"><i class="fa fa-check"></i><b>6.2.3</b> PCA</a></li>
-<li class="chapter" data-level="6.2.4" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>6.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.2.4" data-path="multivar.html"><a href="multivar.html#exercises-2"><i class="fa fa-check"></i><b>6.2.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="multivar.html"><a href="multivar.html#dimension-reduction"><i class="fa fa-check"></i><b>6.3</b> Dimension reduction</a><ul>
+<li class="chapter" data-level="6.3" data-path="multivar.html"><a href="multivar.html#dimension-reduction"><i class="fa fa-check"></i><b>6.3</b> Dimension reduction</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="multivar.html"><a href="multivar.html#use-the-results-of-the-pca"><i class="fa fa-check"></i><b>6.3.1</b> Use the results of the PCA</a></li>
 <li class="chapter" data-level="6.3.2" data-path="multivar.html"><a href="multivar.html#other-inertia-based-methods"><i class="fa fa-check"></i><b>6.3.2</b> Other inertia-based methods</a></li>
 <li class="chapter" data-level="6.3.3" data-path="multivar.html"><a href="multivar.html#t-sne"><i class="fa fa-check"></i><b>6.3.3</b> t-SNE</a></li>
 <li class="chapter" data-level="6.3.4" data-path="multivar.html"><a href="multivar.html#a-word-about-clustering"><i class="fa fa-check"></i><b>6.3.4</b> A word about clustering</a></li>
-<li class="chapter" data-level="6.3.5" data-path="intro-r.html"><a href="intro-r.html#exercise"><i class="fa fa-check"></i><b>6.3.5</b> Exercise</a></li>
+<li class="chapter" data-level="6.3.5" data-path="multivar.html"><a href="multivar.html#exercise-1"><i class="fa fa-check"></i><b>6.3.5</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="multivar.html"><a href="multivar.html#visualization-bonus-dashboards-and-reports"><i class="fa fa-check"></i><b>6.4</b> Visualization bonus : dashboards and reports</a><ul>
+<li class="chapter" data-level="6.4" data-path="multivar.html"><a href="multivar.html#visualization-bonus-dashboards-and-reports"><i class="fa fa-check"></i><b>6.4</b> Visualization bonus : dashboards and reports</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="multivar.html"><a href="multivar.html#shiny-and-rmarkdown"><i class="fa fa-check"></i><b>6.4.1</b> Shiny and rmarkdown</a></li>
 <li class="chapter" data-level="6.4.2" data-path="multivar.html"><a href="multivar.html#web-based-graphics-with-plotly"><i class="fa fa-check"></i><b>6.4.2</b> Web-based graphics with <code>plotly</code></a></li>
 <li class="chapter" data-level="6.4.3" data-path="multivar.html"><a href="multivar.html#other-packages-widgets"><i class="fa fa-check"></i><b>6.4.3</b> Other packages &amp; widgets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>7</b> Linear and logistic regression</a><ul>
-<li class="chapter" data-level="7.1" data-path="reg.html"><a href="reg.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear regression</a><ul>
+<li class="chapter" data-level="7" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>7</b> Linear and logistic regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reg.html"><a href="reg.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear regression</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="reg.html"><a href="reg.html#general-presentation"><i class="fa fa-check"></i><b>7.1.1</b> General presentation</a></li>
 <li class="chapter" data-level="7.1.2" data-path="reg.html"><a href="reg.html#implementation-and-diagnostics"><i class="fa fa-check"></i><b>7.1.2</b> Implementation and diagnostics</a></li>
 <li class="chapter" data-level="7.1.3" data-path="reg.html"><a href="reg.html#coefficients-interpretation-and-inference"><i class="fa fa-check"></i><b>7.1.3</b> Coefficients interpretation and inference</a></li>
 <li class="chapter" data-level="7.1.4" data-path="reg.html"><a href="reg.html#the-frischwaugh-theorem-and-the-omitted-variable-bias"><i class="fa fa-check"></i><b>7.1.4</b> The Frisch–Waugh Theorem and the omitted variable bias</a></li>
 <li class="chapter" data-level="7.1.5" data-path="reg.html"><a href="reg.html#feature-engineering-and-functional-specification"><i class="fa fa-check"></i><b>7.1.5</b> Feature engineering and functional specification</a></li>
 <li class="chapter" data-level="7.1.6" data-path="reg.html"><a href="reg.html#variable-selection"><i class="fa fa-check"></i><b>7.1.6</b> Variable selection</a></li>
-<li class="chapter" data-level="7.1.7" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>7.1.7</b> Exercises</a></li>
+<li class="chapter" data-level="7.1.7" data-path="reg.html"><a href="reg.html#exercises-3"><i class="fa fa-check"></i><b>7.1.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a><ul>
+<li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="reg.html"><a href="reg.html#mathematical-formulation"><i class="fa fa-check"></i><b>7.2.1</b> Mathematical formulation</a></li>
 <li class="chapter" data-level="7.2.2" data-path="reg.html"><a href="reg.html#implementation-in-r-and-interpretation"><i class="fa fa-check"></i><b>7.2.2</b> Implementation in R and interpretation</a></li>
 <li class="chapter" data-level="7.2.3" data-path="reg.html"><a href="reg.html#goodness-of-fit"><i class="fa fa-check"></i><b>7.2.3</b> Goodness of fit</a></li>
-<li class="chapter" data-level="7.2.4" data-path="stats.html"><a href="stats.html#exercises-1"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="7.2.4" data-path="reg.html"><a href="reg.html#exercises-4"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -277,10 +287,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Data exploration and statistics with R and the tidyverse</h1>
-<p class="author"><em>Vivien Roussez (A1 Telekom Austria Group)</em></p>
-<p class="date"><em>Fall 2020</em></p>
+<p class="author"><em>Vivien Roussez (GoStudent)</em></p>
+<p class="date"><em>Winter 2022</em></p>
 </div>
-<div id="foreword" class="section level1">
+<div id="foreword" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Foreword</h1>
 <p><img src="img/asigmo.png" /></p>
 <p>Welcome to this learning week in Asigmo’s program !</p>
@@ -300,7 +310,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -319,6 +328,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -339,6 +349,10 @@ gitbook.start({
 "text": null
 },
 "download": ["DataExploration.pdf", "DataExploration.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

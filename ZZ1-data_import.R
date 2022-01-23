@@ -3,7 +3,7 @@ require(tidyverse)
 require(jsonlite)
 
 # import one of the files to check what's in it
-test <- fromJSON("Data/Sports/Raw/ixxxen_1001_summarizedActivities.json",
+test <- fromJSON("Data/Sports/Raw/2022/ixxxen_1001_summarizedActivities.json",
                  simplifyDataFrame = F,simplifyVector = F,simplifyMatrix = F)
 # get all possible fields for all activities (from sample)
 all_fields <- sapply(test[[1]]$summarizedActivitiesExport, function(xx) names(xx)) %>% 
@@ -12,7 +12,7 @@ all_fields <- sapply(test[[1]]$summarizedActivitiesExport, function(xx) names(xx
 
 # test[[1]]$summarizedActivitiesExport[[3]][["avgPower"]]
 
-imports <- list.files("Data/Sports/Raw/",pattern = "json",full.names = T)
+imports <- list.files("Data/Sports/Raw/2022",pattern = "json",full.names = T)
 
 sports <- lapply(imports,
         function(xx) fromJSON(xx,simplifyDataFrame = F,simplifyVector = F,simplifyMatrix = F) )
@@ -44,9 +44,11 @@ extract_from_all_activities <- function(json,name)
 dat <- lapply(all_fields,function(xx) extract_from_all_activities(sports,xx) )
 names(dat) <- all_fields
 dat$summarizedDiveInfo <- NULL
+dat$splitSummaries <- NULL
+dat$splits <- NULL
 dat <- bind_cols(dat) %>% 
   mutate(across(-c(activityType,rule,sportType,name,locationName),
                 as.numeric))
 
 
-write.csv(dat,row.names = F,file="Activities.csv")
+write.csv(dat,row.names = F,file="Data/Sports/Activities_2022.csv")

@@ -1,7 +1,7 @@
 require(tidyverse)
 require(lubridate)
 
-dat <- read.csv("Data/Sports/Activities.csv",header = T)
+dat <- read.csv("Data/Sports/Activities_2022.csv",header = T)
 
 dat <- dat %>% 
   mutate(start_time=as_datetime(startTimeLocal/1000), # create a timestamp

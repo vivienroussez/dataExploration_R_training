@@ -35,8 +35,9 @@ What's on our agenda :
 A very synthetic schematic of the data science workflow
 
 ![](img/data-science-explore.png)
+This process is a part of a large scheme :
 
-To which you could add **deployment** in some cases.
+![](img/CRISP-DM_Process_Diagram.png)
 
 ## About the interactions with other colleagues
 
@@ -78,7 +79,7 @@ The export results in a lot of JSON files and we will focus on the summary data.
 
 ```{r}
 require(tidyverse)
-dat <- read.csv("Data/Sports/Activities.csv",header = T)
+dat <- read.csv("Data/Sports/Activities_2022.csv",header = T)
 glimpse(dat)
 ```
 

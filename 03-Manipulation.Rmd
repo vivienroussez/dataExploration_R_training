@@ -25,7 +25,7 @@ Those principles have been largely adopted by the community (powered by Rstudio)
 You can either use the basic `read.table` and related functions (eg `read.csv`) which work pretty fine. If the file is large, you might consider tools from other package such as read_csv and others from the `readr` package (part of the tidyverse)
 
 ```{r}
-dat <- read.csv("Data/Sports/Activities.csv",header = T)
+dat <- read.csv("Data/Sports/Activities_2022.csv",header = T)
 head(dat)
 ```
 

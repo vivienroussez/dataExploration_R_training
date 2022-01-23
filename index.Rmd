@@ -1,7 +1,7 @@
 --- 
 title: "Data exploration and statistics with R and the tidyverse"
-author: "Vivien Roussez (A1 Telekom Austria Group)"
-date: "Fall 2020"
+author: "Vivien Roussez (GoStudent)"
+date: "Winter 2022"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

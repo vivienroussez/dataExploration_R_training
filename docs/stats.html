@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Statistics | Data exploration and statistics with R and the tidyverse</title>
   <meta name="description" content="Welcome to the wonderful world of data science and R !" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Statistics | Data exploration and statistics with R and the tidyverse" />
   <meta property="og:type" content="book" />
@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Welcome to the wonderful world of data science and R !" />
   
 
-<meta name="author" content="Vivien Roussez (A1 Telekom Austria Group)" />
+<meta name="author" content="Vivien Roussez (GoStudent)" />
 
 
 
@@ -32,7 +32,9 @@
   
 <link rel="prev" href="manip.html"/>
 <link rel="next" href="multivar.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -48,37 +50,23 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -98,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -148,7 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Foreword</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#topics-of-the-week"><i class="fa fa-check"></i><b>2.1</b> Topics of the week</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#the-data-science-workflow"><i class="fa fa-check"></i><b>2.2</b> The data science workflow</a></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#about-the-interactions-with-other-colleagues"><i class="fa fa-check"></i><b>2.3</b> About the interactions with other colleagues</a></li>
@@ -156,27 +146,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#data-of-the-week"><i class="fa fa-check"></i><b>2.5</b> Data of the week</a></li>
 <li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#your-mission"><i class="fa fa-check"></i><b>2.6</b> Your mission</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="intro-r.html"><a href="intro-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to R</a><ul>
-<li class="chapter" data-level="3.1" data-path="intro-r.html"><a href="intro-r.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is R</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="intro-r.html"><a href="intro-r.html#description"><i class="fa fa-check"></i><b>3.1.1</b> Description</a></li>
-<li class="chapter" data-level="3.1.2" data-path="intro-r.html"><a href="intro-r.html#objective-comparison-with-pyhton"><i class="fa fa-check"></i><b>3.1.2</b> (Objective) comparison with Pyhton</a></li>
-<li class="chapter" data-level="3.1.3" data-path="intro-r.html"><a href="intro-r.html#what-can-i-do-with-r"><i class="fa fa-check"></i><b>3.1.3</b> What can I do with R</a></li>
-<li class="chapter" data-level="3.1.4" data-path="intro-r.html"><a href="intro-r.html#quick-presentation-of-the-ecosystem"><i class="fa fa-check"></i><b>3.1.4</b> Quick presentation of the ecosystem</a></li>
+<li class="chapter" data-level="3" data-path="intro_r.html"><a href="intro_r.html"><i class="fa fa-check"></i><b>3</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="intro_r.html"><a href="intro_r.html#what-is-r"><i class="fa fa-check"></i><b>3.1</b> What is R</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="intro_r.html"><a href="intro_r.html#description"><i class="fa fa-check"></i><b>3.1.1</b> Description</a></li>
+<li class="chapter" data-level="3.1.2" data-path="intro_r.html"><a href="intro_r.html#objective-comparison-with-pyhton"><i class="fa fa-check"></i><b>3.1.2</b> (Objective) comparison with Pyhton</a></li>
+<li class="chapter" data-level="3.1.3" data-path="intro_r.html"><a href="intro_r.html#what-can-i-do-with-r"><i class="fa fa-check"></i><b>3.1.3</b> What can I do with R</a></li>
+<li class="chapter" data-level="3.1.4" data-path="intro_r.html"><a href="intro_r.html#quick-presentation-of-the-ecosystem"><i class="fa fa-check"></i><b>3.1.4</b> Quick presentation of the ecosystem</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="intro-r.html"><a href="intro-r.html#basic-commands-to-know"><i class="fa fa-check"></i><b>3.2</b> Basic commands to know</a></li>
-<li class="chapter" data-level="3.3" data-path="intro-r.html"><a href="intro-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>3.3</b> Data structures in R</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="intro-r.html"><a href="intro-r.html#basic-data-structures"><i class="fa fa-check"></i><b>3.3.1</b> Basic data structures</a></li>
-<li class="chapter" data-level="3.3.2" data-path="intro-r.html"><a href="intro-r.html#explore-a-new-data-structure-or-object"><i class="fa fa-check"></i><b>3.3.2</b> Explore a new data structure (or object)</a></li>
+<li class="chapter" data-level="3.2" data-path="intro_r.html"><a href="intro_r.html#basic-commands-to-know"><i class="fa fa-check"></i><b>3.2</b> Basic commands to know</a></li>
+<li class="chapter" data-level="3.3" data-path="intro_r.html"><a href="intro_r.html#data-structures-in-r"><i class="fa fa-check"></i><b>3.3</b> Data structures in R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="intro_r.html"><a href="intro_r.html#basic-data-structures"><i class="fa fa-check"></i><b>3.3.1</b> Basic data structures</a></li>
+<li class="chapter" data-level="3.3.2" data-path="intro_r.html"><a href="intro_r.html#explore-a-new-data-structure-or-object"><i class="fa fa-check"></i><b>3.3.2</b> Explore a new data structure (or object)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="manip.html"><a href="manip.html"><i class="fa fa-check"></i><b>4</b> Data manipulation</a><ul>
-<li class="chapter" data-level="4.1" data-path="manip.html"><a href="manip.html#import"><i class="fa fa-check"></i><b>4.1</b> Import</a><ul>
+<li class="chapter" data-level="4" data-path="manip.html"><a href="manip.html"><i class="fa fa-check"></i><b>4</b> Data manipulation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="manip.html"><a href="manip.html#import"><i class="fa fa-check"></i><b>4.1</b> Import</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="manip.html"><a href="manip.html#text-files"><i class="fa fa-check"></i><b>4.1.1</b> Text files</a></li>
 <li class="chapter" data-level="4.1.2" data-path="manip.html"><a href="manip.html#excel-files"><i class="fa fa-check"></i><b>4.1.2</b> Excel files</a></li>
 <li class="chapter" data-level="4.1.3" data-path="manip.html"><a href="manip.html#more-formats"><i class="fa fa-check"></i><b>4.1.3</b> More formats</a></li>
 <li class="chapter" data-level="4.1.4" data-path="manip.html"><a href="manip.html#read-from-databases-big-data"><i class="fa fa-check"></i><b>4.1.4</b> Read from databases / big data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="manip.html"><a href="manip.html#the-grammar-of-data-manipulation"><i class="fa fa-check"></i><b>4.2</b> The grammar of data manipulation</a><ul>
+<li class="chapter" data-level="4.2" data-path="manip.html"><a href="manip.html#the-grammar-of-data-manipulation"><i class="fa fa-check"></i><b>4.2</b> The grammar of data manipulation</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="manip.html"><a href="manip.html#the-pipe"><i class="fa fa-check"></i><b>4.2.1</b> The pipe</a></li>
 <li class="chapter" data-level="4.2.2" data-path="manip.html"><a href="manip.html#the-verbs-of-manipulation"><i class="fa fa-check"></i><b>4.2.2</b> The verbs of manipulation</a></li>
 <li class="chapter" data-level="4.2.3" data-path="manip.html"><a href="manip.html#filter-conditions"><i class="fa fa-check"></i><b>4.2.3</b> Filter : conditions</a></li>
@@ -185,28 +181,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.6" data-path="manip.html"><a href="manip.html#join-with-other-tables"><i class="fa fa-check"></i><b>4.2.6</b> Join with other tables</a></li>
 <li class="chapter" data-level="4.2.7" data-path="manip.html"><a href="manip.html#manipulate-several-data-in-the-same-time"><i class="fa fa-check"></i><b>4.2.7</b> Manipulate several data in the same time</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="manip.html"><a href="manip.html#lets-import-and-wrangle-some-data"><i class="fa fa-check"></i><b>4.3</b> Let’s import and wrangle some data !</a><ul>
+<li class="chapter" data-level="4.3" data-path="manip.html"><a href="manip.html#lets-import-and-wrangle-some-data"><i class="fa fa-check"></i><b>4.3</b> Let’s import and wrangle some data !</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="manip.html"><a href="manip.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
 <li class="chapter" data-level="4.3.2" data-path="manip.html"><a href="manip.html#one-tool-you-will-need-lapply"><i class="fa fa-check"></i><b>4.3.2</b> One tool you will need : <code>lapply()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="manip.html"><a href="manip.html#tidy-your-data"><i class="fa fa-check"></i><b>4.4</b> Tidy your data</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Statistics</a><ul>
-<li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#definitions"><i class="fa fa-check"></i><b>5.1</b> Definitions</a><ul>
+<li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#definitions"><i class="fa fa-check"></i><b>5.1</b> Definitions</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="stats.html"><a href="stats.html#terminology"><i class="fa fa-check"></i><b>5.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="5.1.2" data-path="stats.html"><a href="stats.html#types-of-variables"><i class="fa fa-check"></i><b>5.1.2</b> Types of variables</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#univariate-statistics"><i class="fa fa-check"></i><b>5.2</b> Univariate statistics</a><ul>
+<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#univariate-statistics"><i class="fa fa-check"></i><b>5.2</b> Univariate statistics</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="stats.html"><a href="stats.html#numerical-variables"><i class="fa fa-check"></i><b>5.2.1</b> Numerical variables</a></li>
 <li class="chapter" data-level="5.2.2" data-path="stats.html"><a href="stats.html#categorical-variables"><i class="fa fa-check"></i><b>5.2.2</b> Categorical variables</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#bivariate-statistics"><i class="fa fa-check"></i><b>5.3</b> Bivariate statistics</a><ul>
+<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#bivariate-statistics"><i class="fa fa-check"></i><b>5.3</b> Bivariate statistics</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="stats.html"><a href="stats.html#continuous-variables"><i class="fa fa-check"></i><b>5.3.1</b> 2 continuous variables</a></li>
 <li class="chapter" data-level="5.3.2" data-path="stats.html"><a href="stats.html#categorical-variables-1"><i class="fa fa-check"></i><b>5.3.2</b> 2 categorical variables</a></li>
 <li class="chapter" data-level="5.3.3" data-path="stats.html"><a href="stats.html#continuous-1-categorical-variable"><i class="fa fa-check"></i><b>5.3.3</b> 1 continuous, 1 categorical variable</a></li>
 <li class="chapter" data-level="5.3.4" data-path="stats.html"><a href="stats.html#exercises-1"><i class="fa fa-check"></i><b>5.3.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#stat_inf"><i class="fa fa-check"></i><b>5.4</b> Statistical inference</a><ul>
+<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#stat_inf"><i class="fa fa-check"></i><b>5.4</b> Statistical inference</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="stats.html"><a href="stats.html#the-statistical-model"><i class="fa fa-check"></i><b>5.4.1</b> The statistical model</a></li>
 <li class="chapter" data-level="5.4.2" data-path="stats.html"><a href="stats.html#two-fundamental-theorems"><i class="fa fa-check"></i><b>5.4.2</b> Two fundamental theorems</a></li>
 <li class="chapter" data-level="5.4.3" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>5.4.3</b> Statistical tests</a></li>
@@ -214,45 +216,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.5" data-path="stats.html"><a href="stats.html#exercises-interprete-a-test-you-dont-know"><i class="fa fa-check"></i><b>5.4.5</b> Exercises : interprete a test you don’t know</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="multivar.html"><a href="multivar.html"><i class="fa fa-check"></i><b>6</b> Multivariate analysis and dimension reduction</a><ul>
-<li class="chapter" data-level="6.1" data-path="multivar.html"><a href="multivar.html#multivariate-analysis"><i class="fa fa-check"></i><b>6.1</b> Multivariate analysis</a><ul>
+<li class="chapter" data-level="6" data-path="multivar.html"><a href="multivar.html"><i class="fa fa-check"></i><b>6</b> Multivariate analysis and dimension reduction</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="multivar.html"><a href="multivar.html#multivariate-analysis"><i class="fa fa-check"></i><b>6.1</b> Multivariate analysis</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="multivar.html"><a href="multivar.html#advanced-visualization"><i class="fa fa-check"></i><b>6.1.1</b> Advanced visualization</a></li>
 <li class="chapter" data-level="6.1.2" data-path="multivar.html"><a href="multivar.html#easily-explore-an-entire-dataset"><i class="fa fa-check"></i><b>6.1.2</b> Easily explore an entire dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="multivar.html"><a href="multivar.html#multivariate-analysis-and-dimension-reduction"><i class="fa fa-check"></i><b>6.2</b> Multivariate analysis and dimension reduction</a><ul>
+<li class="chapter" data-level="6.2" data-path="multivar.html"><a href="multivar.html#multivariate-analysis-and-dimension-reduction"><i class="fa fa-check"></i><b>6.2</b> Multivariate analysis and dimension reduction</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="multivar.html"><a href="multivar.html#imputation"><i class="fa fa-check"></i><b>6.2.1</b> Imputation</a></li>
 <li class="chapter" data-level="6.2.2" data-path="multivar.html"><a href="multivar.html#normalization"><i class="fa fa-check"></i><b>6.2.2</b> Normalization</a></li>
 <li class="chapter" data-level="6.2.3" data-path="multivar.html"><a href="multivar.html#pca"><i class="fa fa-check"></i><b>6.2.3</b> PCA</a></li>
-<li class="chapter" data-level="6.2.4" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>6.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.2.4" data-path="multivar.html"><a href="multivar.html#exercises-2"><i class="fa fa-check"></i><b>6.2.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="multivar.html"><a href="multivar.html#dimension-reduction"><i class="fa fa-check"></i><b>6.3</b> Dimension reduction</a><ul>
+<li class="chapter" data-level="6.3" data-path="multivar.html"><a href="multivar.html#dimension-reduction"><i class="fa fa-check"></i><b>6.3</b> Dimension reduction</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="multivar.html"><a href="multivar.html#use-the-results-of-the-pca"><i class="fa fa-check"></i><b>6.3.1</b> Use the results of the PCA</a></li>
 <li class="chapter" data-level="6.3.2" data-path="multivar.html"><a href="multivar.html#other-inertia-based-methods"><i class="fa fa-check"></i><b>6.3.2</b> Other inertia-based methods</a></li>
 <li class="chapter" data-level="6.3.3" data-path="multivar.html"><a href="multivar.html#t-sne"><i class="fa fa-check"></i><b>6.3.3</b> t-SNE</a></li>
 <li class="chapter" data-level="6.3.4" data-path="multivar.html"><a href="multivar.html#a-word-about-clustering"><i class="fa fa-check"></i><b>6.3.4</b> A word about clustering</a></li>
-<li class="chapter" data-level="6.3.5" data-path="intro-r.html"><a href="intro-r.html#exercise"><i class="fa fa-check"></i><b>6.3.5</b> Exercise</a></li>
+<li class="chapter" data-level="6.3.5" data-path="multivar.html"><a href="multivar.html#exercise-1"><i class="fa fa-check"></i><b>6.3.5</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="multivar.html"><a href="multivar.html#visualization-bonus-dashboards-and-reports"><i class="fa fa-check"></i><b>6.4</b> Visualization bonus : dashboards and reports</a><ul>
+<li class="chapter" data-level="6.4" data-path="multivar.html"><a href="multivar.html#visualization-bonus-dashboards-and-reports"><i class="fa fa-check"></i><b>6.4</b> Visualization bonus : dashboards and reports</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="multivar.html"><a href="multivar.html#shiny-and-rmarkdown"><i class="fa fa-check"></i><b>6.4.1</b> Shiny and rmarkdown</a></li>
 <li class="chapter" data-level="6.4.2" data-path="multivar.html"><a href="multivar.html#web-based-graphics-with-plotly"><i class="fa fa-check"></i><b>6.4.2</b> Web-based graphics with <code>plotly</code></a></li>
 <li class="chapter" data-level="6.4.3" data-path="multivar.html"><a href="multivar.html#other-packages-widgets"><i class="fa fa-check"></i><b>6.4.3</b> Other packages &amp; widgets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>7</b> Linear and logistic regression</a><ul>
-<li class="chapter" data-level="7.1" data-path="reg.html"><a href="reg.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear regression</a><ul>
+<li class="chapter" data-level="7" data-path="reg.html"><a href="reg.html"><i class="fa fa-check"></i><b>7</b> Linear and logistic regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reg.html"><a href="reg.html#linear-regression"><i class="fa fa-check"></i><b>7.1</b> Linear regression</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="reg.html"><a href="reg.html#general-presentation"><i class="fa fa-check"></i><b>7.1.1</b> General presentation</a></li>
 <li class="chapter" data-level="7.1.2" data-path="reg.html"><a href="reg.html#implementation-and-diagnostics"><i class="fa fa-check"></i><b>7.1.2</b> Implementation and diagnostics</a></li>
 <li class="chapter" data-level="7.1.3" data-path="reg.html"><a href="reg.html#coefficients-interpretation-and-inference"><i class="fa fa-check"></i><b>7.1.3</b> Coefficients interpretation and inference</a></li>
 <li class="chapter" data-level="7.1.4" data-path="reg.html"><a href="reg.html#the-frischwaugh-theorem-and-the-omitted-variable-bias"><i class="fa fa-check"></i><b>7.1.4</b> The Frisch–Waugh Theorem and the omitted variable bias</a></li>
 <li class="chapter" data-level="7.1.5" data-path="reg.html"><a href="reg.html#feature-engineering-and-functional-specification"><i class="fa fa-check"></i><b>7.1.5</b> Feature engineering and functional specification</a></li>
 <li class="chapter" data-level="7.1.6" data-path="reg.html"><a href="reg.html#variable-selection"><i class="fa fa-check"></i><b>7.1.6</b> Variable selection</a></li>
-<li class="chapter" data-level="7.1.7" data-path="stats.html"><a href="stats.html#exercises"><i class="fa fa-check"></i><b>7.1.7</b> Exercises</a></li>
+<li class="chapter" data-level="7.1.7" data-path="reg.html"><a href="reg.html#exercises-3"><i class="fa fa-check"></i><b>7.1.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a><ul>
+<li class="chapter" data-level="7.2" data-path="reg.html"><a href="reg.html#logitic-regression"><i class="fa fa-check"></i><b>7.2</b> Logitic regression</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="reg.html"><a href="reg.html#mathematical-formulation"><i class="fa fa-check"></i><b>7.2.1</b> Mathematical formulation</a></li>
 <li class="chapter" data-level="7.2.2" data-path="reg.html"><a href="reg.html#implementation-in-r-and-interpretation"><i class="fa fa-check"></i><b>7.2.2</b> Implementation in R and interpretation</a></li>
 <li class="chapter" data-level="7.2.3" data-path="reg.html"><a href="reg.html#goodness-of-fit"><i class="fa fa-check"></i><b>7.2.3</b> Goodness of fit</a></li>
-<li class="chapter" data-level="7.2.4" data-path="stats.html"><a href="stats.html#exercises-1"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="7.2.4" data-path="reg.html"><a href="reg.html#exercises-4"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -275,10 +285,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stats" class="section level1">
+<div id="stats" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Statistics</h1>
 <p>Let’s load and clean the data (which you have done during the exercises)</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="stats.html#cb116-1"></a><span class="kw">source</span>(<span class="st">&quot;ZZ2 - data_preparation.R&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="stats.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;ZZ2-data_preparation.R&quot;</span>)</span></code></pre></div>
 <p>This session aims to give a practical guide to explore a dataset you’ve never seen before and to understand some of the key statistical concepts. You will learn to describe each <em>variable</em> of a dataset and assess the strength of the relationship between two variables whatever their types may be. For that, we’ll see how to visually explore a dataset and to quantify what the graphics show. We will also give an overview of what statistical inference is and what it can be used for.</p>
 <p>This section covers the following topics :</p>
 <ul>
@@ -295,9 +305,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Introduction to statistical tests</li>
 </ul></li>
 </ul>
-<div id="definitions" class="section level2">
+<div id="definitions" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Definitions</h2>
-<div id="terminology" class="section level3">
+<div id="terminology" class="section level3" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Terminology</h3>
 <p>A data set can be viewed in two different manners :</p>
 <ul>
@@ -306,159 +316,117 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>It is crucial to have a good understanding of <strong>what the statistical individual is</strong>, and that can be challenging !</p>
 <p>Some examples :</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="stats.html#cb117-1"></a><span class="kw">head</span>(dat)</span></code></pre></div>
-<pre><code>##   activityId              uuidMsb              uuidLsb                name
-## 1 5570974040  3695223521635878400 -7098506714510231552          En piscine
-## 2 5566524321 -5212790351453402112 -8140622953684101120     Vienna Cyclisme
-## 3 5561266034  1271355725617447936 -5522843681386392576 Korneuburg Cyclisme
-## 4 5555881653 -2923937867469140992 -4676832321872288768       Vienna Course
-## 5 5551811953  7859042982901073920 -7909531516612413440      Zwift - London
-## 6 5551052200  -955408594416025216 -6866434522826685440          En piscine
-##   activityType userProfileId timeZoneId beginTimestamp eventTypeId   rule
-## 1 lap_swimming       1141258        124   1.600700e+12           9 public
-## 2      cycling       1141258        124   1.600602e+12           9 public
-## 3      cycling       1141258        124   1.600523e+12           9 public
-## 4      running       1141258        124   1.600439e+12           9 public
-## 5 virtual_ride       1141258        124   1.600362e+12           9 public
-## 6 lap_swimming       1141258        124   1.600353e+12           9 public
-##   sportType startTimeGmt startTimeLocal  duration  distance elevationGain
-## 1   GENERIC 1.600700e+12   1.600708e+12  60.67035   3.00000            NA
-## 2   CYCLING 1.600602e+12   1.600609e+12 251.07617 122.93220          2001
-## 3   CYCLING 1.600523e+12   1.600530e+12 173.04054  83.60927           745
-## 4   RUNNING 1.600439e+12   1.600447e+12  89.89717  17.92890           426
-## 5   GENERIC 1.600362e+12   1.600369e+12  60.44708  34.92347           160
-## 6   GENERIC 1.600353e+12   1.600360e+12  55.98575   2.85000            NA
-##   elevationLoss avgSpeed maxSpeed avgHr maxHr  calories startLongitude
-## 1            NA   3.5496   4.0392    NA    NA  608.8748             NA
-## 2          1968  29.3760  69.5340   144   176 3906.6128       16.31524
-## 3           742  28.9908  70.4052   117   161 2090.0028       16.33986
-## 4           425  11.9664  44.9100   155   176 1176.6906       16.31587
-## 5             0  34.6644  58.9104   138   163  737.0590        0.00000
-## 6            NA   3.6396  12.6864    NA    NA  598.8604             NA
-##   startLatitude aerobicTrainingEffect avgFractionalCadence maxFractionalCadence
-## 1            NA                    NA               0.0000                    0
-## 2      48.20915                   3.5               0.0000                    0
-## 3      48.34994                   2.4               0.0000                    0
-## 4      48.21432                   3.0               0.1875                    0
-## 5       0.00000                   0.0               0.0000                    0
-## 6            NA                    NA               0.0000                    0
-##   elapsedDuration movingDuration anaerobicTrainingEffect   deviceId
-## 1        65.93168       51.66088                      NA 3968818126
-## 2       269.60959      250.00298                     0.0 3968818126
-## 3       188.66444      172.60130                     0.0 3968818126
-## 4        92.30841       89.82672                     0.2 3968818126
-## 5        60.48333       60.18333                      NA 3825981698
-## 6        59.76377       47.64918                      NA 3968818126
-##   minTemperature maxTemperature minElevation maxElevation        locationName
-## 1             25             26           NA           NA                &lt;NA&gt;
-## 2             19             29        184.8        954.8              Vienna
-## 3             18             29        139.8        322.0          Korneuburg
-## 4             19             27        249.2        544.0              Vienna
-## 5             NA             NA          3.0         34.2 City of Westminster
-## 6             26             27           NA           NA                &lt;NA&gt;
-##   maxVerticalSpeed lapCount endLongitude endLatitude activeSets totalSets
-## 1               NA       34           NA          NA         NA        NA
-## 2        15.839978       25     16.25314    48.20399         NA        NA
-## 3        12.240033       17     16.38793    48.38009         NA        NA
-## 4         2.880066       18     16.31980    48.22264         NA        NA
-## 5         5.760001        1           NA          NA         NA        NA
-## 6               NA       32           NA          NA         NA        NA
-##   totalReps purposeful autoCalcCalories favorite    pr elevationCorrected
-## 1        NA      FALSE            FALSE    FALSE FALSE                  0
-## 2        NA      FALSE            FALSE    FALSE FALSE                  0
-## 3        NA      FALSE            FALSE    FALSE FALSE                  0
-## 4        NA      FALSE            FALSE    FALSE FALSE                  0
-## 5        NA      FALSE            FALSE    FALSE FALSE                  0
-## 6        NA      FALSE            FALSE    FALSE FALSE                  0
-##   atpActivity parent maxRunCadence steps avgVerticalOscillation
-## 1       FALSE  FALSE            NA    NA                     NA
-## 2       FALSE  FALSE            NA    NA                     NA
-## 3       FALSE  FALSE            NA    NA                     NA
-## 4       FALSE  FALSE           104 15620                     NA
-## 5       FALSE  FALSE            NA    NA                     NA
-## 6       FALSE  FALSE            NA    NA                     NA
-##   avgGroundContactTime  avgStrideLength vO2MaxValue avgVerticalRatio
-## 1                   NA             &lt;NA&gt;          NA               NA
-## 2                   NA             &lt;NA&gt;          72               NA
-## 3                   NA             &lt;NA&gt;          71               NA
-## 4                   NA 115.638917703599          58               NA
-## 5                   NA             &lt;NA&gt;          NA               NA
-## 6                   NA             &lt;NA&gt;          NA               NA
-##   avgGroundContactBalance avgDoubleCadence maxDoubleCadence avgPower
-## 1                      NA               NA               NA       NA
-## 2                      NA               NA               NA      260
-## 3                      NA               NA               NA      202
-## 4                      NA          172.375              208       NA
-## 5                      NA               NA               NA      212
-## 6                      NA               NA               NA       NA
-##   avgBikeCadence maxBikeCadence strokes normPower avgLeftBalance
-## 1             NA             NA    1198        NA             NA
-## 2             83            114   17968  296.0000          49.92
-## 3             82            107   12571  231.0000          49.90
-## 4             NA             NA      NA        NA             NA
-## 5             91            114       0  218.3049             NA
-## 6             NA             NA    1152        NA             NA
-##   avgRightBalance max20MinPower trainingStressScore intensityFactor
-## 1              NA            NA                  NA              NA
-## 2           50.08      375.1583               291.4           0.835
-## 3           50.10      242.7692               122.8           0.653
-## 4              NA            NA                  NA              NA
-## 5              NA      221.0525                  NA              NA
-## 6              NA            NA                  NA              NA
-##   lactateThresholdBpm lactateThresholdSpeed avgStrokes activeLengths avgSwolf
-## 1                  NA                    NA       23.0            60       74
-## 2                  NA                    NA         NA            NA       NA
-## 3                  NA                    NA         NA            NA       NA
-## 4                  NA                    NA         NA            NA       NA
-## 5                  NA                    NA         NA            NA       NA
-## 6                  NA                    NA       22.6            57       72
-##   poolLength avgStrokeDistance avgSwimCadence maxSwimCadence maxFtp workoutId
-## 1       5000               217             27             29     NA      &lt;NA&gt;
-## 2         NA                NA             NA             NA     NA      &lt;NA&gt;
-## 3         NA                NA             NA             NA     NA      &lt;NA&gt;
-## 4         NA                NA             NA             NA     NA      &lt;NA&gt;
-## 5         NA                NA             NA             NA     NA      &lt;NA&gt;
-## 6       5000               221             27             30     NA      &lt;NA&gt;
-##   decoDive parentId avgVerticalSpeed maxDepth avgDepth surfaceInterval
-## 1       NA     &lt;NA&gt;               NA       NA       NA              NA
-## 2       NA     &lt;NA&gt;               NA       NA       NA              NA
-## 3       NA     &lt;NA&gt;               NA       NA       NA              NA
-## 4       NA     &lt;NA&gt;               NA       NA       NA              NA
-## 5       NA     &lt;NA&gt;               NA       NA       NA              NA
-## 6       NA     &lt;NA&gt;               NA       NA       NA              NA
-##   floorsDescended bottomTime          start_time       date is_bike is_run
-## 1              NA         NA 2020-09-21 17:00:51 2020-09-21   FALSE  FALSE
-## 2              NA         NA 2020-09-20 13:37:03 2020-09-20    TRUE  FALSE
-## 3              NA         NA 2020-09-19 15:38:41 2020-09-19    TRUE  FALSE
-## 4              NA         NA 2020-09-18 16:28:37 2020-09-18   FALSE   TRUE
-## 5              NA         NA 2020-09-17 18:55:06 2020-09-17    TRUE  FALSE
-## 6              NA         NA 2020-09-17 16:33:09 2020-09-17   FALSE  FALSE
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="stats.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
+<pre><code>##   activityId              uuidMsb              uuidLsb                                                   name
+## 1 8117908979  1389057466509903104 -8816744684180752384                                          Pool Swimming
+## 2 8112025942 -8579594978425615360 -6087295519639653376              Zwift - WTRL Team Time Trial - Zone 6 (C)
+## 3 8111738850  4389923367750683136 -4813906093171606528 Zwift - .. *3.JOKE?(INC#EA2)&#39;s Meetup - Sleepless City
+## 4 8106509382 -3409298562326379008 -6907548221554647040                                         Vienna Running
+## 5 8101019939  8398595148511005696 -7204024095524219904                                         Zwift - London
+## 6 8100932442 -6116764320069431296 -8563845011947501568                         Zwift - TdZ Stage 1: Long Ride
+##   activityType userProfileId timeZoneId beginTimestamp eventTypeId   rule sportType startTimeGmt startTimeLocal
+## 1 lap_swimming       1141258        124   1.642184e+12           9 public  SWIMMING 1.642184e+12   1.642188e+12
+## 2 virtual_ride       1141258        124   1.642096e+12           9 public   CYCLING 1.642096e+12   1.642099e+12
+## 3 virtual_ride       1141258        124   1.642094e+12           9 public   CYCLING 1.642094e+12   1.642097e+12
+## 4      running       1141258        124   1.642009e+12           9 public   RUNNING 1.642009e+12   1.642012e+12
+## 5 virtual_ride       1141258        124   1.641928e+12           9 public   CYCLING 1.641928e+12   1.641932e+12
+## 6 virtual_ride       1141258        124   1.641924e+12           9 public   CYCLING 1.641924e+12   1.641928e+12
+##   duration distance avgSpeed avgHr maxHr avgPower avgBikeCadence maxBikeCadence  calories aerobicTrainingEffect
+## 1 71.18416  3.40000   3.5748    NA    NA       NA             NA             NA  725.0417                    NA
+## 2 37.91667 27.71270  43.8516   168   181      333             86            104  742.0662                    NA
+## 3 28.45000 16.40097  34.5888   135   154      240             83            200  391.5626                    NA
+## 4 70.40072 14.99398  12.7800   148   162       NA             NA             NA  889.2777                   2.4
+## 5 10.36667  6.24256  36.1296   138   151      186             78            100  110.1583                    NA
+## 6 65.90000 49.27470  44.8596   130   180      266             84            103 1025.4733                    NA
+##   strokes normPower avgLeftBalance avgRightBalance max20MinPower avgFractionalCadence maxFractionalCadence
+## 1    1390        NA             NA              NA            NA              0.00000                  0.0
+## 2       0  348.5247             NA              NA      342.2592              0.00000                  0.0
+## 3       0  249.8839             NA              NA      252.1425              0.00000                  0.0
+## 4      NA        NA             NA              NA            NA              0.15625                  0.5
+## 5       0  194.3214             NA              NA            NA              0.00000                  0.0
+## 6       0  275.7212             NA              NA      291.5917              0.00000                  0.0
+##   trainingStressScore intensityFactor elapsedDuration movingDuration anaerobicTrainingEffect   deviceId minTemperature
+## 1                  NA              NA        78.08723       57.76997                      NA 3968818126             26
+## 2                  NA              NA        37.88333       37.83333                      NA 3825981698             NA
+## 3                  NA              NA        28.43333       28.43333                      NA 3825981698             NA
+## 4                  NA              NA        71.55715       70.34502                       0 3968818126              7
+## 5                  NA              NA        10.33333       10.30000                      NA 3825981698             NA
+## 6                  NA              NA        65.88333       65.83333                      NA 3825981698             NA
+##   maxTemperature lapCount aerobicTrainingEffectMessage anaerobicTrainingEffectMessage purposeful autoCalcCalories
+## 1             27       39                           NA                             NA          0                0
+## 2             NA        1                           NA                             NA          0                0
+## 3             NA        1                           NA                             NA          0                0
+## 4             24       15                           NA                             NA          0                0
+## 5             NA        1                           NA                             NA          0                0
+## 6             NA        1                           NA                             NA          0                0
+##   favorite pr elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed maxRunCadence steps
+## 1        0  0                  0           0      0            NA            NA  13.9140            NA    NA
+## 2        0  0                  0           0      0           325             0  69.0192            NA    NA
+## 3        0  0                  0           0      0            76             0  46.2672            NA    NA
+## 4        0  0                  0           0      0           160           183  14.9796           112 12014
+## 5        0  0                  0           0      0            38             0  57.8988            NA    NA
+## 6        0  0                  0           0      0           266             0  61.2540            NA    NA
+##   startLongitude startLatitude avgVerticalOscillation avgGroundContactTime  avgStrideLength vO2MaxValue
+## 1             NA            NA                     NA                   NA             &lt;NA&gt;          NA
+## 2        0.00000       0.00000                     NA                   NA             &lt;NA&gt;          NA
+## 3        0.00000       0.00000                     NA                   NA             &lt;NA&gt;          NA
+## 4       16.31589      48.21407                   8.26                248.1 118.240002441406          60
+## 5        0.00000       0.00000                     NA                   NA             &lt;NA&gt;          NA
+## 6        0.00000       0.00000                     NA                   NA             &lt;NA&gt;          NA
+##   avgVerticalRatio avgGroundContactBalance minElevation maxElevation avgDoubleCadence maxDoubleCadence  locationName
+## 1               NA                      NA           NA           NA               NA               NA          &lt;NA&gt;
+## 2               NA                      NA          1.2         57.8               NA               NA          &lt;NA&gt;
+## 3               NA                      NA        121.8        130.4               NA               NA          &lt;NA&gt;
+## 4             6.83                   48.93        194.8        349.0         172.3125              225        Vienna
+## 5               NA                      NA          4.0         29.0               NA               NA Tower Hamlets
+## 6               NA                      NA         10.4         34.0               NA               NA          Thio
+##   maxVerticalSpeed endLongitude endLatitude avgStrokes activeLengths avgSwolf poolLength avgStrokeDistance
+## 1               NA           NA          NA       22.4            68       73       5000               223
+## 2         4.319999  166.9529124   -11.63601         NA            NA       NA         NA                NA
+## 3         2.159995  165.8442626   -10.79433         NA            NA       NA         NA                NA
+## 4         3.600000   16.3033489    48.21414         NA            NA       NA         NA                NA
+## 5         2.160001   -0.1127895    51.49451         NA            NA       NA         NA                NA
+## 6         2.160001  166.1724174   -21.73831         NA            NA       NA         NA                NA
+##   avgSwimCadence maxSwimCadence workoutId activeSets totalSets totalReps parentId manufacturer courseId maxFtp
+## 1             27             31      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
+## 2             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
+## 3             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
+## 4             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
+## 5             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
+## 6             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
+##   avgVerticalSpeed decoDive lactateThresholdBpm lactateThresholdSpeed          start_time       date is_bike is_run
+## 1               NA        0                  NA                    NA 2022-01-14 19:14:14 2022-01-14   FALSE  FALSE
+## 2               NA        0                  NA                    NA 2022-01-13 18:44:12 2022-01-13    TRUE  FALSE
+## 3               NA        0                  NA                    NA 2022-01-13 18:08:59 2022-01-13    TRUE  FALSE
+## 4               NA        0                  NA                    NA 2022-01-12 18:30:18 2022-01-12   FALSE   TRUE
+## 5               NA        0                  NA                    NA 2022-01-11 20:07:09 2022-01-11    TRUE  FALSE
+## 6               NA        0                  NA                    NA 2022-01-11 19:00:39 2022-01-11    TRUE  FALSE
 ##   activity_recoded qual_distance        qual_avgHr
 ## 1             Swim         Short              &lt;NA&gt;
-## 2             Bike     Very long    High intensity
-## 3             Bike     Very long     Low intensity
-## 4              Run          Long              &lt;NA&gt;
-## 5             Bike     Very long Average intensity
-## 6             Swim         Short              &lt;NA&gt;</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="stats.html#cb119-1"></a><span class="kw">group_by</span>(dat,activityType) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb119-2"><a href="stats.html#cb119-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total_dist=</span><span class="kw">sum</span>(distance,<span class="dt">na.rm=</span>T),<span class="dt">avg_speed=</span><span class="kw">mean</span>(avgSpeed,<span class="dt">na.rm=</span>T),<span class="dt">avg_power=</span><span class="kw">mean</span>(avgPower,<span class="dt">na.rm =</span> T),</span>
-<span id="cb119-3"><a href="stats.html#cb119-3"></a>            <span class="dt">.groups=</span><span class="st">&quot;keep&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb119-4"><a href="stats.html#cb119-4"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 4
+## 2             Bike     Very long              &lt;NA&gt;
+## 3             Bike          Long Average intensity
+## 4              Run          Long    High intensity
+## 5             Bike         Short Average intensity
+## 6             Bike     Very long     Low intensity</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="stats.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dat,activityType) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-2"><a href="stats.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_dist=</span><span class="fu">sum</span>(distance,<span class="at">na.rm=</span>T),<span class="at">avg_speed=</span><span class="fu">mean</span>(avgSpeed,<span class="at">na.rm=</span>T),<span class="at">avg_power=</span><span class="fu">mean</span>(avgPower,<span class="at">na.rm =</span> T),</span>
+<span id="cb119-3"><a href="stats.html#cb119-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups=</span><span class="st">&quot;keep&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-4"><a href="stats.html#cb119-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
 ## # Groups:   activityType [6]
 ##   activityType            total_dist avg_speed avg_power
 ##   &lt;chr&gt;                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1 cross_country_skiing_ws      635.      12.6       NaN 
-## 2 cycling                    74185.      22.8       253.
+## 1 cross_country_skiing_ws      782.      12.6       NaN 
+## 2 cycling                    78241.      23.0       254.
 ## 3 cyclocross                    41.2     18.4       NaN 
-## 4 hiking                        74.7      3.95      NaN 
+## 4 hiking                       236.       3.85      NaN 
 ## 5 indoor_cardio                  0        0         NaN 
 ## 6 indoor_cycling               592.       1.55      225.</code></pre>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="stats.html#cb121-1"></a><span class="kw">group_by</span>(dat,date) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb121-2"><a href="stats.html#cb121-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total_dist=</span><span class="kw">sum</span>(distance,<span class="dt">na.rm=</span>T),<span class="dt">avg_speed=</span><span class="kw">mean</span>(avgSpeed,<span class="dt">na.rm=</span>T),<span class="dt">avg_power=</span><span class="kw">mean</span>(avgPower,<span class="dt">na.rm =</span> T),</span>
-<span id="cb121-3"><a href="stats.html#cb121-3"></a>            <span class="dt">.groups=</span><span class="st">&quot;keep&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb121-4"><a href="stats.html#cb121-4"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 4
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="stats.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dat,date) <span class="sc">%&gt;%</span> </span>
+<span id="cb121-2"><a href="stats.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_dist=</span><span class="fu">sum</span>(distance,<span class="at">na.rm=</span>T),<span class="at">avg_speed=</span><span class="fu">mean</span>(avgSpeed,<span class="at">na.rm=</span>T),<span class="at">avg_power=</span><span class="fu">mean</span>(avgPower,<span class="at">na.rm =</span> T),</span>
+<span id="cb121-3"><a href="stats.html#cb121-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups=</span><span class="st">&quot;keep&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb121-4"><a href="stats.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
 ## # Groups:   date [6]
 ##   date                total_dist avg_speed avg_power
 ##   &lt;dttm&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -469,7 +437,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 2008-11-28 00:00:00     10.6       13.2        NaN
 ## 6 2008-11-29 00:00:00      0.208      6.90       NaN</code></pre>
 </div>
-<div id="types-of-variables" class="section level3">
+<div id="types-of-variables" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Types of variables</h3>
 <p>The way we analyse variables depends on their <em>type</em> :</p>
 <ul>
@@ -482,48 +450,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 </div>
-<div id="univariate-statistics" class="section level2">
+<div id="univariate-statistics" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Univariate statistics</h2>
-<div id="numerical-variables" class="section level3">
+<div id="numerical-variables" class="section level3" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> Numerical variables</h3>
-<div id="distribution" class="section level4">
+<div id="distribution" class="section level4" number="5.2.1.1">
 <h4><span class="header-section-number">5.2.1.1</span> Distribution</h4>
 <p>The distribution of a variable quantifies the number of individuals how have a certain value of the variable. We can visualize the distribution either with histograms or density plot, which are the “empirical counterparts” of the probability density function.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="stats.html#cb123-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(avgPower)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="stats.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(avgPower)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="stats.html#cb124-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(avgPower)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="stats.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(avgPower)) <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-39-2.png" width="672" /></p>
 </div>
-<div id="descriptive-statistics" class="section level4">
+<div id="descriptive-statistics" class="section level4" number="5.2.1.2">
 <h4><span class="header-section-number">5.2.1.2</span> Descriptive statistics</h4>
-<p>We typically want to measure what the “average” value is, along with “how diverse is my population”. For that, we can use either sum-based statistics (mean, standard deviation) or quantiles.
+<p>We typically want to measure what the “average” value is, along with “how diverse is my population.” For that, we can use either sum-based statistics (mean, standard deviation) or quantiles.
 Quantile-based statistics are said to be <strong>robust</strong> because much less sensitive to outliers. But they are more computationally expensive.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="stats.html#cb125-1"></a>stats &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">quantile</span>(dat<span class="op">$</span>avgPower,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">na.rm =</span> T),<span class="kw">mean</span>(dat<span class="op">$</span>avgPower,<span class="dt">na.rm =</span> T))</span>
-<span id="cb125-2"><a href="stats.html#cb125-2"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(avgPower)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span></span>
-<span id="cb125-3"><a href="stats.html#cb125-3"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> stats,<span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb125-4"><a href="stats.html#cb125-4"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;text&quot;</span>,<span class="dt">x=</span>stats,<span class="dt">y=</span><span class="kw">c</span>(<span class="dv">50</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">100</span>),<span class="dt">label=</span><span class="kw">c</span>(<span class="st">&quot;Q1&quot;</span>,<span class="st">&quot;Q2=median&quot;</span>,<span class="st">&quot;Q3&quot;</span>,<span class="st">&quot;mean&quot;</span>),<span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
-<span id="cb125-5"><a href="stats.html#cb125-5"></a><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">200</span>,<span class="dt">y=</span><span class="dv">25</span>,<span class="dt">xend=</span><span class="dv">300</span>,<span class="dt">yend=</span><span class="dv">25</span>),<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span></span>
-<span id="cb125-6"><a href="stats.html#cb125-6"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom=</span><span class="st">&quot;text&quot;</span>,<span class="dt">x=</span><span class="dv">300</span>,<span class="dt">y=</span><span class="dv">30</span>,<span class="dt">label=</span><span class="st">&quot;dispersion&quot;</span>,<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="stats.html#cb125-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">quantile</span>(dat<span class="sc">$</span>avgPower,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>,<span class="at">na.rm =</span> T),<span class="fu">mean</span>(dat<span class="sc">$</span>avgPower,<span class="at">na.rm =</span> T))</span>
+<span id="cb125-2"><a href="stats.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(avgPower)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb125-3"><a href="stats.html#cb125-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> stats,<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb125-4"><a href="stats.html#cb125-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&quot;text&quot;</span>,<span class="at">x=</span>stats,<span class="at">y=</span><span class="fu">c</span>(<span class="dv">50</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">100</span>),<span class="at">label=</span><span class="fu">c</span>(<span class="st">&quot;Q1&quot;</span>,<span class="st">&quot;Q2=median&quot;</span>,<span class="st">&quot;Q3&quot;</span>,<span class="st">&quot;mean&quot;</span>),<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb125-5"><a href="stats.html#cb125-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">200</span>,<span class="at">y=</span><span class="dv">25</span>,<span class="at">xend=</span><span class="dv">300</span>,<span class="at">yend=</span><span class="dv">25</span>),<span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb125-6"><a href="stats.html#cb125-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom=</span><span class="st">&quot;text&quot;</span>,<span class="at">x=</span><span class="dv">300</span>,<span class="at">y=</span><span class="dv">30</span>,<span class="at">label=</span><span class="st">&quot;dispersion&quot;</span>,<span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<div id="central-tendency" class="section level5">
+<div id="central-tendency" class="section level5" number="5.2.1.2.1">
 <h5><span class="header-section-number">5.2.1.2.1</span> Central tendency</h5>
 <p>Central tendency statistics allow you to have an idea of the order of magnitude of the attribute you are interested in, over the population.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="stats.html#cb126-1"></a><span class="kw">summary</span>(dat<span class="op">$</span>avgPower)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="stats.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat<span class="sc">$</span>avgPower)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
-##     0.0   224.0   239.0   240.6   261.0   347.0    4853</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="stats.html#cb128-1"></a><span class="kw">quantile</span>(dat<span class="op">$</span>avgPower,<span class="dt">probs=</span><span class="dv">0</span><span class="op">:</span><span class="dv">10</span><span class="op">/</span><span class="dv">10</span>,<span class="dt">na.rm =</span> T)</span></code></pre></div>
-<pre><code>##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
-##    0  212  221  226  230  239  246  258  265  276  347</code></pre>
+##     0.0   227.0   243.0   245.5   264.0   350.0    5194</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="stats.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(dat<span class="sc">$</span>avgPower,<span class="at">probs=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">10</span><span class="sc">/</span><span class="dv">10</span>,<span class="at">na.rm =</span> T)</span></code></pre></div>
+<pre><code>##    0%   10%   20%   30%   40%   50%   60%   70%   80%   90%  100% 
+##   0.0 214.0 224.0 229.0 235.2 243.0 251.0 260.0 269.0 282.7 350.0</code></pre>
 </div>
-<div id="dispersion" class="section level5">
+<div id="dispersion" class="section level5" number="5.2.1.2.2">
 <h5><span class="header-section-number">5.2.1.2.2</span> Dispersion</h5>
 <p>Dispersion describes how heterogenous our population is. It can be measured with various measurements (not exhaustive here)</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="stats.html#cb130-1"></a><span class="kw">sd</span>(dat<span class="op">$</span>avgPower,<span class="dt">na.rm =</span> T) <span class="co"># standard deviation</span></span></code></pre></div>
-<pre><code>## [1] 29.83959</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="stats.html#cb132-1"></a><span class="kw">IQR</span>(dat<span class="op">$</span>avgPower,<span class="dt">na.rm =</span> T) <span class="co"># interquartile range</span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="stats.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(dat<span class="sc">$</span>avgPower,<span class="at">na.rm =</span> T) <span class="co"># standard deviation</span></span></code></pre></div>
+<pre><code>## [1] 31.72316</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="stats.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(dat<span class="sc">$</span>avgPower,<span class="at">na.rm =</span> T) <span class="co"># interquartile range</span></span></code></pre></div>
 <pre><code>## [1] 37</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="stats.html#cb134-1"></a><span class="kw">sd</span>(dat<span class="op">$</span>avgPower,<span class="dt">na.rm =</span> T)<span class="op">/</span><span class="kw">mean</span>(dat<span class="op">$</span>avgPower,<span class="dt">na.rm =</span> T) <span class="co"># coefficient of variation</span></span></code></pre></div>
-<pre><code>## [1] 0.1240017</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="stats.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(dat<span class="sc">$</span>avgPower,<span class="at">na.rm =</span> T)<span class="sc">/</span><span class="fu">mean</span>(dat<span class="sc">$</span>avgPower,<span class="at">na.rm =</span> T) <span class="co"># coefficient of variation</span></span></code></pre></div>
+<pre><code>## [1] 0.1291948</code></pre>
 <p>How to read it :</p>
 <ul>
 <li>The average deviation to the average power is 29 watts</li>
@@ -533,11 +501,11 @@ Quantile-based statistics are said to be <strong>robust</strong> because much le
 <p>The latter allows to compare dispersion between variables that have different units</p>
 </div>
 </div>
-<div id="dealing-with-various-shapes" class="section level4">
+<div id="dealing-with-various-shapes" class="section level4" number="5.2.1.3">
 <h4><span class="header-section-number">5.2.1.3</span> Dealing with various shapes</h4>
 <p>The traditional example of a distribution is the gaussian distribution</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="stats.html#cb136-1"></a>fake &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">xx=</span><span class="kw">rnorm</span>(<span class="dv">100000</span>,<span class="dv">100</span>,<span class="dv">10</span>))</span>
-<span id="cb136-2"><a href="stats.html#cb136-2"></a><span class="kw">ggplot</span>(fake,<span class="kw">aes</span>(xx)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Random variable&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="stats.html#cb136-1" aria-hidden="true" tabindex="-1"></a>fake <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">xx=</span><span class="fu">rnorm</span>(<span class="dv">100000</span>,<span class="dv">100</span>,<span class="dv">10</span>))</span>
+<span id="cb136-2"><a href="stats.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fake,<span class="fu">aes</span>(xx)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Random variable&quot;</span>)<span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <p>In this case, we have a very interesting property : symmetry, which makes mean and median very close. If the coefficient of variation is not too high, the <strong>tail</strong> is pretty short.</p>
 <p>In real life,it (almost) never happens. Therefore, to understand what happens, you can check :</p>
@@ -550,16 +518,16 @@ Quantile-based statistics are said to be <strong>robust</strong> because much le
 <li>Are there outliers (which generates a long tail) <span class="math inline">\(\rightarrow\)</span> outlier detection (vast field…). You can start with the previous</li>
 </ul>
 <p><strong>Flat or not flat ?</strong></p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="stats.html#cb137-1"></a><span class="kw">data.frame</span>(<span class="dt">xx=</span><span class="kw">rnorm</span>(<span class="dv">10000</span>),<span class="dt">yy=</span><span class="kw">rnorm</span>(<span class="dv">10000</span>,<span class="dv">0</span>,<span class="dv">5</span>))  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb137-2"><a href="stats.html#cb137-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>()) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb137-3"><a href="stats.html#cb137-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value,<span class="dt">color=</span>name)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()<span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="stats.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">xx=</span><span class="fu">rnorm</span>(<span class="dv">10000</span>),<span class="at">yy=</span><span class="fu">rnorm</span>(<span class="dv">10000</span>,<span class="dv">0</span>,<span class="dv">5</span>))  <span class="sc">%&gt;%</span> </span>
+<span id="cb137-2"><a href="stats.html#cb137-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb137-3"><a href="stats.html#cb137-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value,<span class="at">color=</span>name)) <span class="sc">+</span> <span class="fu">geom_density</span>()<span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="stats.html#cb138-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="stats.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(distance)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="stats.html#cb139-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(distance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_log10</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="stats.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(distance)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">scale_x_log10</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-45-2.png" width="672" /></p>
 </div>
-<div id="exercises" class="section level4">
+<div id="exercises" class="section level4" number="5.2.1.4">
 <h4><span class="header-section-number">5.2.1.4</span> Exercises :</h4>
 <p>What can you tell about the distance variable ?</p>
 <ul>
@@ -569,51 +537,45 @@ Quantile-based statistics are said to be <strong>robust</strong> because much le
 <li>I want to group activities in 5 categories based on the distance. This operation is called discretization (very useful for choropleth maps). Search for available methods, and apply some of them. Which one is best suited to this variable ? Which one should you avoid ?</li>
 </ul>
 </div>
-<div id="bonus-overlay-the-distribution-of-two-variables" class="section level4">
+<div id="bonus-overlay-the-distribution-of-two-variables" class="section level4" number="5.2.1.5">
 <h4><span class="header-section-number">5.2.1.5</span> Bonus : overlay the distribution of two variables</h4>
 <p>If you want to compare the distribution of several variables, you can use several methods with <code>ggplot</code> :</p>
 <ul>
 <li>Brute-force overlaying 2 <code>geom_density()</code> plots</li>
 <li>Pivot your data to exhibit an underlying variable that you will use in the aesthetics</li>
 </ul>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="stats.html#cb140-1"></a><span class="kw">ggplot</span>(dat) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(distance),<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb140-2"><a href="stats.html#cb140-2"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(avgPower))</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="stats.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="fu">aes</span>(distance),<span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb140-2"><a href="stats.html#cb140-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(avgPower))</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="stats.html#cb141-1"></a>long_data &lt;-<span class="st"> </span><span class="kw">select</span>(dat,distance,avgPower,avgSpeed,activityId) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb141-2"><a href="stats.html#cb141-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">-</span>activityId,<span class="dt">names_to=</span><span class="st">&quot;metric&quot;</span>,<span class="dt">values_to=</span><span class="st">&quot;val&quot;</span>)</span>
-<span id="cb141-3"><a href="stats.html#cb141-3"></a></span>
-<span id="cb141-4"><a href="stats.html#cb141-4"></a><span class="kw">ggplot</span>(long_data,<span class="kw">aes</span>(val)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>metric,</span>
-<span id="cb141-5"><a href="stats.html#cb141-5"></a>                                                           <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="stats.html#cb141-1" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">select</span>(dat,distance,avgPower,avgSpeed,activityId) <span class="sc">%&gt;%</span> </span>
+<span id="cb141-2"><a href="stats.html#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>activityId,<span class="at">names_to=</span><span class="st">&quot;metric&quot;</span>,<span class="at">values_to=</span><span class="st">&quot;val&quot;</span>)</span>
+<span id="cb141-3"><a href="stats.html#cb141-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-4"><a href="stats.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_data,<span class="fu">aes</span>(val)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(. <span class="sc">~</span> metric,</span>
+<span id="cb141-5"><a href="stats.html#cb141-5" aria-hidden="true" tabindex="-1"></a>                                                           <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-46-2.png" width="672" /></p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="stats.html#cb142-1"></a><span class="kw">ggplot</span>(long_data,<span class="kw">aes</span>(<span class="dt">x=</span>val,<span class="dt">color=</span>metric)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="stats.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_data,<span class="fu">aes</span>(<span class="at">x=</span>val,<span class="at">color=</span>metric)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-46-3.png" width="672" /></p>
 </div>
 </div>
-<div id="categorical-variables" class="section level3">
+<div id="categorical-variables" class="section level3" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> Categorical variables</h3>
-<div id="working-with-factors" class="section level4">
+<div id="working-with-factors" class="section level4" number="5.2.2.1">
 <h4><span class="header-section-number">5.2.2.1</span> Working with factors</h4>
 <p>Factors are an optimized way to store categorical variables (encoded in integers). The distinct categories are stored in the <code>level</code> attribute which you can interact with.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="stats.html#cb143-1"></a><span class="kw">as.factor</span>(dat<span class="op">$</span>activityType) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb143-2"><a href="stats.html#cb143-2"></a><span class="st">  </span><span class="kw">levels</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;cross_country_skiing_ws&quot; &quot;cycling&quot;                
-##  [3] &quot;cyclocross&quot;              &quot;hiking&quot;                 
-##  [5] &quot;indoor_cardio&quot;           &quot;indoor_cycling&quot;         
-##  [7] &quot;indoor_running&quot;          &quot;lap_swimming&quot;           
-##  [9] &quot;multi_sport&quot;             &quot;open_water_swimming&quot;    
-## [11] &quot;other&quot;                   &quot;road_biking&quot;            
-## [13] &quot;running&quot;                 &quot;street_running&quot;         
-## [15] &quot;strength_training&quot;       &quot;swimming&quot;               
-## [17] &quot;swimToBikeTransition&quot;    &quot;trail_running&quot;          
-## [19] &quot;transition&quot;              &quot;treadmill_running&quot;      
-## [21] &quot;uncategorized&quot;           &quot;virtual_ride&quot;           
-## [23] &quot;walking&quot;</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="stats.html#cb145-1"></a><span class="kw">as.factor</span>(dat<span class="op">$</span>activityType) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb145-2"><a href="stats.html#cb145-2"></a><span class="st">  </span><span class="kw">str</span>()</span></code></pre></div>
-<pre><code>##  Factor w/ 23 levels &quot;cross_country_skiing_ws&quot;,..: 8 2 2 13 22 8 2 13 2 8 ...</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="stats.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(dat<span class="sc">$</span>activityType) <span class="sc">%&gt;%</span> </span>
+<span id="cb143-2"><a href="stats.html#cb143-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">levels</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;cross_country_skiing_ws&quot; &quot;cycling&quot;                 &quot;cyclocross&quot;              &quot;hiking&quot;                 
+##  [5] &quot;indoor_cardio&quot;           &quot;indoor_cycling&quot;          &quot;indoor_running&quot;          &quot;lap_swimming&quot;           
+##  [9] &quot;multi_sport&quot;             &quot;open_water_swimming&quot;     &quot;other&quot;                   &quot;road_biking&quot;            
+## [13] &quot;running&quot;                 &quot;street_running&quot;          &quot;strength_training&quot;       &quot;swimming&quot;               
+## [17] &quot;swimToBikeTransition_v2&quot; &quot;trail_running&quot;           &quot;transition_v2&quot;           &quot;treadmill_running&quot;      
+## [21] &quot;virtual_ride&quot;            &quot;walking&quot;</code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="stats.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(dat<span class="sc">$</span>activityType) <span class="sc">%&gt;%</span> </span>
+<span id="cb145-2"><a href="stats.html#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str</span>()</span></code></pre></div>
+<pre><code>##  Factor w/ 22 levels &quot;cross_country_skiing_ws&quot;,..: 8 21 21 13 21 21 21 8 13 21 ...</code></pre>
 <p>For more functionalities you can use the <a href="https://cran.r-project.org/web/packages/forcats/vignettes/forcats.html">forcats package</a> which provides convenient tools (eg to recode the variable)</p>
 </div>
-<div id="barcharts" class="section level4">
+<div id="barcharts" class="section level4" number="5.2.2.2">
 <h4><span class="header-section-number">5.2.2.2</span> Barcharts</h4>
 <p>The barchart (which IS NOT a histogram) is the most common representation for categorical variables. You can also use the pie chart (but it requires to hack a little ggplot).
 Pie charts are despised by the majority of statisticians but it can be adapted if the sizes really differ. Some material to make your own opinion :</p>
@@ -621,71 +583,63 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 <li><a href="https://www.data-to-viz.com/caveat/pie.html">Why it’s bad</a></li>
 <li><a href="https://www.oreilly.com/content/in-defense-of-the-pie-chart/">Defense</a></li>
 </ul>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="stats.html#cb147-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activityType)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="stats.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(activityType)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="stats.html#cb148-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>,<span class="dt">fill=</span>activityType)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb148-2"><a href="stats.html#cb148-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">width=</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb148-3"><a href="stats.html#cb148-3"></a><span class="st">  </span><span class="kw">coord_polar</span>(<span class="st">&quot;y&quot;</span>,<span class="dt">start=</span><span class="dv">0</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb148-4"><a href="stats.html#cb148-4"></a><span class="st">  </span><span class="kw">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="stats.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>,<span class="at">fill=</span>activityType)) <span class="sc">+</span> </span>
+<span id="cb148-2"><a href="stats.html#cb148-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">width=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb148-3"><a href="stats.html#cb148-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="st">&quot;y&quot;</span>,<span class="at">start=</span><span class="dv">0</span>) <span class="sc">+</span> </span>
+<span id="cb148-4"><a href="stats.html#cb148-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-48-2.png" width="672" /></p>
 </div>
-<div id="contingency-tables" class="section level4">
+<div id="contingency-tables" class="section level4" number="5.2.2.3">
 <h4><span class="header-section-number">5.2.2.3</span> Contingency tables</h4>
 <p>After visualizing, how can we measure the number of cases and the percent in each category ?</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="stats.html#cb149-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activityType)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="stats.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>activityType)</span></code></pre></div>
 <pre><code>## 
-## cross_country_skiing_ws                 cycling              cyclocross 
-##                      38                    2174                       1 
-##                  hiking           indoor_cardio          indoor_cycling 
-##                       7                      32                     331 
-##          indoor_running            lap_swimming             multi_sport 
-##                      13                     852                      52 
-##     open_water_swimming                   other             road_biking 
-##                      69                      22                       2 
-##                 running          street_running       strength_training 
-##                    1728                      10                       4 
-##                swimming    swimToBikeTransition           trail_running 
-##                       4                       1                       1 
-##              transition       treadmill_running           uncategorized 
-##                      63                       4                      55 
+## cross_country_skiing_ws                 cycling              cyclocross                  hiking 
+##                      48                    2232                       1                      21 
+##           indoor_cardio          indoor_cycling          indoor_running            lap_swimming 
+##                      84                     330                      13                     909 
+##             multi_sport     open_water_swimming                   other             road_biking 
+##                      52                      74                      72                       2 
+##                 running          street_running       strength_training                swimming 
+##                    1926                      10                       4                       4 
+## swimToBikeTransition_v2           trail_running           transition_v2       treadmill_running 
+##                       1                       1                      63                       4 
 ##            virtual_ride                 walking 
-##                      49                       2</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="stats.html#cb151-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activityType) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb151-2"><a href="stats.html#cb151-2"></a><span class="st">  </span><span class="kw">prop.table</span>()<span class="op">*</span><span class="dv">100</span> </span></code></pre></div>
+##                     335                       2</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="stats.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>activityType) <span class="sc">%&gt;%</span> </span>
+<span id="cb151-2"><a href="stats.html#cb151-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>()<span class="sc">*</span><span class="dv">100</span> </span></code></pre></div>
 <pre><code>## 
-## cross_country_skiing_ws                 cycling              cyclocross 
-##              0.68915488             39.42691331              0.01813565 
-##                  hiking           indoor_cardio          indoor_cycling 
-##              0.12694958              0.58034095              6.00290170 
-##          indoor_running            lap_swimming             multi_sport 
-##              0.23576351             15.45157780              0.94305404 
-##     open_water_swimming                   other             road_biking 
-##              1.25136017              0.39898440              0.03627131 
-##                 running          street_running       strength_training 
-##             31.33841132              0.18135655              0.07254262 
-##                swimming    swimToBikeTransition           trail_running 
-##              0.07254262              0.01813565              0.01813565 
-##              transition       treadmill_running           uncategorized 
-##              1.14254625              0.07254262              0.99746101 
+## cross_country_skiing_ws                 cycling              cyclocross                  hiking 
+##              0.77569489             36.06981254              0.01616031              0.33936652 
+##           indoor_cardio          indoor_cycling          indoor_running            lap_swimming 
+##              1.35746606              5.33290239              0.21008403             14.68972204 
+##             multi_sport     open_water_swimming                   other             road_biking 
+##              0.84033613              1.19586296              1.16354234              0.03232062 
+##                 running          street_running       strength_training                swimming 
+##             31.12475760              0.16160310              0.06464124              0.06464124 
+## swimToBikeTransition_v2           trail_running           transition_v2       treadmill_running 
+##              0.01616031              0.01616031              1.01809955              0.06464124 
 ##            virtual_ride                 walking 
-##              0.88864708              0.03627131</code></pre>
+##              5.41370394              0.03232062</code></pre>
 <p>Another solution is to use what you’ve learned in the previous section (<a href="manip.html#manip">4</a>) : aggregation !</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="stats.html#cb153-1"></a><span class="kw">group_by</span>(dat,activityType) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb153-2"><a href="stats.html#cb153-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">number=</span><span class="kw">n</span>(),<span class="dt">proportion=</span><span class="kw">n</span>()<span class="op">/</span><span class="kw">nrow</span>(dat))</span></code></pre></div>
-<pre><code>## # A tibble: 23 x 3
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="stats.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dat,activityType) <span class="sc">%&gt;%</span> </span>
+<span id="cb153-2"><a href="stats.html#cb153-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">number=</span><span class="fu">n</span>(),<span class="at">proportion=</span><span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(dat))</span></code></pre></div>
+<pre><code>## # A tibble: 22 × 3
 ##    activityType            number proportion
 ##    &lt;chr&gt;                    &lt;int&gt;      &lt;dbl&gt;
-##  1 cross_country_skiing_ws     38   0.00689 
-##  2 cycling                   2174   0.394   
-##  3 cyclocross                   1   0.000181
-##  4 hiking                       7   0.00127 
-##  5 indoor_cardio               32   0.00580 
-##  6 indoor_cycling             331   0.0600  
-##  7 indoor_running              13   0.00236 
-##  8 lap_swimming               852   0.155   
-##  9 multi_sport                 52   0.00943 
-## 10 open_water_swimming         69   0.0125  
-## # … with 13 more rows</code></pre>
+##  1 cross_country_skiing_ws     48   0.00776 
+##  2 cycling                   2232   0.361   
+##  3 cyclocross                   1   0.000162
+##  4 hiking                      21   0.00339 
+##  5 indoor_cardio               84   0.0136  
+##  6 indoor_cycling             330   0.0533  
+##  7 indoor_running              13   0.00210 
+##  8 lap_swimming               909   0.147   
+##  9 multi_sport                 52   0.00840 
+## 10 open_water_swimming         74   0.0120  
+## # … with 12 more rows</code></pre>
 <!-- ### Weighted analysis -->
 <!-- Let's say we want to compute the same proportions but for the whole country. As a statistician, I computed a weight for each customer so that the sum of weights equals the total population of Autria. -->
 <!-- ```{r} -->
@@ -701,109 +655,109 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 </div>
 </div>
 </div>
-<div id="bivariate-statistics" class="section level2">
+<div id="bivariate-statistics" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Bivariate statistics</h2>
 <p>In this section, we see how to represent the relationship between two variables and measure it</p>
-<div id="continuous-variables" class="section level3">
+<div id="continuous-variables" class="section level3" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> 2 continuous variables</h3>
-<div id="graphical-exploration" class="section level4">
+<div id="graphical-exploration" class="section level4" number="5.3.1.1">
 <h4><span class="header-section-number">5.3.1.1</span> Graphical exploration</h4>
 <p>To visualize the relationship between two numerical variables, we can use the scatter plot. Don’t forget that the log function can help you identify non linear relationships since <span class="math inline">\(log(a \cdot x^b) = log(a) + b \cdot log(x)\)</span></p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="stats.html#cb155-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(distance,avgPower)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb155-2"><a href="stats.html#cb155-2"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Distance&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Power&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Raw variables&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>comma)<span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="stats.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(distance,avgPower)) <span class="sc">+</span> <span class="fu">geom_jitter</span>() <span class="sc">+</span> </span>
+<span id="cb155-2"><a href="stats.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Distance&quot;</span>,<span class="at">y=</span><span class="st">&quot;Power&quot;</span>,<span class="at">title=</span><span class="st">&quot;Raw variables&quot;</span>) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="stats.html#cb156-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(distance,avgPower)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_log10</span>(<span class="dt">labels =</span> scales<span class="op">::</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb156-2"><a href="stats.html#cb156-2"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Distance&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Power&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Distance in log scale&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="stats.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(distance,avgPower)) <span class="sc">+</span> <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span> </span>
+<span id="cb156-2"><a href="stats.html#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Distance&quot;</span>,<span class="at">y=</span><span class="st">&quot;Power&quot;</span>,<span class="at">title=</span><span class="st">&quot;Distance in log scale&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-51-2.png" width="672" /></p>
 <p>We can pimp up the graphics a bit to visualize the correlation</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="stats.html#cb157-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(distance<span class="op">/</span><span class="fl">1E5</span>,avgPower)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_log10</span>(<span class="dt">labels =</span> scales<span class="op">::</span>comma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb157-2"><a href="stats.html#cb157-2"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Distance&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Power&quot;</span>,<span class="dt">title=</span><span class="st">&quot;Usage in log scale&quot;</span>)<span class="op">+</span><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="stats.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(distance<span class="sc">/</span><span class="fl">1E5</span>,avgPower)) <span class="sc">+</span> <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span> </span>
+<span id="cb157-2"><a href="stats.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Distance&quot;</span>,<span class="at">y=</span><span class="st">&quot;Power&quot;</span>,<span class="at">title=</span><span class="st">&quot;Usage in log scale&quot;</span>)<span class="sc">+</span>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>We can see here that there is a positive relationship between distance and data usage and that this relationship has an exponential shape, meaning that the usage increases A LOT when the age drops.</p>
 </div>
-<div id="quantifying-the-relationship-correlations" class="section level4">
+<div id="quantifying-the-relationship-correlations" class="section level4" number="5.3.1.2">
 <h4><span class="header-section-number">5.3.1.2</span> Quantifying the relationship : correlation<strong>s</strong></h4>
 <p>To quantify this relationship, you can use the coefficients of correlation. There are 3 main coefficients : Pearson (the most famous and used), Kendall and Spearman. The latter can handle non-linear functional dependencies (ranks correlation) ; this is (roughly) equivalent to computing the coefficients on the log-transformed variables.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="stats.html#cb158-1"></a><span class="co"># Pearson coeff</span></span>
-<span id="cb158-2"><a href="stats.html#cb158-2"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="stats.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson coeff</span></span>
+<span id="cb158-2"><a href="stats.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(dat<span class="sc">$</span>distance,dat<span class="sc">$</span>avgPower,<span class="at">method=</span><span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="stats.html#cb160-1"></a><span class="co"># Pearson coeff, NAs removed</span></span>
-<span id="cb160-2"><a href="stats.html#cb160-2"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] 0.5437859</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="stats.html#cb162-1"></a><span class="co"># Spearman coeff </span></span>
-<span id="cb162-2"><a href="stats.html#cb162-2"></a><span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span><span class="st">&quot;spearman&quot;</span>,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] 0.6316721</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="stats.html#cb164-1"></a><span class="co"># Why is R a beautiful language ? Do it at once, without loops (loops are evil) </span></span>
-<span id="cb164-2"><a href="stats.html#cb164-2"></a><span class="kw">print</span>(<span class="st">&quot;all coeffs&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="stats.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson coeff, NAs removed</span></span>
+<span id="cb160-2"><a href="stats.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(dat<span class="sc">$</span>distance,dat<span class="sc">$</span>avgPower,<span class="at">method=</span><span class="st">&quot;pearson&quot;</span>,<span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.409875</code></pre>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="stats.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spearman coeff </span></span>
+<span id="cb162-2"><a href="stats.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(dat<span class="sc">$</span>distance,dat<span class="sc">$</span>avgPower,<span class="at">method=</span><span class="st">&quot;spearman&quot;</span>,<span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.568165</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="stats.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Why is R a beautiful language ? Do it at once, without loops (loops are evil) </span></span>
+<span id="cb164-2"><a href="stats.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;all coeffs&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;all coeffs&quot;</code></pre>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="stats.html#cb166-1"></a><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="st">&quot;pearson&quot;</span>,<span class="st">&quot;spearman&quot;</span>,<span class="st">&quot;kendall&quot;</span>),<span class="cf">function</span>(xx) <span class="kw">cor</span>(dat<span class="op">$</span>distance,dat<span class="op">$</span>avgPower,<span class="dt">method=</span>xx,<span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="stats.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;pearson&quot;</span>,<span class="st">&quot;spearman&quot;</span>,<span class="st">&quot;kendall&quot;</span>),<span class="cf">function</span>(xx) <span class="fu">cor</span>(dat<span class="sc">$</span>distance,dat<span class="sc">$</span>avgPower,<span class="at">method=</span>xx,<span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>))</span></code></pre></div>
 <pre><code>##   pearson  spearman   kendall 
-## 0.5437859 0.6316721 0.4452121</code></pre>
+## 0.4098750 0.5681650 0.3843185</code></pre>
 <p>More <a href="https://www.statisticssolutions.com/correlation-pearson-kendall-spearman/">info about correlation coefficients</a></p>
 <p>Should there be a complex relationship (eg sine), the graphical exploration is mandatory !</p>
 </div>
 </div>
-<div id="categorical-variables-1" class="section level3">
+<div id="categorical-variables-1" class="section level3" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> 2 categorical variables</h3>
 <p>For this part, I will create a discrete variable out of the distance variable (see previous exercises) to use it as second qualitative variable (the other ones are not really meaningful)</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="stats.html#cb168-1"></a>dat &lt;-<span class="st"> </span><span class="kw">mutate</span>(dat,<span class="dt">qual_distance=</span><span class="kw">as.character</span>(<span class="kw">cut</span>(distance,</span>
-<span id="cb168-2"><a href="stats.html#cb168-2"></a>                                                 <span class="kw">quantile</span>(distance,<span class="dt">probs =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">5</span><span class="op">/</span><span class="dv">5</span>,<span class="dt">na.rm=</span>T),</span>
-<span id="cb168-3"><a href="stats.html#cb168-3"></a>                                                 <span class="dt">include.lowest =</span> T,</span>
-<span id="cb168-4"><a href="stats.html#cb168-4"></a>                                                 <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Very short&quot;</span>,<span class="st">&quot;Short&quot;</span>,</span>
-<span id="cb168-5"><a href="stats.html#cb168-5"></a>                                                          <span class="st">&quot;Average&quot;</span>,<span class="st">&quot;Long&quot;</span>,<span class="st">&quot;Very long&quot;</span>))),</span>
-<span id="cb168-6"><a href="stats.html#cb168-6"></a>              <span class="dt">qual_avgHr=</span><span class="kw">as.character</span>(<span class="kw">cut</span>(avgHr,<span class="kw">quantile</span>(avgHr,<span class="dv">0</span><span class="op">:</span><span class="dv">3</span><span class="op">/</span><span class="dv">5</span>,<span class="dt">na.rm =</span> T),</span>
-<span id="cb168-7"><a href="stats.html#cb168-7"></a>                                          <span class="dt">include.lowest =</span> T,</span>
-<span id="cb168-8"><a href="stats.html#cb168-8"></a>                                          <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Low intensity&quot;</span>,<span class="st">&quot;Average intensity&quot;</span>,</span>
-<span id="cb168-9"><a href="stats.html#cb168-9"></a>                                                   <span class="st">&quot;High intensity&quot;</span>))),</span>
-<span id="cb168-10"><a href="stats.html#cb168-10"></a>              <span class="dt">qual_distance=</span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(qual_distance),<span class="st">&quot;Very short&quot;</span>,qual_distance))</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="stats.html#cb168-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">mutate</span>(dat,<span class="at">qual_distance=</span><span class="fu">as.character</span>(<span class="fu">cut</span>(distance,</span>
+<span id="cb168-2"><a href="stats.html#cb168-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="fu">quantile</span>(distance,<span class="at">probs =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span><span class="sc">/</span><span class="dv">5</span>,<span class="at">na.rm=</span>T),</span>
+<span id="cb168-3"><a href="stats.html#cb168-3" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">include.lowest =</span> T,</span>
+<span id="cb168-4"><a href="stats.html#cb168-4" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Very short&quot;</span>,<span class="st">&quot;Short&quot;</span>,</span>
+<span id="cb168-5"><a href="stats.html#cb168-5" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;Average&quot;</span>,<span class="st">&quot;Long&quot;</span>,<span class="st">&quot;Very long&quot;</span>))),</span>
+<span id="cb168-6"><a href="stats.html#cb168-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">qual_avgHr=</span><span class="fu">as.character</span>(<span class="fu">cut</span>(avgHr,<span class="fu">quantile</span>(avgHr,<span class="dv">0</span><span class="sc">:</span><span class="dv">3</span><span class="sc">/</span><span class="dv">5</span>,<span class="at">na.rm =</span> T),</span>
+<span id="cb168-7"><a href="stats.html#cb168-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">include.lowest =</span> T,</span>
+<span id="cb168-8"><a href="stats.html#cb168-8" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Low intensity&quot;</span>,<span class="st">&quot;Average intensity&quot;</span>,</span>
+<span id="cb168-9"><a href="stats.html#cb168-9" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">&quot;High intensity&quot;</span>))),</span>
+<span id="cb168-10"><a href="stats.html#cb168-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">qual_distance=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(qual_distance),<span class="st">&quot;Very short&quot;</span>,qual_distance))</span></code></pre></div>
 <p>Try different layouts with you barcharts !</p>
-<div id="barcharts-1" class="section level4">
+<div id="barcharts-1" class="section level4" number="5.3.2.1">
 <h4><span class="header-section-number">5.3.2.1</span> Barcharts</h4>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="stats.html#cb169-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb169-2"><a href="stats.html#cb169-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;stack&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="stats.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(activity_recoded,<span class="at">fill=</span>qual_distance)) <span class="sc">+</span> </span>
+<span id="cb169-2"><a href="stats.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;stack&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="stats.html#cb170-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb170-2"><a href="stats.html#cb170-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="stats.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(activity_recoded,<span class="at">fill=</span>qual_distance)) <span class="sc">+</span> </span>
+<span id="cb170-2"><a href="stats.html#cb170-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-55-2.png" width="672" /></p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="stats.html#cb171-1"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,<span class="dt">fill=</span>qual_distance)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb171-2"><a href="stats.html#cb171-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb171-3"><a href="stats.html#cb171-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="stats.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(activity_recoded,<span class="at">fill=</span>qual_distance)) <span class="sc">+</span> </span>
+<span id="cb171-2"><a href="stats.html#cb171-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb171-3"><a href="stats.html#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-55-3.png" width="672" /></p>
 <p>You get really different insights depending on the representation you chose !</p>
 </div>
-<div id="contingency-tables-1" class="section level4">
+<div id="contingency-tables-1" class="section level4" number="5.3.2.2">
 <h4><span class="header-section-number">5.3.2.2</span> Contingency tables</h4>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="stats.html#cb172-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) </span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="stats.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>activity_recoded,dat<span class="sc">$</span>qual_distance) </span></code></pre></div>
 <pre><code>##        
 ##         Average Long Short Very long Very short
-##   Bike      530  297   186       986        558
-##   Other      48   39    34        43        111
-##   Run       523  764   311        70         88
-##   Swim        0    1   554         3        368</code></pre>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="stats.html#cb174-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span></span>
-<span id="cb174-2"><a href="stats.html#cb174-2"></a><span class="st">  </span><span class="kw">prop.table</span>()<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
+##   Bike      610  332   226      1172        560
+##   Other      45   54    49        38        160
+##   Run       581  848   402        24         99
+##   Swim        0    2   550         2        434</code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="stats.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>activity_recoded,dat<span class="sc">$</span>qual_distance) <span class="sc">%&gt;%</span>   </span>
+<span id="cb174-2"><a href="stats.html#cb174-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>()<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>##        
 ##             Average        Long       Short   Very long  Very short
-##   Bike   9.61189699  5.38628945  3.37323177 17.88175553 10.11969532
-##   Other  0.87051143  0.70729053  0.61661226  0.77983315  2.01305767
-##   Run    9.48494741 13.85564019  5.64018861  1.26949583  1.59593761
-##   Swim   0.00000000  0.01813565 10.04715270  0.05440696  6.67392093</code></pre>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="stats.html#cb176-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span></span>
-<span id="cb176-2"><a href="stats.html#cb176-2"></a><span class="st">  </span><span class="kw">prop.table</span>(<span class="dt">margin =</span> <span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
+##   Bike   9.85778927  5.36522301  3.65223012 18.93988365  9.04977376
+##   Other  0.72721396  0.87265676  0.79185520  0.61409179  2.58564964
+##   Run    9.38914027 13.70394312  6.49644473  0.38784745  1.59987072
+##   Swim   0.00000000  0.03232062  8.88817065  0.03232062  7.01357466</code></pre>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="stats.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>activity_recoded,dat<span class="sc">$</span>qual_distance) <span class="sc">%&gt;%</span>   </span>
+<span id="cb176-2"><a href="stats.html#cb176-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">1</span>)<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>##        
 ##            Average       Long      Short  Very long Very short
-##   Bike  20.7274149 11.6151740  7.2741494 38.5608135 21.8224482
-##   Other 17.4545455 14.1818182 12.3636364 15.6363636 40.3636364
-##   Run   29.7835991 43.5079727 17.7107062  3.9863326  5.0113895
-##   Swim   0.0000000  0.1079914 59.8272138  0.3239741 39.7408207</code></pre>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="stats.html#cb178-1"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st">   </span></span>
-<span id="cb178-2"><a href="stats.html#cb178-2"></a><span class="st">  </span><span class="kw">prop.table</span>(<span class="dt">margin =</span> <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
+##   Bike  21.0344828 11.4482759  7.7931034 40.4137931 19.3103448
+##   Other 13.0057803 15.6069364 14.1618497 10.9826590 46.2427746
+##   Run   29.7338792 43.3981576 20.5731832  1.2282497  5.0665302
+##   Swim   0.0000000  0.2024291 55.6680162  0.2024291 43.9271255</code></pre>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="stats.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>activity_recoded,dat<span class="sc">$</span>qual_distance) <span class="sc">%&gt;%</span>   </span>
+<span id="cb178-2"><a href="stats.html#cb178-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>##        
-##             Average        Long       Short   Very long  Very short
-##   Bike  48.13805631 26.97547684 17.14285714 89.47368421 49.60000000
-##   Other  4.35967302  3.54223433  3.13364055  3.90199637  9.86666667
-##   Run   47.50227066 69.39146231 28.66359447  6.35208711  7.82222222
-##   Swim   0.00000000  0.09082652 51.05990783  0.27223230 32.71111111</code></pre>
+##            Average       Long      Short  Very long Very short
+##   Bike  49.3527508 26.8608414 18.4189079 94.8220065 44.6927374
+##   Other  3.6407767  4.3689320  3.9934800  3.0744337 12.7693536
+##   Run   47.0064725 68.6084142 32.7628362  1.9417476  7.9010375
+##   Swim   0.0000000  0.1618123 44.8247759  0.1618123 34.6368715</code></pre>
 <!-- ### Weighted contingency tables -->
 <!-- If you have a weighting variable, you can create a weighted contingency table with the following function.  -->
 <!-- ```{r} -->
@@ -818,12 +772,12 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 <!--   mutate(pct = 100*nb/sum(nb)) -->
 <!-- ``` -->
 </div>
-<div id="quantifying-relationships-chi2-cramers-v" class="section level4">
+<div id="quantifying-relationships-chi2-cramers-v" class="section level4" number="5.3.2.3">
 <h4><span class="header-section-number">5.3.2.3</span> Quantifying relationships : <span class="math inline">\(\chi^2\)</span>, Cramer’s V</h4>
 <p>The Chi-square (<span class="math inline">\(\chi^2\)</span>) statistics is used to measure the distance between the actual distribution of cases among categories of both variables and the distribution if the variables were independent. The higher the <code>X-squared</code>, the higher the divergence with independence, meaning that the variables are likely <em>linked</em> (correlation does not apply to categorical variables). The <code>p-value</code> indicates whether this relationship is <strong>statistically significant</strong> or not. We will see this in more details in the last chapter (Inference).</p>
 <p>More info and detailed way to compute the value : <a href="https://www.statisticshowto.com/probability-and-statistics/chi-square/">this website</a></p>
 </div>
-<div id="extreme-examples" class="section level4">
+<div id="extreme-examples" class="section level4" number="5.3.2.4">
 <h4><span class="header-section-number">5.3.2.4</span> Extreme examples :</h4>
 <p>Let’s assume we want to assess the relationship between distance and activity type.</p>
 <ul>
@@ -846,100 +800,100 @@ Pie charts are despised by the majority of statisticians but it can be adapted i
 <p><strong>Note :</strong> if some cells of the contingency table have less than 5 cases, the statistic is not reliable (you’ll get a message in this case)</p>
 <p>The chi-square suffers 2 main drawbacks : its value depends on the number of observations and the total number of categories <span class="math inline">\(\Rightarrow\)</span> one cannot compare the <span class="math inline">\(\chi^2\)</span> values for 2 different tables that have different numbers of underlying observations and number of categories.
 To deal with that, you can use Cramer’s V, which is a (kind of) <em>normalized</em> <span class="math inline">\(\chi^2\)</span>. You can use the function built in the <code>lsr</code> package. Cramer’s V <span class="math inline">\(\in [0,1]\)</span> and the higher it is, the more intense the link between both variables.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="stats.html#cb182-1"></a><span class="co"># install.packages(&quot;lsr&quot;) # If not installed</span></span>
-<span id="cb182-2"><a href="stats.html#cb182-2"></a><span class="kw">table</span>(dat<span class="op">$</span>activity_recoded,dat<span class="op">$</span>qual_distance) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb182-3"><a href="stats.html#cb182-3"></a><span class="st">  </span>lsr<span class="op">::</span><span class="kw">cramersV</span>()</span></code></pre></div>
-<pre><code>## [1] 0.4454809</code></pre>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="stats.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;lsr&quot;) # If not installed</span></span>
+<span id="cb182-2"><a href="stats.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>activity_recoded,dat<span class="sc">$</span>qual_distance) <span class="sc">%&gt;%</span> </span>
+<span id="cb182-3"><a href="stats.html#cb182-3" aria-hidden="true" tabindex="-1"></a>  lsr<span class="sc">::</span><span class="fu">cramersV</span>()</span></code></pre></div>
+<pre><code>## [1] 0.4505235</code></pre>
 <p>Let’s check with our 2 extreme examples :</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="stats.html#cb184-1"></a>lsr<span class="op">::</span><span class="kw">cramersV</span>(ex_dep[,<span class="op">-</span><span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="stats.html#cb184-1" aria-hidden="true" tabindex="-1"></a>lsr<span class="sc">::</span><span class="fu">cramersV</span>(ex_dep[,<span class="sc">-</span><span class="dv">5</span>])</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="stats.html#cb186-1"></a>lsr<span class="op">::</span><span class="kw">cramersV</span>(ex_indep)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="stats.html#cb186-1" aria-hidden="true" tabindex="-1"></a>lsr<span class="sc">::</span><span class="fu">cramersV</span>(ex_indep)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<p>In practice, it is very rare to get high values ; a rule of thumb is that a value around 0.2-0.3 is already “decent”. The <span class="math inline">\(\chi^2\)</span> p-value (if under 0.05) shows that there is a relationship ; Cramer’s V allows to compare between two tables.</p>
+<p>In practice, it is very rare to get high values ; a rule of thumb is that a value around 0.2-0.3 is already “decent.” The <span class="math inline">\(\chi^2\)</span> p-value (if under 0.05) shows that there is a relationship ; Cramer’s V allows to compare between two tables.</p>
 </div>
 </div>
-<div id="continuous-1-categorical-variable" class="section level3">
+<div id="continuous-1-categorical-variable" class="section level3" number="5.3.3">
 <h3><span class="header-section-number">5.3.3</span> 1 continuous, 1 categorical variable</h3>
 <p>In this part, we see how to deal with 2 variables that have different types. The goal remains the same : getting insights about the relationship between those 2 variables and quantify the strength of the link.
 We will try to assess if there is a connection between the distance and the discipline.</p>
-<div id="boxplots-violin-plots" class="section level4">
+<div id="boxplots-violin-plots" class="section level4" number="5.3.3.1">
 <h4><span class="header-section-number">5.3.3.1</span> Boxplots, violin plots</h4>
 <p>Boxplots are a simple, effective and compact representation of a variable’s distribution. It relies on quantiles.
 Vilin plots allows to see the ful distribution of both variables</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="stats.html#cb188-1"></a><span class="co"># Compute bounds of the boxplot</span></span>
-<span id="cb188-2"><a href="stats.html#cb188-2"></a><span class="co"># bounds &lt;- group_by(dat,activity_recoded) %&gt;% </span></span>
-<span id="cb188-3"><a href="stats.html#cb188-3"></a><span class="co">#   summarise(q1=quantile(distance,.25,na.rm = T),</span></span>
-<span id="cb188-4"><a href="stats.html#cb188-4"></a><span class="co">#             q2=quantile(distance,.50,na.rm = T),</span></span>
-<span id="cb188-5"><a href="stats.html#cb188-5"></a><span class="co">#             q3=quantile(distance,.75,na.rm = T),</span></span>
-<span id="cb188-6"><a href="stats.html#cb188-6"></a><span class="co">#             lower_bound=q1-1.5*IQR(distance,na.rm = T),</span></span>
-<span id="cb188-7"><a href="stats.html#cb188-7"></a><span class="co">#             upper_bound=q3+1.5*IQR(distance,na.rm = T)) %&gt;% </span></span>
-<span id="cb188-8"><a href="stats.html#cb188-8"></a><span class="co">#   pivot_longer(-activity_recoded)</span></span>
-<span id="cb188-9"><a href="stats.html#cb188-9"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,distance<span class="op">/</span><span class="fl">1E5</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="stats.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute bounds of the boxplot</span></span>
+<span id="cb188-2"><a href="stats.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bounds &lt;- group_by(dat,activity_recoded) %&gt;% </span></span>
+<span id="cb188-3"><a href="stats.html#cb188-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(q1=quantile(distance,.25,na.rm = T),</span></span>
+<span id="cb188-4"><a href="stats.html#cb188-4" aria-hidden="true" tabindex="-1"></a><span class="co">#             q2=quantile(distance,.50,na.rm = T),</span></span>
+<span id="cb188-5"><a href="stats.html#cb188-5" aria-hidden="true" tabindex="-1"></a><span class="co">#             q3=quantile(distance,.75,na.rm = T),</span></span>
+<span id="cb188-6"><a href="stats.html#cb188-6" aria-hidden="true" tabindex="-1"></a><span class="co">#             lower_bound=q1-1.5*IQR(distance,na.rm = T),</span></span>
+<span id="cb188-7"><a href="stats.html#cb188-7" aria-hidden="true" tabindex="-1"></a><span class="co">#             upper_bound=q3+1.5*IQR(distance,na.rm = T)) %&gt;% </span></span>
+<span id="cb188-8"><a href="stats.html#cb188-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_longer(-activity_recoded)</span></span>
+<span id="cb188-9"><a href="stats.html#cb188-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(activity_recoded,distance<span class="sc">/</span><span class="fl">1E5</span>)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="stats.html#cb189-1"></a>  <span class="co"># geom_point(data = bounds,aes(activity_recoded,value,color=name))</span></span>
-<span id="cb189-2"><a href="stats.html#cb189-2"></a><span class="kw">ggplot</span>(dat,<span class="kw">aes</span>(activity_recoded,distance<span class="op">/</span><span class="fl">1E5</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>()<span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_log10</span>(<span class="dt">label=</span>scales<span class="op">::</span>comma)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="stats.html#cb189-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = bounds,aes(activity_recoded,value,color=name))</span></span>
+<span id="cb189-2"><a href="stats.html#cb189-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(activity_recoded,distance<span class="sc">/</span><span class="fl">1E5</span>)) <span class="sc">+</span> <span class="fu">geom_violin</span>()<span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">scale_y_log10</span>(<span class="at">label=</span>scales<span class="sc">::</span>comma)</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-61-2.png" width="672" /></p>
 <p>It looks like bike activities are longer than the others ! Big surprise !</p>
 </div>
-<div id="quantifying-relationship-intensity-eta2" class="section level4">
+<div id="quantifying-relationship-intensity-eta2" class="section level4" number="5.3.3.2">
 <h4><span class="header-section-number">5.3.3.2</span> Quantifying relationship intensity : <span class="math inline">\(\eta^2\)</span></h4>
 <p>The graphics indicate that there is a relationship between activity type and distance (if not, boxplots would have the same shape for all groups). We can assess the strength of the connection with the <span class="math inline">\(\eta^2\)</span> statistics.</p>
 <p>Using the decomposition of the variance formula <span class="math inline">\(SS_{total} = SS_{between} + SS_{within}\)</span>, <span class="math inline">\(\eta^2\)</span> is defined as <span class="math inline">\(\eta^2 = \dfrac{SS_{between}}{SS_{total}} \in [0,1]\)</span></p>
 </div>
-<div id="extreme-examples-1" class="section level4">
+<div id="extreme-examples-1" class="section level4" number="5.3.3.3">
 <h4><span class="header-section-number">5.3.3.3</span> Extreme examples :</h4>
 <ul>
 <li>If the variables are independent, the boxplots should look like this (almost no difference in the distributions) :</li>
 </ul>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <ul>
-<li>If they are fully “correlated”, the activity variable would explain all variance in the data set :</li>
+<li>If they are fully “correlated,” the activity variable would explain all variance in the data set :</li>
 </ul>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <p>In this case, we see that all the variance lies between the subgroups : there is no dispersion within the groups.</p>
 <p><strong>Note :</strong> In practice, the previous situation will of course never happen, and a categorical variable can’t carry by itself a lot of variance (since the number of possible values are de facto limited).</p>
 <p>This is also the <span class="math inline">\(R^2\)</span> of the 1-factor ANOVA regression of distance explained by activty type,</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="stats.html#cb190-1"></a>anova &lt;-<span class="st"> </span><span class="kw">aov</span>(distance<span class="op">~</span>activity_recoded,<span class="dt">data=</span>dat) </span>
-<span id="cb190-2"><a href="stats.html#cb190-2"></a><span class="co"># Variance decomposition</span></span>
-<span id="cb190-3"><a href="stats.html#cb190-3"></a><span class="kw">summary</span>(anova)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="stats.html#cb190-1" aria-hidden="true" tabindex="-1"></a>anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(distance<span class="sc">~</span>activity_recoded,<span class="at">data=</span>dat) </span>
+<span id="cb190-2"><a href="stats.html#cb190-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance decomposition</span></span>
+<span id="cb190-3"><a href="stats.html#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova)</span></code></pre></div>
 <pre><code>##                    Df  Sum Sq Mean Sq F value Pr(&gt;F)    
-## activity_recoded    3  610577  203526   230.6 &lt;2e-16 ***
-## Residuals        5503 4857888     883                   
+## activity_recoded    3  779537  259846   310.8 &lt;2e-16 ***
+## Residuals        6177 5163842     836                   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 7 observations deleted due to missingness</code></pre>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="stats.html#cb192-1"></a><span class="kw">print</span>(<span class="st">&quot;eta squared&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="stats.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;eta squared&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;eta squared&quot;</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="stats.html#cb194-1"></a>lsr<span class="op">::</span><span class="kw">etaSquared</span>(anova)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="stats.html#cb194-1" aria-hidden="true" tabindex="-1"></a>lsr<span class="sc">::</span><span class="fu">etaSquared</span>(anova)</span></code></pre></div>
 <pre><code>##                     eta.sq eta.sq.part
-## activity_recoded 0.1116542   0.1116542</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="stats.html#cb196-1"></a><span class="co"># Alternatively</span></span>
-<span id="cb196-2"><a href="stats.html#cb196-2"></a><span class="kw">lm</span>(distance<span class="op">~</span>activity_recoded,<span class="dt">data=</span>dat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span></code></pre></div>
+## activity_recoded 0.1311605   0.1311605</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="stats.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively</span></span>
+<span id="cb196-2"><a href="stats.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(distance<span class="sc">~</span>activity_recoded,<span class="at">data=</span>dat) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = distance ~ activity_recoded, data = dat)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-##  -29.98  -17.47   -1.23    1.37 1136.08 
+##  -31.53  -15.28   -0.98    1.96 1136.16 
 ## 
 ## Coefficients:
 ##                       Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)            29.9816     0.5877  51.017  &lt; 2e-16 ***
-## activity_recodedOther -11.9153     1.8950  -6.288 3.47e-10 ***
-## activity_recodedRun   -17.0613     0.9214 -18.517  &lt; 2e-16 ***
-## activity_recodedSwim  -27.0224     1.1396 -23.712  &lt; 2e-16 ***
+## (Intercept)            31.5284     0.5370  58.712   &lt;2e-16 ***
+## activity_recodedOther -16.3343     1.6509  -9.894   &lt;2e-16 ***
+## activity_recodedRun   -18.6880     0.8467 -22.072   &lt;2e-16 ***
+## activity_recodedSwim  -28.5564     1.0651 -26.810   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 29.71 on 5503 degrees of freedom
+## Residual standard error: 28.91 on 6177 degrees of freedom
 ##   (7 observations deleted due to missingness)
-## Multiple R-squared:  0.1117,	Adjusted R-squared:  0.1112 
-## F-statistic: 230.6 on 3 and 5503 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Multiple R-squared:  0.1312, Adjusted R-squared:  0.1307 
+## F-statistic: 310.8 on 3 and 6177 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>In this case, 11.2% of the age variance is explained by the difference in activity types ; it is very high.</p>
 </div>
 </div>
-<div id="exercises-1" class="section level3">
+<div id="exercises-1" class="section level3" number="5.3.4">
 <h3><span class="header-section-number">5.3.4</span> Exercises</h3>
 <ul>
 <li>Explore the distribution of the average speed. What can you say about it ?</li>
@@ -947,12 +901,12 @@ Vilin plots allows to see the ful distribution of both variables</p>
 <li>For all the the categorical variables, get the frequent category (with table AND dplyr/tidyr)</li>
 </ul>
 <p><strong>Very important :</strong> For the next parts, we will remove the extreme observation that is clearly an error</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="stats.html#cb198-1"></a>dat_clean &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,<span class="op">!</span>(activityId <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">407226313</span>,<span class="dv">2321338</span>)) <span class="op">&amp;</span><span class="st"> </span><span class="kw">year</span>(date)<span class="op">&gt;=</span><span class="dv">2012</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="stats.html#cb198-1" aria-hidden="true" tabindex="-1"></a>dat_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat,<span class="sc">!</span>(activityId <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">407226313</span>,<span class="dv">2321338</span>)) <span class="sc">&amp;</span> <span class="fu">year</span>(date)<span class="sc">&gt;=</span><span class="dv">2012</span>)</span></code></pre></div>
 </div>
 </div>
-<div id="stat_inf" class="section level2">
+<div id="stat_inf" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Statistical inference</h2>
-<div id="the-statistical-model" class="section level3">
+<div id="the-statistical-model" class="section level3" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> The statistical model</h3>
 <p>We want to measure a characteristic in the <em>general population</em>, let’s say the average distance of all potential activites, and let’s denote it by D.</p>
 <p>The fundamental assumption of the statistical model is that there is an underlying <em>data-genereting process</em>, which means that D is distributed with a certain probability distribution. The goal of the statistician is to find which distribution it is, and estimate its parameters.
@@ -963,15 +917,15 @@ As a matter of fact the sample mean is an estimator of the population mean. The 
 An estimator is said to be <em>biased</em> if <span class="math inline">\(\mathbb{E}(\hat{\theta}) \neq \mu\)</span> ; it is said to be <em>efficient</em> if its variance is minimal.</p>
 <p>One fundamental hypothesis of the model is that all observations are independent and identically distributed (<em>iid</em>). This is typically not the case for <em>time series</em>, but this hypothesis is, in general, reasonable.</p>
 </div>
-<div id="two-fundamental-theorems" class="section level3">
+<div id="two-fundamental-theorems" class="section level3" number="5.4.2">
 <h3><span class="header-section-number">5.4.2</span> Two fundamental theorems</h3>
 <p>Eventough we cannot observe the true parameter(s), and that the sample mean is an estimator (hence a random variable), 2 theorems save the game :</p>
-<div id="the-law-of-large-numbers" class="section level4">
+<div id="the-law-of-large-numbers" class="section level4" number="5.4.2.1">
 <h4><span class="header-section-number">5.4.2.1</span> The law of large numbers</h4>
 <p><span class="math display">\[\bar{D} = \dfrac{1}{n} \sum_{i=1}^n D_i \xrightarrow[n \to +\infty]{a.s.} \mu\]</span></p>
 <p>In other words, when the sample size n is big enough, the sample mean converges to the population mean <span class="math inline">\(\rightarrow\)</span> We can estimate this parameter with a simple mean without <strong>bias</strong>.</p>
 </div>
-<div id="the-central-limit-theorem-clt" class="section level4">
+<div id="the-central-limit-theorem-clt" class="section level4" number="5.4.2.2">
 <h4><span class="header-section-number">5.4.2.2</span> The central limit theorem (CLT)</h4>
 <p>Probably the most important theorem in statistics, valid whatever the true distribution is</p>
 <p><span class="math display">\[\sqrt{n} \cdot \bar{D} \xrightarrow[n \to +\infty]{p}  \mathcal{N} (\mu,\sigma^2)\]</span></p>
@@ -1001,9 +955,9 @@ An estimator is said to be <em>biased</em> if <span class="math inline">\(\mathb
 It is up to you to decide, but you generally can’t have both an unbiased and very precise estimator…</p>
 </div>
 </div>
-<div id="statistical-tests" class="section level3">
+<div id="statistical-tests" class="section level3" number="5.4.3">
 <h3><span class="header-section-number">5.4.3</span> Statistical tests</h3>
-<div id="introductory-example" class="section level4">
+<div id="introductory-example" class="section level4" number="5.4.3.1">
 <h4><span class="header-section-number">5.4.3.1</span> Introductory example</h4>
 <p>Knowing the theoretical probability distribution of our estimator, we can assess the likelihood of an hypothesis. For the example, let’s make the hypothesis (<span class="math inline">\(\mathcal{H_0}\)</span>) that the true mean is 10 and standard deviation is <span class="math inline">\(2\sqrt{n}\)</span>. If this hypothesis is true, thanks to the CTL, the distribution of <span class="math inline">\(\bar{D}\)</span> would be the following :</p>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
@@ -1011,7 +965,7 @@ It is up to you to decide, but you generally can’t have both an unbiased and v
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 <p>Obviously my actual value doesn’t fit with my hypothesis : the probability of getting such a sample mean under <span class="math inline">\(\mathcal{H_O}\)</span> is very small <span class="math inline">\(\rightarrow\)</span> my hypothesis is very unlikely to be valid <span class="math inline">\(\rightarrow\)</span> the true mean is probably not 10.</p>
 </div>
-<div id="student-test" class="section level4">
+<div id="student-test" class="section level4" number="5.4.3.2">
 <h4><span class="header-section-number">5.4.3.2</span> Student test</h4>
 <p>A test is defined by its <em>null hypothesis</em> <span class="math inline">\(\mathcal{H_0}\)</span>, the contrapositive (alternative) being <span class="math inline">\(\mathcal{H_1}\)</span>. The general procedure is to set <span class="math inline">\(\mathcal{H_0}\)</span> such that we can build a <em>test statistic</em> of which we can derive the distribution.</p>
 <p>In general, statisticians chose a null hypothesis such that they can build a statistic for which they know the distribution <span class="math inline">\(\rightarrow\)</span> they can compute the probability of a specific value to occur.</p>
@@ -1026,22 +980,22 @@ It is up to you to decide, but you generally can’t have both an unbiased and v
 <p>Problem : we don’t know the value of the true standard deviation. The final test statistic is distributed with a Student distribution :</p>
 <p><span class="math display">\[T = \sqrt{n} \dfrac{\bar{D}-20}{\hat{s}} \hookrightarrow \mathcal{St}_{n-1}\]</span></p>
 <p>where <span class="math inline">\(\hat{s}^2 = \dfrac{1}{n-1}\sum_{i=1}^n (D-\bar{D})^2\)</span> is the unbiased estimator of the variance.</p>
-<div id="implementation-in-r" class="section level5">
+<div id="implementation-in-r" class="section level5" number="5.4.3.2.1">
 <h5><span class="header-section-number">5.4.3.2.1</span> Implementation in R :</h5>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="stats.html#cb199-1"></a><span class="kw">t.test</span>(dat<span class="op">$</span>distance,<span class="dt">mu=</span><span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="stats.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat<span class="sc">$</span>distance,<span class="at">mu=</span><span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## 
-## 	One Sample t-test
+##  One Sample t-test
 ## 
 ## data:  dat$distance
-## t = -1.3698, df = 5506, p-value = 0.1708
+## t = 0.4021, df = 6180, p-value = 0.6876
 ## alternative hypothesis: true mean is not equal to 20
 ## 95 percent confidence interval:
-##  18.58573 20.25079
+##  19.38535 20.93187
 ## sample estimates:
 ## mean of x 
-##  19.41826</code></pre>
+##  20.15861</code></pre>
 </div>
-<div id="interpretation" class="section level5">
+<div id="interpretation" class="section level5" number="5.4.3.2.2">
 <h5><span class="header-section-number">5.4.3.2.2</span> Interpretation :</h5>
 <p>If you have one thing to remember : <strong>the p-value is the probability to be wrong while rejecting <span class="math inline">\(\mathcal{H_0}\)</span></strong>.
 In our case, this probability is very small, meaning that we should not consider that the average distance of all activities is 20km/h.</p>
@@ -1049,49 +1003,49 @@ In our case, this probability is very small, meaning that we should not consider
 <p><em>Note : </em> If you want to dig deeper, you can test whether the mean is strictly greater than a specific value using the parameter <code>alternative</code> of the <code>t-test</code> function.</p>
 </div>
 </div>
-<div id="student-test-to-compare-group-means" class="section level4">
+<div id="student-test-to-compare-group-means" class="section level4" number="5.4.3.3">
 <h4><span class="header-section-number">5.4.3.3</span> Student test to compare group means</h4>
 <p>You can also use the Student test to check whether the means of two sub-populations are equal or not. In this case, the tests checks whether the difference in means differs significantly from 0. We’ll check in this example if average distance differs between rides and other activities.
 For that we have to extract on the one hand the bike activities’ distance and the other activites’ distance on the other hand. We can run the test on those 2 vectors :</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="stats.html#cb201-1"></a>bike &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,is_bike) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(distance)</span>
-<span id="cb201-2"><a href="stats.html#cb201-2"></a>non_bike &lt;-<span class="st"> </span><span class="kw">filter</span>(dat,<span class="op">!</span>is_bike) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(distance)</span>
-<span id="cb201-3"><a href="stats.html#cb201-3"></a><span class="kw">t.test</span>(bike,non_bike)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="stats.html#cb201-1" aria-hidden="true" tabindex="-1"></a>bike <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat,is_bike) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(distance)</span>
+<span id="cb201-2"><a href="stats.html#cb201-2" aria-hidden="true" tabindex="-1"></a>non_bike <span class="ot">&lt;-</span> <span class="fu">filter</span>(dat,<span class="sc">!</span>is_bike) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(distance)</span>
+<span id="cb201-3"><a href="stats.html#cb201-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(bike,non_bike)</span></code></pre></div>
 <pre><code>## 
-## 	Welch Two Sample t-test
+##  Welch Two Sample t-test
 ## 
 ## data:  bike and non_bike
-## t = 23.825, df = 4586.7, p-value &lt; 2.2e-16
+## t = 28.255, df = 5116, p-value &lt; 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  18.09061 21.33476
+##  19.92709 22.89845
 ## sample estimates:
 ## mean of x mean of y 
-##  29.98157  10.26888</code></pre>
+##  31.52841  10.11564</code></pre>
 <p>In this case, the null hypothesis is “the difference in means is 0” and the p-value is very very small (almost 0) <span class="math inline">\(\rightarrow\)</span> we can reject the null without second thoughts, which means there is a <strong>significant</strong> difference between the 2 sub-groups regarding average distance.</p>
 </div>
-<div id="back-to-our-chi2" class="section level4">
+<div id="back-to-our-chi2" class="section level4" number="5.4.3.4">
 <h4><span class="header-section-number">5.4.3.4</span> Back to our <span class="math inline">\(\chi^2\)</span></h4>
-<p>Remember the <span class="math inline">\(\chi^2\)</span> test is used to assess if 2 categorical variables are independent or not. The null hypothesis in this test is “both variable are independant”. To check that, a test statistic, <span class="math inline">\(D^2\)</span> (X-squared in R output) is built, and under <span class="math inline">\(\mathcal{H_0}\)</span>, it is distributed with a <span class="math inline">\(\chi^2\)</span> probability distribution. We can can then test the validity of the null depending on the test value.</p>
+<p>Remember the <span class="math inline">\(\chi^2\)</span> test is used to assess if 2 categorical variables are independent or not. The null hypothesis in this test is “both variable are independant.” To check that, a test statistic, <span class="math inline">\(D^2\)</span> (X-squared in R output) is built, and under <span class="math inline">\(\mathcal{H_0}\)</span>, it is distributed with a <span class="math inline">\(\chi^2\)</span> probability distribution. We can can then test the validity of the null depending on the test value.</p>
 <p>Let’s check if there is a relationship between activity and distance in bins :</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="stats.html#cb203-1"></a>tab &lt;-<span class="st"> </span><span class="kw">table</span>(dat<span class="op">$</span>qual_distance,dat<span class="op">$</span>activity_recoded) </span>
-<span id="cb203-2"><a href="stats.html#cb203-2"></a>tab</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="stats.html#cb203-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">table</span>(dat<span class="sc">$</span>qual_distance,dat<span class="sc">$</span>activity_recoded) </span>
+<span id="cb203-2"><a href="stats.html#cb203-2" aria-hidden="true" tabindex="-1"></a>tab</span></code></pre></div>
 <pre><code>##             
-##              Bike Other Run Swim
-##   Average     530    48 523    0
-##   Long        297    39 764    1
-##   Short       186    34 311  554
-##   Very long   986    43  70    3
-##   Very short  558   111  88  368</code></pre>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="stats.html#cb205-1"></a>tab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">chisq.test</span>()</span></code></pre></div>
+##              Bike Other  Run Swim
+##   Average     610    45  581    0
+##   Long        332    54  848    2
+##   Short       226    49  402  550
+##   Very long  1172    38   24    2
+##   Very short  560   160   99  434</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="stats.html#cb205-1" aria-hidden="true" tabindex="-1"></a>tab <span class="sc">%&gt;%</span> <span class="fu">chisq.test</span>()</span></code></pre></div>
 <pre><code>## 
-## 	Pearson&#39;s Chi-squared test
+##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  .
-## X-squared = 3282.8, df = 12, p-value &lt; 2.2e-16</code></pre>
+## X-squared = 3768, df = 12, p-value &lt; 2.2e-16</code></pre>
 <p>In this case, the p-value is again much smaller than 5% <span class="math inline">\(\Rightarrow\)</span> the probability to be wrong by rejecting the null is again very small… It is hence reasonable to reject the null and we can consider that the two variables are independent, meaning there is a connection between the activity type and the distance.</p>
 </div>
 </div>
-<div id="other-estimators-maximum-of-likelihood" class="section level3">
+<div id="other-estimators-maximum-of-likelihood" class="section level3" number="5.4.4">
 <h3><span class="header-section-number">5.4.4</span> Other estimators : maximum of likelihood</h3>
 <p>We saw that the sample mean is a good estimator for the population mean. If you assume that the underlying probability distribution of the variable of interest is something else than a normal distribution, you can be interested in estimating another parameter than the mean.</p>
 <p>Let’s say we want to estimate the <span class="math inline">\(s\)</span> parameter of the <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">Zipf’s law</a>.</p>
@@ -1113,7 +1067,7 @@ For that we have to extract on the one hand the bike activities’ distance and 
 <li>MLE is a subset of <a href="https://en.wikipedia.org/wiki/M-estimator">M-estimators</a></li>
 </ul>
 </div>
-<div id="exercises-interprete-a-test-you-dont-know" class="section level3">
+<div id="exercises-interprete-a-test-you-dont-know" class="section level3" number="5.4.5">
 <h3><span class="header-section-number">5.4.5</span> Exercises : interprete a test you don’t know</h3>
 <ul>
 <li>Run a Kolmogorov–Smirnov test on the distance variable, and the logarithm of this variable. What can you conclude ?</li>
@@ -1121,21 +1075,20 @@ For that we have to extract on the one hand the bike activities’ distance and 
 To check that, there are several tests called “unit-root” tests (if there is a unit root, the serie is not stationary).
 In this example, I simulate a time series and run the Phillips-Perron test. The alternative hypothesis is specified in the output ; please interpret the result.</li>
 </ul>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="stats.html#cb207-1"></a><span class="kw">library</span>(tseries)</span>
-<span id="cb207-2"><a href="stats.html#cb207-2"></a><span class="co"># generation of a random walk</span></span>
-<span id="cb207-3"><a href="stats.html#cb207-3"></a>Xt &lt;-<span class="st"> </span><span class="kw">cumsum</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>))</span>
-<span id="cb207-4"><a href="stats.html#cb207-4"></a>series &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Xt=</span>Xt) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb207-5"><a href="stats.html#cb207-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">index=</span><span class="kw">row_number</span>())</span>
-<span id="cb207-6"><a href="stats.html#cb207-6"></a><span class="kw">ggplot</span>(series,<span class="kw">aes</span>(index,Xt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
-<span id="cb207-7"><a href="stats.html#cb207-7"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;A random walk&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="stats.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
+<span id="cb207-2"><a href="stats.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="co"># generation of a random walk</span></span>
+<span id="cb207-3"><a href="stats.html#cb207-3" aria-hidden="true" tabindex="-1"></a>Xt <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
+<span id="cb207-4"><a href="stats.html#cb207-4" aria-hidden="true" tabindex="-1"></a>series <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Xt=</span>Xt) <span class="sc">%&gt;%</span> </span>
+<span id="cb207-5"><a href="stats.html#cb207-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index=</span><span class="fu">row_number</span>())</span>
+<span id="cb207-6"><a href="stats.html#cb207-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(series,<span class="fu">aes</span>(index,Xt)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb207-7"><a href="stats.html#cb207-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;A random walk&quot;</span>)</span></code></pre></div>
 <p><img src="DataExploration_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="stats.html#cb208-1"></a><span class="kw">pp.test</span>(Xt)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="stats.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp.test</span>(Xt)</span></code></pre></div>
 <pre><code>## 
-## 	Phillips-Perron Unit Root Test
+##  Phillips-Perron Unit Root Test
 ## 
 ## data:  Xt
-## Dickey-Fuller Z(alpha) = -7.6353, Truncation lag parameter = 3, p-value
-## = 0.6733
+## Dickey-Fuller Z(alpha) = -0.42752, Truncation lag parameter = 3, p-value = 0.99
 ## alternative hypothesis: stationary</code></pre>
 
 </div>
@@ -1151,7 +1104,6 @@ In this example, I simulate a time series and run the Phillips-Perron test. The 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1170,6 +1122,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1190,6 +1143,10 @@ gitbook.start({
 "text": null
 },
 "download": ["DataExploration.pdf", "DataExploration.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

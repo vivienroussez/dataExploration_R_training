@@ -35,9 +35,10 @@ What's on our agenda :
 A very synthetic schematic of the data science workflow
 
 ![](img/data-science-explore.png)
-This process is a part of a large scheme :
 
-![](img/CRISP-DM_Process_Diagram.png)
+This process is a part of a large workflow :
+
+![](img/CRISP-DM_Process_Diagram.png){width=50%}
 
 ## About the interactions with other colleagues
 

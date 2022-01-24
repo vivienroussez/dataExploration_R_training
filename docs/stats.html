@@ -52,6 +52,14 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 
 
 <style type="text/css">
@@ -345,69 +353,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4      NA        NA             NA              NA            NA              0.15625                  0.5
 ## 5       0  194.3214             NA              NA            NA              0.00000                  0.0
 ## 6       0  275.7212             NA              NA      291.5917              0.00000                  0.0
-##   trainingStressScore intensityFactor elapsedDuration movingDuration anaerobicTrainingEffect   deviceId minTemperature
-## 1                  NA              NA        78.08723       57.76997                      NA 3968818126             26
-## 2                  NA              NA        37.88333       37.83333                      NA 3825981698             NA
-## 3                  NA              NA        28.43333       28.43333                      NA 3825981698             NA
-## 4                  NA              NA        71.55715       70.34502                       0 3968818126              7
-## 5                  NA              NA        10.33333       10.30000                      NA 3825981698             NA
-## 6                  NA              NA        65.88333       65.83333                      NA 3825981698             NA
-##   maxTemperature lapCount aerobicTrainingEffectMessage anaerobicTrainingEffectMessage purposeful autoCalcCalories
-## 1             27       39                           NA                             NA          0                0
-## 2             NA        1                           NA                             NA          0                0
-## 3             NA        1                           NA                             NA          0                0
-## 4             24       15                           NA                             NA          0                0
-## 5             NA        1                           NA                             NA          0                0
-## 6             NA        1                           NA                             NA          0                0
-##   favorite pr elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed maxRunCadence steps
-## 1        0  0                  0           0      0            NA            NA  13.9140            NA    NA
-## 2        0  0                  0           0      0           325             0  69.0192            NA    NA
-## 3        0  0                  0           0      0            76             0  46.2672            NA    NA
-## 4        0  0                  0           0      0           160           183  14.9796           112 12014
-## 5        0  0                  0           0      0            38             0  57.8988            NA    NA
-## 6        0  0                  0           0      0           266             0  61.2540            NA    NA
-##   startLongitude startLatitude avgVerticalOscillation avgGroundContactTime  avgStrideLength vO2MaxValue
-## 1             NA            NA                     NA                   NA             &lt;NA&gt;          NA
-## 2        0.00000       0.00000                     NA                   NA             &lt;NA&gt;          NA
-## 3        0.00000       0.00000                     NA                   NA             &lt;NA&gt;          NA
-## 4       16.31589      48.21407                   8.26                248.1 118.240002441406          60
-## 5        0.00000       0.00000                     NA                   NA             &lt;NA&gt;          NA
-## 6        0.00000       0.00000                     NA                   NA             &lt;NA&gt;          NA
-##   avgVerticalRatio avgGroundContactBalance minElevation maxElevation avgDoubleCadence maxDoubleCadence  locationName
-## 1               NA                      NA           NA           NA               NA               NA          &lt;NA&gt;
-## 2               NA                      NA          1.2         57.8               NA               NA          &lt;NA&gt;
-## 3               NA                      NA        121.8        130.4               NA               NA          &lt;NA&gt;
-## 4             6.83                   48.93        194.8        349.0         172.3125              225        Vienna
-## 5               NA                      NA          4.0         29.0               NA               NA Tower Hamlets
-## 6               NA                      NA         10.4         34.0               NA               NA          Thio
-##   maxVerticalSpeed endLongitude endLatitude avgStrokes activeLengths avgSwolf poolLength avgStrokeDistance
-## 1               NA           NA          NA       22.4            68       73       5000               223
-## 2         4.319999  166.9529124   -11.63601         NA            NA       NA         NA                NA
-## 3         2.159995  165.8442626   -10.79433         NA            NA       NA         NA                NA
-## 4         3.600000   16.3033489    48.21414         NA            NA       NA         NA                NA
-## 5         2.160001   -0.1127895    51.49451         NA            NA       NA         NA                NA
-## 6         2.160001  166.1724174   -21.73831         NA            NA       NA         NA                NA
-##   avgSwimCadence maxSwimCadence workoutId activeSets totalSets totalReps parentId manufacturer courseId maxFtp
-## 1             27             31      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
-## 2             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
-## 3             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
-## 4             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
-## 5             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
-## 6             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;           NA     &lt;NA&gt;     NA
-##   avgVerticalSpeed decoDive lactateThresholdBpm lactateThresholdSpeed          start_time       date is_bike is_run
-## 1               NA        0                  NA                    NA 2022-01-14 19:14:14 2022-01-14   FALSE  FALSE
-## 2               NA        0                  NA                    NA 2022-01-13 18:44:12 2022-01-13    TRUE  FALSE
-## 3               NA        0                  NA                    NA 2022-01-13 18:08:59 2022-01-13    TRUE  FALSE
-## 4               NA        0                  NA                    NA 2022-01-12 18:30:18 2022-01-12   FALSE   TRUE
-## 5               NA        0                  NA                    NA 2022-01-11 20:07:09 2022-01-11    TRUE  FALSE
-## 6               NA        0                  NA                    NA 2022-01-11 19:00:39 2022-01-11    TRUE  FALSE
-##   activity_recoded qual_distance        qual_avgHr
-## 1             Swim         Short              &lt;NA&gt;
-## 2             Bike     Very long              &lt;NA&gt;
-## 3             Bike          Long Average intensity
-## 4              Run          Long    High intensity
-## 5             Bike         Short Average intensity
-## 6             Bike     Very long     Low intensity</code></pre>
+##   trainingStressScore intensityFactor elapsedDuration movingDuration anaerobicTrainingEffect   deviceId
+## 1                  NA              NA        78.08723       57.76997                      NA 3968818126
+## 2                  NA              NA        37.88333       37.83333                      NA 3825981698
+## 3                  NA              NA        28.43333       28.43333                      NA 3825981698
+## 4                  NA              NA        71.55715       70.34502                       0 3968818126
+## 5                  NA              NA        10.33333       10.30000                      NA 3825981698
+## 6                  NA              NA        65.88333       65.83333                      NA 3825981698
+##   minTemperature maxTemperature lapCount aerobicTrainingEffectMessage anaerobicTrainingEffectMessage purposeful
+## 1             26             27       39                           NA                             NA          0
+## 2             NA             NA        1                           NA                             NA          0
+## 3             NA             NA        1                           NA                             NA          0
+## 4              7             24       15                           NA                             NA          0
+## 5             NA             NA        1                           NA                             NA          0
+## 6             NA             NA        1                           NA                             NA          0
+##   autoCalcCalories favorite pr elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed
+## 1                0        0  0                  0           0      0            NA            NA  13.9140
+## 2                0        0  0                  0           0      0           325             0  69.0192
+## 3                0        0  0                  0           0      0            76             0  46.2672
+## 4                0        0  0                  0           0      0           160           183  14.9796
+## 5                0        0  0                  0           0      0            38             0  57.8988
+## 6                0        0  0                  0           0      0           266             0  61.2540
+##   maxRunCadence steps startLongitude startLatitude avgVerticalOscillation avgGroundContactTime  avgStrideLength
+## 1            NA    NA             NA            NA                     NA                   NA             &lt;NA&gt;
+## 2            NA    NA        0.00000       0.00000                     NA                   NA             &lt;NA&gt;
+## 3            NA    NA        0.00000       0.00000                     NA                   NA             &lt;NA&gt;
+## 4           112 12014       16.31589      48.21407                   8.26                248.1 118.240002441406
+## 5            NA    NA        0.00000       0.00000                     NA                   NA             &lt;NA&gt;
+## 6            NA    NA        0.00000       0.00000                     NA                   NA             &lt;NA&gt;
+##   vO2MaxValue avgVerticalRatio avgGroundContactBalance minElevation maxElevation avgDoubleCadence
+## 1          NA               NA                      NA           NA           NA               NA
+## 2          NA               NA                      NA          1.2         57.8               NA
+## 3          NA               NA                      NA        121.8        130.4               NA
+## 4          60             6.83                   48.93        194.8        349.0         172.3125
+## 5          NA               NA                      NA          4.0         29.0               NA
+## 6          NA               NA                      NA         10.4         34.0               NA
+##   maxDoubleCadence  locationName maxVerticalSpeed endLongitude endLatitude avgStrokes activeLengths avgSwolf
+## 1               NA          &lt;NA&gt;               NA           NA          NA       22.4            68       73
+## 2               NA          &lt;NA&gt;         4.319999  166.9529124   -11.63601         NA            NA       NA
+## 3               NA          &lt;NA&gt;         2.159995  165.8442626   -10.79433         NA            NA       NA
+## 4              225        Vienna         3.600000   16.3033489    48.21414         NA            NA       NA
+## 5               NA Tower Hamlets         2.160001   -0.1127895    51.49451         NA            NA       NA
+## 6               NA          Thio         2.160001  166.1724174   -21.73831         NA            NA       NA
+##   poolLength avgStrokeDistance avgSwimCadence maxSwimCadence workoutId activeSets totalSets totalReps parentId
+## 1       5000               223             27             31      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;
+## 2         NA                NA             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;
+## 3         NA                NA             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;
+## 4         NA                NA             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;
+## 5         NA                NA             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;
+## 6         NA                NA             NA             NA      &lt;NA&gt;         NA        NA        NA     &lt;NA&gt;
+##   manufacturer courseId maxFtp avgVerticalSpeed decoDive lactateThresholdBpm lactateThresholdSpeed
+## 1           NA     &lt;NA&gt;     NA               NA        0                  NA                    NA
+## 2           NA     &lt;NA&gt;     NA               NA        0                  NA                    NA
+## 3           NA     &lt;NA&gt;     NA               NA        0                  NA                    NA
+## 4           NA     &lt;NA&gt;     NA               NA        0                  NA                    NA
+## 5           NA     &lt;NA&gt;     NA               NA        0                  NA                    NA
+## 6           NA     &lt;NA&gt;     NA               NA        0                  NA                    NA
+##            start_time       date is_bike is_run activity_recoded qual_distance        qual_avgHr
+## 1 2022-01-14 19:14:14 2022-01-14   FALSE  FALSE             Swim         Short              &lt;NA&gt;
+## 2 2022-01-13 18:44:12 2022-01-13    TRUE  FALSE             Bike     Very long              &lt;NA&gt;
+## 3 2022-01-13 18:08:59 2022-01-13    TRUE  FALSE             Bike          Long Average intensity
+## 4 2022-01-12 18:30:18 2022-01-12   FALSE   TRUE              Run          Long    High intensity
+## 5 2022-01-11 20:07:09 2022-01-11    TRUE  FALSE             Bike         Short Average intensity
+## 6 2022-01-11 19:00:39 2022-01-11    TRUE  FALSE             Bike     Very long     Low intensity</code></pre>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="stats.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dat,activityType) <span class="sc">%&gt;%</span> </span>
 <span id="cb119-2"><a href="stats.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_dist=</span><span class="fu">sum</span>(distance,<span class="at">na.rm=</span>T),<span class="at">avg_speed=</span><span class="fu">mean</span>(avgSpeed,<span class="at">na.rm=</span>T),<span class="at">avg_power=</span><span class="fu">mean</span>(avgPower,<span class="at">na.rm =</span> T),</span>
 <span id="cb119-3"><a href="stats.html#cb119-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups=</span><span class="st">&quot;keep&quot;</span>) <span class="sc">%&gt;%</span> </span>
@@ -1088,7 +1096,7 @@ In this example, I simulate a time series and run the Phillips-Perron test. The 
 ##  Phillips-Perron Unit Root Test
 ## 
 ## data:  Xt
-## Dickey-Fuller Z(alpha) = -0.42752, Truncation lag parameter = 3, p-value = 0.99
+## Dickey-Fuller Z(alpha) = -17.686, Truncation lag parameter = 3, p-value = 0.09688
 ## alternative hypothesis: stationary</code></pre>
 
 </div>

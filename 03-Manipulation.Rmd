@@ -273,13 +273,14 @@ random_list <- lapply(1:100,function(xx) rnorm(100,xx,xx/5))
 str(random_list[1:5])
 ```
 
-**Attention :** be careful with the squared brackets
+**Important note :** be careful with the squared brackets
 
 ```{r}
 random_list[1] # is a list
 random_list[[1]] # is a vector
 ```
 
+![](img/lists-viz.jpg)
 
 <!-- ## The split-apply-combine operation -->
 

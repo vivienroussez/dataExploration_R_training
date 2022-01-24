@@ -52,6 +52,14 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 
 
 <style type="text/css">
@@ -316,83 +324,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 8106509382 -3.409299e+18 -6.907548e+18                                         Vienna Running      running
 ## 5 8101019939  8.398595e+18 -7.204024e+18                                         Zwift - London virtual_ride
 ## 6 8100932442 -6.116764e+18 -8.563845e+18                         Zwift - TdZ Stage 1: Long Ride virtual_ride
-##   userProfileId timeZoneId beginTimestamp eventTypeId   rule sportType startTimeGmt startTimeLocal duration distance
-## 1       1141258        124   1.642184e+12           9 public  SWIMMING 1.642184e+12   1.642188e+12  4271050   340000
-## 2       1141258        124   1.642096e+12           9 public   CYCLING 1.642096e+12   1.642099e+12  2275000  2771270
-## 3       1141258        124   1.642094e+12           9 public   CYCLING 1.642094e+12   1.642097e+12  1707000  1640097
-## 4       1141258        124   1.642009e+12           9 public   RUNNING 1.642009e+12   1.642012e+12  4224043  1499398
-## 5       1141258        124   1.641928e+12           9 public   CYCLING 1.641928e+12   1.641932e+12   622000   624256
-## 6       1141258        124   1.641924e+12           9 public   CYCLING 1.641924e+12   1.641928e+12  3954000  4927470
-##   avgSpeed avgHr maxHr avgPower avgBikeCadence maxBikeCadence  calories aerobicTrainingEffect strokes normPower
-## 1   0.0993    NA    NA       NA             NA             NA 3033.5745                    NA    1390        NA
-## 2   1.2181   168   181      333             86            104 3104.8048                    NA       0  348.5247
-## 3   0.9608   135   154      240             83            200 1638.2978                    NA       0  249.8839
-## 4   0.3550   148   162       NA             NA             NA 3720.7378                   2.4      NA        NA
-## 5   1.0036   138   151      186             78            100  460.9022                    NA       0  194.3214
-## 6   1.2461   130   180      266             84            103 4290.5805                    NA       0  275.7212
-##   avgLeftBalance avgRightBalance max20MinPower avgFractionalCadence maxFractionalCadence trainingStressScore
-## 1             NA              NA            NA              0.00000                  0.0                  NA
-## 2             NA              NA      342.2592              0.00000                  0.0                  NA
-## 3             NA              NA      252.1425              0.00000                  0.0                  NA
-## 4             NA              NA            NA              0.15625                  0.5                  NA
-## 5             NA              NA            NA              0.00000                  0.0                  NA
-## 6             NA              NA      291.5917              0.00000                  0.0                  NA
-##   intensityFactor elapsedDuration movingDuration anaerobicTrainingEffect   deviceId minTemperature maxTemperature
-## 1              NA         4685234        3466198                      NA 3968818126             26             27
-## 2              NA         2273000        2270000                      NA 3825981698             NA             NA
-## 3              NA         1706000        1706000                      NA 3825981698             NA             NA
-## 4              NA         4293429        4220701                       0 3968818126              7             24
-## 5              NA          620000         618000                      NA 3825981698             NA             NA
-## 6              NA         3953000        3950000                      NA 3825981698             NA             NA
-##   lapCount aerobicTrainingEffectMessage anaerobicTrainingEffectMessage purposeful autoCalcCalories favorite pr
-## 1       39                           NA                             NA          0                0        0  0
-## 2        1                           NA                             NA          0                0        0  0
-## 3        1                           NA                             NA          0                0        0  0
-## 4       15                           NA                             NA          0                0        0  0
-## 5        1                           NA                             NA          0                0        0  0
-## 6        1                           NA                             NA          0                0        0  0
-##   elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed maxRunCadence steps startLongitude
-## 1                  0           0      0            NA            NA   0.3865            NA    NA             NA
-## 2                  0           0      0         32500             0   1.9172            NA    NA        0.00000
-## 3                  0           0      0          7600             0   1.2852            NA    NA        0.00000
-## 4                  0           0      0         16000         18300   0.4161           112 12014       16.31589
-## 5                  0           0      0          3800             0   1.6083            NA    NA        0.00000
-## 6                  0           0      0         26600             0   1.7015            NA    NA        0.00000
-##   startLatitude avgVerticalOscillation avgGroundContactTime avgStrideLength vO2MaxValue avgVerticalRatio
-## 1            NA                     NA                   NA              NA          NA               NA
-## 2       0.00000                     NA                   NA              NA          NA               NA
-## 3       0.00000                     NA                   NA              NA          NA               NA
-## 4      48.21407                   8.26                248.1          118.24          60             6.83
-## 5       0.00000                     NA                   NA              NA          NA               NA
-## 6       0.00000                     NA                   NA              NA          NA               NA
-##   avgGroundContactBalance minElevation maxElevation avgDoubleCadence maxDoubleCadence  locationName maxVerticalSpeed
-## 1                      NA           NA           NA               NA               NA          &lt;NA&gt;               NA
-## 2                      NA          120         5780               NA               NA          &lt;NA&gt;       0.11999998
-## 3                      NA        12180        13040               NA               NA          &lt;NA&gt;       0.05999985
-## 4                   48.93        19480        34900         172.3125              225        Vienna       0.10000000
-## 5                      NA          400         2900               NA               NA Tower Hamlets       0.06000004
-## 6                      NA         1040         3400               NA               NA          Thio       0.06000004
-##   endLongitude endLatitude avgStrokes activeLengths avgSwolf poolLength avgStrokeDistance avgSwimCadence
-## 1           NA          NA       22.4            68       73       5000               223             27
-## 2  166.9529124   -11.63601         NA            NA       NA         NA                NA             NA
-## 3  165.8442626   -10.79433         NA            NA       NA         NA                NA             NA
-## 4   16.3033489    48.21414         NA            NA       NA         NA                NA             NA
-## 5   -0.1127895    51.49451         NA            NA       NA         NA                NA             NA
-## 6  166.1724174   -21.73831         NA            NA       NA         NA                NA             NA
-##   maxSwimCadence workoutId activeSets totalSets totalReps parentId manufacturer courseId maxFtp avgVerticalSpeed
-## 1             31        NA         NA        NA        NA       NA           NA       NA     NA               NA
-## 2             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
-## 3             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
-## 4             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
-## 5             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
-## 6             NA        NA         NA        NA        NA       NA           NA       NA     NA               NA
-##   decoDive lactateThresholdBpm lactateThresholdSpeed
-## 1        0                  NA                    NA
-## 2        0                  NA                    NA
-## 3        0                  NA                    NA
-## 4        0                  NA                    NA
-## 5        0                  NA                    NA
-## 6        0                  NA                    NA</code></pre>
+##   userProfileId timeZoneId beginTimestamp eventTypeId   rule sportType startTimeGmt startTimeLocal duration
+## 1       1141258        124   1.642184e+12           9 public  SWIMMING 1.642184e+12   1.642188e+12  4271050
+## 2       1141258        124   1.642096e+12           9 public   CYCLING 1.642096e+12   1.642099e+12  2275000
+## 3       1141258        124   1.642094e+12           9 public   CYCLING 1.642094e+12   1.642097e+12  1707000
+## 4       1141258        124   1.642009e+12           9 public   RUNNING 1.642009e+12   1.642012e+12  4224043
+## 5       1141258        124   1.641928e+12           9 public   CYCLING 1.641928e+12   1.641932e+12   622000
+## 6       1141258        124   1.641924e+12           9 public   CYCLING 1.641924e+12   1.641928e+12  3954000
+##   distance avgSpeed avgHr maxHr avgPower avgBikeCadence maxBikeCadence  calories aerobicTrainingEffect strokes
+## 1   340000   0.0993    NA    NA       NA             NA             NA 3033.5745                    NA    1390
+## 2  2771270   1.2181   168   181      333             86            104 3104.8048                    NA       0
+## 3  1640097   0.9608   135   154      240             83            200 1638.2978                    NA       0
+## 4  1499398   0.3550   148   162       NA             NA             NA 3720.7378                   2.4      NA
+## 5   624256   1.0036   138   151      186             78            100  460.9022                    NA       0
+## 6  4927470   1.2461   130   180      266             84            103 4290.5805                    NA       0
+##   normPower avgLeftBalance avgRightBalance max20MinPower avgFractionalCadence maxFractionalCadence
+## 1        NA             NA              NA            NA              0.00000                  0.0
+## 2  348.5247             NA              NA      342.2592              0.00000                  0.0
+## 3  249.8839             NA              NA      252.1425              0.00000                  0.0
+## 4        NA             NA              NA            NA              0.15625                  0.5
+## 5  194.3214             NA              NA            NA              0.00000                  0.0
+## 6  275.7212             NA              NA      291.5917              0.00000                  0.0
+##   trainingStressScore intensityFactor elapsedDuration movingDuration anaerobicTrainingEffect   deviceId
+## 1                  NA              NA         4685234        3466198                      NA 3968818126
+## 2                  NA              NA         2273000        2270000                      NA 3825981698
+## 3                  NA              NA         1706000        1706000                      NA 3825981698
+## 4                  NA              NA         4293429        4220701                       0 3968818126
+## 5                  NA              NA          620000         618000                      NA 3825981698
+## 6                  NA              NA         3953000        3950000                      NA 3825981698
+##   minTemperature maxTemperature lapCount aerobicTrainingEffectMessage anaerobicTrainingEffectMessage purposeful
+## 1             26             27       39                           NA                             NA          0
+## 2             NA             NA        1                           NA                             NA          0
+## 3             NA             NA        1                           NA                             NA          0
+## 4              7             24       15                           NA                             NA          0
+## 5             NA             NA        1                           NA                             NA          0
+## 6             NA             NA        1                           NA                             NA          0
+##   autoCalcCalories favorite pr elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed
+## 1                0        0  0                  0           0      0            NA            NA   0.3865
+## 2                0        0  0                  0           0      0         32500             0   1.9172
+## 3                0        0  0                  0           0      0          7600             0   1.2852
+## 4                0        0  0                  0           0      0         16000         18300   0.4161
+## 5                0        0  0                  0           0      0          3800             0   1.6083
+## 6                0        0  0                  0           0      0         26600             0   1.7015
+##   maxRunCadence steps startLongitude startLatitude avgVerticalOscillation avgGroundContactTime avgStrideLength
+## 1            NA    NA             NA            NA                     NA                   NA              NA
+## 2            NA    NA        0.00000       0.00000                     NA                   NA              NA
+## 3            NA    NA        0.00000       0.00000                     NA                   NA              NA
+## 4           112 12014       16.31589      48.21407                   8.26                248.1          118.24
+## 5            NA    NA        0.00000       0.00000                     NA                   NA              NA
+## 6            NA    NA        0.00000       0.00000                     NA                   NA              NA
+##   vO2MaxValue avgVerticalRatio avgGroundContactBalance minElevation maxElevation avgDoubleCadence
+## 1          NA               NA                      NA           NA           NA               NA
+## 2          NA               NA                      NA          120         5780               NA
+## 3          NA               NA                      NA        12180        13040               NA
+## 4          60             6.83                   48.93        19480        34900         172.3125
+## 5          NA               NA                      NA          400         2900               NA
+## 6          NA               NA                      NA         1040         3400               NA
+##   maxDoubleCadence  locationName maxVerticalSpeed endLongitude endLatitude avgStrokes activeLengths avgSwolf
+## 1               NA          &lt;NA&gt;               NA           NA          NA       22.4            68       73
+## 2               NA          &lt;NA&gt;       0.11999998  166.9529124   -11.63601         NA            NA       NA
+## 3               NA          &lt;NA&gt;       0.05999985  165.8442626   -10.79433         NA            NA       NA
+## 4              225        Vienna       0.10000000   16.3033489    48.21414         NA            NA       NA
+## 5               NA Tower Hamlets       0.06000004   -0.1127895    51.49451         NA            NA       NA
+## 6               NA          Thio       0.06000004  166.1724174   -21.73831         NA            NA       NA
+##   poolLength avgStrokeDistance avgSwimCadence maxSwimCadence workoutId activeSets totalSets totalReps parentId
+## 1       5000               223             27             31        NA         NA        NA        NA       NA
+## 2         NA                NA             NA             NA        NA         NA        NA        NA       NA
+## 3         NA                NA             NA             NA        NA         NA        NA        NA       NA
+## 4         NA                NA             NA             NA        NA         NA        NA        NA       NA
+## 5         NA                NA             NA             NA        NA         NA        NA        NA       NA
+## 6         NA                NA             NA             NA        NA         NA        NA        NA       NA
+##   manufacturer courseId maxFtp avgVerticalSpeed decoDive lactateThresholdBpm lactateThresholdSpeed
+## 1           NA       NA     NA               NA        0                  NA                    NA
+## 2           NA       NA     NA               NA        0                  NA                    NA
+## 3           NA       NA     NA               NA        0                  NA                    NA
+## 4           NA       NA     NA               NA        0                  NA                    NA
+## 5           NA       NA     NA               NA        0                  NA                    NA
+## 6           NA       NA     NA               NA        0                  NA                    NA</code></pre>
 <p>You have many options to deal with issues :</p>
 <ul>
 <li><code>sep</code> to specify the separator (<code>\t</code> for tabulation, <code>';'</code> for semicolon… )</li>
@@ -408,21 +416,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="manip.html#cb79-1" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;Data/Sports/Activities.xlsx&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb79-2"><a href="manip.html#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 89
-##   activityId uuidMsb   uuidLsb  name   activityType userProfileId timeZoneId beginTimestamp eventTypeId rule  sportType
-##        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    
-## 1 5570974040 3.695223… -7.0985… En pi… lap_swimming       1141258        124 1600700451000            9 publ… GENERIC  
-## 2 5566524321 -5.21279… -8.1406… Vienn… cycling            1141258        124 1600601823000            9 publ… CYCLING  
-## 3 5561266034 1.271355… -5.5228… Korne… cycling            1141258        124 1600522721000            9 publ… CYCLING  
-## 4 5555881653 -2.92393… -4.6768… Vienn… running            1141258        124 1600439317000            9 publ… RUNNING  
-## 5 5551811953 7.859042… -7.9095… Zwift… virtual_ride       1141258        124 1600361706000            9 publ… GENERIC  
-## 6 5551052200 -9.55408… -6.8664… En pi… lap_swimming       1141258        124 1600353189000            9 publ… GENERIC  
-## # … with 78 more variables: startTimeGmt &lt;dbl&gt;, startTimeLocal &lt;chr&gt;, duration &lt;chr&gt;, distance &lt;chr&gt;,
-## #   elevationGain &lt;chr&gt;, elevationLoss &lt;chr&gt;, avgSpeed &lt;chr&gt;, maxSpeed &lt;chr&gt;, avgHr &lt;chr&gt;, maxHr &lt;chr&gt;,
-## #   calories &lt;chr&gt;, startLongitude &lt;chr&gt;, startLatitude &lt;chr&gt;, aerobicTrainingEffect &lt;chr&gt;,
+##   activityId uuidMsb    uuidLsb    name    activityType userProfileId timeZoneId beginTimestamp eventTypeId rule 
+##        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;
+## 1 5570974040 3.6952235… -7.098506… En pis… lap_swimming       1141258        124 1600700451000            9 publ…
+## 2 5566524321 -5.212790… -8.140622… Vienna… cycling            1141258        124 1600601823000            9 publ…
+## 3 5561266034 1.2713557… -5.522843… Korneu… cycling            1141258        124 1600522721000            9 publ…
+## 4 5555881653 -2.923937… -4.676832… Vienna… running            1141258        124 1600439317000            9 publ…
+## 5 5551811953 7.8590429… -7.909531… Zwift … virtual_ride       1141258        124 1600361706000            9 publ…
+## 6 5551052200 -9.554085… -6.866434… En pis… lap_swimming       1141258        124 1600353189000            9 publ…
+## # … with 79 more variables: sportType &lt;chr&gt;, startTimeGmt &lt;dbl&gt;, startTimeLocal &lt;chr&gt;, duration &lt;chr&gt;,
+## #   distance &lt;chr&gt;, elevationGain &lt;chr&gt;, elevationLoss &lt;chr&gt;, avgSpeed &lt;chr&gt;, maxSpeed &lt;chr&gt;, avgHr &lt;chr&gt;,
+## #   maxHr &lt;chr&gt;, calories &lt;chr&gt;, startLongitude &lt;chr&gt;, startLatitude &lt;chr&gt;, aerobicTrainingEffect &lt;chr&gt;,
 ## #   avgFractionalCadence &lt;chr&gt;, maxFractionalCadence &lt;chr&gt;, elapsedDuration &lt;chr&gt;, movingDuration &lt;chr&gt;,
-## #   anaerobicTrainingEffect &lt;chr&gt;, deviceId &lt;dbl&gt;, minTemperature &lt;chr&gt;, maxTemperature &lt;chr&gt;, minElevation &lt;chr&gt;,
-## #   maxElevation &lt;chr&gt;, locationName &lt;chr&gt;, maxVerticalSpeed &lt;chr&gt;, lapCount &lt;dbl&gt;, endLongitude &lt;chr&gt;,
-## #   endLatitude &lt;chr&gt;, activeSets &lt;chr&gt;, totalSets &lt;chr&gt;, totalReps &lt;chr&gt;, purposeful &lt;chr&gt;, autoCalcCalories &lt;chr&gt;, …</code></pre>
+## #   anaerobicTrainingEffect &lt;chr&gt;, deviceId &lt;dbl&gt;, minTemperature &lt;chr&gt;, maxTemperature &lt;chr&gt;,
+## #   minElevation &lt;chr&gt;, maxElevation &lt;chr&gt;, locationName &lt;chr&gt;, maxVerticalSpeed &lt;chr&gt;, lapCount &lt;dbl&gt;,
+## #   endLongitude &lt;chr&gt;, endLatitude &lt;chr&gt;, activeSets &lt;chr&gt;, totalSets &lt;chr&gt;, totalReps &lt;chr&gt;, …</code></pre>
 <p>Options :</p>
 <ul>
 <li><code>sheet</code> to select whioch you want to import</li>
@@ -639,24 +647,26 @@ In the following code, we first compute a summary of distance and power for each
 <span id="cb102-4"><a href="manip.html#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Other stupid examples</span></span>
 <span id="cb102-5"><a href="manip.html#cb102-5" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric),</span>
 <span id="cb102-6"><a href="manip.html#cb102-6" aria-hidden="true" tabindex="-1"></a>                          <span class="cf">function</span>(xx) <span class="fu">sum</span>(xx,<span class="at">na.rm=</span>T)))</span></code></pre></div>
-<pre><code>##   beginTimestamp startTimeGmt startTimeLocal    duration    distance avgSpeed  avgHr  maxHr avgPower avgBikeCadence
-## 1   9.115198e+15 9.130494e+15   9.130529e+15 25615640953 12460037061 2604.539 622949 736233   244072         148991
-##   maxBikeCadence calories aerobicTrainingEffect  strokes normPower avgLeftBalance avgRightBalance max20MinPower
-## 1         196512 23068547                8194.2 12586771  263186.2       32092.28        32207.72      266312.1
-##   avgFractionalCadence maxFractionalCadence trainingStressScore intensityFactor elapsedDuration movingDuration
-## 1             498.5859                  232            153951.3         677.757     14915022075     9035529534
-##   anaerobicTrainingEffect minTemperature maxTemperature lapCount purposeful autoCalcCalories favorite pr
-## 1                   328.2          54208          75796    35699          0               19        1  8
-##   elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed maxRunCadence    steps startLongitude
-## 1                  6           0     52     181365816     157535613 114630.2        104583 30070036       22364.53
-##   startLatitude avgVerticalOscillation avgGroundContactTime vO2MaxValue avgVerticalRatio avgGroundContactBalance
-## 1      203830.2                6380.52             184995.2       62584          5628.33                 36199.7
-##   minElevation maxElevation avgDoubleCadence maxDoubleCadence maxVerticalSpeed endLongitude endLatitude avgStrokes
-## 1     44510572     84601757         160554.9           208808         412.4803     24056.88    51257.07   37535.92
-##   activeLengths avgSwolf poolLength avgStrokeDistance avgSwimCadence maxSwimCadence activeSets totalSets totalReps
-## 1         86201    42980    2300698            128108          23258          30877          0         0         0
-##   maxFtp avgVerticalSpeed decoDive lactateThresholdBpm lactateThresholdSpeed
-## 1  42787                0        0               12296               28.8716</code></pre>
+<pre><code>##   beginTimestamp startTimeGmt startTimeLocal    duration    distance avgSpeed  avgHr  maxHr avgPower
+## 1   9.115198e+15 9.130494e+15   9.130529e+15 25615640953 12460037061 2604.539 622949 736233   244072
+##   avgBikeCadence maxBikeCadence calories aerobicTrainingEffect  strokes normPower avgLeftBalance avgRightBalance
+## 1         148991         196512 23068547                8194.2 12586771  263186.2       32092.28        32207.72
+##   max20MinPower avgFractionalCadence maxFractionalCadence trainingStressScore intensityFactor elapsedDuration
+## 1      266312.1             498.5859                  232            153951.3         677.757     14915022075
+##   movingDuration anaerobicTrainingEffect minTemperature maxTemperature lapCount purposeful autoCalcCalories
+## 1     9035529534                   328.2          54208          75796    35699          0               19
+##   favorite pr elevationCorrected atpActivity parent elevationGain elevationLoss maxSpeed maxRunCadence    steps
+## 1        1  8                  6           0     52     181365816     157535613 114630.2        104583 30070036
+##   startLongitude startLatitude avgVerticalOscillation avgGroundContactTime vO2MaxValue avgVerticalRatio
+## 1       22364.53      203830.2                6380.52             184995.2       62584          5628.33
+##   avgGroundContactBalance minElevation maxElevation avgDoubleCadence maxDoubleCadence maxVerticalSpeed
+## 1                 36199.7     44510572     84601757         160554.9           208808         412.4803
+##   endLongitude endLatitude avgStrokes activeLengths avgSwolf poolLength avgStrokeDistance avgSwimCadence
+## 1     24056.88    51257.07   37535.92         86201    42980    2300698            128108          23258
+##   maxSwimCadence activeSets totalSets totalReps maxFtp avgVerticalSpeed decoDive lactateThresholdBpm
+## 1          30877          0         0         0  42787                0        0               12296
+##   lactateThresholdSpeed
+## 1               28.8716</code></pre>
 </div>
 </div>
 <div id="lets-import-and-wrangle-some-data" class="section level2" number="4.3">
@@ -692,35 +702,36 @@ You will have to :</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="manip.html#cb104-1" aria-hidden="true" tabindex="-1"></a>random_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="cf">function</span>(xx) <span class="fu">rnorm</span>(<span class="dv">100</span>,xx,xx<span class="sc">/</span><span class="dv">5</span>))</span>
 <span id="cb104-2"><a href="manip.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(random_list[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
 <pre><code>## List of 5
-##  $ : num [1:100] 0.876 1.185 0.889 1.089 0.784 ...
-##  $ : num [1:100] 2.861 0.965 2.361 2.17 1.598 ...
-##  $ : num [1:100] 2.83 3.18 3.26 2.83 2.91 ...
-##  $ : num [1:100] 4.98 4.11 4.47 3.99 3.22 ...
-##  $ : num [1:100] 4.6 5.38 4.55 4.9 4.17 ...</code></pre>
-<p><strong>Attention :</strong> be careful with the squared brackets</p>
+##  $ : num [1:100] 0.996 1.018 0.942 0.971 0.961 ...
+##  $ : num [1:100] 2.37 1.47 1.68 1.82 2.17 ...
+##  $ : num [1:100] 4.22 3.49 2.35 4.45 2.6 ...
+##  $ : num [1:100] 3.31 3.7 3.99 4.99 3.4 ...
+##  $ : num [1:100] 7.23 5.35 5.23 5.33 5 ...</code></pre>
+<p><strong>Important note :</strong> be careful with the squared brackets</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="manip.html#cb106-1" aria-hidden="true" tabindex="-1"></a>random_list[<span class="dv">1</span>] <span class="co"># is a list</span></span></code></pre></div>
 <pre><code>## [[1]]
-##   [1] 0.8762579 1.1847322 0.8894186 1.0885496 0.7842904 1.0868630 0.9707225 0.7042148 0.8791926 1.1901618 1.2059422
-##  [12] 0.8361683 0.8028438 0.8453620 1.1883960 0.8592794 1.2346351 0.5714095 0.5868384 0.8403402 0.9547395 0.9232981
-##  [23] 0.8736897 1.0154564 1.1842713 0.8953028 0.7105368 0.9654275 1.0736669 1.0171087 1.1385832 0.9779842 1.2855125
-##  [34] 0.8600799 1.0656875 0.9532695 1.0905608 1.2626257 0.9034522 1.4887389 1.2437893 1.0017677 1.0482679 1.3534238
-##  [45] 1.2382150 1.0077574 1.0306095 0.9037012 1.1903217 0.9172878 1.2586481 1.4085976 0.7471268 1.2147218 1.1365606
-##  [56] 0.6883287 1.0184002 1.0261762 1.5795826 0.8519094 0.9071928 1.0488016 1.1892730 1.0604149 0.8092711 1.2777698
-##  [67] 1.3484682 1.1167283 0.7210837 1.1141198 1.2526091 0.8732426 0.9369893 1.0553987 1.2096500 1.0153447 1.0896273
-##  [78] 1.0623083 0.9412501 1.1729047 0.9554398 0.7967397 1.2279968 0.9001226 1.1318012 0.7118117 1.3900315 1.2528391
-##  [89] 0.7792249 0.4889133 1.2154665 1.0288691 0.6976595 0.5154510 0.9041581 1.1290166 0.8295818 0.7789798 0.7826941
-## [100] 1.0047529</code></pre>
+##   [1] 0.9963278 1.0178845 0.9419145 0.9707508 0.9605360 1.1232369 1.2157605 0.6192850 0.6953650 0.6339365
+##  [11] 1.0040106 1.1478990 0.8800156 0.7958088 0.8722933 1.1809863 0.9469319 1.1895773 0.6594915 1.0156719
+##  [21] 0.8686029 0.9503164 0.6617844 0.8532147 0.7534019 1.3040371 1.0105435 1.0949937 0.8749542 1.1440127
+##  [31] 1.0110959 1.1678127 1.3895359 0.7751328 1.0056183 1.2134029 0.9696622 1.0422609 1.4039874 1.2070380
+##  [41] 0.8354634 1.0259836 0.8291434 0.8785737 0.9382224 0.7573489 1.1841567 1.2309677 0.9056912 0.9717828
+##  [51] 0.8066806 1.2224101 1.0241134 1.1452929 0.7802524 1.3682592 1.0371783 1.1370215 0.8029423 1.1721083
+##  [61] 0.9290914 0.6794954 0.7592127 0.6261401 0.9548459 0.8236348 0.8010062 0.9514305 0.8816419 0.6705979
+##  [71] 0.7153356 1.2014641 0.9577183 1.0544358 1.0057898 0.9305899 1.0253283 0.7488619 1.0906381 1.1813662
+##  [81] 0.6819163 0.8639038 0.8042549 1.1788024 0.7622052 0.9611840 0.9757082 1.1630476 0.8887524 1.0154785
+##  [91] 1.2425608 0.5253707 1.1166571 0.8133918 1.2054999 1.1664269 0.8007038 0.9395852 0.7865362 0.8412360</code></pre>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="manip.html#cb108-1" aria-hidden="true" tabindex="-1"></a>random_list[[<span class="dv">1</span>]] <span class="co"># is a vector</span></span></code></pre></div>
-<pre><code>##   [1] 0.8762579 1.1847322 0.8894186 1.0885496 0.7842904 1.0868630 0.9707225 0.7042148 0.8791926 1.1901618 1.2059422
-##  [12] 0.8361683 0.8028438 0.8453620 1.1883960 0.8592794 1.2346351 0.5714095 0.5868384 0.8403402 0.9547395 0.9232981
-##  [23] 0.8736897 1.0154564 1.1842713 0.8953028 0.7105368 0.9654275 1.0736669 1.0171087 1.1385832 0.9779842 1.2855125
-##  [34] 0.8600799 1.0656875 0.9532695 1.0905608 1.2626257 0.9034522 1.4887389 1.2437893 1.0017677 1.0482679 1.3534238
-##  [45] 1.2382150 1.0077574 1.0306095 0.9037012 1.1903217 0.9172878 1.2586481 1.4085976 0.7471268 1.2147218 1.1365606
-##  [56] 0.6883287 1.0184002 1.0261762 1.5795826 0.8519094 0.9071928 1.0488016 1.1892730 1.0604149 0.8092711 1.2777698
-##  [67] 1.3484682 1.1167283 0.7210837 1.1141198 1.2526091 0.8732426 0.9369893 1.0553987 1.2096500 1.0153447 1.0896273
-##  [78] 1.0623083 0.9412501 1.1729047 0.9554398 0.7967397 1.2279968 0.9001226 1.1318012 0.7118117 1.3900315 1.2528391
-##  [89] 0.7792249 0.4889133 1.2154665 1.0288691 0.6976595 0.5154510 0.9041581 1.1290166 0.8295818 0.7789798 0.7826941
-## [100] 1.0047529</code></pre>
+<pre><code>##   [1] 0.9963278 1.0178845 0.9419145 0.9707508 0.9605360 1.1232369 1.2157605 0.6192850 0.6953650 0.6339365
+##  [11] 1.0040106 1.1478990 0.8800156 0.7958088 0.8722933 1.1809863 0.9469319 1.1895773 0.6594915 1.0156719
+##  [21] 0.8686029 0.9503164 0.6617844 0.8532147 0.7534019 1.3040371 1.0105435 1.0949937 0.8749542 1.1440127
+##  [31] 1.0110959 1.1678127 1.3895359 0.7751328 1.0056183 1.2134029 0.9696622 1.0422609 1.4039874 1.2070380
+##  [41] 0.8354634 1.0259836 0.8291434 0.8785737 0.9382224 0.7573489 1.1841567 1.2309677 0.9056912 0.9717828
+##  [51] 0.8066806 1.2224101 1.0241134 1.1452929 0.7802524 1.3682592 1.0371783 1.1370215 0.8029423 1.1721083
+##  [61] 0.9290914 0.6794954 0.7592127 0.6261401 0.9548459 0.8236348 0.8010062 0.9514305 0.8816419 0.6705979
+##  [71] 0.7153356 1.2014641 0.9577183 1.0544358 1.0057898 0.9305899 1.0253283 0.7488619 1.0906381 1.1813662
+##  [81] 0.6819163 0.8639038 0.8042549 1.1788024 0.7622052 0.9611840 0.9757082 1.1630476 0.8887524 1.0154785
+##  [91] 1.2425608 0.5253707 1.1166571 0.8133918 1.2054999 1.1664269 0.8007038 0.9395852 0.7865362 0.8412360</code></pre>
+<p><img src="img/lists-viz.jpg" /></p>
 <!-- ## The split-apply-combine operation -->
 <!-- ![](img/split-apply-combine.png) -->
 </div>
@@ -773,16 +784,16 @@ You will have to :</p>
 <span id="cb114-2"><a href="manip.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_val=</span><span class="fu">mean</span>(value,<span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span> </span>
 <span id="cb114-3"><a href="manip.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> metric,<span class="at">values_from=</span>mean_val)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 69
-##   activeLengths activeSets aerobicTrainingEffect anaerobicTrainingEffect atpActivity autoCalcCalories avgBikeCadence
-##           &lt;dbl&gt;      &lt;dbl&gt;                 &lt;dbl&gt;                   &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;
-## 1          62.1          0                  2.64                   0.270           0          0.00621           90.1
+##   activeLengths activeSets aerobicTrainingEffect anaerobicTrainingEf… atpActivity autoCalcCalories avgBikeCadence
+##           &lt;dbl&gt;      &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;
+## 1          62.1          0                  2.64                0.270           0          0.00621           90.1
 ## # … with 62 more variables: avgDoubleCadence &lt;dbl&gt;, avgFractionalCadence &lt;dbl&gt;, avgGroundContactBalance &lt;dbl&gt;,
 ## #   avgGroundContactTime &lt;dbl&gt;, avgHr &lt;dbl&gt;, avgLeftBalance &lt;dbl&gt;, avgPower &lt;dbl&gt;, avgRightBalance &lt;dbl&gt;,
 ## #   avgSpeed &lt;dbl&gt;, avgStrokeDistance &lt;dbl&gt;, avgStrokes &lt;dbl&gt;, avgSwimCadence &lt;dbl&gt;, avgSwolf &lt;dbl&gt;,
 ## #   avgVerticalOscillation &lt;dbl&gt;, avgVerticalRatio &lt;dbl&gt;, avgVerticalSpeed &lt;dbl&gt;, beginTimestamp &lt;dbl&gt;,
-## #   calories &lt;dbl&gt;, decoDive &lt;dbl&gt;, distance &lt;dbl&gt;, duration &lt;dbl&gt;, elapsedDuration &lt;dbl&gt;, elevationCorrected &lt;dbl&gt;,
-## #   elevationGain &lt;dbl&gt;, elevationLoss &lt;dbl&gt;, endLatitude &lt;dbl&gt;, endLongitude &lt;dbl&gt;, favorite &lt;dbl&gt;,
-## #   intensityFactor &lt;dbl&gt;, lactateThresholdBpm &lt;dbl&gt;, lactateThresholdSpeed &lt;dbl&gt;, lapCount &lt;dbl&gt;, …</code></pre>
+## #   calories &lt;dbl&gt;, decoDive &lt;dbl&gt;, distance &lt;dbl&gt;, duration &lt;dbl&gt;, elapsedDuration &lt;dbl&gt;,
+## #   elevationCorrected &lt;dbl&gt;, elevationGain &lt;dbl&gt;, elevationLoss &lt;dbl&gt;, endLatitude &lt;dbl&gt;, endLongitude &lt;dbl&gt;,
+## #   favorite &lt;dbl&gt;, intensityFactor &lt;dbl&gt;, lactateThresholdBpm &lt;dbl&gt;, lactateThresholdSpeed &lt;dbl&gt;, …</code></pre>
 <p>The result looks very much like the one we had with <code>across</code> but the intermediate manipulationsncan be very useful in some cases. For instance, you could join the <code>dat_long</code> dataframe or its summary with an external data that has values by metrics (eg the average metric values for pro athletes).</p>
 
 </div>

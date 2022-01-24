@@ -494,10 +494,10 @@ You can use a lot of other [html widgets](https://www.htmlwidgets.org/index.html
 Example of leaflet :
 
 ```{r}
-# filter(dat,is_bike) %>%
-#   leaflet::leaflet(data=.) %>%
-#   leaflet::addMarkers(lng = ~startLongitude,lat = ~startLatitude,
-#                              popup = ~activityId) %>%
-#   leaflet::addTiles()
+filter(dat,is_bike) %>%
+  leaflet::leaflet(data=.) %>%
+  leaflet::addMarkers(lng = ~startLongitude,lat = ~startLatitude,
+                             popup = ~activityId) %>%
+  leaflet::addTiles()
 ```
 
